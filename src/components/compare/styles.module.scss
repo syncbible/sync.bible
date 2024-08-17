@@ -1,0 +1,108 @@
+.compare {
+	padding: .5em;
+	p {
+		padding: 0.5rem;
+	}
+}
+
+.statsReferenceWrapper {
+	width: 100%;
+}
+
+.statsReference {
+	display: flex;
+	font-size: .7em;
+	gap: 3px;
+}
+
+.compareWithBook {
+	flex-grow: 1;
+	width: 100px;
+}
+
+.statsResults {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+
+	> div {
+		cursor: pointer;
+		flex-grow: 1;
+		margin-bottom: 1rem;
+		padding: .5rem;
+	}
+}
+
+.statsDescription {
+	font-size: 14px;
+	line-height: 30px;
+}
+
+.limit {
+	display: inline;
+	height: 30px;
+	margin-left: 5px;
+	width: 60px;
+}
+
+.h3 {
+	margin: auto;
+}
+
+.button {
+	width: 100%;
+}
+
+.content {
+	padding: 1em;
+}
+
+.controls {
+	display: flex;
+	gap: 1em;
+
+	label {
+		line-height: 2;
+	}
+
+	button {
+		padding: 0 .5em;
+	}
+}
+
+.bookcase {
+	display: flex;
+	font-size: 15px;
+	flex-wrap: wrap;
+
+  span {
+	background: hsl( min(calc(var(--hue)*var(--hue-factor)), 330 ), calc(var(--saturation)*var(--saturation-factor)), calc(var(--lightness)*var(--lightness-factor)) );
+	--textLightness: calc( var(--lightness) - 0.5 );
+	color: hsl( 0, 0%, calc( var(--textLightness) * -100000%) );
+	display: inline-block;
+	flex-basis: 0;
+	flex-grow: 1;
+	height: 150px;
+	line-height: 20px;
+	min-width: 20px;
+	text-indent: -9999px;
+	writing-mode:vertical-rl;
+	white-space: nowrap;
+  }
+  span:hover,
+  span:active {
+	text-indent: 7px;
+  }
+}
+
+.reference {
+	display: flex;
+	gap:.5em;
+}
+
+.adjustments {
+	display: flex;
+	justify-content: space-between;
+	gap: 1em;
+	margin-top: 1em;
+}

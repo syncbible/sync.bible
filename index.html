@@ -33,7 +33,7 @@
 			<br />
 			<p>If this is broken, use <a href="https://javascripture.github.io/javascripture">javascripture</a>.</p>
 		</div>
-		<div id="content">
+		<div id="root">
 			<div class="full-page">
 				<div class="logo">
 					<object type="image/svg+xml" data="syncbible.svg" width="150" height="150"></object>
@@ -61,13 +61,7 @@
 </script>
 
 <!-- libs -->
-<script src="lib/MorphCodes.js"></script>
-<script src="lib/MorphParse.js"></script>
-<script src="lib/morphgnt-parse.js"></script>
-<script src="data/bible.js"></script>
-<script src="data/cdrplan.min.js"></script>
-<script src="data/harmonised.js"></script>
-<script src="build/bundle.js"></script>
+<script type="module" src="/src/main.jsx"></script>
 <script>
 	// Attach web workers
 	// has to come before service worker

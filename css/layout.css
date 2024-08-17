@@ -51,11 +51,7 @@ html {
   font-size: 140%;
 }
 
-.root {
-  background-image: url(/syncbible.svg);
-}
-
-.root,
+#root > .root,
 body {
   background-color: var(--background);
   background-repeat: no-repeat;

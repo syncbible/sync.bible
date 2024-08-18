@@ -4,28 +4,28 @@ self.addEventListener( 'install', function ( e ) {
 	e.waitUntil(
 		caches.open( cache ).then( function ( cache ) {
 			return cache.addAll( [
-				'/',
-				'index.html',
+				'./',
+				'./index.html',
 
 				// The Vite build output
-				'assets/index.js',
-				'assets/index.css',
+				'./assets/index.js',
+				'./assets/index.css',
 
 				// Assets
-				'manifest.json',
-				'syncbible.svg',
+				'./manifest.json',
+				'./syncbible.svg',
 
 				//data
-				'data/strongsObjectWithFamilies.json',
-				'data/strongs-dictionary.json',
-				'data/searchResults.json',
-				'data/crossReferences.json',
+				'./data/strongsObjectWithFamilies.json',
+				'./data/strongs-dictionary.json',
+				'./data/searchResults.json',
+				'./data/crossReferences.json',
 
 				//api - so that search works offline
-				'api/searchApi.js',
+				'./api/searchApi.js',
 
 				//workers
-				'workers/worker.js',
+				'./workers/worker.js',
 			] );
 		} )
 	);

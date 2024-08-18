@@ -18,6 +18,7 @@ const htmlPlugin = () => {
 
 // https://vitejs.dev/config/
 export default defineConfig( {
+	base: '/sync.bible/',
 	build: {
 		rollupOptions: {
 			output: {

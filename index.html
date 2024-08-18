@@ -90,32 +90,32 @@
 	let newWorker;
 	if( 'serviceWorker' in navigator) {
 			navigator.serviceWorker
-					.register('/sw.js', { updateViaCache: 'imports' } )
-					.then( function( reg ) {
-							reg.addEventListener('updatefound', () => {
+				.register('/sw.js', { updateViaCache: 'imports' } )
+				.then( function( reg ) {
+						reg.addEventListener('updatefound', () => {
 
-									// An updated service worker has appeared in reg.installing!
-									newWorker = reg.installing;
+							// An updated service worker has appeared in reg.installing!
+							newWorker = reg.installing;
 
-									newWorker.addEventListener('statechange', () => {
+							newWorker.addEventListener('statechange', () => {
 
-											// Has service worker state changed?
-											switch (newWorker.state) {
-													case 'installed':
+							// Has service worker state changed?
+							switch (newWorker.state) {
+									case 'installed':
 
-													// There is a new service worker available, show the notification
-													if (navigator.serviceWorker.controller) {
-															let notification = document.getElementById('notification');
+									// There is a new service worker available, show the notification
+									if (navigator.serviceWorker.controller) {
+											let notification = document.getElementById('notification');
 
-															// notification.style.display = 'block';
-															if ( confirm('A new version of this app is available. Update now?') ) {
-																	indexedDB.deleteDatabase('syncbible');
-																	newWorker.postMessage({ action: 'skipWaiting' });
-															}
-													}
-
-													break;
+												// notification.style.display = 'block';
+												if ( confirm('A new version of this app is available. Update now?') ) {
+													indexedDB.deleteDatabase('syncbible');
+													newWorker.postMessage({ action: 'skipWaiting' });
+												}
 											}
+
+											break;
+										}
 									});
 							});
 					});

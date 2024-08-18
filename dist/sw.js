@@ -1,88 +1,90 @@
-var cache = "syncbible.23.0.1720447802";
+var cache = 'syncbible.23.0.1720447802';
 
-self.addEventListener("install", function (e) {
-  e.waitUntil(
-    caches.open(cache).then(function (cache) {
-      return cache.addAll([
-        "/",
-        "index.html",
-        "css/layout.css",
-        "manifest.json",
-        "syncbible.svg",
+self.addEventListener( 'install', function ( e ) {
+	e.waitUntil(
+		caches.open( cache ).then( function ( cache ) {
+			return cache.addAll( [
+				'/',
+				'index.html',
 
-        //data
-        "data/strongsObjectWithFamilies.json",
-        "data/strongs-dictionary.json",
-        "data/searchResults.json",
-        "data/crossReferences.json",
+				// The Vite build output
+				'assets/index.js',
+				'assets/index.css',
 
-        //api - so that search works offline
-        "api/searchApi.js",
+				// Assets
+				'manifest.json',
+				'syncbible.svg',
 
-        //modules
-        "build/bundle.js",
+				//data
+				'data/strongsObjectWithFamilies.json',
+				'data/strongs-dictionary.json',
+				'data/searchResults.json',
+				'data/crossReferences.json',
 
-        //workers
-        "workers/worker.js",
-      ]);
-    })
-  );
-});
+				//api - so that search works offline
+				'api/searchApi.js',
 
-function send_message_to_client(client, msg) {
-  return new Promise(function (resolve, reject) {
-    var msg_chan = new MessageChannel();
+				//workers
+				'workers/worker.js',
+			] );
+		} )
+	);
+} );
 
-    msg_chan.port1.onmessage = function (event) {
-      if (event.data.error) {
-        reject(event.data.error);
-      } else {
-        resolve(event.data);
-      }
-    };
+function send_message_to_client( client, msg ) {
+	return new Promise( function ( resolve, reject ) {
+		var msg_chan = new MessageChannel();
 
-    client.postMessage(msg, [msg_chan.port2]);
-  });
+		msg_chan.port1.onmessage = function ( event ) {
+			if ( event.data.error ) {
+				reject( event.data.error );
+			} else {
+				resolve( event.data );
+			}
+		};
+
+		client.postMessage( msg, [ msg_chan.port2 ] );
+	} );
 }
 
-function send_message_to_all_clients(msg) {
-  clients.matchAll().then((clients) => {
-    clients.forEach((client) => {
-      send_message_to_client(client, msg).then((m) =>
-        console.log("SW Received Message: " + m)
-      );
-    });
-  });
+function send_message_to_all_clients( msg ) {
+	clients.matchAll().then( ( clients ) => {
+		clients.forEach( ( client ) => {
+			send_message_to_client( client, msg ).then( ( m ) =>
+				console.log( 'SW Received Message: ' + m )
+			);
+		} );
+	} );
 }
 
-self.addEventListener("fetch", function (event) {
-  send_message_to_all_clients(cache);
-  event.respondWith(
-    caches.match(event.request).then(function (response) {
-      return response || fetch(event.request);
-    })
-  );
-});
+self.addEventListener( 'fetch', function ( event ) {
+	send_message_to_all_clients( cache );
+	event.respondWith(
+		caches.match( event.request ).then( function ( response ) {
+			return response || fetch( event.request );
+		} )
+	);
+} );
 
 // Delete unused cache
-self.addEventListener("activate", function (event) {
-  send_message_to_all_clients(cache);
-  var cacheWhitelist = [cache];
-  event.waitUntil(
-    caches.keys().then(function (keyList) {
-      return Promise.all(
-        keyList.map(function (key) {
-          if (cacheWhitelist.indexOf(key) === -1) {
-            return caches.delete(key);
-          }
-        })
-      );
-    })
-  );
-});
+self.addEventListener( 'activate', function ( event ) {
+	send_message_to_all_clients( cache );
+	var cacheWhitelist = [ cache ];
+	event.waitUntil(
+		caches.keys().then( function ( keyList ) {
+			return Promise.all(
+				keyList.map( function ( key ) {
+					if ( cacheWhitelist.indexOf( key ) === -1 ) {
+						return caches.delete( key );
+					}
+				} )
+			);
+		} )
+	);
+} );
 
-self.addEventListener("message", function (event) {
-  if (event.data.action === "skipWaiting") {
-    self.skipWaiting();
-  }
-});
+self.addEventListener( 'message', function ( event ) {
+	if ( event.data.action === 'skipWaiting' ) {
+		self.skipWaiting();
+	}
+} );

@@ -125,7 +125,9 @@ const SearchForm = ( { isActive } ) => {
 	// Get the data if its not loaded
 	useEffect( () => {
 		if ( isSubmitButtonDisabled ) {
-			dispatch( fetchData( searchForm.version ) );
+			if ( searchForm.version ) {
+				dispatch( fetchData( searchForm.version ) );
+			}
 		}
 	}, [ searchForm.version ] );
 

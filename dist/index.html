@@ -1,19 +1,19 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<!-- Favicon code -->
-		<link rel="icon" type="image/svg+xml" href="/syncbible.svg">
-		<link rel="manifest" href="/assets/manifest-C1atyGrK.json">
-		<meta name="msapplication-TileColor" content="#ffffff">
-		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-		<meta name="theme-color" content="#ffffff">
-		<!-- End favicon code -->
+		<!-- Primary Meta Tags -->
+		<link rel="manifest" href="/manifest.json">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>sync.bible</title>
+		<meta name="description" content="A tool to help you read the Bible.">
+		<link rel="icon" type="image/svg+xml" href="/syncbible.svg">
+		<link rel="apple-touch-icon" href="/syncbible.svg" sizes="180x180">
+		<meta name="theme-color" content="#ffffff">
+
+		<!-- Extra Meta Tags -->
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="google" content="notranslate" />
 		<link rel="canonical" href="https://sync.bible" />
-		<link rel="manifest" href="/assets/manifest-C1atyGrK.json">
-		<title>sync.bible</title>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-KEWMC9BVQE"></script>
 		<script>
@@ -22,8 +22,8 @@
 		gtag('js', new Date());
 		gtag('config', 'G-KEWMC9BVQE');
 		</script>
-		<script type="module" crossorigin src="/assets/index-DnPulEBu.js"></script>
-		<link rel="stylesheet" crossorigin href="/assets/index-DnfBEl3_.css">
+		<script type="module" crossorigin src="/assets/index.js"></script>
+		<link rel="stylesheet" crossorigin href="/assets/index.css">
 	</head>
 	<body>
 		<div class="errors" id="errors">
@@ -89,51 +89,51 @@
 
 	let newWorker;
 	if( 'serviceWorker' in navigator) {
-		navigator.serviceWorker
-			.register('/sw.js', { updateViaCache: 'imports' } )
-			.then( function( reg ) {
-				reg.addEventListener('updatefound', () => {
+			navigator.serviceWorker
+					.register('/sw.js', { updateViaCache: 'imports' } )
+					.then( function( reg ) {
+							reg.addEventListener('updatefound', () => {
 
-					// An updated service worker has appeared in reg.installing!
-					newWorker = reg.installing;
+									// An updated service worker has appeared in reg.installing!
+									newWorker = reg.installing;
 
-					newWorker.addEventListener('statechange', () => {
+									newWorker.addEventListener('statechange', () => {
 
-						// Has service worker state changed?
-						switch (newWorker.state) {
-							case 'installed':
+											// Has service worker state changed?
+											switch (newWorker.state) {
+													case 'installed':
 
-							// There is a new service worker available, show the notification
-							if (navigator.serviceWorker.controller) {
-								let notification = document.getElementById('notification');
+													// There is a new service worker available, show the notification
+													if (navigator.serviceWorker.controller) {
+															let notification = document.getElementById('notification');
 
-								// notification.style.display = 'block';
-								if ( confirm('A new version of this app is available. Update now?') ) {
-									indexedDB.deleteDatabase('syncbible');
-									newWorker.postMessage({ action: 'skipWaiting' });
-								}
-							}
+															// notification.style.display = 'block';
+															if ( confirm('A new version of this app is available. Update now?') ) {
+																	indexedDB.deleteDatabase('syncbible');
+																	newWorker.postMessage({ action: 'skipWaiting' });
+															}
+													}
 
-							break;
-						}
+													break;
+											}
+									});
+							});
 					});
-				});
-			});
 
-		// Handler for messages coming from the service worker
-		navigator.serviceWorker.addEventListener('message', function( event ) {
-			// Send to react
-			javascripture.sw = event.data;
-		} );
+               // Handler for messages coming from the service worker
+               navigator.serviceWorker.addEventListener('message', function( event ) {
+                       // Send to react
+                       javascripture.sw = event.data;
+               } );
 
-		let refreshing;
-		// The event listener that is fired when the service worker updates
-		// Here we reload the page
-		navigator.serviceWorker.addEventListener('controllerchange', function () {
-			if (refreshing) return;
-			window.location.reload();
-			refreshing = true;
-		});
-	}
+               let refreshing;
+               // The event listener that is fired when the service worker updates
+               // Here we reload the page
+               navigator.serviceWorker.addEventListener('controllerchange', function () {
+                       if (refreshing) return;
+                       window.location.reload();
+                       refreshing = true;
+               });
+       }
 </script>
 </html>

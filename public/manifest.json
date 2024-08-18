@@ -1,0 +1,33 @@
+{
+	"manifest_version": 3,
+	"name": "sync.bible",
+	"short_name": "sync.bible",
+	"version": "21",
+
+	"description": "A tool to help you read the bible.",
+	"icons": [
+		{
+            "src": "syncbible.svg",
+            "purpose": "any",
+            "sizes": "any"
+		}
+	],
+	"app": {
+		"urls": [
+			"https://sync.bible/"
+		],
+		"launch": {
+			"web_url": "https://sync.bible/"
+		}
+	},
+
+	"start_url": "/index.html",
+	"display": "standalone",
+	"background_color": "#ffffff",
+	"theme_color": "#ffffff",
+
+	"author": "scruffian",
+	"permissions": {
+		"unlimitedStorage": true
+	}
+}

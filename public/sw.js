@@ -1,5 +1,4 @@
 const cacheKey = new URL( location ).searchParams.get( 'cacheKey' );
-console.log( 'cacheKey', cacheKey );
 
 self.addEventListener( 'install', function ( e ) {
 	e.waitUntil(

@@ -34,4 +34,7 @@ export default defineConfig( {
 			localsConvention: 'camelCaseOnly',
 		},
 	},
+	server: {
+		port: 7777,
+	},
 } );

@@ -104,7 +104,8 @@ export default function Connections( { close } ) {
 		}
 	};
 
-	const getDataForSingleReference = ( book, chapterNumber ) => {
+	const getDataForSingleReference = ( { book, chapter } ) => {
+		const chapterNumber = chapter - 1;
 		let hslData = getHSLData( book, chapterNumber );
 		if ( sort === 'hue' || sort === 'saturation' || sort === 'lightness' ) {
 			hslData.sort( sortByProperty( sort ) );
@@ -365,10 +366,7 @@ export default function Connections( { close } ) {
 				) }
 			</div>
 			<div className={ styles.bookcase }>
-				{ getDataForSingleReference(
-					reference.book,
-					reference.chapter - 1
-				) }
+				{ reference && getDataForSingleReference( reference ) }
 			</div>
 		</>
 	);

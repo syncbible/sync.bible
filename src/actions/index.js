@@ -568,6 +568,9 @@ export const fetchCrossReferences = () => {
 				dispatch(
 					receiveData( 'crossReferences', JSON.parse( body ) )
 				);
+				caches.open( cacheKey ).then( function ( cache ) {
+					return cache.addAll( [ 'data/crossReferences.json' ] );
+				} );
 			}
 		);
 	};
@@ -644,6 +647,9 @@ export const fetchComparisonData = () => {
 			},
 			function ( error, response, body ) {
 				dispatch( receiveData( 'comparisonData', JSON.parse( body ) ) );
+				caches.open( cacheKey ).then( function ( cache ) {
+					return cache.addAll( [ 'data/comparison-data.json' ] );
+				} );
 			}
 		);
 	};

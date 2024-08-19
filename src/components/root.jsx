@@ -24,7 +24,7 @@ const Root = () => {
 	// Fetch the other data we need
 	// Don't store it in the global state as that is cached in local storage
 	// and we don't want to fill up local storage with immutable data.
-	dispatch( fetchCrossReferences() );
+	dispatch( fetchCrossReferences() ); // TODO - move this to where the data is actually used.
 	dispatch( fetchStrongsDictonary() );
 	dispatch( fetchStrongsDictonaryWithFamilies() );
 

@@ -1,10 +1,11 @@
-var cache = 'syncbible.23.0.1720447802';
+const cacheKey = new URL( location ).searchParams.get( 'cacheKey' );
+console.log( 'cacheKey', cacheKey );
 
 self.addEventListener( 'install', function ( e ) {
 	e.waitUntil(
-		caches.open( cache ).then( function ( cache ) {
+		caches.open( cacheKey ).then( function ( cache ) {
 			return cache.addAll( [
-				'/',
+				'.',
 				'index.html',
 
 				// The Vite build output
@@ -58,7 +59,7 @@ function send_message_to_all_clients( msg ) {
 }
 
 self.addEventListener( 'fetch', function ( event ) {
-	send_message_to_all_clients( cache );
+	send_message_to_all_clients( cacheKey );
 	event.respondWith(
 		caches.match( event.request ).then( function ( response ) {
 			return response || fetch( event.request );
@@ -68,8 +69,8 @@ self.addEventListener( 'fetch', function ( event ) {
 
 // Delete unused cache
 self.addEventListener( 'activate', function ( event ) {
-	send_message_to_all_clients( cache );
-	var cacheWhitelist = [ cache ];
+	send_message_to_all_clients( cacheKey );
+	var cacheWhitelist = [ cacheKey ];
 	event.waitUntil(
 		caches.keys().then( function ( keyList ) {
 			return Promise.all(

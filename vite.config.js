@@ -2,16 +2,16 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 // Cache busting: append timestamp as hash
-const htmlPlugin = () => {
+const versionNumberPlugin = () => {
 	return {
-		name: 'html-transform',
+		name: 'version-number-transform',
 		transformIndexHtml( html ) {
 			const hash = Date.now();
 
-			return html
-				.replaceAll( '.json"', '.json?v=' + hash + '"' )
-				.replaceAll( '.js"', '.js?v=' + hash + '"' )
-				.replaceAll( '.css"', '.css?v=' + hash + '"' );
+			return html.replaceAll(
+				/sync.bible.23.([0-9]+)/g,
+				'sync.bible.23.' + hash
+			);
 		},
 	};
 };
@@ -28,7 +28,7 @@ export default defineConfig( {
 			},
 		},
 	},
-	plugins: [ react() ],
+	plugins: [ react(), versionNumberPlugin() ],
 	css: {
 		modules: {
 			localsConvention: 'camelCaseOnly',

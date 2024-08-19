@@ -1,5 +1,3 @@
-var cache = 'syncbible.23.0.1720447802';
-
 // External dependencies.
 import xhr from 'xhr';
 import { push } from '@lagunovsky/redux-react-router';
@@ -19,6 +17,8 @@ import {
 } from '../lib/reference.js';
 import { isValidWord } from '../lib/word.js';
 import bible from '../data/bible.js';
+
+const cacheKey = globalThis.cacheKey;
 
 export const goToReferenceAction = ( reference, targetColumn ) => {
 	return function ( dispatch, getState ) {
@@ -487,7 +487,7 @@ export const fetchData = ( key ) => {
 			xhr(
 				{
 					method: 'get',
-					uri: './data/farsi-translations.json',
+					uri: 'data/farsi-translations.json',
 					headers: {
 						'Content-Type': 'application/json',
 					},
@@ -496,9 +496,9 @@ export const fetchData = ( key ) => {
 					const parsedData = JSON.parse( body );
 					dispatch( receiveData( 'farsiTranslations', parsedData ) );
 
-					caches.open( cache ).then( function ( cache ) {
+					caches.open( cacheKey ).then( function ( cache ) {
 						return cache.addAll( [
-							'./data/farsi-translations.json',
+							'data/farsi-translations.json',
 						] );
 					} );
 				}
@@ -507,7 +507,7 @@ export const fetchData = ( key ) => {
 		return xhr(
 			{
 				method: 'get',
-				uri: './bibles/' + key + '.json',
+				uri: 'bibles/' + key + '.json',
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -519,8 +519,8 @@ export const fetchData = ( key ) => {
 				} else {
 					dispatch( receiveData( key, parsedData ) );
 				}
-				caches.open( cache ).then( function ( cache ) {
-					return cache.addAll( [ './bibles/' + key + '.json' ] );
+				caches.open( cacheKey ).then( function ( cache ) {
+					return cache.addAll( [ 'bibles/' + key + '.json' ] );
 				} );
 			}
 		);
@@ -537,7 +537,7 @@ export const fetchSearchResults = () => {
 		return xhr(
 			{
 				method: 'get',
-				uri: './data/searchResults.json',
+				uri: 'data/searchResults.json',
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -559,7 +559,7 @@ export const fetchCrossReferences = () => {
 		return xhr(
 			{
 				method: 'get',
-				uri: './data/crossReferences.json',
+				uri: 'data/crossReferences.json',
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -584,7 +584,7 @@ export const fetchStrongsDictonary = () => {
 		return xhr(
 			{
 				method: 'get',
-				uri: './data/strongs-dictionary.json',
+				uri: 'data/strongs-dictionary.json',
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -609,7 +609,7 @@ export const fetchStrongsDictonaryWithFamilies = () => {
 		return xhr(
 			{
 				method: 'get',
-				uri: './data/strongsObjectWithFamilies.json',
+				uri: 'data/strongsObjectWithFamilies.json',
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -637,7 +637,7 @@ export const fetchComparisonData = () => {
 		return xhr(
 			{
 				method: 'get',
-				uri: './data/comparison-data.json',
+				uri: 'data/comparison-data.json',
 				headers: {
 					'Content-Type': 'application/json',
 				},

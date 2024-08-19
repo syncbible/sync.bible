@@ -45,6 +45,7 @@
 </body>
 
 <script>
+	globalThis.cacheKey = 'sync.bible.23.1720447802';
 	var javascripture = {
 		data: {},
 		reactHelpers: {},
@@ -56,12 +57,12 @@
 
 	function clear() {
 		indexedDB.deleteDatabase('syncbible');
-		window.location.href="/";
+		window.location.href="./";
 	}
 </script>
 
 <!-- libs -->
-<script type="module" src="/src/main.jsx"></script>
+<script type="module" src="src/main.jsx"></script>
 <script>
 	// Attach web workers
 	// has to come before service worker
@@ -89,51 +90,43 @@
 
 	let newWorker;
 	if( 'serviceWorker' in navigator) {
-			navigator.serviceWorker
-				.register('/sw.js', { updateViaCache: 'imports' } )
-				.then( function( reg ) {
-						reg.addEventListener('updatefound', () => {
-
-							// An updated service worker has appeared in reg.installing!
-							newWorker = reg.installing;
-
-							newWorker.addEventListener('statechange', () => {
-
-							// Has service worker state changed?
-							switch (newWorker.state) {
-									case 'installed':
-
-									// There is a new service worker available, show the notification
-									if (navigator.serviceWorker.controller) {
-											let notification = document.getElementById('notification');
-
-												// notification.style.display = 'block';
-												if ( confirm('A new version of this app is available. Update now?') ) {
-													indexedDB.deleteDatabase('syncbible');
-													newWorker.postMessage({ action: 'skipWaiting' });
-												}
-											}
-
-											break;
-										}
-									});
-							});
+		navigator.serviceWorker
+			.register('sw.js?cacheKey=' + globalThis.cacheKey, { updateViaCache: 'imports' } )
+			.then( function( reg ) {
+				reg.addEventListener('updatefound', () => {
+					// An updated service worker has appeared in reg.installing!
+					newWorker = reg.installing;
+					newWorker.addEventListener('statechange', () => {
+						// Has service worker state changed?
+						switch (newWorker.state) {
+							// There is a new service worker available, show the notification
+							case 'installed':
+								if (navigator.serviceWorker.controller) {
+									if ( confirm('A new version of this app is available. Update now?') ) {
+										indexedDB.deleteDatabase('syncbible');
+										newWorker.postMessage({ action: 'skipWaiting' });
+									}
+								}
+							break;
+						}
 					});
+				});
+			});
 
-               // Handler for messages coming from the service worker
-               navigator.serviceWorker.addEventListener('message', function( event ) {
-                       // Send to react
-                       javascripture.sw = event.data;
-               } );
+			// Handler for messages coming from the service worker
+			navigator.serviceWorker.addEventListener('message', function( event ) {
+				// Send to react
+				javascripture.sw = event.data;
+			} );
 
-               let refreshing;
-               // The event listener that is fired when the service worker updates
-               // Here we reload the page
-               navigator.serviceWorker.addEventListener('controllerchange', function () {
-                       if (refreshing) return;
-                       window.location.reload();
-                       refreshing = true;
-               });
+			let refreshing;
+			// The event listener that is fired when the service worker updates
+			// Here we reload the page
+			navigator.serviceWorker.addEventListener('controllerchange', function () {
+				if (refreshing) return;
+				window.location.reload();
+				refreshing = true;
+			});
        }
 </script>
 </html>

@@ -1,12 +1,10 @@
 ## Todo
 
-Migrate to vite
-
--   make morph libs part of the build
--   replace classnames with CSX
--   use .jsx for all files with jsx in them
--   use redux-react-router instead of connected-react-router
--   do we still need to load and save settings options?
+-   make it clear that we need original for several features
+-   so when we dont have it show that we need it and add explain
+-   this is better than precaching original, maybe?
+-   fix the sidebar on initial load - probably just remove MUI
+-   show verse for context in combined. only show verses with more than one result
 
 -   paralell gospels?
 -   replace חׇpointing

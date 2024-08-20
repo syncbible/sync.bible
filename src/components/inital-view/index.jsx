@@ -17,7 +17,7 @@ const InitialView = () => {
 			<div className={ styles.logo }>
 				<object
 					type="image/svg+xml"
-					data="/syncbible.svg"
+					data="syncbible.svg"
 					width="150"
 					height="150"
 				></object>

@@ -16,7 +16,7 @@ const sidebar = ( state = false, action ) => {
 			if ( window.innerWidth < 960 ) {
 				return false;
 			}
-			break;
+			return state;
 
 		default:
 			return state;

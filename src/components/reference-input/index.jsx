@@ -36,9 +36,11 @@ const getReferenceValue = ( reference, scrollChapter, version ) => {
 const ReferenceInput = ( { index } ) => {
 	const dispatch = useDispatch();
 	const reference = useSelector( ( state ) => state.reference );
-	const scrollChapter = useSelector(
-		( state ) => state.scrollChapter[ index ]
-	);
+	const scrollChapter = useSelector( ( state ) => {
+		if ( state.scrollChapter ) {
+			return state.scrollChapter[ index ];
+		}
+	} );
 	const version = reference[ index ].version;
 	const referenceValue = getReferenceValue(
 		reference[ index ],

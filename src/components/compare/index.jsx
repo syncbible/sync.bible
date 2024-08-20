@@ -24,7 +24,7 @@ import bible from '../../data/bible.js';
 import Connections from './connections';
 
 const Compare = () => {
-	const [compareAllChapters, setCompareAllChapters] = useState( false );
+	const [ compareAllChapters, setCompareAllChapters ] = useState( false );
 	const dispatch = useDispatch();
 	const isOriginalLoaded = useSelector(
 		( state ) => 'undefined' !== typeof state.data.original
@@ -38,7 +38,6 @@ const Compare = () => {
 	);
 	const overlap = useSelector( ( state ) => compareTwoReferences( state ) );
 	const limit = useSelector( ( state ) => state.referenceInfo.limit );
-	const data = useSelector( ( state ) => state.data );
 	const addAllWords = () => {
 		overlap.forEach( ( lemma ) => addWord( lemma ) );
 	};
@@ -211,7 +210,7 @@ const Compare = () => {
 	} );*/
 
 	if ( compareAllChapters ) {
-		return <Connections close={ () => setCompareAllChapters( false ) } />
+		return <Connections close={ () => setCompareAllChapters( false ) } />;
 	}
 
 	return (
@@ -298,10 +297,15 @@ const Compare = () => {
 					<button onClick={ addAllWords }>Select all words</button>
 				) }
 			</div>
-			<button className={ styles.button } onClick={ () => {
-				dispatch( settingsChange( 'compareMode', true ) );
-				setCompareAllChapters( true );
-			} }>All chapters</button>
+			<button
+				className={ styles.button }
+				onClick={ () => {
+					dispatch( settingsChange( 'compareMode', true ) );
+					setCompareAllChapters( true );
+				} }
+			>
+				All chapters
+			</button>
 		</div>
 	);
 };

@@ -3,6 +3,7 @@ import React, { createRef, useEffect, useRef, Fragment, useState } from 'react';
 import { Waypoint } from 'react-waypoint';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal
 import bible from '../../data/bible.js';
@@ -284,4 +285,9 @@ const Chapter = ( { book, chapter, index } ) => {
 	);
 };
 
+Chapter.protoTypes = {
+	book: PropTypes.string.isRequired,
+	chapter: PropTypes.number.isRequired,
+	index: PropTypes.number.isRequired,
+};
 export default React.memo( Chapter );

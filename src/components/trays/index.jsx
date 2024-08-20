@@ -146,7 +146,7 @@ const Trays = () => {
 					sx={ {
 						width: drawerWidth,
 						flexShrink: 0,
-						zIndex: 9,
+						zIndex: sidebarOpen ? 9 : -1, // Needed to keep the drawer from sitting over the canvas on initial load.
 						'& .MuiDrawer-paper': {
 							background: 'var(--background)',
 							boxShadow: 'none',

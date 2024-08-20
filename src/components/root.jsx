@@ -15,7 +15,6 @@ import {
 	fetchCrossReferences,
 	fetchStrongsDictonary,
 	fetchStrongsDictonaryWithFamilies,
-	fetchData,
 } from '../actions';
 import { rootClasses } from './utils';
 

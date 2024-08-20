@@ -15,16 +15,18 @@ import {
 	fetchCrossReferences,
 	fetchStrongsDictonary,
 	fetchStrongsDictonaryWithFamilies,
+	fetchData,
 } from '../actions';
 import { rootClasses } from './utils';
 
 const Root = () => {
 	const dispatch = useDispatch();
 
-	// Fetch the other data we need
+	// Fetch the other data we need - we precache this as a lot of features depend on it
+	// and we want them to work in offline mode.
 	// Don't store it in the global state as that is cached in local storage
 	// and we don't want to fill up local storage with immutable data.
-	dispatch( fetchCrossReferences() ); // TODO - move this to where the data is actually used.
+	dispatch( fetchCrossReferences() );
 	dispatch( fetchStrongsDictonary() );
 	dispatch( fetchStrongsDictonaryWithFamilies() );
 

@@ -18,13 +18,10 @@ const getReferenceFromAction = ( reference, version ) => {
 const reference = ( state = [], action ) => {
 	switch ( action.type ) {
 		case ROUTER_ON_LOCATION_CHANGED:
-			console.log( 'ROUTER_ON_LOCATION_CHANGED' );
 			const hash = getHashFromAction( action );
-			console.log( hash );
 			timer = new Date();
 
 			const referenceFromHash = getReferenceFromHash( hash );
-			console.log( 'referenceFromHash', referenceFromHash );
 			if ( ! referenceFromHash ) {
 				return state;
 			}

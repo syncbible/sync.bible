@@ -63,6 +63,10 @@ body {
   font-weight: 300;
 }
 
+#root a {
+  color: var(--color);
+}
+
 #content {
   position: relative;
 }

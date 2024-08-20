@@ -34,12 +34,10 @@ const Root = () => {
 	const expandedSearchResults = useSelector(
 		( state ) => state.settings.expandedSearchResults
 	);
-	const getBodyStyles = () => {
-		const fontFamily = useSelector(
-			( state ) => state.settings.fontFamily
-		);
-		const fontSize = useSelector( ( state ) => state.settings.fontSize );
+	const fontFamily = useSelector( ( state ) => state.settings.fontFamily );
+	const fontSize = useSelector( ( state ) => state.settings.fontSize );
 
+	const getBodyStyles = () => {
 		var bodyStyles = 'body, .root { ';
 		bodyStyles += 'font-family: ' + fontFamily + ';';
 		bodyStyles += 'font-size: ' + fontSize + ';';

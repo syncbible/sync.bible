@@ -8,7 +8,6 @@ import Collapsible from '../collapsible';
 import ReferenceLink from '../reference-link';
 import SearchLink from '../search-link';
 import InlineResultsToggle from '../inline-results-toggle';
-import { getGroupedResults } from '../../lib/reference';
 import bible from '../../data/bible.js';
 
 const Single = ( { bookmark, index } ) => {
@@ -70,88 +69,6 @@ const Single = ( { bookmark, index } ) => {
 		);
 	};
 
-	const renderOverlap = () => {
-		const original = useSelector( ( state ) => state.data.original );
-		const searchResultsData = useSelector(
-			( state ) => state.data.searchResults
-		);
-
-		// Return if there's no data. Surely there's a better way.
-		if ( Object.keys( original ).length === 0 ) {
-			return;
-		}
-		const originalVerse =
-			original[ reference.book ][ reference.chapter - 1 ][
-				reference.verse - 1
-			];
-
-		const allLemmasForVerse = originalVerse
-			.map( ( word ) => {
-				return word[ 1 ].split( '/' );
-			} )
-			.flat();
-		const searchResultsForAllWords = allLemmasForVerse
-			.map( ( lemma ) => {
-				// Get the results from cache
-				if ( searchResultsData && searchResultsData[ lemma ] ) {
-					return searchResultsData[ lemma ];
-				}
-			} )
-			.flat();
-
-		const processedResults = searchResultsForAllWords.map(
-			( reference ) => {
-				if ( ! reference ) {
-					return;
-				}
-				const referenceArray = reference.split( '.' );
-				const bookCode = referenceArray[ 0 ];
-				const bookId = bible.getBookId( bookCode );
-				const bookName = bible.getBook( bookId );
-				return {
-					reference:
-						bookName +
-						'.' +
-						referenceArray[ 1 ] +
-						'.' +
-						referenceArray[ 2 ],
-				};
-			}
-		);
-
-		const groupedResults = getGroupedResults(
-			processedResults,
-			'verse',
-			'desc',
-			interfaceLanguage
-		);
-
-		return (
-			<ol>
-				{ groupedResults.map( ( result, resultKey ) => {
-					const reference = result[ 0 ];
-					if ( ! reference ) {
-						return;
-					}
-					return (
-						<SearchLink
-							key={ resultKey }
-							index={ resultKey }
-							referenceString={
-								reference[ 0 ] +
-								'.' +
-								reference[ 1 ] +
-								'.' +
-								reference[ 2 ]
-							}
-							count={ result.length }
-						/>
-					);
-				} ) }
-			</ol>
-		);
-	};
-
 	return (
 		<Collapsible
 			key={ index }
@@ -162,7 +79,6 @@ const Single = ( { bookmark, index } ) => {
 			onRemove={ () => dispatch( removeFromList( bookmark ) ) }
 		>
 			<div ref={ bookmarkRef }>{ renderCrossReferences() }</div>
-			<div>{ /*renderOverlap()*/ }</div>
 		</Collapsible>
 	);
 };

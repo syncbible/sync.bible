@@ -527,28 +527,6 @@ export const fetchData = ( key ) => {
 	};
 };
 
-export const fetchSearchResults = () => {
-	return function ( dispatch, getState ) {
-		const { data } = getState();
-		if ( data.searchResults ) {
-			return;
-		}
-
-		return xhr(
-			{
-				method: 'get',
-				uri: 'data/searchResults.json',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			},
-			function ( error, response, body ) {
-				dispatch( receiveData( 'searchResults', JSON.parse( body ) ) );
-			}
-		);
-	};
-};
-
 export const fetchCrossReferences = () => {
 	return function ( dispatch, getState ) {
 		const { data } = getState();

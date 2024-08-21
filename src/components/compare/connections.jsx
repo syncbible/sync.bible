@@ -7,7 +7,7 @@ import bible from '../../data/bible';
 import styles from './styles.module.scss';
 import {
 	fetchData,
-	fetchStrongsDictonaryWithFamilies,
+	fetchDataAsync,
 	fetchComparisonData,
 	setReferenceInfo,
 } from '../../actions';
@@ -16,7 +16,7 @@ import { getBooks, getCompareChapters } from '../../lib/select-helpers';
 export default function Connections( { close } ) {
 	const dispatch = useDispatch();
 	dispatch( fetchData( 'original' ) );
-	dispatch( fetchStrongsDictonaryWithFamilies() );
+	dispatch( fetchDataAsync( 'strongsObjectWithFamilies' ) );
 	dispatch( fetchComparisonData() );
 	const comparisonData = useSelector(
 		( state ) => state.data.comparisonData

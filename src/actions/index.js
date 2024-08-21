@@ -527,82 +527,26 @@ export const fetchData = ( key ) => {
 	};
 };
 
-export const fetchCrossReferences = () => {
-	return function ( dispatch, getState ) {
+export function fetchDataAsync( key ) {
+	return async function ( dispatch, getState ) {
 		const { data } = getState();
-		if ( data.crossReferences ) {
+		if ( data[ key ] ) {
 			return;
 		}
 
-		return xhr(
-			{
-				method: 'get',
-				uri: 'data/cross-references.json',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			},
-			function ( error, response, body ) {
-				dispatch(
-					receiveData( 'crossReferences', JSON.parse( body ) )
-				);
+		try {
+			const response = await fetch( `data/${ key }.json` );
+			if ( ! response.ok ) {
+				throw new Error( `Response status: ${ response.status }` );
 			}
-		);
-	};
-};
 
-export const fetchStrongsDictonary = () => {
-	return function ( dispatch, getState ) {
-		const { data } = getState();
-		if ( data.strongsDictionary ) {
-			return;
+			const json = await response.json();
+			dispatch( receiveData( key, json ) );
+		} catch ( error ) {
+			console.log( error.message );
 		}
-
-		// This is a combination of both the Hebrew and Greek dictonaries
-		return xhr(
-			{
-				method: 'get',
-				uri: 'data/strongs-dictionary.json',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			},
-			function ( error, response, body ) {
-				dispatch(
-					receiveData( 'strongsDictionary', JSON.parse( body ) )
-				);
-			}
-		);
 	};
-};
-
-export const fetchStrongsDictonaryWithFamilies = () => {
-	return function ( dispatch, getState ) {
-		const { data } = getState();
-		if ( data.strongsObjectWithFamilies ) {
-			return;
-		}
-
-		// This is a combination of both the Hebrew and Greek dictonaries
-		return xhr(
-			{
-				method: 'get',
-				uri: 'data/strongsObjectWithFamilies.json',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			},
-			function ( error, response, body ) {
-				dispatch(
-					receiveData(
-						'strongsObjectWithFamilies',
-						JSON.parse( body )
-					)
-				);
-			}
-		);
-	};
-};
+}
 
 export const fetchComparisonData = () => {
 	return function ( dispatch, getState ) {

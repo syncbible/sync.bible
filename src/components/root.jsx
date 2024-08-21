@@ -10,12 +10,7 @@ import Trays from './trays';
 import WordHighlight from './word-highlight';
 import InitialView from './inital-view';
 import styles from './root.module.scss';
-import {
-	closeReferenceSelectorMobile,
-	fetchCrossReferences,
-	fetchStrongsDictonary,
-	fetchStrongsDictonaryWithFamilies,
-} from '../actions';
+import { closeReferenceSelectorMobile, fetchDataAsync } from '../actions';
 import { rootClasses } from './utils';
 
 const Root = () => {
@@ -25,9 +20,9 @@ const Root = () => {
 	// and we want them to work in offline mode.
 	// Don't store it in the global state as that is cached in local storage
 	// and we don't want to fill up local storage with immutable data.
-	dispatch( fetchCrossReferences() );
-	dispatch( fetchStrongsDictonary() );
-	dispatch( fetchStrongsDictonaryWithFamilies() );
+	dispatch( fetchDataAsync( 'crossReferences' ) );
+	dispatch( fetchDataAsync( 'strongsDictionary' ) );
+	dispatch( fetchDataAsync( 'strongsObjectWithFamilies' ) );
 
 	const reference = useSelector( ( state ) => state.reference );
 	const darkMode = useSelector( ( state ) => state.settings.darkMode );

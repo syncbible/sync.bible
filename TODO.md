@@ -1,5 +1,6 @@
 ## Todo
 
+-   show the whole range for cross references
 -   make it clear that we need original for several features
 -   so when we dont have it show that we need it and add explain
 -   this is better than precaching original, maybe?

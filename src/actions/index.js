@@ -530,7 +530,7 @@ export const fetchData = ( key ) => {
 export const fetchSearchResults = () => {
 	return function ( dispatch, getState ) {
 		const { data } = getState();
-		if ( data.crossReferences ) {
+		if ( data.searchResults ) {
 			return;
 		}
 
@@ -559,7 +559,7 @@ export const fetchCrossReferences = () => {
 		return xhr(
 			{
 				method: 'get',
-				uri: 'data/crossReferences.json',
+				uri: 'data/cross-references.json',
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -568,9 +568,6 @@ export const fetchCrossReferences = () => {
 				dispatch(
 					receiveData( 'crossReferences', JSON.parse( body ) )
 				);
-				caches.open( cacheKey ).then( function ( cache ) {
-					return cache.addAll( [ 'data/crossReferences.json' ] );
-				} );
 			}
 		);
 	};

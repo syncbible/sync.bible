@@ -1,4 +1,4 @@
-const referenceArray = [
+export default [
 	'Ge.1.1',
 	'Ge.1.2',
 	'Ge.1.3',

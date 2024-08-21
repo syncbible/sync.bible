@@ -42,4 +42,4 @@ const VerseNumber = ( { book, chapter, verse } ) => {
 	);
 };
 
-export default React.memo( VerseNumber );
+export default VerseNumber;

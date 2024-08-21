@@ -19,6 +19,7 @@ self.addEventListener( 'install', function ( e ) {
 				'data/strongsObjectWithFamilies.json',
 				'data/strongs-dictionary.json',
 				'data/searchResults.json',
+				'data/cross-references.json',
 
 				//api - so that search works offline
 				'api/searchApi.js',

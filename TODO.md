@@ -1,12 +1,9 @@
 ## Todo
 
 -   show common words under a list of passages, or rare words, or words that are used in more than one section
--   create a mini version of original
--   consolidate fetch and find the modern way to do it
 -   add animation to current verse
 -   show the whole range for cross references
 -   make it clear that we need original for several features, so when we dont have it show that we need it and add explain
--   this is better than precaching original, maybe?
 -   fix the sidebar on initial load - don't set KJV as initial interface lang
 -   show verse for context in combined. only show verses with more than one result
 

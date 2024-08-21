@@ -9,7 +9,7 @@ const initialState = {
 	inSync: true,
 	expandedSearchResults: false,
 	highlightSearchResults: false,
-	interfaceLanguage: 'KJV',
+	interfaceLanguage: 'KJV', // TODO, we shouldn't need this, for some reason it gets reset when you reload the page
 	type: 'SETTINGS_CHANGE',
 	darkMode: null,
 	compareMode: false,

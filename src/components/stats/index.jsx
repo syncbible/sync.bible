@@ -136,9 +136,13 @@ const Rare = () => {
 						}
 					>
 						<td>{ lemma }</td>
-						<td>{ strongsDictionary[ lemma ].lemma }</td>
 						<td>
-							{ strongsDictionary[ lemma ].xlit ||
+							{ strongsDictionary &&
+								strongsDictionary[ lemma ].lemma }
+						</td>
+						<td>
+							{ ( strongsDictionary &&
+								strongsDictionary[ lemma ].xlit ) ||
 								strongsDictionary[ lemma ].translit }
 						</td>
 						<td>{ common[ lemma ] }</td>

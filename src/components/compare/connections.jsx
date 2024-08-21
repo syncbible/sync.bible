@@ -10,7 +10,7 @@ import { getBooks, getCompareChapters } from '../../lib/select-helpers';
 
 export default function Connections( { close } ) {
 	const dispatch = useDispatch();
-	dispatch( fetchData( 'original' ) );
+	//dispatch( fetchData( 'original' ) );
 	dispatch( fetchDataAsync( 'strongsObjectWithFamilies' ) );
 	dispatch( fetchDataAsync( 'comparisonData' ) );
 	const comparisonData = useSelector(

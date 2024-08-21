@@ -62,7 +62,7 @@ const Compare = () => {
 
 	const getOverlap = () => {
 		if ( ! overlap ) {
-			return;
+			return 'Loading...';
 		}
 
 		if ( overlap.length === 0 ) {
@@ -314,4 +314,4 @@ const Compare = () => {
 	);
 };
 
-export default React.memo( Compare );
+export default Compare;

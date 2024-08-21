@@ -23,6 +23,7 @@ const Root = () => {
 	dispatch( fetchDataAsync( 'crossReferences' ) );
 	dispatch( fetchDataAsync( 'strongsDictionary' ) );
 	dispatch( fetchDataAsync( 'strongsObjectWithFamilies' ) );
+	dispatch( fetchDataAsync( 'lemmas' ) ); // So that stats and comparison tabs work offline.
 
 	const reference = useSelector( ( state ) => state.reference );
 	const darkMode = useSelector( ( state ) => state.settings.darkMode );

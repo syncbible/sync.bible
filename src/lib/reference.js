@@ -98,7 +98,7 @@ export const getAllLemmasFromReference = ( reference, data ) => {
 };
 
 function getLemmasForBook( reference, data ) {
-	return data.original[ reference.book ]
+	return data.lemmas[ reference.book ]
 		.map( ( chapter, chapterNumber ) => {
 			return getLemmasForChapter(
 				{ ...reference, chapter: chapterNumber + 1 },
@@ -109,7 +109,7 @@ function getLemmasForBook( reference, data ) {
 }
 
 function getLemmasForChapter( reference, data ) {
-	return data.original[ reference.book ][ reference.chapter - 1 ]
+	return data.lemmas[ reference.book ][ reference.chapter - 1 ]
 		.map( ( verse, verseNumber ) => {
 			return getLemmasForVerse(
 				{ ...reference, verse: verseNumber + 1 },
@@ -120,11 +120,11 @@ function getLemmasForChapter( reference, data ) {
 }
 
 function getLemmasForVerse( reference, data ) {
-	return data[ 'original' ][ reference.book ][ reference.chapter - 1 ][
+	return data.lemmas[ reference.book ][ reference.chapter - 1 ][
 		reference.verse - 1
 	]
 		.map( ( word ) => {
-			return word[ 1 ].split( '/' );
+			return word.split( '/' );
 		} )
 		.flat();
 }
@@ -132,10 +132,10 @@ function getLemmasForVerse( reference, data ) {
 export const getLemmasForReference = ( reference, data ) => {
 	if (
 		typeof data === 'undefined' ||
-		typeof data.original === 'undefined' ||
-		typeof data.original[ reference.book ] === 'undefined'
+		typeof data.lemmas === 'undefined' ||
+		typeof data.lemmas[ reference.book ] === 'undefined'
 	) {
-		return [];
+		return null;
 	}
 
 	// Get lemmas for book.
@@ -180,18 +180,22 @@ export const compareTwoReferences = ( {
 
 	const ref1Lemmas = getLemmasForReference( reference, data );
 	const ref2Lemmas = getLemmasForReference( referenceToCompareWith, data );
-	const comparison = ref1Lemmas.filter( ( lemma ) => {
-		if (
-			data.strongsObjectWithFamilies &&
-			data.strongsObjectWithFamilies[ lemma ].count < limit
-		) {
-			if ( ref2Lemmas.indexOf( lemma ) > -1 ) {
-				return lemma;
+	const comparison =
+		ref1Lemmas &&
+		ref1Lemmas.filter( ( lemma ) => {
+			if (
+				data.strongsObjectWithFamilies &&
+				data.strongsObjectWithFamilies[ lemma ].count < limit
+			) {
+				if ( ref2Lemmas.indexOf( lemma ) > -1 ) {
+					return lemma;
+				}
 			}
-		}
-	} );
+		} );
 
-	return uniq( comparison );
+	if ( comparison ) {
+		return uniq( comparison );
+	}
 };
 
 export const calculateRareWords = ( {
@@ -216,20 +220,23 @@ export const calculateCommonWords = ( reference, data ) => {
 	}
 
 	const lemmas = getLemmasForReference( reference, data );
-	const counted = {};
-	forEach( lemmas, ( lemma ) => {
-		if ( typeof counted[ lemma ] === 'undefined' ) {
-			counted[ lemma ] = 1;
-		} else {
-			counted[ lemma ] = counted[ lemma ] + 1;
-		}
-	} );
 
-	return _( counted )
-		.toPairs( counted )
-		.orderBy( [ 1 ], [ 'desc' ] )
-		.fromPairs()
-		.value();
+	if ( lemmas ) {
+		const counted = {};
+		forEach( lemmas, ( lemma ) => {
+			if ( typeof counted[ lemma ] === 'undefined' ) {
+				counted[ lemma ] = 1;
+			} else {
+				counted[ lemma ] = counted[ lemma ] + 1;
+			}
+		} );
+
+		return _( counted )
+			.toPairs( counted )
+			.orderBy( [ 1 ], [ 'desc' ] )
+			.fromPairs()
+			.value();
+	}
 };
 
 export const calculateConnectionQuality = ( state ) => {

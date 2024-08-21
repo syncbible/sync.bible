@@ -20,10 +20,12 @@ const Root = () => {
 	// and we want them to work in offline mode.
 	// Don't store it in the global state as that is cached in local storage
 	// and we don't want to fill up local storage with immutable data.
-	dispatch( fetchDataAsync( 'crossReferences' ) );
-	dispatch( fetchDataAsync( 'strongsDictionary' ) );
-	dispatch( fetchDataAsync( 'strongsObjectWithFamilies' ) );
-	dispatch( fetchDataAsync( 'lemmas' ) ); // So that stats and comparison tabs work offline.
+	useEffect( () => {
+		dispatch( fetchDataAsync( 'crossReferences' ) );
+		dispatch( fetchDataAsync( 'strongsDictionary' ) );
+		dispatch( fetchDataAsync( 'strongsObjectWithFamilies' ) );
+		dispatch( fetchDataAsync( 'lemmas' ) ); // So that stats and comparison tabs work offline.
+	}, [] ); // Use the useEffect so this runs after the component mounts.
 
 	const reference = useSelector( ( state ) => state.reference );
 	const darkMode = useSelector( ( state ) => state.settings.darkMode );

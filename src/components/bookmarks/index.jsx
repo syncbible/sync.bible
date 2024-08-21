@@ -10,7 +10,6 @@ import Single from './single';
 import styles from './styles.module.scss';
 
 const BookMarks = () => {
-	const dispatch = useDispatch();
 	const list = useSelector( ( state ) => state.list );
 	const bookmarks = list.filter(
 		( { listType } ) => listType === 'bookmark'

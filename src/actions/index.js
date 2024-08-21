@@ -542,37 +542,15 @@ export function fetchDataAsync( key ) {
 
 			const json = await response.json();
 			dispatch( receiveData( key, json ) );
+			// Add to the cache - most things are already, except comparisonData.
+			caches.open( cacheKey ).then( function ( cache ) {
+				return cache.addAll( [ `data/${ key }.json` ] );
+			} );
 		} catch ( error ) {
 			console.log( error.message );
 		}
 	};
 }
-
-export const fetchComparisonData = () => {
-	return function ( dispatch, getState ) {
-		const { data } = getState();
-		if ( data.comparisonData ) {
-			return;
-		}
-
-		// This is a combination of both the Hebrew and Greek dictonaries
-		return xhr(
-			{
-				method: 'get',
-				uri: 'data/comparison-data.json',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			},
-			function ( error, response, body ) {
-				dispatch( receiveData( 'comparisonData', JSON.parse( body ) ) );
-				caches.open( cacheKey ).then( function ( cache ) {
-					return cache.addAll( [ 'data/comparison-data.json' ] );
-				} );
-			}
-		);
-	};
-};
 
 export const setReferenceInfo = ( reference ) => {
 	return {

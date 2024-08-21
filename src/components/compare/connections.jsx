@@ -5,19 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 // Internal dependencies
 import bible from '../../data/bible';
 import styles from './styles.module.scss';
-import {
-	fetchData,
-	fetchDataAsync,
-	fetchComparisonData,
-	setReferenceInfo,
-} from '../../actions';
+import { fetchData, fetchDataAsync, setReferenceInfo } from '../../actions';
 import { getBooks, getCompareChapters } from '../../lib/select-helpers';
 
 export default function Connections( { close } ) {
 	const dispatch = useDispatch();
 	dispatch( fetchData( 'original' ) );
 	dispatch( fetchDataAsync( 'strongsObjectWithFamilies' ) );
-	dispatch( fetchComparisonData() );
+	dispatch( fetchDataAsync( 'comparisonData' ) );
 	const comparisonData = useSelector(
 		( state ) => state.data.comparisonData
 	);

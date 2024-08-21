@@ -6140,7 +6140,6 @@ bible.parseReference = function ( textReference ) {
 	}
 
 	// finalize
-	console.log( chapter1, chapter2 );
 	return new bible.Reference( bookID, chapter1, verse1, chapter2, verse2 );
 };
 

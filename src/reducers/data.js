@@ -1,17 +1,19 @@
 const data = ( state = {}, action ) => {
 	switch ( action.type ) {
-		case 'REQUEST_DATA':
+		case 'REQUEST_DATA': {
 			const requestState = { ...state };
 			requestState[ action.key ] = {};
 			return requestState;
+		}
 
-		case 'RECEIVE_DATA':
+		case 'RECEIVE_DATA': {
 			const newState = { ...state };
 			newState[ action.key ] = action.data;
 			javascripture.data[ action.key ] = action.data; //for search
 			return newState;
+		}
 
-		case 'UPDATE_DATA':
+		case 'UPDATE_DATA': {
 			const unmutatedState = { ...state };
 			if ( ! action.lemma ) {
 				action.lemma = '';
@@ -21,6 +23,7 @@ const data = ( state = {}, action ) => {
 				action.morph
 			] = action.translation;
 			return unmutatedState;
+		}
 
 		default:
 			return state;

@@ -52,10 +52,14 @@ const InitialView = () => {
 					</a>
 				</p>
 				<p>
-					There is also an old version available in case this one is
+					There are also old versions available in case this one is
 					broken:{ ' ' }
 					<a href="https://javascripture.github.io/javascripture">
 						javascripture
+					</a>
+					{ ' | ' }
+					<a href="https://syncbible.github.io/syncbible">
+						syncbible webkit
 					</a>
 				</p>
 			</div>
@@ -63,4 +67,4 @@ const InitialView = () => {
 	);
 };
 
-export default React.memo( InitialView );
+export default InitialView;

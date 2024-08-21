@@ -182,7 +182,8 @@ export const compareTwoReferences = ( {
 	const ref2Lemmas = getLemmasForReference( referenceToCompareWith, data );
 	const comparison = ref1Lemmas.filter( ( lemma ) => {
 		if (
-			javascripture.data.strongsObjectWithFamilies[ lemma ].count < limit
+			data.strongsObjectWithFamilies &&
+			data.strongsObjectWithFamilies[ lemma ].count < limit
 		) {
 			if ( ref2Lemmas.indexOf( lemma ) > -1 ) {
 				return lemma;
@@ -204,10 +205,7 @@ export const calculateRareWords = ( {
 	const lemmas = getLemmasForReference( reference, data );
 	return uniq(
 		lemmas.filter( ( lemma ) => {
-			return (
-				javascripture.data.strongsObjectWithFamilies[ lemma ].count <
-				limit
-			);
+			return data.strongsObjectWithFamilies[ lemma ].count < limit;
 		} )
 	);
 };

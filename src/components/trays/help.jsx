@@ -60,7 +60,12 @@ const HelpTray = () => {
 
 				<h3>Legacy versions</h3>
 				<p>
-					<a href="https://javascripture.org">javascripture.org</a>
+					<a href="https://javascripture.github.io/javascripture">
+						javascripture.org
+					</a>
+					<a href="https://syncbible.github.io/syncbible">
+						syncbible webkit
+					</a>
 				</p>
 
 				<h3>Texts</h3>
@@ -74,7 +79,7 @@ const HelpTray = () => {
 					<a href="https://github.com/morphgnt/tischendorf">Greek</a>
 				</p>
 				<p className={ styles.inline }>
-					<a href="https://github.com/javascripture/javascripture/blob/gh-pages/data/literalConsistent.js">
+					<a href="https://github.com/syncbible/sync.bible/blob/main/public/bibles/LC.json">
 						Literal consistent
 					</a>{ ' ' }
 					<a
@@ -86,7 +91,7 @@ const HelpTray = () => {
 					</a>
 				</p>
 				<p className={ styles.inline }>
-					<a href="https://github.com/syncbible/syncbible/blob/trunk/bibles/NMV_strongs.js">
+					<a href="https://github.com/syncbible/sync.bible/blob/main/bibles/NMV_strongs.js">
 						NMV_strongs
 					</a>{ ' ' }
 					<a
@@ -98,9 +103,9 @@ const HelpTray = () => {
 					</a>
 				</p>
 				<p>
-					ESV: The Holy Bible, English Standard Version ©2011 Crossway
-					Bibles, a division of Good News Publishers. All rights
-					reserved.
+					ESV: The Holy Bible, English Standard Version ©2011
+					Crossway Bibles, a division of Good News Publishers. All
+					rights reserved.
 				</p>
 				<p>
 					<a href="https://www.dropbox.com/s/7e05iklpkrtn46n/Genesis%20-%20Jeremiah.pdf?dl=0">
@@ -114,10 +119,7 @@ const HelpTray = () => {
 				</p>
 				<p>
 					<br />
-					Version:{ ' ' }
-					{ typeof javascripture.sw !== 'undefined'
-						? javascripture.sw
-						: null }
+					Version: { globalThis.cacheKey }
 				</p>
 				<p>
 					<a href="#" onClick={ clear }>

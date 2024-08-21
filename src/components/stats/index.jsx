@@ -35,6 +35,12 @@ const Rare = () => {
 		() => calculateCommonWords( reference, data ),
 		[ reference, data ]
 	);
+	const strongsDictionary = useSelector(
+		( state ) => state.data.strongsDictionary
+	);
+	const strongsObjectWithFamilies = useSelector(
+		( state ) => state.data.strongsObjectWithFamilies
+	);
 
 	useEffect( () => {
 		if ( isActiveTray ) {
@@ -44,15 +50,15 @@ const Rare = () => {
 
 	const sortByTotalAsc = ( a, b ) => {
 		return (
-			javascripture.data.strongsObjectWithFamilies[ a ].count -
-			javascripture.data.strongsObjectWithFamilies[ b ].count
+			strongsObjectWithFamilies[ a ].count -
+			strongsObjectWithFamilies[ b ].count
 		);
 	};
 
 	const sortByTotalDesc = ( a, b ) => {
 		return (
-			javascripture.data.strongsObjectWithFamilies[ b ].count -
-			javascripture.data.strongsObjectWithFamilies[ a ].count
+			strongsObjectWithFamilies[ b ].count -
+			strongsObjectWithFamilies[ a ].count
 		);
 	};
 
@@ -66,21 +72,17 @@ const Rare = () => {
 
 	const sortBySignificanceAsc = ( a, b ) => {
 		const significanceA =
-			common[ a ] /
-			javascripture.data.strongsObjectWithFamilies[ a ].count;
+			common[ a ] / strongsObjectWithFamilies[ a ].count;
 		const significanceB =
-			common[ b ] /
-			javascripture.data.strongsObjectWithFamilies[ b ].count;
+			common[ b ] / strongsObjectWithFamilies[ b ].count;
 		return significanceA - significanceB;
 	};
 
 	const sortBySignificanceDesc = ( a, b ) => {
 		const significanceA =
-			common[ a ] /
-			javascripture.data.strongsObjectWithFamilies[ a ].count;
+			common[ a ] / strongsObjectWithFamilies[ a ].count;
 		const significanceB =
-			common[ b ] /
-			javascripture.data.strongsObjectWithFamilies[ b ].count;
+			common[ b ] / strongsObjectWithFamilies[ b ].count;
 		return significanceB - significanceA;
 	};
 
@@ -115,8 +117,7 @@ const Rare = () => {
 			.sort( getSortFunction() )
 			.map( ( lemma ) => {
 				const significance = (
-					common[ lemma ] /
-					javascripture.data.strongsObjectWithFamilies[ lemma ].count
+					common[ lemma ] / strongsObjectWithFamilies[ lemma ].count
 				).toFixed( 3 );
 				return (
 					<tr
@@ -135,26 +136,13 @@ const Rare = () => {
 						}
 					>
 						<td>{ lemma }</td>
+						<td>{ strongsDictionary[ lemma ].lemma }</td>
 						<td>
-							{
-								javascripture.data.strongsDictionary[ lemma ]
-									.lemma
-							}
-						</td>
-						<td>
-							{ javascripture.data.strongsDictionary[ lemma ]
-								.xlit ||
-								javascripture.data.strongsDictionary[ lemma ]
-									.translit }
+							{ strongsDictionary[ lemma ].xlit ||
+								strongsDictionary[ lemma ].translit }
 						</td>
 						<td>{ common[ lemma ] }</td>
-						<td>
-							{
-								javascripture.data.strongsObjectWithFamilies[
-									lemma
-								].count
-							}
-						</td>
+						<td>{ strongsObjectWithFamilies[ lemma ].count }</td>
 						<td>{ significance }</td>
 					</tr>
 				);
@@ -307,4 +295,4 @@ const Rare = () => {
 	);
 };
 
-export default React.memo( Rare );
+export default Rare;

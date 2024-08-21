@@ -38,6 +38,9 @@ const Compare = () => {
 	);
 	const overlap = useSelector( ( state ) => compareTwoReferences( state ) );
 	const limit = useSelector( ( state ) => state.referenceInfo.limit );
+	const strongsDictionary = useSelector(
+		( state ) => state.data.strongsDictionary
+	);
 	const addAllWords = () => {
 		overlap.forEach( ( lemma ) => addWord( lemma ) );
 	};
@@ -143,8 +146,9 @@ const Compare = () => {
 				} }
 			>
 				{ lemma } -{ ' ' }
-				{ javascripture.data.strongsDictionary[ lemma ].lemma } -{ ' ' }
-				{ javascripture.data.strongsDictionary[ lemma ].translit }
+				{ strongsDictionary && strongsDictionary[ lemma ].lemma }
+				{ ' - ' }
+				{ strongsDictionary && strongsDictionary[ lemma ].translit }
 			</div>
 		);
 	};

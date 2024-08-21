@@ -29,8 +29,7 @@
     "redux-persist": "^6.0.0",
     "redux-persist-indexeddb-storage": "^1.0.4",
     "redux-thunk": "^3.1.0",
-    "tinycolor2": "^1.6.0",
-    "xhr": "^2.6.0"
+    "tinycolor2": "^1.6.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",

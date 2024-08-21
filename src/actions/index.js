@@ -1,5 +1,4 @@
 // External dependencies.
-import xhr from 'xhr';
 import { push } from '@lagunovsky/redux-react-router';
 
 // Internal dependencies.
@@ -474,7 +473,7 @@ export function receiveData( key, data ) {
 }
 
 export const fetchData = ( key ) => {
-	return function ( dispatch, getState ) {
+	return async function ( dispatch, getState ) {
 		const { data } = getState(); // check that the data isn't already in state
 		if ( data[ key ] ) {
 			return;
@@ -482,48 +481,42 @@ export const fetchData = ( key ) => {
 
 		dispatch( requestData( key ) );
 
+		try {
+			const response = await fetch( `bibles/${ key }.json` );
+			if ( ! response.ok ) {
+				throw new Error( `Response status: ${ response.status }` );
+			}
+
+			const json = await response.json();
+			if ( json.books ) {
+				dispatch( receiveData( key, json.books ) );
+			} else {
+				dispatch( receiveData( key, json ) );
+			}
+			caches.open( cacheKey ).then( function ( cache ) {
+				return cache.addAll( [ 'bibles/' + key + '.json' ] );
+			} );
+		} catch ( error ) {
+			console.log( error.message );
+		}
+
 		// If we load NMV_strongs, we need to load the translation data as well.
 		if ( key === 'NMV_strongs' ) {
-			xhr(
-				{
-					method: 'get',
-					uri: 'data/farsi-translations.json',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				},
-				function ( error, response, body ) {
-					const parsedData = JSON.parse( body );
-					dispatch( receiveData( 'farsiTranslations', parsedData ) );
+			try {
+				const response = await fetch( 'data/farsi-translations.json' );
+				if ( ! response.ok ) {
+					throw new Error( `Response status: ${ response.status }` );
+				}
 
-					caches.open( cacheKey ).then( function ( cache ) {
-						return cache.addAll( [
-							'data/farsi-translations.json',
-						] );
-					} );
-				}
-			);
-		}
-		return xhr(
-			{
-				method: 'get',
-				uri: 'bibles/' + key + '.json',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			},
-			function ( error, response, body ) {
-				const parsedData = JSON.parse( body );
-				if ( parsedData.books ) {
-					dispatch( receiveData( key, parsedData.books ) );
-				} else {
-					dispatch( receiveData( key, parsedData ) );
-				}
+				const json = await response.json();
+				dispatch( receiveData( 'farsiTranslations', json ) );
 				caches.open( cacheKey ).then( function ( cache ) {
-					return cache.addAll( [ 'bibles/' + key + '.json' ] );
+					return cache.addAll( [ 'data/farsi-translations.json' ] );
 				} );
+			} catch ( error ) {
+				console.log( error.message );
 			}
-		);
+		}
 	};
 };
 

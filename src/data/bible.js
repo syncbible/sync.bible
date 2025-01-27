@@ -374,6 +374,7 @@ bible.Data.bookNamesByLanguage = {
 		'Ιουδα',
 		'Αποκαλυψη του Ιωαννη',
 	],
+	af: bible.Data.allBooks, // TODO
 	ar: [
 		'تكوين',
 		'خروج',
@@ -1054,7 +1055,7 @@ bible.Data.bookNamesByLanguage = {
 		'Júdov',
 		'Zjavenie Jána',
 	], // Pretty sure these are wrong
-	cy: bible.Data.allBooks,
+	cy: bible.Data.allBooks, // TODO
 	da: [
 		'1. Mosebog',
 		'2. Mosebog',
@@ -5205,6 +5206,7 @@ bible.Data.supportedVersions = {
 	NMV: { name: 'ترجمه هزارۀ نو', language: 'fa' },
 	NMV_strongs: { name: '*with strongs - ترجمه هزارۀ نو', language: 'fa' },
 	NMV_KJV_strongs: { name: '*from KJV - ترجمه هزارۀ نو', language: 'fa' },
+	Afr1953: { name: '1933/1953 Afrikaans Bybel', language: 'af' },
 	AraSVD: { name: 'Arabic Bible', language: 'ar' },
 	NorthernAzeri: { name: 'Northern Azeri', language: 'az' },
 	Bela: { name: 'Belarusian Bible', language: 'be' },
@@ -5499,6 +5501,7 @@ bible.Data.interfaceLanguages = {
 	original: 'Hebrew/Greek',
 	en: 'English',
 	fa: 'فارسی (Farsi)',
+	af: 'Afrikaans', // TODO
 	ar: 'عربى (Arabic)',
 	az: 'آذری (Northern Azeri)',
 	be: 'беларуская (Belarusian)',
@@ -5509,7 +5512,7 @@ bible.Data.interfaceLanguages = {
 	cop: 'ϯⲙⲉⲧⲣⲉⲙⲛ̀ⲭⲏⲙⲓ (Coptic)',
 	cs: 'Čeština (Czech)',
 	cu: 'Church Slavonic',
-	cy: 'Cymru (Welsh)',
+	cy: 'Cymru (Welsh)', // TODO
 	da: 'Dansk (Danish)',
 	de: 'Deutsch (German)',
 	el: 'Ελληνικά (Modern Greek)',

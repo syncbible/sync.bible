@@ -2010,7 +2010,7 @@ bible.Data.bookNamesByLanguage = {
 		'Ιουδα',
 		'Αποκαλυψη του Ιωαννη',
 	],
-	he: [
+	hbo: [
 		'בראשית',
 		'שמות',
 		'ויקרא',
@@ -5106,6 +5106,7 @@ bible.Data.bookNamesByLanguage = {
 		'启 示 录',
 	],
 };
+bible.Data.bookNamesByLanguage.he = bible.Data.bookNamesByLanguage.hbo;
 bible.Data.rtlLanguages = [ 'he', 'fa', 'ar', 'ckb', 'prs', 'ur' ];
 bible.Data.supportedVersions = {
 	original: { name: 'Original', language: 'original' },
@@ -5410,18 +5411,33 @@ bible.Data.supportedVersions = {
 		language: 'grc',
 		strongs: true,
 	},
-	Aleppo: { name: 'Aleppo Codex', language: 'he' },
-	HebModern: { name: 'Modern Hebrew Bible', language: 'he' },
-	SP: { name: 'Samaritan Pentateuch', language: 'he', strongs: true },
+	Aleppo: { name: 'Aleppo Codex', language: 'hbo' },
+	MapM: {
+		name: 'מקרא על פי המסורה (Miqra `al pi ha-Mesorah)',
+		language: 'hbo',
+	},
+	OSHB: {
+		name: 'Open Scriptures Hebrew Bible',
+		language: 'hbo',
+		strongs: true,
+	},
+	SP: { name: 'Samaritan Pentateuch', language: 'hbo', strongs: true },
+	SPDSS: {
+		name: 'Dead Sea Scrolls variants parallel to the Samaritan Pentateuch',
+		language: 'hbo',
+		strongs: true,
+	},
 	SPMT: {
 		name: 'Masoretic Text parallel to the Samaritan Pentateuch',
-		language: 'he',
+		language: 'hbo',
 		strongs: true,
 	},
 	SPVar: {
 		name: 'Samaritan Pentateuch with variant readings',
-		language: 'he',
+		language: 'hbo',
 	},
+	WLC: { name: 'Westminster Leningrad Codex', language: 'hbo' },
+	HebModern: { name: 'Modern Hebrew Bible', language: 'he' },
 	Haitian: { name: 'Haitian Creole Bible', language: 'ht' },
 	HunIMIT: {
 		name: 'Az Izraelita-Magyar Irodalmi Társaság (IMIT) Bibliája (zsidó)',
@@ -5597,7 +5613,8 @@ bible.Data.interfaceLanguages = {
 	gd: 'Gaelg (Scots Gaelic)',
 	gez: 'ግዕዝ (Geez)',
 	grc: 'Ελληνικά (Ancient Greek)',
-	he: 'עברית (Hebrew)',
+	hbo: 'עברית (Hebrew)',
+	he: 'עברית (Modern Hebrew)',
 	hi: 'हिन्दी (Hindi)',
 	hlt: 'Matupi Chin',
 	ht: 'Kreyòl ayisyen (Haitian Creole)',

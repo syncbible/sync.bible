@@ -1,5 +1,6 @@
 ## Todo
 
+-   redo dead sea scrolls text?
 -   search for stranger and pilgrim and look at stats
 -   Search in chapter/book
 -   Filter search results by strongs number eg life

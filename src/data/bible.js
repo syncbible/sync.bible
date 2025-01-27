@@ -5207,6 +5207,7 @@ bible.Data.supportedVersions = {
 	NMV_strongs: { name: '*with strongs - ترجمه هزارۀ نو', language: 'fa' },
 	NMV_KJV_strongs: { name: '*from KJV - ترجمه هزارۀ نو', language: 'fa' },
 	Afr1953: { name: '1933/1953 Afrikaans Bybel', language: 'af' },
+	AraNAV: { name: 'New Arabic Version (Ketab El Hayat)', language: 'ar' },
 	AraSVD: { name: 'Arabic Bible', language: 'ar' },
 	NorthernAzeri: { name: 'Northern Azeri', language: 'az' },
 	Bela: { name: 'Belarusian Bible', language: 'be' },

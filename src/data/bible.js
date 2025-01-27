@@ -854,7 +854,7 @@ bible.Data.bookNamesByLanguage = {
 		'ئاشکراکردن',
 	],
 	cop: [
-		'',
+		'', // TODO
 		'',
 		'',
 		'',
@@ -1535,6 +1535,7 @@ bible.Data.bookNamesByLanguage = {
 		'APOCALIPSIS',
 	],
 	et: bible.Data.allBooks, // TODO
+	eu: bible.Data.allBooks, // TODO
 	fa: [
 		'پدایش',
 		'خروج',
@@ -1943,7 +1944,7 @@ bible.Data.bookNamesByLanguage = {
 		'ትንቢተ ሚልክያ',
 	],
 	grc: [
-		'',
+		'', // TODO
 		'',
 		'',
 		'',
@@ -2010,6 +2011,7 @@ bible.Data.bookNamesByLanguage = {
 		'Ιουδα',
 		'Αποκαλυψη του Ιωαννη',
 	],
+	gv: bible.Data.allBooks, // TODO
 	hbo: [
 		'בראשית',
 		'שמות',
@@ -2567,6 +2569,7 @@ bible.Data.bookNamesByLanguage = {
 		'ユダの手紙',
 		'ヨハネの黙示録',
 	],
+	kek: bible.Data.allBooks,
 	kk: [
 		'Жаратылыстың баст.',
 		'Мысырдан шығу',
@@ -2704,6 +2707,7 @@ bible.Data.bookNamesByLanguage = {
 		'유다서',
 		'요한계시록',
 	],
+	kpl: bible.Data.allBooks, // TODO
 	ksw: bible.Data.allBooks, // TODO
 	la: [
 		'Genesis',
@@ -3130,6 +3134,7 @@ bible.Data.bookNamesByLanguage = {
 		'യൂദാ',
 		'വെളി.',
 	],
+	mg: bible.Data.allBooks, // TODO
 	mi: bible.Data.allBooks, // TODO
 	mn: bible.Data.allBooks, // TODO
 	my: bible.Data.allBooks, // TODO
@@ -4564,6 +4569,7 @@ bible.Data.bookNamesByLanguage = {
 		'Judas',
 		'Pahayag',
 	],
+	tlh: bible.Data.allBooks, // TODO
 	tr: [
 		'YARATILIŞ',
 		"MISIR'DAN ÇIKIŞ",
@@ -5113,7 +5119,9 @@ bible.Data.bookNamesByLanguage = {
 	],
 };
 bible.Data.bookNamesByLanguage.he = bible.Data.bookNamesByLanguage.hbo;
-bible.Data.rtlLanguages = [ 'he', 'fa', 'ar', 'ckb', 'prs', 'ur' ];
+bible.Data.bookNamesByLanguage.azb = bible.Data.bookNamesByLanguage.az;
+
+bible.Data.rtlLanguages = [ 'he', 'fa', 'ar', 'az', 'azb', 'ckb', 'prs', 'ur' ];
 bible.Data.supportedVersions = {
 	original: { name: 'Original', language: 'original' },
 	accented: { name: 'Accented original', language: 'original' },
@@ -5148,6 +5156,7 @@ bible.Data.supportedVersions = {
 		language: 'en',
 		strongs: true,
 	},
+	AB: { name: "The Apostles' Bible", language: 'en' },
 	ACV: { name: 'A Conservative Version', language: 'en' },
 	AKJV: { name: 'American King James Version', language: 'en' },
 	Anderson: {
@@ -5157,6 +5166,7 @@ bible.Data.supportedVersions = {
 	BBE: { name: '1949/1964 Bible in Basic English', language: 'en' },
 	BSB: { name: 'Berean Study Bible', language: 'en' },
 	BWE: { name: 'Bible in Worldwide English', language: 'en' },
+	Common: { name: 'The Common Edition: New Testament', language: 'en' },
 	CPDV: { name: 'Catholic Public Domain Version', language: 'en' },
 	DRC: { name: 'Douay-Rheims Bible, Challoner Revision', language: 'en' },
 	EMTV: { name: 'English Majority Text Version', language: 'en' },
@@ -5177,7 +5187,13 @@ bible.Data.supportedVersions = {
 	},
 	LEB: { name: 'Lexham English Bible', language: 'en' },
 	LITV: { name: "Green's Literal Translation", language: 'en' },
+	LO: { name: 'The Living Oracles NT', language: 'en' },
 	MKJV: { name: "Green's Modern King James Version", language: 'en' },
+	Montgomery: { name: 'Montgomery New Testament', language: 'en' },
+	Murdock: {
+		name: "James Murdock's Translation of the Syriac Peshitta",
+		language: 'en',
+	},
 	NET: { name: 'New English Translation', language: 'en' },
 	NHEB: { name: 'New Heart English Bible', language: 'en' },
 	NHEBJE: {
@@ -5189,6 +5205,7 @@ bible.Data.supportedVersions = {
 		language: 'en',
 	},
 	Noyes: { name: '1869 Noyes Translation', language: 'en' },
+	OEB: { name: 'Open English Bible (US Spelling)', language: 'en' },
 	OEBcth: {
 		name: 'Open English Bible (Commonwealth Spelling)',
 		language: 'en',
@@ -5205,6 +5222,7 @@ bible.Data.supportedVersions = {
 	Tyndale: { name: 'William Tyndale Bible (1525/1530)', language: 'en' },
 	UKJV: { name: 'Updated King James Version', language: 'en' },
 	Webster: { name: 'Webster Bible', language: 'en' },
+	Weymouth: { name: 'Weymouth NT (1912)', language: 'en' },
 	WMB: { name: 'World Messianic Bible', language: 'en' },
 	Worsley: { name: '1770 John Worsley NT', language: 'en' },
 	Wycliffe: { name: 'John Wycliffe Bible (c.1395)', language: 'enm' },
@@ -5229,8 +5247,13 @@ bible.Data.supportedVersions = {
 	AraNAV: { name: 'New Arabic Version (Ketab El Hayat)', language: 'ar' },
 	AraSVD: { name: 'Arabic Bible', language: 'ar' },
 	NorthernAzeri: { name: 'Northern Azeri', language: 'az' },
+	Azeri: { name: 'مقدَس کتاب آذربايجان ديلی', language: 'azb' },
 	BeaMRK: { name: 'The Gospel of Mark in Beaver (Danezaa)', language: 'bea' },
 	Bela: { name: 'Belarusian Bible', language: 'be' },
+	BulCarigradNT: {
+		name: 'Bulgarian New Testament from 1914, known as Tsarigrad Edition',
+		language: 'bg',
+	},
 	BulVeren: { name: 'Veren’s Contemporary Bible', language: 'bg' },
 	BretonNT: { name: 'Breton New Testament (Koad 21)', language: 'br' },
 	CebPinadayag: { name: 'Cebuano Pinadayag', language: 'ceb' },
@@ -5279,6 +5302,10 @@ bible.Data.supportedVersions = {
 		name: 'Danish OT1931 + NT1907 with original orthography',
 		language: 'da',
 	},
+	GerAlbrecht: {
+		name: 'German Albrecht Neues Testament und Psalmen',
+		language: 'de',
+	},
 	GerBoLut: {
 		name: 'Deutsch Bolsingerߴs Luther 1545 Bibel (moderne Rechtschreibung)',
 		language: 'de',
@@ -5302,6 +5329,7 @@ bible.Data.supportedVersions = {
 		language: 'de',
 		strongs: true,
 	},
+	GerMenge: { name: 'Menge-Bibel (1939)', language: 'de' },
 	GerNeUe: { name: 'Neue evangelistische Übersetzung', language: 'de' },
 	GerOffBiSt: { name: 'Leonberger Bibel, NT (RP19)', language: 'de' },
 	GerReinhardt: { name: 'German Reinhardt Evangelien', language: 'de' },
@@ -5314,7 +5342,24 @@ bible.Data.supportedVersions = {
 	},
 	GerZurcher: { name: 'Deutsche Zürcher Bibel von 1931.', language: 'de' },
 	Esperanto: { name: 'Esperanto Londona Biblio', language: 'eo' },
+	SpaPlatense: { name: 'Biblia Platense (Straubinger)', language: 'es' },
+	SpaRV: { name: 'La Santa Biblia Reina-Valera (1909)', language: 'es' },
+	SpaRV1865: {
+		name: 'La Santa Biblia Reina-Valera (1865) con arreglos ortográficos',
+		language: 'es',
+	},
+	SpaRV1909: {
+		name: 'Reina-Valera 1909',
+		language: 'es',
+	},
+	SpaTDP: {
+		name: 'Spanish Traducción de dominio público (Mateo a Romanos)',
+		language: 'es',
+		strongs: true,
+	},
+	SpaVNT: { name: 'Spanish 1858 Reina Valera New Testament', language: 'es' },
 	Est: { name: 'Estonian Bible', language: 'et' },
+	BasHautin: { name: '1571 Navarro-Labourdin Basque NT', language: 'eu' },
 	FinBiblia: { name: 'Finnish Biblia (1776)', language: 'fi' },
 	FinPR: { name: 'Finnish Pyhä Raamattu (1933/1938)', language: 'fi' },
 	FinPR92: { name: 'Finnish Pyhä Raamattu (1992)', language: 'fi' },
@@ -5355,18 +5400,6 @@ bible.Data.supportedVersions = {
 		name: 'Le Nouveau Testament Version Synodale 1921 et le livre des Psaumes',
 		language: 'fr',
 	},
-	SpaPlatense: { name: 'Biblia Platense (Straubinger)', language: 'es' },
-	SpaRV: { name: 'La Santa Biblia Reina-Valera (1909)', language: 'es' },
-	SpaRV1865: {
-		name: 'La Santa Biblia Reina-Valera (1865) con arreglos ortográficos',
-		language: 'es',
-	},
-	SpaTDP: {
-		name: 'Spanish Traducción de dominio público (Mateo a Romanos)',
-		language: 'es',
-		strongs: true,
-	},
-	SpaVNT: { name: 'Spanish 1858 Reina Valera New Testament', language: 'es' },
 	IriODomhnuill: {
 		name: 'A modern Irish New Testament (Luke preview)',
 		language: 'ga',
@@ -5394,6 +5427,11 @@ bible.Data.supportedVersions = {
 		strongs: true,
 	},
 	f35: { name: 'Family 35', language: 'grc' },
+	LXX: {
+		name: "Septuagint, Morphologically Tagged Rahlfs'",
+		language: 'grc',
+		strongs: true,
+	},
 	MorphGNT: {
 		name: 'Morphologically Parsed Greek New Testament based on the SBLGNT',
 		language: 'grc',
@@ -5409,6 +5447,11 @@ bible.Data.supportedVersions = {
 		language: 'grc',
 		strongs: true,
 	},
+	Tisch: {
+		name: "Tischendorf's 8th edition GNT",
+		language: 'grc',
+		strongs: true,
+	},
 	TNT: { name: "Tregelles' Greek New Testament", language: 'grc' },
 	TR: { name: 'Textus Receptus (1550/1894)', language: 'grc', strongs: true },
 	WHNU: {
@@ -5416,6 +5459,7 @@ bible.Data.supportedVersions = {
 		language: 'grc',
 		strongs: true,
 	},
+	ManxGaelic: { name: 'Manx Gaelic Scripture Portions', language: 'gv' },
 	Aleppo: { name: 'Aleppo Codex', language: 'hbo' },
 	MapM: {
 		name: 'מקרא על פי המסורה (Miqra `al pi ha-Mesorah)',
@@ -5489,10 +5533,15 @@ bible.Data.supportedVersions = {
 		name: 'Japanese Raguet-yaku ラゲ訳「我主イエズスキリストの新約聖書」(1910年版)',
 		language: 'ja',
 	},
+	Kekchi: { name: "K'ekchi' Bible", language: 'kek' },
 	Kaz: { name: 'Киелі кітап', language: 'kk' },
 	KhmerNT: { name: 'Khmer Christian Bible', language: 'km' },
 	KorHKJV: { name: 'Hangul King James Version', language: 'ko' },
 	KorRV: { name: '개역성경', language: 'ko' },
+	Kapingamarangi: {
+		name: 'The Bible in the Kapingamarangi language',
+		language: 'kpl',
+	},
 	KswSKMB: { name: "S'gaw Karen Mason Bible 1853", language: 'ksw' },
 	Vulgate_HebPs: { name: 'Latin Vulgate Psalms from Hebrew', language: 'la' },
 	VulgClementine: { name: 'Clementine Vulgate', language: 'la' },
@@ -5513,6 +5562,7 @@ bible.Data.supportedVersions = {
 		name: 'Sathyavedapusthakam (Malayalam Bible) published in 1910',
 		language: 'mal',
 	},
+	Mg1865: { name: 'Baiboly Malagasy (1865)', language: 'mg' },
 	Maori: { name: 'Maori Bible', language: 'mi' },
 	MonKJV: { name: 'Mongolian King James Version', language: 'mn' },
 	BurCBCM: {
@@ -5559,6 +5609,10 @@ bible.Data.supportedVersions = {
 		language: 'ru',
 		strongs: true,
 	},
+	RusVZh: {
+		name: 'Russian New Testament',
+		language: 'ru',
+	},
 	SloOjacano: { name: 'Ojačano Sveto pismo (Ps + Gal)', language: 'sl' },
 	SloChraska: {
 		name: 'Sveto pismo Starega in Novega zakona (1925) – SloChraska',
@@ -5566,6 +5620,10 @@ bible.Data.supportedVersions = {
 	},
 	SloKJV: {
 		name: 'Slovenian translation of Holy Bible King James Version (1769)',
+		language: 'sl',
+	},
+	SloStritar: {
+		name: 'Novi testament in Psalmi Davidovi Josipa Stritarja (1882)',
 		language: 'sl',
 	},
 	sml_BL_2008: { name: 'Kitab Injil and Kitab Awal-Jaman', language: 'sml' },
@@ -5588,6 +5646,10 @@ bible.Data.supportedVersions = {
 	Peshitta: { name: 'Syriac Peshitta', language: 'syr' },
 	ThaiKJV: { name: 'Thai King James Version', language: 'th' },
 	Tagalog: { name: 'Tagalog (John & James)', language: 'tl' },
+	KLV: {
+		name: 'Klingon Language Version of the World English Bible',
+		language: 'tlh',
+	},
 	TagAngBiblia: { name: 'Philippine Bible Society (1905)', language: 'tl' },
 	TpiKJPB: { name: 'King Jems Pisin Baibel', language: 'tpi' },
 	TurNTB: { name: 'Kutsal Kitap (New Turkish Bible)', language: 'tr' },
@@ -5623,6 +5685,7 @@ bible.Data.supportedVersions = {
 	},
 	Viet: { name: 'Kinh Thánh Tiếng Việt (1934)', language: 'vi' },
 	VieLCCMN: { name: 'Lời Chúa Cho Mọi Người', language: 'vi' },
+	VietNVB: { name: 'New Vietnamese Bible (2002)', language: 'vi' },
 	vlsJoNT: {
 		name: 'Het Nieuwe Testament by Nicolaas De Jonge',
 		language: 'vls',
@@ -5632,6 +5695,10 @@ bible.Data.supportedVersions = {
 		language: 'yo',
 	},
 	ChiNCVs: { name: '新译本', language: 'zh-hans' },
+	ChiSB: {
+		name: '思高本 (Sīgāo Běn), 聖經：思高聖經學會譯釋',
+		language: 'zh-hant',
+	},
 	ChiUns: { name: '和合本 (简体字)', language: 'zh-hans', strongs: true },
 	ChiUn: { name: '和合本 (繁體字)', language: 'zh-hant', strongs: true },
 };
@@ -5642,6 +5709,7 @@ bible.Data.interfaceLanguages = {
 	af: 'Afrikaans', // TODO
 	ar: 'عربى (Arabic)',
 	az: 'آذری (Northern Azeri)',
+	azb: 'Azeri', // TODO
 	be: 'беларуская (Belarusian)',
 	bea: 'Beaver', // TODO
 	bg: 'български (Bulgarian)',
@@ -5660,11 +5728,13 @@ bible.Data.interfaceLanguages = {
 	eo: 'Esperanto',
 	es: 'Español (Spanish)',
 	et: 'Estonian', // TODO
+	eu: 'Basque', // TODO
 	fi: 'Suomi (Finish)',
 	fr: 'Français (French)',
 	ga: 'Gaeilge (Gaelic)',
 	gd: 'Gaelg (Scots Gaelic)',
 	gez: 'ግዕዝ (Geez)',
+	gv: 'Manx Gaelic', // TODO
 	grc: 'Ελληνικά (Ancient Greek)',
 	hbo: 'עברית (Hebrew)',
 	he: 'עברית (Modern Hebrew)',
@@ -5676,9 +5746,11 @@ bible.Data.interfaceLanguages = {
 	hy: 'հայերեն (Armenian)',
 	it: 'Italiano (Italian)',
 	ja: '日本語 (Japanese)',
+	kek: "K'ekchi'", // TODO
 	kk: 'Қазақша / Qazaqşa / قازاق ٴتىلى / Kazakh',
 	km: 'Khmer', // TODO
 	ko: '한국어 (Korean)',
+	kpl: 'Kapingamarangi', // TODO
 	ksw: "S'gaw Karen", // TODO
 	la: 'Latin',
 	ln: 'Liloba', // TODO
@@ -5687,6 +5759,7 @@ bible.Data.interfaceLanguages = {
 	lv: 'Latviešu Valoda (Latvian)',
 	lzh: '文言（中文）(Classical Chinese)',
 	mal: 'മലയാളം (Malayalam)',
+	mg: 'Malagasy', // TODO
 	mi: 'Maori',
 	mn: 'Mongolian', // TODO
 	my: 'Burmese', // TODO
@@ -5714,6 +5787,7 @@ bible.Data.interfaceLanguages = {
 	syr: 'Syriac Peshitta', // TODO
 	th: 'ไทย (Thai)',
 	tl: 'Tagalog',
+	tlh: 'Klingon', // TODO
 	tpi: 'TPI', // TODO
 	tr: 'Türkçe',
 	tsg: 'Tausug', // TODO

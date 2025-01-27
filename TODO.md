@@ -1,5 +1,6 @@
 ## Todo
 
+-   redo welsh text?
 -   redo dead sea scrolls text?
 -   lots of text missing mal 4?
 -   move all strongs texts up
@@ -16,6 +17,14 @@
 -   make it clear that we need original for several features, so when we dont have it show that we need it and add explain
 -   fix the sidebar on initial load - don't set KJV as initial interface lang
 -   show verse for context in combined. only show verses with more than one result
+
+-   There are some texts from crosswire that couldn't be converted
+
+    -   GerHfa2002
+    -   SpaRVG
+    -   Wulfila
+    -   Nestle1904
+    -   There are also some texts that say they have strongs but didn't convert right
 
 -   replace חׇpointing
 -   collapse all button

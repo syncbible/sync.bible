@@ -784,6 +784,7 @@ bible.Data.bookNamesByLanguage = {
 		'Judas',
 		'Gipadayag',
 	],
+	chr: bible.Data.allBooks, // TODO
 	ckb: [
 		'پەیدابوون',
 		'دەرچوون',
@@ -5216,6 +5217,10 @@ bible.Data.supportedVersions = {
 	BulVeren: { name: 'Veren’s Contemporary Bible', language: 'bg' },
 	BretonNT: { name: 'Breton New Testament (Koad 21)', language: 'br' },
 	CebPinadayag: { name: 'Cebuano Pinadayag', language: 'ceb' },
+	Che1860: {
+		name: 'Cherokee New Testament (1860) with Sequoyah transliterated forms',
+		language: 'chr',
+	},
 	ckbOKS: {
 		name: 'وەشانی بێبەرامبەری کوردیی سۆرانیی ستاندەر',
 		language: 'ckb',
@@ -5512,6 +5517,7 @@ bible.Data.interfaceLanguages = {
 	bg: 'български (Bulgarian)',
 	br: 'Brezhoneg (Breton)',
 	ceb: 'Cebuano',
+	chr: 'Cherokee',
 	ckb: 'کوردیی سۆرانی (Kurdi Sorani)',
 	cop: 'ϯⲙⲉⲧⲣⲉⲙⲛ̀ⲭⲏⲙⲓ (Coptic)',
 	cs: 'Čeština (Czech)',

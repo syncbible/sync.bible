@@ -1534,6 +1534,7 @@ bible.Data.bookNamesByLanguage = {
 		'JUDAS',
 		'APOCALIPSIS',
 	],
+	et: bible.Data.allBooks, // TODO
 	fa: [
 		'پدایش',
 		'خروج',
@@ -5293,6 +5294,7 @@ bible.Data.supportedVersions = {
 	},
 	GerZurcher: { name: 'Deutsche Zürcher Bibel von 1931.', language: 'de' },
 	Esperanto: { name: 'Esperanto Londona Biblio', language: 'eo' },
+	Est: { name: 'Estonian Bible', language: 'et' },
 	MCSB: {
 		name: 'Matupi Chin Standard Bible',
 		language: 'hlt',
@@ -5544,6 +5546,7 @@ bible.Data.interfaceLanguages = {
 	enm: 'Middle English',
 	eo: 'Esperanto',
 	es: 'Español (Spanish)',
+	et: 'Estonian', // TODO
 	fi: 'Suomi (Finish)',
 	fr: 'Français (French)',
 	ga: 'Gaeilge (Gaelic)',

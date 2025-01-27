@@ -1054,6 +1054,7 @@ bible.Data.bookNamesByLanguage = {
 		'Júdov',
 		'Zjavenie Jána',
 	], // Pretty sure these are wrong
+	cy: bible.Data.allBooks,
 	da: [
 		'1. Mosebog',
 		'2. Mosebog',
@@ -5132,6 +5133,10 @@ bible.Data.supportedVersions = {
 		strongs: true,
 	},
 	ACV: { name: 'A Conservative Version', language: 'en' },
+	Anderson: {
+		name: 'Henry Tompkins Anderson’s 1864 New Testament',
+		language: 'en',
+	},
 	AKJV: { name: 'American King James Version', language: 'en' },
 	BBE: { name: '1949/1964 Bible in Basic English', language: 'en' },
 	BSB: { name: 'Berean Study Bible', language: 'en' },
@@ -5465,6 +5470,10 @@ bible.Data.supportedVersions = {
 		name: 'Wonhia Akuapem Twi Nkwa Asɛm™ ho kwamma nhoma',
 		language: 'twi',
 	},
+	WelBeiblNet: {
+		name: 'Welsh beibl.net',
+		language: 'cy',
+	},
 	yoOBYO: {
 		name: 'Biblica® Open Yoruba Contemporary Bible',
 		language: 'yo',
@@ -5484,6 +5493,7 @@ bible.Data.interfaceLanguages = {
 	cop: 'ϯⲙⲉⲧⲣⲉⲙⲛ̀ⲭⲏⲙⲓ (Coptic)',
 	cs: 'Čeština (Czech)',
 	cu: 'Church Slavonic',
+	cy: 'Cymru (Welsh)',
 	da: 'Dansk (Danish)',
 	de: 'Deutsch (German)',
 	el: 'Ελληνικά (Modern Greek)',

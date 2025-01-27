@@ -5309,6 +5309,8 @@ bible.Data.supportedVersions = {
 		language: 'hlt',
 		strongs: true,
 	},
+	FinPR: { name: 'Finnish Pyhä Raamattu (1933/1938)', language: 'fi' },
+	FinPR92: { name: 'Finnish Pyhä Raamattu (1992)', language: 'fi' },
 	FreSegond1910: { name: 'Bible Louis Segond (1910)', language: 'fr' },
 	FreJND: { name: 'Bible J.N.Darby en français', language: 'fr' },
 	FrePGR: { name: 'Bible Perret-Gentil et Rilliet', language: 'fr' },

@@ -5447,6 +5447,10 @@ bible.Data.supportedVersions = {
 		language: 'he',
 	},
 	HebModern: { name: 'Modern Hebrew Bible', language: 'he' },
+	hinIRV: {
+		name: 'हिंदी भारतीय संशोधित संस्करण बाइबिल भारत',
+		language: 'hi',
+	},
 	MCSB: {
 		name: 'Matupi Chin Standard Bible',
 		language: 'hlt',
@@ -5501,6 +5505,7 @@ bible.Data.supportedVersions = {
 	Vulgate: { name: 'Latin Vulgate', language: 'la' },
 	LinVB: { name: 'Liloba lya Nzambe, édition Verbum Bible', language: 'ln' },
 	LtKBB: { name: 'Lithuanian Bible', language: 'lt' },
+	luoONL: { name: 'Ochiw Thuolo Motingʼo Loko Manyien', language: 'luo' },
 	Latvian: { name: 'Latvian New Testament', language: 'lv' },
 	LvGluck8: { name: 'Latvian Glück 8th edition', language: 'lv' },
 	ChiUnL: { name: '聖經 (文理和合)', language: 'lzh' },
@@ -5531,6 +5536,7 @@ bible.Data.supportedVersions = {
 	Pohnpeian: { name: 'Bible in Pohnpeian language', language: 'pon' },
 	PohnOld: { name: 'Old Public Domain Pohnpeian Bible', language: 'pon' },
 	PotLykins: { name: '1833 Potawatomi Matthew and Acts', language: 'pot' },
+	Uma: { name: 'Uma New Testament', language: 'ppk' },
 	Dari: { name: 'Dari Translation', language: 'prs' },
 	PorAR: { name: 'Bíblia Almeida Recebida (AR)', language: 'pt' },
 	PorAlmeida1911: {
@@ -5583,10 +5589,20 @@ bible.Data.supportedVersions = {
 	ThaiKJV: { name: 'Thai King James Version', language: 'th' },
 	Tagalog: { name: 'Tagalog (John & James)', language: 'tl' },
 	TagAngBiblia: { name: 'Philippine Bible Society (1905)', language: 'tl' },
+	TpiKJPB: { name: 'King Jems Pisin Baibel', language: 'tpi' },
 	TurNTB: { name: 'Kutsal Kitap (New Turkish Bible)', language: 'tr' },
 	TurHADI: {
 		name: 'Turkish Easy-to-Read Translation (HADI)',
 		language: 'tr',
+	},
+	Tausug: { name: 'Tausug Kitab Injil', language: 'tsg' },
+	twiONA: {
+		name: 'Wɔnhia ɛho kwamma nwoma Asante Twi Nkwa Asɛm',
+		language: 'twi',
+	},
+	twkONA: {
+		name: 'Wonhia Akuapem Twi Nkwa Asɛm™ ho kwamma nhoma',
+		language: 'twi',
 	},
 	UkrKulish: {
 		name: 'Новий Завіт. Переклад П. Куліша (1871)',
@@ -5611,30 +5627,13 @@ bible.Data.supportedVersions = {
 		name: 'Het Nieuwe Testament by Nicolaas De Jonge',
 		language: 'vls',
 	},
-	ChiNCVs: { name: '新译本', language: 'zh-hans' },
-	ChiUns: { name: '和合本 (简体字)', language: 'zh-hans', strongs: true },
-	ChiUn: { name: '和合本 (繁體字)', language: 'zh-hant', strongs: true },
-	hinIRV: {
-		name: 'हिंदी भारतीय संशोधित संस्करण बाइबिल भारत',
-		language: 'hi',
-	},
-	luoONL: { name: 'Ochiw Thuolo Motingʼo Loko Manyien', language: 'luo' },
-	twiONA: {
-		name: 'Wɔnhia ɛho kwamma nwoma Asante Twi Nkwa Asɛm',
-		language: 'twi',
-	},
-	twkONA: {
-		name: 'Wonhia Akuapem Twi Nkwa Asɛm™ ho kwamma nhoma',
-		language: 'twi',
-	},
 	yoOBYO: {
 		name: 'Biblica® Open Yoruba Contemporary Bible',
 		language: 'yo',
 	},
-
-	Tausug: { name: 'Tausug Kitab Injil', language: 'tsg' },
-	TpiKJPB: { name: 'King Jems Pisin Baibel', language: 'tpi' },
-	Uma: { name: 'Uma New Testament', language: 'ppk' },
+	ChiNCVs: { name: '新译本', language: 'zh-hans' },
+	ChiUns: { name: '和合本 (简体字)', language: 'zh-hans', strongs: true },
+	ChiUn: { name: '和合本 (繁體字)', language: 'zh-hant', strongs: true },
 };
 bible.Data.interfaceLanguages = {
 	original: 'Hebrew/Greek',

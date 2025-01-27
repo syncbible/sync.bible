@@ -5254,6 +5254,10 @@ bible.Data.supportedVersions = {
 		name: 'Danish OT1871 + NT1907 with original orthography',
 		language: 'da',
 	},
+	DaOT1931NT1907: {
+		name: 'Danish OT1931 + NT1907 with original orthography',
+		language: 'da',
+	},
 	GerBoLut: {
 		name: 'Deutsch Bolsingerߴs Luther 1545 Bibel (moderne Rechtschreibung)',
 		language: 'de',

@@ -511,6 +511,7 @@ bible.Data.bookNamesByLanguage = {
 		'یهودا',
 		'وحی',
 	],
+	bea: bible.Data.allBooks, // TODO
 	be: [
 		'БЫЦЦЁ',
 		'ВЫХАД',
@@ -5210,6 +5211,7 @@ bible.Data.supportedVersions = {
 	AraNAV: { name: 'New Arabic Version (Ketab El Hayat)', language: 'ar' },
 	AraSVD: { name: 'Arabic Bible', language: 'ar' },
 	NorthernAzeri: { name: 'Northern Azeri', language: 'az' },
+	BeaMRK: { name: 'The Gospel of Mark in Beaver (Danezaa)', language: 'bea' },
 	Bela: { name: 'Belarusian Bible', language: 'be' },
 	BulVeren: { name: 'Veren’s Contemporary Bible', language: 'bg' },
 	BretonNT: { name: 'Breton New Testament (Koad 21)', language: 'br' },
@@ -5506,6 +5508,7 @@ bible.Data.interfaceLanguages = {
 	ar: 'عربى (Arabic)',
 	az: 'آذری (Northern Azeri)',
 	be: 'беларуская (Belarusian)',
+	bea: 'Beaver', // TODO
 	bg: 'български (Bulgarian)',
 	br: 'Brezhoneg (Breton)',
 	ceb: 'Cebuano',

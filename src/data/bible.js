@@ -5121,7 +5121,17 @@ bible.Data.bookNamesByLanguage = {
 bible.Data.bookNamesByLanguage.he = bible.Data.bookNamesByLanguage.hbo;
 bible.Data.bookNamesByLanguage.azb = bible.Data.bookNamesByLanguage.az;
 
-bible.Data.rtlLanguages = [ 'he', 'fa', 'ar', 'az', 'azb', 'ckb', 'prs', 'ur' ];
+bible.Data.rtlLanguages = [
+	'he',
+	'hbo',
+	'fa',
+	'ar',
+	'az',
+	'azb',
+	'ckb',
+	'prs',
+	'ur',
+];
 bible.Data.supportedVersions = {
 	original: { name: 'Original', language: 'original' },
 	accented: { name: 'Accented original', language: 'original' },
@@ -5333,7 +5343,7 @@ bible.Data.supportedVersions = {
 	GerNeUe: { name: 'Neue evangelistische Übersetzung', language: 'de' },
 	GerOffBiSt: { name: 'Leonberger Bibel, NT (RP19)', language: 'de' },
 	GerReinhardt: { name: 'German Reinhardt Evangelien', language: 'de' },
-	GerSch: { name: 'Schlachter Bibel (1951)', language: 'de' },
+	GerSch: { name: 'Schlachter Bibel (1951)', language: 'de', strongs: true },
 	GerTafel: { name: 'German Tafelbibel (1911)', language: 'de' },
 	GerTextbibel: { name: '	Deutsch Textbibel (1906)', language: 'de' },
 	GreVamvas: {

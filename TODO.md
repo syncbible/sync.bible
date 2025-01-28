@@ -1,7 +1,6 @@
 ## Todo
 
--   redo welsh text - same issue with VietNVB
--   fix SweFolk1998
+-   fix SweFolk1998 and VietNVB
 -   redo dead sea scrolls text?
 -   move all strongs texts up
 -   search for stranger and pilgrim and look at stats

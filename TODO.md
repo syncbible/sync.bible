@@ -3,7 +3,6 @@
 -   redo welsh text - same issue with VietNVB
 -   fix SweFolk1998
 -   redo dead sea scrolls text?
--   lots of text missing mal 4?
 -   move all strongs texts up
 -   search for stranger and pilgrim and look at stats
 -   Search in chapter/book

@@ -5716,6 +5716,8 @@ bible.Data.interfaceLanguages = {
 	original: 'Hebrew/Greek',
 	en: 'English',
 	fa: 'فارسی (Farsi)',
+	grc: 'Ελληνικά (Ancient Greek)',
+	hbo: 'עברית (Hebrew)',
 	af: 'Afrikaans', // TODO
 	ar: 'عربى (Arabic)',
 	az: 'آذری (Northern Azeri)',
@@ -5745,8 +5747,6 @@ bible.Data.interfaceLanguages = {
 	gd: 'Gaelg (Scots Gaelic)',
 	gez: 'ግዕዝ (Geez)',
 	gv: 'Manx Gaelic', // TODO
-	grc: 'Ελληνικά (Ancient Greek)',
-	hbo: 'עברית (Hebrew)',
 	he: 'עברית (Modern Hebrew)',
 	hi: 'हिन्दी (Hindi)',
 	hlt: 'Matupi Chin',

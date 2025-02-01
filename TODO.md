@@ -1,6 +1,6 @@
 ## Todo
 
--   fix SweFolk1998 and VietNVB
+-   fix SweFolk1998 and VietNVB and GerOffBist
 -   redo dead sea scrolls text?
 -   move all strongs texts up
 -   search for stranger and pilgrim and look at stats

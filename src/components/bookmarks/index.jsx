@@ -1,13 +1,15 @@
 // External dependencies
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Internal dependencies
 //import { fetchSearchResults, fetchData } from '../../actions/index.js';
 import Bookmark from '../svg/bookmark';
+import Collapsible from '../collapsible';
 import CombinedResults from '../word-details/combined';
 import Single from './single';
 import styles from './styles.module.scss';
+import WordBlockLink from '../word-details/word-block-link';
 
 const BookMarks = () => {
 	const { bookmarks, words } = useSelector( ( state ) => {
@@ -50,6 +52,8 @@ const BookMarks = () => {
 		};
 	} );
 
+	const [ open, setOpen ] = useState( false );
+
 	if ( bookmarks.length > 0 ) {
 		// Get the data for extra stuff in single.
 		// not used right now
@@ -58,19 +62,29 @@ const BookMarks = () => {
 	}
 
 	function getSharedWords() {
-		return null;
 		return (
-			<div>
+			<Collapsible
+				open={ open }
+				onToggle={ () => {
+					setOpen( ! open );
+				} }
+				header={ 'Shared Words' }
+				title={ 'Words that are used in more than one bookmark' }
+			>
 				<ol>
 					{ Object.keys( words )
 						.filter( ( word ) => words[ word ] > 1 )
 						.map( ( word, index ) => (
 							<li key={ index }>
-								{ word } { words[ word ] }
+								<WordBlockLink
+									key={ index }
+									strongsNumber={ word }
+									count={ words[ word ] }
+								/>
 							</li>
 						) ) }
 				</ol>
-			</div>
+			</Collapsible>
 		);
 	}
 

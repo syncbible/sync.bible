@@ -5718,12 +5718,12 @@ bible.Data.interfaceLanguages = {
 	fa: 'فارسی (Farsi)',
 	grc: 'Ελληνικά (Ancient Greek)',
 	hbo: 'עברית (Hebrew)',
-	af: 'Afrikaans', // TODO
+	af: 'Afrikaans',
 	ar: 'عربى (Arabic)',
-	az: 'آذری (Northern Azeri)',
-	azb: 'Azeri', // TODO
+	az: 'آذری شمالی (Northern Azeri)',
+	azb: 'آذری (Azeri)',
 	be: 'беларуская (Belarusian)',
-	bea: 'Beaver', // TODO
+	bea: 'Beaver (Dane-zaa)',
 	bg: 'български (Bulgarian)',
 	br: 'Brezhoneg (Breton)',
 	ceb: 'Cebuano',
@@ -5732,15 +5732,15 @@ bible.Data.interfaceLanguages = {
 	cop: 'ϯⲙⲉⲧⲣⲉⲙⲛ̀ⲭⲏⲙⲓ (Coptic)',
 	cs: 'Čeština (Czech)',
 	cu: 'Church Slavonic',
-	cy: 'Cymru (Welsh)', // TODO
+	cy: 'Cymraeg (Welsh)',
 	da: 'Dansk (Danish)',
 	de: 'Deutsch (German)',
 	el: 'Ελληνικά (Modern Greek)',
 	enm: 'Middle English',
 	eo: 'Esperanto',
 	es: 'Español (Spanish)',
-	et: 'Estonian', // TODO
-	eu: 'Basque', // TODO
+	et: 'Eesti Keel (Estonian)',
+	eu: 'Euskara (Basque)',
 	fi: 'Suomi (Finish)',
 	fr: 'Français (French)',
 	ga: 'Gaeilge (Gaelic)',

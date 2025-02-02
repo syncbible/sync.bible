@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import styles from './styles.module.scss';
 import { selectWord } from '../../actions';
 
-const WordBlockLink = ( { strongsNumber, version } ) => {
+const WordBlockLink = ( { strongsNumber, version, count } ) => {
 	const dispatch = useDispatch();
 
 	const getClassName = ( strongsNumber ) => {
@@ -40,6 +40,7 @@ const WordBlockLink = ( { strongsNumber, version } ) => {
 			>
 				{ strongsNumber }
 			</a>{ ' ' }
+			{ count }
 		</span>
 	);
 };

@@ -1,11 +1,27 @@
 ## Todo
 
+-   fix SweFolk1998 and VietNVB and GerOffBist
+-   redo dead sea scrolls text?
+-   move all strongs texts up
+-   search for stranger and pilgrim and look at stats
+-   Search in chapter/book
+-   Filter search results by strongs number eg life
+-   turn off suggestions for reference input
+-   Matt 26:56 - in harmonised version the text is missing
 -   show common words under a list of passages, or rare words, or words that are used in more than one section
 -   add animation to current verse
 -   show the whole range for cross references
 -   make it clear that we need original for several features, so when we dont have it show that we need it and add explain
 -   fix the sidebar on initial load - don't set KJV as initial interface lang
 -   show verse for context in combined. only show verses with more than one result
+
+-   There are some texts from crosswire that couldn't be converted
+
+    -   GerHfa2002
+    -   SpaRVG
+    -   Wulfila
+    -   Nestle1904
+    -   There are also some texts that say they have strongs but didn't convert right
 
 -   replace חׇpointing
 -   collapse all button

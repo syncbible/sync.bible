@@ -3,63 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sync.Bible - Your Ultimate Online Bible Study Tool">
-    <title>Sync.Bible Documentation</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="sync.bible - a tool to help you understand the bible better.">
+    <title>sync.bible Help and Documentation</title>
+    <link rel="stylesheet" src="/css/layout.css" />
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", Arial, Helvetica, sans-serif;
+            padding: 3em;
         }
-        header {
-            background: #333;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        section {
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            margin-top: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        footer {
-            text-align: center;
-            padding: 10px;
-            background: #333;
-            color: white;
-            margin-top: 20px;
-        }
+        h1,h2,h3,h4,h5,h6 { font-weight: 100; margin: 0;}
+        h1 { font-size: 4em; }
+        h2 { font-size: 2em; }
+        section { margin-top: 5em; }
+        section#features ul li { margin-bottom: 2em;}
     </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to Sync.Bible</h1>
+        <h1>sync.bible</h1>
+        <h2>sync.bible is a tool to help you understand the bible better.</h2>
         <nav>
             <ul>
                 <li><a href="#getting-started">Getting Started</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#faq">FAQs</a></li>
                 <li><a href="#blog">Blog</a></li>
+                <li><a href="#get-involved">Get Involved</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -67,87 +36,140 @@
 
     <section id="getting-started">
         <h2>Getting Started</h2>
-        <p>Sync.Bible is a powerful online platform designed to help you study the Bible effectively. To get started:</p>
-        <ul>
-            <li>Visit <a href="https://sync.bible">Sync.Bible</a> and sign up for free.</li>
+        <p>sync.bible is a powerful online platform designed to help you study the Bible effectively. To get started:</p>
+        <ol>
+            <li>Visit <a href="https://sync.bible">sync.bible</a></li>
             <li>Choose your preferred Bible translation.</li>
-            <li>Explore study tools like cross-references, commentaries, and search functions.</li>
-        </ul>
+            <li>Explore study tools like word details, cross-references, and search functions.</li>
+        </ol>
     </section>
 
     <section id="features">
         <h2>Features</h2>
-        <p>Sync.Bible offers a range of features to enhance your Bible study experience:</p>
+        <p>sync.bible offers a range of features to enhance your Bible study experience:</p>
         <ul>
-            <li>Multiple translations for deeper understanding.</li>
-            <li>Offline access for reading anywhere.</li>
-            <li>Advanced search and cross-referencing tools.</li>
-            <li>Personalized study notes and bookmarks.</li>
-        </ul>
+            <li>
+                <strong>Over 270 texts in almost 100 languages</strong><br />
+                These texts are displayed side-by-side, to make it easier to connect them.
+            </li>
+            <li>
+                <strong>Strong's Numbers integration</strong><br />
+                Texts that support Strong's numbers are marked with a *. Strongs numbers make it possible to explore the words used in the original text. This can be used to find the same word in multiple languages. It can also be used to find where the same original word is used in different passages.
+            </li>
+			<li>
+				<strong>Offline</strong><br />
+				sync.bible should work offline if your brower supports it. This means you can use it on an aeroplane, or when you have no data. It uses a service worker which has <a href="https://caniuse.com/#feat=serviceworkers">pretty good support</a> these days.
+			</li>
+			<li>
+				<strong>Word tree</strong><br />
+				Strongs dictionary defines roots for each word. sync.bible uses this data to also create "branches" for each word too. A branch is a word which has the current word as its root. This makes it easier to find related words.
+			</li>
+			<li>
+				<strong>Hovering</strong><br />
+				When you hover over a word, all the other words with the same strongs number are highlighted.
+			</li>
+			<li>
+				<strong>Parallel Reading</strong><br />
+				Compare multiple Bible translations side by side for deeper study and understanding.
+			</li>
+			<li>
+				<strong>Original Languages</strong><br />
+				Access Hebrew and Greek texts alongside modern translations.
+			</li>
+			<li>
+				<strong>Cross References</strong><br />
+				Explore related passages and references throughout scripture.
+			</li>
+			<li>
+				<strong>Copy</strong><br />
+				Easily copy and share verses or passages in multiple translations.
+			</li>
+            <li>
+                <strong>Compare</strong><br />
+                Use the compare screen to find what words are used in both selected passages.
+            </li>
+            <li>
+                <strong>Stats</strong><br />
+                Use the stats screen to find which words are most common and rare in a selected passage.
+            </li>
+            <li>
+                <strong>Keyboard Shortcuts</strong><br />
+                Simply start typing to go to a new reference. Typing a number will take you to that chapter.
+            </li>
+		</ul>
     </section>
 
     <section id="faq">
         <h2>FAQs</h2>
-        <p><strong>Q: Is Sync.Bible free to use?</strong></p>
-        <p>A: Yes! Sync.Bible is free and accessible to everyone.</p>
+        <p><strong>Q: Is sync.bible free to use?</strong></p>
+        <p>A: Yes! sync.bible is free and accessible to everyone. The code is open source.</p>
         <p><strong>Q: Can I access it on my phone?</strong></p>
-        <p>A: Absolutely! Sync.Bible is mobile-friendly and works on all devices.</p>
+        <p>A: Absolutely! sync.bible is mobile-friendly and works on all devices.</p>
+
+        <div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">How do I switch Bible versions?</h3>
+            <p class="text-gray-600">Click the version selector dropdown at the top of each column and choose your desired translation.</p>
+        </div>
+        <div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Can I compare more than two versions?</h3>
+            <p class="text-gray-600">Yes! Click the "+" button to add another parallel column for comparison.</p>
+        </div>
+        <div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">How do I copy verses?</h3>
+            <p class="text-gray-600">Select the text you want to copy, or use the copy icon next to each verse to copy that specific verse.</p>
+        </div>
     </section>
 
-    <section id="blog">
-        <h2>Blog</h2>
-        <p>Explore our latest articles on Bible study techniques, devotionals, and platform updates.</p>
+    <section id="videos">
+        <h2>Videos</h2>
+        <p>Here are some video screen casts which explain things</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/7Gx1_jLYt4Q" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/sBP2AKfQOM8?si=QM7QC_D2sACyWSUy" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/7SMi-GGt0Kg?si=m7WmFit1DiLG4G1m" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Mc4UP4ZNblg?si=526yN_6Vy7BwzOAe" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/_aSPn_N9uKY?si=YqeIB63V8M8M0Zx0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/iJ3lrJ-fzzk?si=ovAPU7KMTwM8Iwmy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </section>
+
+
+    <section id="principles">
+        <h2>Principles</h2>
+        <p>sync.bible is agnostic; it's purpose is to make it easier to access bible data. Doctrine is not a consideration in the interface or the data. If there are mistakes in a translation, these are preserved. Thus:</p>
         <ul>
-            <li><a href="#">How to Deepen Your Bible Study</a></li>
-            <li><a href="#">Top Bible Translations for In-Depth Learning</a></li>
+        <li>Benefitting all bible students, not just those of a particular denomination.</li>
+        <li>Removing our own bias from our bible study.</li>
         </ul>
+
+        <p>However sync.bible is heavily geared towards a "bible only" approach to study. This means that, as much as is practical, extra-biblical data is removed to reveal the inspired word as close to how it was revealed. This means that:</p>
+        <ul>
+        <li>accents and pointing are removed from the original text (as these are later additions)</li>
+        <li>human "definitions" (like Strong's) are removed, as these are merely interpretations</li>
+        </ul>
+        <p>Instead the emphasis is on making it as easy as possible to access the raw data. This is a fine line to tread. The intention is to encourage students to think critically, and make their own interpretation. This means also being critical of the data that is presented (e.g. not all cross references are helpful, not all "related words" are related). By removing things like Strong's definitions we hope to make students work harder to come to their own conclusions.</p>
+
+        <p>The primary data points are:</p>
+        <ul>
+        <li>The original text, keyed with Strongs numbers, making it easy to follow the translation.</li>
+        <li>The usage of a word; by surfacing where a word is used elsewhere we can find "single word quotations".</li>
+        <li>Related words; this is based on Strong's concordance and is not always accurate.</li>
+        <li>Cross references; this is data that has been collected through recieved wisdom and should be subject to scrutiny.</li>
+        </ul>
+
+        <p>These can be cut in different ways. The intention is raise interesting connections.</p>
+    </section>
+
+    <section id="get-involved">
+        <h2>Get Involved</h2>
+        <p>To find out how to get involved with the project read the <a href="https://github.com/syncbible/sync.bible/CONTRIBUTING.md">Contributing document</a>.</p>
     </section>
 
     <section id="contact">
         <h2>Contact</h2>
-        <p>Have questions or need support? Reach out to us:</p>
+        <p><a href="">Having problems? Email for help!</a></p></p>
         <ul>
-            <li>Email: <a href="mailto:support@sync.bible">support@sync.bible</a></li>
-            <li>Facebook: <a href="#">Sync.Bible Community</a></li>
-            <li>Twitter: <a href="#">@SyncBible</a></li>
+            <li>Email: <a href="http://scruffian.wordpress.com/contact/">Email for help</a></li>
+            <li>Facebook: <a href="http://facebook.com/sync.bible">sync.bible Page</a></li>
         </ul>
     </section>
-
-    <html>
-	<body>
-		<h1>Help</h1>
-		<h2>Videos</h2>
-		<p>Here are some video screen casts which explain things</p>
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/7Gx1_jLYt4Q" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        https://youtu.be/sBP2AKfQOM8?si=QM7QC_D2sACyWSUy
-        https://youtu.be/7SMi-GGt0Kg?si=m7WmFit1DiLG4G1m
-        https://youtu.be/Mc4UP4ZNblg?si=526yN_6Vy7BwzOAe
-
-        https://youtu.be/_aSPn_N9uKY?si=YqeIB63V8M8M0Zx0
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/iJ3lrJ-fzzk?si=ovAPU7KMTwM8Iwmy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-		<h2>Features</h2>
-		<p>This is a list of the main features of Javascripture with some explanation and context</p>
-		<ul>
-			<li>
-				<strong>Offline</strong><br/>
-				Javascripture should work offline if your brower supports it. It uses a service worker which has <a href="https://caniuse.com/#feat=serviceworkers">pretty good support</a> these days.
-			</li>
-			<li>
-				<strong>Word tree</strong><br />
-				Strongs dictionary defines roots for each word. Javascripture uses this data to also create "branches" for each word too. A branch is a word which has the current word as its root. This makes it easier to find related words.
-			</li>
-			<li>
-				<strong>Hovering</strong></br>
-				When you hover over a word, all the other words with the same strongs number are highlighted.
-			</li>
-		</ul>
-		<p><a href="http://scruffian.wordpress.com/contact/">Having problems? Email for help!</a></p>
-	</body>
-</html>
-
-    <footer>
-        <p>&copy; 2025 Sync.Bible - All Rights Reserved</p>
-    </footer>
 </body>
 </html>

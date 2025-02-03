@@ -43,12 +43,6 @@ const HelpTray = () => {
 								typing
 							</li>
 							<li>
-								<strong>Next reference:</strong> =
-							</li>
-							<li>
-								<strong>Previous reference</strong>: -
-							</li>
-							<li>
 								<strong>Jump to chapter</strong>: type a number
 							</li>
 						</ul>
@@ -63,8 +57,9 @@ const HelpTray = () => {
 					<a href="https://javascripture.github.io/javascripture">
 						javascripture.org
 					</a>
+					{ ' | ' }
 					<a href="https://syncbible.github.io/syncbible">
-						syncbible webkit
+						syncbible-webkit
 					</a>
 				</p>
 

@@ -67,7 +67,7 @@ const Chapter = ( { book, chapter, index } ) => {
 	] );
 
 	const scrollToCurrentChapter = () => {
-		const currrentChapter = currentRef.current;
+		const currrentChapter = ReactDOM.findDOMNode( currentRef.current );
 		const referenceWindow = document.getElementById(
 			'referenceWindow' + index
 		);

@@ -40,7 +40,7 @@ const InitialView = () => {
 					<a href="http://scruffian.wordpress.com/contact/">
 						Email me
 					</a>
-					, or{ ' ' }
+					,
 					<a
 						href="#"
 						onClick={ () => {
@@ -49,7 +49,8 @@ const InitialView = () => {
 						} }
 					>
 						clear settings and start over
-					</a>
+					</a>{ ' ' }
+					or <a href="/help/index.html">get help</a>
 				</p>
 				<p>
 					There are also old versions available in case this one is

@@ -99,6 +99,7 @@ const BookMarks = () => {
 				<Single bookmark={ bookmark } key={ key } index={ key } />
 			) ) }
 			<CombinedResults type="bookmark" />
+			{ getSharedWords() }
 		</>
 	);
 };

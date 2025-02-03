@@ -1,5 +1,7 @@
 ## Todo
 
+-   Search in chapter
+-   Filter search results by strongs number eg life
 -   fix SweFolk1998 and VietNVB and GerOffBist
 -   redo dead sea scrolls text?
 -   move all strongs texts up

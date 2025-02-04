@@ -1,5 +1,5 @@
 // External dependencies
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 // Internal dependencies
@@ -11,7 +11,6 @@ const WordDetails = () => {
 	const list = useSelector( ( state ) => state.list );
 	const userInterface = useSelector( ( state ) => state.userInterface );
 	const words = list.filter( ( { listType } ) => listType === 'word' );
-	const [ focus, setFocus ] = useState( null );
 
 	return words && words.length ? (
 		<div className={ styles.wordDetails }>
@@ -20,10 +19,6 @@ const WordDetails = () => {
 					<WordBlock
 						word={ word }
 						key={ index }
-						highlight={
-							! focus || ( focus && focus === word.data.lemma )
-						}
-						setFocus={ setFocus }
 						data={ word.data }
 						visible={ userInterface[ word.id ] }
 						results={ word.results }

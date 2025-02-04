@@ -6,19 +6,20 @@ import stripPointing from '../../lib/strip-pointing.js';
 
 // Internal dependencies
 import Collapsible from '../collapsible';
-import { getHighlight } from '../strongs-color.js';
 import styles from './styles.module.scss';
 import WordBlockDetails from './word-block-details';
-import { removeFromList, toggleListItemVisible } from '../../actions';
+import WordHighlight from './word-highlight.jsx';
+import {
+	focusWord,
+	removeFromList,
+	toggleListItemVisible,
+} from '../../actions';
 
 const WordBlock = ( props ) => {
-	const { data, visible, highlight, setFocus, word } = props;
+	const { data, visible, word } = props;
 	const { clickedWord, morphology, lemma, version } = data;
 	const strongsDictionary = useSelector(
 		( state ) => state.data.strongsDictionary
-	);
-	const strongsDictionaryWithFamilies = useSelector(
-		( state ) => state.data.strongsDictionaryWithFamilies
 	);
 	const wordBlockRef = useRef( null );
 	const getSearchParameters = () => {
@@ -70,17 +71,13 @@ const WordBlock = ( props ) => {
 			className={ getClassName( lemma ) }
 			textToCopy={ wordBlockRef }
 			onRemove={ () => {
-				setFocus( null );
+				dispatch( focusWord( null ) );
 				dispatch( removeFromList( props ) );
 			} }
-			onMouseOver={ () => setFocus( lemma ) }
-			onMouseOut={ () => setFocus( null ) }
+			onMouseOver={ () => dispatch( focusWord( lemma ) ) }
+			onMouseOut={ () => dispatch( focusWord( null ) ) }
 		>
-			{ highlight && (
-				<style>
-					{ getHighlight( lemma, strongsDictionaryWithFamilies ) }
-				</style>
-			) }
+			<WordHighlight lemma={ lemma } />
 			<div ref={ wordBlockRef }>
 				<div className={ styles.wordBlock }>
 					<WordBlockDetails

@@ -1,11 +1,11 @@
-const highlightWord = (state = [], action) => {
-  switch (action.type) {
-    case "HIGHLIGHT_WORD":
-      return action.lemmas;
+const highlightWord = ( state = [], action ) => {
+	switch ( action.type ) {
+		case 'HIGHLIGHT_WORD':
+			return action.lemmas;
 
-    default:
-      return state;
-  }
+		default:
+			return state;
+	}
 };
 
 export default highlightWord;

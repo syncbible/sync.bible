@@ -6,13 +6,13 @@ import { useSelector } from 'react-redux';
 import Verse from '../reference/verse';
 
 const ExpandedSearchResults = ( { book, chapter, verse } ) => {
-	if ( ! book || ! chapter || ! verse ) {
-		return null;
-	}
-
 	const interfaceLanguage = useSelector( ( state ) => {
 		return state.settings.interfaceLanguage;
 	} );
+
+	if ( ! book || ! chapter || ! verse ) {
+		return null;
+	}
 
 	const adjustedReference = {
 		book: book,

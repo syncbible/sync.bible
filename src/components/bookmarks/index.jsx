@@ -13,52 +13,46 @@ import styles from './styles.module.scss';
 import WordBlockLink from '../word-details/word-block-link';
 
 const BookMarks = () => {
-	const { bookmarks, words } = useSelector( ( state ) => {
-		const _bookmarks = state.list.filter(
-			( { listType } ) => listType === 'bookmark'
-		);
+	const list = useSelector( ( state ) => state.list );
+	const original = useSelector( ( state ) => state.data.original );
 
-		// Get unique lemmas for each bookmark.
-		const bookmarkLemmasList = _bookmarks.map( ( item ) => {
-			const { book, chapter, verse } = item.data.reference;
-			if (
-				state.data[ 'original' ] &&
-				state.data[ 'original' ][ book ] &&
-				state.data[ 'original' ][ book ][ chapter ] &&
-				state.data[ 'original' ][ book ][ chapter - 1 ][ verse - 1 ]
-			) {
-				const referenceLemmas = state.data[ 'original' ][ book ][
-					chapter - 1
-				][ verse - 1 ]
-					.filter( ( word ) => word[ 1 ] )
-					.map( ( word ) => {
-						return word[ 1 ].split( ' ' );
-					} )
-					.flat()
-					.filter( ( word ) => word !== 'added' && word !== 'G3588' );
-				return [ ...new Set( referenceLemmas ) ]; // dedupe.
+	const bookmarks = list.filter(
+		( { listType } ) => listType === 'bookmark'
+	);
+
+	// Get unique lemmas for each bookmark.
+	const bookmarkLemmasList = bookmarks.map( ( item ) => {
+		const { book, chapter, verse } = item.data.reference;
+		if (
+			original &&
+			original[ book ] &&
+			original[ book ][ chapter ] &&
+			original[ book ][ chapter - 1 ][ verse - 1 ]
+		) {
+			const referenceLemmas = original[ book ][ chapter - 1 ][ verse - 1 ]
+				.filter( ( word ) => word[ 1 ] )
+				.map( ( word ) => {
+					return word[ 1 ].split( ' ' );
+				} )
+				.flat()
+				.filter( ( word ) => word !== 'added' && word !== 'G3588' );
+			return [ ...new Set( referenceLemmas ) ]; // dedupe.
+		}
+	} );
+
+	const words = {};
+	bookmarkLemmasList.forEach( ( bookmarkLemmas ) => {
+		if ( ! bookmarkLemmas ) {
+			return;
+		}
+
+		bookmarkLemmas.forEach( ( bookmarkLemma ) => {
+			if ( ! words[ bookmarkLemma ] ) {
+				words[ bookmarkLemma ] = 1;
+			} else {
+				words[ bookmarkLemma ] = words[ bookmarkLemma ] + 1;
 			}
 		} );
-
-		const _words = {};
-		bookmarkLemmasList.forEach( ( bookmarkLemmas ) => {
-			if ( ! bookmarkLemmas ) {
-				return;
-			}
-
-			bookmarkLemmas.forEach( ( bookmarkLemma ) => {
-				if ( ! _words[ bookmarkLemma ] ) {
-					_words[ bookmarkLemma ] = 1;
-				} else {
-					_words[ bookmarkLemma ] = _words[ bookmarkLemma ] + 1;
-				}
-			} );
-		} );
-
-		return {
-			bookmarks: _bookmarks,
-			words: _words,
-		};
 	} );
 
 	const dispatch = useDispatch();

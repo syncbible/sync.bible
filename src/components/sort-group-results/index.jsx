@@ -59,20 +59,19 @@ const SortGroupResults = ( {
 	const interfaceLanguage = useSelector(
 		( state ) => state.settings.interfaceLanguage
 	);
-	const _list = useSelector( ( state ) => {
-		if ( type && strongsNumber && version ) {
-			return state.list.find(
-				( { listType, data } ) =>
-					listType === 'word' &&
-					data.lemma === strongsNumber &&
-					data.version === version
-			);
-		} else if ( type ) {
-			// This for for all results of a certain type, e.g. word.
-			return state.list.filter( ( { listType } ) => listType === type );
-		}
-		return state.list;
-	}, shallowEqual );
+	const list = useSelector( ( state ) => state.list );
+	let _list = list;
+	if ( type && strongsNumber && version ) {
+		_list = list.find(
+			( { listType, data } ) =>
+				listType === 'word' &&
+				data.lemma === strongsNumber &&
+				data.version === version
+		);
+	} else if ( type ) {
+		// This for for all results of a certain type, e.g. word.
+		_list = list.filter( ( { listType } ) => listType === type );
+	}
 
 	if ( type && strongsNumber && version ) {
 		const groupedResults = useMemo(

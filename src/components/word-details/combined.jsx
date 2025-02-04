@@ -11,9 +11,10 @@ import SortGroupResults from '../sort-group-results';
 const CombinedResults = ( { type } ) => {
 	const dispatch = useDispatch();
 	const [ open, setOpen ] = useState( false );
-	const words = useSelector( ( state ) => {
-		return state.list.filter( ( { listType } ) => listType === type );
+	const list = useSelector( ( state ) => {
+		return state.list;
 	} );
+	const words = list.filter( ( { listType } ) => listType === type );
 
 	if ( words.length < 2 ) {
 		return null;

@@ -695,3 +695,10 @@ export const updateData = ( { version, word, lemma, morph, translation } ) => {
 		translation,
 	};
 };
+
+export const focusWord = ( lemma ) => {
+	return {
+		lemma,
+		type: 'FOCUS_WORD',
+	};
+};

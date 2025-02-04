@@ -111,6 +111,7 @@ const trays = [
 
 const Trays = () => {
 	const dispatch = useDispatch();
+
 	const interfaceLanguage = useSelector(
 		( state ) => state.settings.interfaceLanguage
 	);

@@ -27,7 +27,7 @@ const Root = () => {
 		dispatch( fetchDataAsync( 'lemmas' ) ); // So that stats and comparison tabs work offline.
 	}, [] ); // Use the useEffect so this runs after the component mounts.
 
-	const reference = useSelector( ( state ) => state.reference );
+	const showTrays = useSelector( ( state ) => state.reference.length > 0 );
 	const darkMode = useSelector( ( state ) => state.settings.darkMode );
 	const compareMode = useSelector( ( state ) => state.settings.compareMode );
 	const expandedSearchResults = useSelector(
@@ -66,7 +66,7 @@ const Root = () => {
 	return (
 		<div className={ classes }>
 			<div className={ styles.root }>
-				{ reference.length > 0 && <Trays /> }
+				{ showTrays && <Trays /> }
 
 				<style>{ getBodyStyles() }</style>
 				<KeyboardShortcuts />

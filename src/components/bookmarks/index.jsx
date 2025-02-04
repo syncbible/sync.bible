@@ -32,7 +32,7 @@ const BookMarks = () => {
 			const referenceLemmas = original[ book ][ chapter - 1 ][ verse - 1 ]
 				.filter( ( word ) => word[ 1 ] )
 				.map( ( word ) => {
-					return word[ 1 ].split( ' ' );
+					return word[ 1 ].split( ' ' ); // TODO - also split on /
 				} )
 				.flat()
 				.filter( ( word ) => word !== 'added' && word !== 'G3588' );

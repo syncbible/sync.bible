@@ -9,7 +9,6 @@ import WordBlock from './word-block';
 
 const WordDetails = () => {
 	const list = useSelector( ( state ) => state.list );
-	const userInterface = useSelector( ( state ) => state.userInterface );
 	const words = list.filter( ( { listType } ) => listType === 'word' );
 
 	return words && words.length ? (
@@ -20,7 +19,6 @@ const WordDetails = () => {
 						word={ word }
 						key={ index }
 						data={ word.data }
-						visible={ userInterface[ word.id ] }
 						results={ word.results }
 						loading={ word.loading }
 						id={ word.id } // ID is needed when we call toggleListItemVisible

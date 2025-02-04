@@ -16,7 +16,7 @@ import {
 } from '../../actions';
 
 const WordBlock = ( props ) => {
-	const { data, visible, word } = props;
+	const { data, word, id } = props;
 	const { clickedWord, morphology, lemma, version } = data;
 	const strongsDictionary = useSelector(
 		( state ) => state.data.strongsDictionary
@@ -64,9 +64,9 @@ const WordBlock = ( props ) => {
 
 	return (
 		<Collapsible
+			id={ id }
 			title={ termTitle( getSearchParameters() ) }
 			header={ header }
-			open={ visible }
 			onToggle={ () => dispatch( toggleListItemVisible( props ) ) }
 			className={ getClassName( lemma ) }
 			textToCopy={ wordBlockRef }

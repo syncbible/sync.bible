@@ -74,7 +74,7 @@ const SearchResults = () => {
 				title={ termTitle( searchTerm.data ) }
 				key={ index }
 				header={ header }
-				open={ userInterface[ searchTerm.id ] }
+				id={ searchTerm.id }
 				textToCopy={ textToCopy }
 				onToggle={ () =>
 					dispatch( toggleListItemVisible( searchTerm ) )

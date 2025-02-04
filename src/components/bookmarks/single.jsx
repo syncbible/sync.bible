@@ -17,7 +17,6 @@ const Single = ( { bookmark, index } ) => {
 		( state ) => state.settings.interfaceLanguage
 	);
 	const bookmarkRef = useRef();
-	const userInterface = useSelector( ( state ) => state.userInterface );
 	const {
 		data: { reference },
 	} = bookmark;
@@ -73,7 +72,7 @@ const Single = ( { bookmark, index } ) => {
 		<Collapsible
 			key={ index }
 			header={ header }
-			open={ userInterface[ bookmark.id ] }
+			id={ bookmark.id }
 			onToggle={ () => handleToggle() }
 			textToCopy={ bookmarkRef }
 			onRemove={ () => dispatch( removeFromList( bookmark ) ) }

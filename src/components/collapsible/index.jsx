@@ -1,6 +1,7 @@
 // External dependencies
 import classnames from 'classnames';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
 // Internal dependencies
@@ -17,8 +18,12 @@ const Collapsible = ( {
 	onRemove,
 	onMouseOver,
 	onMouseOut,
+	id,
 	open,
 } ) => {
+	const userInterface = useSelector( ( state ) => state.userInterface );
+	const _open = open ?? userInterface[ id ];
+
 	const variants = {
 		open: {
 			height: 'auto',
@@ -55,7 +60,7 @@ const Collapsible = ( {
 			</div>
 			<motion.div
 				initial="closed"
-				animate={ open ? 'open' : 'closed' }
+				animate={ _open ? 'open' : 'closed' }
 				variants={ variants }
 				style={ { overflow: 'hidden' } }
 			>

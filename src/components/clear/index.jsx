@@ -67,4 +67,4 @@ const Clear = ( { selectedTrayId } ) => {
 	);
 };
 
-export default React.memo( Clear );
+export default Clear;

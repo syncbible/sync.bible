@@ -88,4 +88,4 @@ const Controls = () => {
 	}
 };
 
-export default React.memo( Controls );
+export default Controls;

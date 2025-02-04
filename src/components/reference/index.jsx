@@ -262,4 +262,4 @@ const ReferenceComponent = ( props ) => {
 	);
 };
 
-export default React.memo( ReferenceComponent );
+export default ReferenceComponent;

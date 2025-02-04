@@ -23,4 +23,4 @@ const SearchStats = ( { results, data } ) => {
 	);
 };
 
-export default React.memo( SearchStats );
+export default SearchStats;

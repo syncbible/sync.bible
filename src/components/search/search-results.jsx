@@ -104,4 +104,4 @@ const SearchResults = () => {
 	} );
 };
 
-export default React.memo( SearchResults );
+export default SearchResults;

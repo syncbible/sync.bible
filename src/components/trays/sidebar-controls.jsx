@@ -65,4 +65,4 @@ const SidebarControls = ( { trays } ) => {
 	);
 };
 
-export default React.memo( SidebarControls );
+export default SidebarControls;

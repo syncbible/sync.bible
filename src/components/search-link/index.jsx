@@ -92,4 +92,4 @@ const SearchLink = ( {
 	);
 };
 
-export default React.memo( SearchLink );
+export default SearchLink;

@@ -20,4 +20,4 @@ const ReferenceText = ( { reference } ) => {
 	return text;
 };
 
-export default React.memo( ReferenceText );
+export default ReferenceText;

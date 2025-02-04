@@ -206,4 +206,4 @@ const SettingsTray = () => {
 	);
 };
 
-export default React.memo( SettingsTray );
+export default SettingsTray;

@@ -249,4 +249,4 @@ const SearchForm = ( { isActive } ) => {
 	);
 };
 
-export default React.memo( SearchForm );
+export default SearchForm;

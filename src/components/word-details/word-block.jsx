@@ -100,4 +100,4 @@ const WordBlock = ( props ) => {
 	);
 };
 
-export default React.memo( WordBlock );
+export default WordBlock;

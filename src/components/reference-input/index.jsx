@@ -174,4 +174,4 @@ const ReferenceInput = ( { index } ) => {
 	);
 };
 
-export default React.memo( ReferenceInput );
+export default ReferenceInput;

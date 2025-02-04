@@ -290,4 +290,4 @@ Chapter.protoTypes = {
 	chapter: PropTypes.number.isRequired,
 	index: PropTypes.number.isRequired,
 };
-export default React.memo( Chapter );
+export default Chapter;

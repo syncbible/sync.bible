@@ -35,4 +35,4 @@ const Title = ( { book, chapter, verse, version, customClickHandler } ) => {
 	);
 };
 
-export default React.memo( Title );
+export default Title;

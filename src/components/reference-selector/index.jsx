@@ -28,4 +28,4 @@ const ReferenceSelector = ( { onGoToReference, onChangeDisplayState } ) => {
 	} );
 };
 
-export default React.memo( ReferenceSelector );
+export default ReferenceSelector;

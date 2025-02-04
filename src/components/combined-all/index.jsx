@@ -39,4 +39,4 @@ const CombinedAll = () => {
 	);
 };
 
-export default React.memo( CombinedAll );
+export default CombinedAll;

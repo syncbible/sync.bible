@@ -48,4 +48,4 @@ const WordHighlight = () => {
 	);
 };
 
-export default React.memo( WordHighlight );
+export default WordHighlight;

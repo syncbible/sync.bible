@@ -153,4 +153,4 @@ const ReferenceSelectorMobile = ( { index, version } ) => {
 	);
 };
 
-export default React.memo( ReferenceSelectorMobile );
+export default ReferenceSelectorMobile;

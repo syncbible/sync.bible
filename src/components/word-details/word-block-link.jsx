@@ -44,4 +44,4 @@ const WordBlockLink = ( { strongsNumber, version, count } ) => {
 	);
 };
 
-export default React.memo( WordBlockLink );
+export default WordBlockLink;

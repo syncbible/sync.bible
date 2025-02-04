@@ -60,4 +60,4 @@ const Dock = () => {
 	);
 };
 
-export default React.memo( Dock );
+export default Dock;

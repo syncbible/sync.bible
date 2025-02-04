@@ -36,4 +36,4 @@ const TrayList = ( { trays } ) => {
 	} );
 };
 
-export default React.memo( TrayList );
+export default TrayList;

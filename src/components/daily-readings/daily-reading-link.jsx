@@ -35,4 +35,4 @@ const DailyReadingLink = ( { book, chapter, verses } ) => {
 	);
 };
 
-export default React.memo( DailyReadingLink );
+export default DailyReadingLink;

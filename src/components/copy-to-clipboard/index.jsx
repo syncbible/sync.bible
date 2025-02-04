@@ -32,4 +32,4 @@ const CopyToClipboard = ( {
 	);
 };
 
-export default React.memo( CopyToClipboard );
+export default CopyToClipboard;

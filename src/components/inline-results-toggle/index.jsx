@@ -40,4 +40,4 @@ const InlineResultsToggle = () => {
 	);
 };
 
-export default React.memo( InlineResultsToggle );
+export default InlineResultsToggle;

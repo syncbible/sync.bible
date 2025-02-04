@@ -192,4 +192,4 @@ const Trays = () => {
 	return null;
 };
 
-export default React.memo( Trays );
+export default Trays;

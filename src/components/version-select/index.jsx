@@ -64,4 +64,4 @@ const VersionSelect = ( { name, value = 'default', onChange, large } ) => {
 	);
 };
 
-export default React.memo( VersionSelect );
+export default VersionSelect;

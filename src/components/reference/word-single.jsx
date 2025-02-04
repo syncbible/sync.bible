@@ -154,4 +154,4 @@ const WordSingleComponent = ( props ) => {
 	);
 };
 
-export default React.memo( WordSingleComponent );
+export default WordSingleComponent;

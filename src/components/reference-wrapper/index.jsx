@@ -48,4 +48,4 @@ const ReferenceWrapper = () => {
 	);
 };
 
-export default React.memo( ReferenceWrapper );
+export default ReferenceWrapper;

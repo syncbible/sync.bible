@@ -30,4 +30,4 @@ const KJVDef = ( { word, strongsNumber } ) => {
 	);
 };
 
-export default React.memo( KJVDef );
+export default KJVDef;

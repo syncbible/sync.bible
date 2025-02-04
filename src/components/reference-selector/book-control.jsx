@@ -74,4 +74,4 @@ const BookControl = ( { chapters, name } ) => {
 	);
 };
 
-export default React.memo( BookControl );
+export default BookControl;

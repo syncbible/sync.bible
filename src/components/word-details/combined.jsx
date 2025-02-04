@@ -50,4 +50,4 @@ const CombinedResults = ( { type } ) => {
 	);
 };
 
-export default React.memo( CombinedResults );
+export default CombinedResults;

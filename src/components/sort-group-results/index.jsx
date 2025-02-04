@@ -306,4 +306,4 @@ const SortGroupResults = ( {
 	);
 };
 
-export default React.memo( SortGroupResults );
+export default SortGroupResults;

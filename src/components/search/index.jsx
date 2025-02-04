@@ -16,4 +16,4 @@ const Search = ( { isActive } ) => {
 	);
 };
 
-export default React.memo( Search );
+export default Search;

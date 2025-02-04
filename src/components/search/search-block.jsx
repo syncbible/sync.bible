@@ -85,4 +85,4 @@ const SearchBlock = ( props ) => {
 	);
 };
 
-export default React.memo( SearchBlock );
+export default SearchBlock;

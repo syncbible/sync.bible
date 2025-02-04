@@ -107,4 +107,4 @@ const KeyboardShortcuts = () => {
 	return null;
 };
 
-export default React.memo( KeyboardShortcuts );
+export default KeyboardShortcuts;

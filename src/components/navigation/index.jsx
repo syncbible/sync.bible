@@ -36,4 +36,4 @@ const Navigation = ( { index, version } ) => {
 	);
 };
 
-export default React.memo( Navigation );
+export default Navigation;

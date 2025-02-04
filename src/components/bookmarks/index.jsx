@@ -115,4 +115,4 @@ const BookMarks = () => {
 	);
 };
 
-export default React.memo( BookMarks );
+export default BookMarks;

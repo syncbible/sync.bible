@@ -116,4 +116,4 @@ const WordComponent = ( { word, version, prevWord, reference, index } ) => {
 	return <React.Fragment key={ word }> { wordString }</React.Fragment>;
 };
 
-export default React.memo( WordComponent );
+export default WordComponent;

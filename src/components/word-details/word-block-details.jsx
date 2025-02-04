@@ -189,4 +189,4 @@ const WordBlockDetails = ( {
 	);
 };
 
-export default React.memo( WordBlockDetails );
+export default WordBlockDetails;

@@ -19,4 +19,4 @@ const RemoveColumnButton = ( { index } ) => {
 	);
 };
 
-export default React.memo( RemoveColumnButton );
+export default RemoveColumnButton;

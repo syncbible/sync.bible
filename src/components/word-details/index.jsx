@@ -41,4 +41,4 @@ const WordDetails = () => {
 	);
 };
 
-export default React.memo( WordDetails );
+export default WordDetails;

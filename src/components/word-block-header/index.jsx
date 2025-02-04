@@ -27,4 +27,4 @@ const WordBlockHeader = ( { children, className, textToCopy, onRemove } ) => {
 	);
 };
 
-export default React.memo( WordBlockHeader );
+export default WordBlockHeader;

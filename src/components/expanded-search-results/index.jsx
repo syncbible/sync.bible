@@ -31,4 +31,4 @@ const ExpandedSearchResults = ( { book, chapter, verse } ) => {
 	);
 };
 
-export default React.memo( ExpandedSearchResults );
+export default ExpandedSearchResults;

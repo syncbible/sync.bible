@@ -149,4 +149,4 @@ const MoreDetails = ( { morphologyProp, strongsNumber, version } ) => {
 	);
 };
 
-export default React.memo( MoreDetails );
+export default MoreDetails;

@@ -78,4 +78,4 @@ const Root = () => {
 	);
 };
 
-export default React.memo( Root );
+export default Root;

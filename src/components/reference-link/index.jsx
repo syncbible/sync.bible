@@ -33,4 +33,4 @@ const ReferenceLink = ( { reference, number } ) => {
 	);
 };
 
-export default React.memo( ReferenceLink );
+export default ReferenceLink;

@@ -131,4 +131,4 @@ const HelpTray = () => {
 	);
 };
 
-export default React.memo( HelpTray );
+export default HelpTray;

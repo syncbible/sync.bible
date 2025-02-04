@@ -67,4 +67,4 @@ const Collapsible = ( {
 	);
 };
 
-export default React.memo( Collapsible );
+export default Collapsible;

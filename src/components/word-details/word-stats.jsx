@@ -22,4 +22,4 @@ const WordStats = ( { strongsNumber, version } ) => {
 	);
 };
 
-export default React.memo( WordStats );
+export default WordStats;

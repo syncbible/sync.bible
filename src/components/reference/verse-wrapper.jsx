@@ -71,4 +71,4 @@ const VerseWrapper = ( {
 	);
 };
 
-export default React.memo( VerseWrapper );
+export default VerseWrapper;

@@ -523,6 +523,7 @@ export const fetchData = ( key ) => {
 export function fetchDataAsync( key ) {
 	return async function ( dispatch, getState ) {
 		const { data } = getState();
+
 		if ( data[ key ] ) {
 			return;
 		}

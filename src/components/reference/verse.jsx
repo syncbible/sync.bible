@@ -77,4 +77,4 @@ const Verse = ( { reference, version } ) => {
 	return words;
 };
 
-export default React.memo( Verse );
+export default Verse;

@@ -1,0 +1,9 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", Arial, Helvetica, sans-serif;
+    padding: 3em;
+}
+h1,h2,h3,h4,h5,h6 { font-weight: 100; margin: 0;}
+h1 { font-size: 4em; }
+h2 { font-size: 2em; }
+section { margin-top: 5em; }
+section#features ul li { margin-bottom: 2em;}

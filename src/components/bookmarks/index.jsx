@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Internal dependencies
-//import { fetchSearchResults, fetchData } from '../../actions/index.js';
+import { fetchData } from '../../actions/index.js';
 import Bookmark from '../svg/bookmark';
 import Collapsible from '../collapsible';
 import CombinedResults from '../word-details/combined';
@@ -12,6 +12,7 @@ import styles from './styles.module.scss';
 import WordBlockLink from '../word-details/word-block-link';
 
 const BookMarks = () => {
+	const dispatch = useDispatch();
 	const { bookmarks, words } = useSelector( ( state ) => {
 		const _bookmarks = state.list.filter(
 			( { listType } ) => listType === 'bookmark'
@@ -19,15 +20,18 @@ const BookMarks = () => {
 
 		const _words = {};
 		_bookmarks.forEach( ( item ) => {
-			const { book, chapter, verse, version } = item.data.reference;
+			const { book, chapter, verse } = item.data.reference;
 
 			if (
-				state.data[ version ] &&
-				state.data[ version ][ book ] &&
-				state.data[ version ][ book ][ chapter ] &&
-				state.data[ version ][ book ][ chapter - 1 ][ verse - 1 ]
+				state.data[ 'original' ] &&
+				state.data[ 'original' ][ book ] &&
+				state.data[ 'original' ][ book ][ chapter ] &&
+				state.data[ 'original' ][ book ][ chapter - 1 ][ verse - 1 ] &&
+				typeof state.data[ 'original' ][ book ][ chapter - 1 ][
+					verse - 1
+				] !== 'string'
 			) {
-				return state.data[ version ][ book ][ chapter - 1 ][
+				return state.data[ 'original' ][ book ][ chapter - 1 ][
 					verse - 1
 				].forEach( ( word ) => {
 					if ( ! word[ 1 ] ) {
@@ -58,7 +62,7 @@ const BookMarks = () => {
 		// Get the data for extra stuff in single.
 		// not used right now
 		//dispatch( fetchSearchResults() );
-		//dispatch( fetchData( 'original' ) );
+		dispatch( fetchData( 'original' ) );
 	}
 
 	function getSharedWords() {

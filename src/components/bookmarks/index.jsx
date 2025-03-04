@@ -11,49 +11,46 @@ import Single from './single';
 import styles from './styles.module.scss';
 import WordBlockLink from '../word-details/word-block-link';
 
-const BookMarks = () => {
+export default function BookMarks() {
 	const dispatch = useDispatch();
-	const { bookmarks, words } = useSelector( ( state ) => {
-		const _bookmarks = state.list.filter(
-			( { listType } ) => listType === 'bookmark'
-		);
+	const { list, original } = useSelector( ( state ) => {
+		return {
+			list: state.list,
+			original: state.data[ 'original' ],
+		};
+	}, [] );
 
-		const _words = {};
-		_bookmarks.forEach( ( item ) => {
-			const { book, chapter, verse } = item.data.reference;
+	const bookmarks = list.filter(
+		( { listType } ) => listType === 'bookmark'
+	);
+	const words = {};
+	bookmarks.forEach( ( item ) => {
+		const { book, chapter, verse } = item.data.reference;
 
-			if (
-				state.data[ 'original' ] &&
-				state.data[ 'original' ][ book ] &&
-				state.data[ 'original' ][ book ][ chapter ] &&
-				state.data[ 'original' ][ book ][ chapter - 1 ][ verse - 1 ] &&
-				typeof state.data[ 'original' ][ book ][ chapter - 1 ][
-					verse - 1
-				] !== 'string'
-			) {
-				return state.data[ 'original' ][ book ][ chapter - 1 ][
-					verse - 1
-				].forEach( ( word ) => {
+		if (
+			original &&
+			original[ book ] &&
+			original[ book ][ chapter ] &&
+			original[ book ][ chapter - 1 ][ verse - 1 ] &&
+			typeof original[ book ][ chapter - 1 ][ verse - 1 ] !== 'string'
+		) {
+			return original[ book ][ chapter - 1 ][ verse - 1 ].forEach(
+				( word ) => {
 					if ( ! word[ 1 ] ) {
 						return;
 					}
 					const lemmas = word[ 1 ].split( ' ' );
 					if ( lemmas ) {
 						lemmas.forEach( ( lemma ) => {
-							if ( ! _words[ lemma ] ) {
-								_words[ lemma ] = 0;
+							if ( ! words[ lemma ] ) {
+								words[ lemma ] = 0;
 							}
-							_words[ lemma ] = _words[ lemma ] + 1;
+							words[ lemma ] = words[ lemma ] + 1;
 						} );
 					}
-				} );
-			}
-		} );
-
-		return {
-			bookmarks: _bookmarks,
-			words: _words,
-		};
+				}
+			);
+		}
 	} );
 
 	const [ open, setOpen ] = useState( false );
@@ -106,6 +103,4 @@ const BookMarks = () => {
 			{ getSharedWords() }
 		</>
 	);
-};
-
-export default React.memo( BookMarks );
+}

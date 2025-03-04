@@ -1,24 +1,28 @@
 // External dependencies
-import React from 'react';
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import { goToReferenceAction } from '../../actions';
 import ExpandedSearchResults from '../expanded-search-results';
 import styles from './styles.module.scss';
 import ReferenceText from '../reference-text';
-import { getReferenceFromSearchResult } from '../../lib/reference';
+import {
+	getReferenceFromSearchResult,
+	getVerseData,
+} from '../../lib/reference';
 
-const SearchLink = ( {
+/** Component for displaying and handling search result links */
+export default function SearchLink( {
 	referenceString,
 	index,
 	count,
 	wordId,
 	isActive,
 	referenceToDisplay,
-} ) => {
-	// State constants
+} ) {
+	const dispatch = useDispatch();
 	const highlightSearchResults = useSelector(
 		( state ) => state.settingshighlightSearchResults
 	);
@@ -34,8 +38,6 @@ const SearchLink = ( {
 	if ( ! referenceToDisplay ) {
 		referenceToDisplay = <ReferenceText reference={ reference } />;
 	}
-
-	const dispatch = useDispatch();
 
 	// Component constants
 	const className = classnames(
@@ -65,6 +67,15 @@ const SearchLink = ( {
 		window.updateAppComponent( 'highlightedWord', null );
 	};
 
+	const chapter = reference.chapter
+		? parseInt( reference.chapter, 10 )
+		: null;
+	const verse = reference.verse ? parseInt( reference.verse, 10 ) : null;
+
+	if ( ! chapter || ! verse ) {
+		return null;
+	}
+
 	return (
 		<li className={ className }>
 			<a
@@ -85,11 +96,18 @@ const SearchLink = ( {
 			</a>
 			<ExpandedSearchResults
 				book={ reference.book }
-				chapter={ reference.chapter }
-				verse={ reference.verse }
+				chapter={ chapter }
+				verse={ verse }
 			/>
 		</li>
 	);
-};
+}
 
-export default React.memo( SearchLink );
+SearchLink.propTypes = {
+	referenceString: PropTypes.string.isRequired,
+	index: PropTypes.number.isRequired,
+	count: PropTypes.number,
+	wordId: PropTypes.string,
+	isActive: PropTypes.bool,
+	referenceToDisplay: PropTypes.node,
+};

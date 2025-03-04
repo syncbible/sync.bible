@@ -12,7 +12,6 @@ import styles from './styles.module.scss';
 import WordBlockLink from '../word-details/word-block-link';
 
 export default function BookMarks() {
-	console.log( 'render BookMarks' );
 	const dispatch = useDispatch();
 	const list = useSelector( ( state ) => state.list );
 	const original = useSelector( ( state ) => state.data[ 'original' ] );

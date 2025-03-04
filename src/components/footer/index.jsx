@@ -1,7 +1,7 @@
 // External dependencies
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import SyncBible from '../svg/syncbible';
@@ -9,7 +9,7 @@ import TrayFilter from '../../components/trays/filter';
 import { settingsChange, openSidebar } from '../../actions/index.js';
 import styles from './styles.module.scss';
 
-const Footer = ( { trays } ) => {
+export default function Footer( { trays } ) {
 	const compareMode = useSelector( ( state ) => {
 		return state.settings.compareMode;
 	} );
@@ -72,6 +72,14 @@ const Footer = ( { trays } ) => {
 			} ) }
 		</div>
 	);
-};
+}
 
-export default React.memo( Footer );
+Footer.propTypes = {
+	trays: PropTypes.arrayOf(
+		PropTypes.shape( {
+			id: PropTypes.string.isRequired,
+			text: PropTypes.string.isRequired,
+			icon: PropTypes.node.isRequired,
+		} )
+	).isRequired,
+};

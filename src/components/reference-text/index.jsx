@@ -1,11 +1,10 @@
 // External
-import React from 'react';
 import { useSelector } from 'react-redux';
 
 // Internal
 import bible from '../../data/bible.js';
 
-const ReferenceText = ( { reference } ) => {
+export default function ReferenceText( { reference } ) {
 	const interfaceLanguage = useSelector(
 		( state ) => state.settings.interfaceLanguage
 	);
@@ -18,6 +17,4 @@ const ReferenceText = ( { reference } ) => {
 		text += ':' + reference.verse;
 	}
 	return text;
-};
-
-export default React.memo( ReferenceText );
+}

@@ -1,5 +1,5 @@
 // External dependencies
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Internal dependencies
@@ -12,13 +12,10 @@ import styles from './styles.module.scss';
 import WordBlockLink from '../word-details/word-block-link';
 
 export default function BookMarks() {
+	console.log( 'render BookMarks' );
 	const dispatch = useDispatch();
-	const { list, original } = useSelector( ( state ) => {
-		return {
-			list: state.list,
-			original: state.data[ 'original' ],
-		};
-	}, [] );
+	const list = useSelector( ( state ) => state.list );
+	const original = useSelector( ( state ) => state.data[ 'original' ] );
 
 	const bookmarks = list.filter(
 		( { listType } ) => listType === 'bookmark'

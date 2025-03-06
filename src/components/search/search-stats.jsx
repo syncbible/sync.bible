@@ -1,11 +1,12 @@
 // External dependencies
-import React from 'react';
+import PropTypes from 'prop-types';
 
 // Internal dependencies.
 import styles from './styles.module.scss';
 import SortGroupResults from '../sort-group-results';
 
-const SearchStats = ( { results, data } ) => {
+/** Component for displaying search result statistics */
+export default function SearchStats( { results, data } ) {
 	if ( ! results ) {
 		return <p>Stats will appear when you have searched for the word.</p>;
 	}
@@ -21,6 +22,11 @@ const SearchStats = ( { results, data } ) => {
 			/>
 		</div>
 	);
-};
+}
 
-export default React.memo( SearchStats );
+SearchStats.propTypes = {
+	results: PropTypes.array,
+	data: PropTypes.shape( {
+		version: PropTypes.string.isRequired,
+	} ).isRequired,
+};

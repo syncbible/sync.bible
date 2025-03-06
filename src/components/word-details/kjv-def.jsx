@@ -1,12 +1,13 @@
 // External dependencies
-import React from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import { addSearch, setTrayVisibilityFilter } from '../../actions';
 import styles from './styles.module.scss';
 
-const KJVDef = ( { word, strongsNumber } ) => {
+/** Component for displaying and searching KJV word definitions */
+export default function KJVDef( { word, strongsNumber } ) {
 	const dispatch = useDispatch();
 	const searchWord = () => {
 		const searchParameters = {
@@ -28,6 +29,9 @@ const KJVDef = ( { word, strongsNumber } ) => {
 			{ word }
 		</span>
 	);
-};
+}
 
-export default React.memo( KJVDef );
+KJVDef.propTypes = {
+	word: PropTypes.string.isRequired,
+	strongsNumber: PropTypes.string.isRequired,
+};

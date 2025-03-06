@@ -1,6 +1,7 @@
 // External dependencies
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import { fetchData, settingsChange, toggleSidebar } from '../../actions';
@@ -9,7 +10,8 @@ import { mapVersionToData } from '../../lib/reference';
 import VersionSelect from '../version-select';
 import LeftPanelClose from '../svg/left-panel-close';
 
-const SidebarControls = ( { trays } ) => {
+/** Controls component for sidebar with version selection and close button */
+export default function SidebarControls( { trays } ) {
 	const dispatch = useDispatch();
 	const activeTray = useSelector( ( state ) => state.trays );
 	const interfaceLanguage = useSelector(
@@ -25,7 +27,7 @@ const SidebarControls = ( { trays } ) => {
 		if ( ntData !== otData ) {
 			dispatch( fetchData( ntData ) );
 		}
-	}, [ interfaceLanguage ] );
+	}, [ interfaceLanguage, dispatch ] );
 
 	return (
 		<div className={ styles.sidebarControls }>
@@ -63,6 +65,14 @@ const SidebarControls = ( { trays } ) => {
 			</span>
 		</div>
 	);
-};
+}
 
-export default React.memo( SidebarControls );
+SidebarControls.propTypes = {
+	trays: PropTypes.arrayOf(
+		PropTypes.shape( {
+			id: PropTypes.string.isRequired,
+			text: PropTypes.string.isRequired,
+			component: PropTypes.elementType.isRequired,
+		} )
+	).isRequired,
+};

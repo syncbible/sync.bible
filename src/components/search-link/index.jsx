@@ -13,7 +13,6 @@ import {
 	getVerseData,
 } from '../../lib/reference';
 
-/** Component for displaying and handling search result links */
 export default function SearchLink( {
 	referenceString,
 	index,

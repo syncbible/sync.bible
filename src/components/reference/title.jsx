@@ -15,7 +15,6 @@ export default function Title( {
 	version,
 	customClickHandler,
 } ) {
-	console.log( 'Render Title:', { book, chapter, version } );
 	const dispatch = useDispatch();
 
 	const tranlatedBook = bible.getTranslatedBookName( book, version );

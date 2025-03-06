@@ -1,12 +1,12 @@
 // External dependencies
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
 // Internal dependencies
 import { goToReferenceAction } from '../../actions';
-import { goToReferenceHelper } from '../../lib/reference';
 
-const DailyReadingLink = ( { book, chapter, verses } ) => {
+/** Link component for daily Bible readings */
+export default function DailyReadingLink( { book, chapter, verses } ) {
 	const dispatch = useDispatch();
 
 	let referenceString = book + ' ' + chapter;
@@ -33,6 +33,11 @@ const DailyReadingLink = ( { book, chapter, verses } ) => {
 			{ referenceString }
 		</a>
 	);
-};
+}
 
-export default React.memo( DailyReadingLink );
+DailyReadingLink.propTypes = {
+	book: PropTypes.string.isRequired,
+	chapter: PropTypes.oneOfType( [ PropTypes.string, PropTypes.number ] )
+		.isRequired,
+	verses: PropTypes.string,
+};

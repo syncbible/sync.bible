@@ -36,6 +36,6 @@ export default function WordBlockHeader( {
 WordBlockHeader.propTypes = {
 	children: PropTypes.node,
 	className: PropTypes.string,
-	textToCopy: PropTypes.string,
+	textToCopy: PropTypes.oneOfType( [ PropTypes.string, PropTypes.object ] ),
 	onRemove: PropTypes.func,
 };

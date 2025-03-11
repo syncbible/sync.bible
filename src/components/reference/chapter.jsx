@@ -263,7 +263,7 @@ const Chapter = ( { book, chapter, index } ) => {
 								version={ version }
 								chapter={ chapter }
 								verse={ verseNumber + 1 }
-								isCurrentRef={ isCurrentRef( verseNumber ) }
+								isCurrentRef={ !! isCurrentRef( verseNumber ) }
 							/>
 						</div>
 					);

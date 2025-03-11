@@ -36,7 +36,7 @@ export default function CopyToClipboard( {
 
 CopyToClipboard.propTypes = {
 	fill: PropTypes.string,
-	textToCopy: PropTypes.string,
+	textToCopy: PropTypes.oneOfType( [ PropTypes.string, PropTypes.object ] ),
 	customClickHandler: PropTypes.func,
 	version: PropTypes.string,
 };

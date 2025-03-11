@@ -28,7 +28,7 @@ export default function Navigation( { index, version } ) {
 			<ReferenceSelectorMobile index={ index } version={ version } />
 			<ReferenceInput version={ version } index={ index } />
 			<VersionSelect
-				name={ index }
+				name={ index.toString() }
 				value={ version }
 				onChange={ handleChangeVersion }
 			/>

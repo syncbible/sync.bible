@@ -74,7 +74,7 @@ export default function VersionSelect( {
 }
 
 VersionSelect.propTypes = {
-	name: PropTypes.string.isRequired,
+	name: PropTypes.string,
 	value: PropTypes.string,
 	onChange: PropTypes.func.isRequired,
 	large: PropTypes.bool,

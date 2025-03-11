@@ -23,7 +23,7 @@ import styles from './styles.module.scss';
 import bible from '../../data/bible.js';
 import Connections from './connections';
 
-const Compare = () => {
+export default function Compare() {
 	const [ compareAllChapters, setCompareAllChapters ] = useState( false );
 	const dispatch = useDispatch();
 	const isOriginalLoaded = useSelector(
@@ -312,6 +312,4 @@ const Compare = () => {
 			</button>
 		</div>
 	);
-};
-
-export default Compare;
+}

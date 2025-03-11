@@ -1,5 +1,4 @@
 // External dependencies
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
@@ -8,7 +7,7 @@ import styles from './styles.module.scss';
 import Clear from '../clear';
 import UnfoldLessDouble from '../svg/unfold-less-double';
 
-const ListHeader = ( { tray } ) => {
+export default function ListHeader( { tray } ) {
 	const dispatch = useDispatch();
 	const openListItems = useSelector( ( state ) => {
 		// Are there any open list items?
@@ -45,6 +44,4 @@ const ListHeader = ( { tray } ) => {
 			<Clear selectedTrayId={ tray } />
 		</div>
 	);
-};
-
-export default ListHeader;
+}

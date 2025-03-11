@@ -1,5 +1,5 @@
 // External dependencies
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
@@ -10,7 +10,7 @@ import SearchLink from '../search-link';
 import InlineResultsToggle from '../inline-results-toggle';
 import bible from '../../data/bible.js';
 
-const Single = ( { bookmark, index } ) => {
+export default function Single( { bookmark, index } ) {
 	const dispatch = useDispatch();
 	const data = useSelector( ( state ) => state.data );
 	const interfaceLanguage = useSelector(
@@ -81,6 +81,4 @@ const Single = ( { bookmark, index } ) => {
 			<div ref={ bookmarkRef }>{ renderCrossReferences() }</div>
 		</Collapsible>
 	);
-};
-
-export default Single; // Adding memo here stops it updating correctly.
+}

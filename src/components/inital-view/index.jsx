@@ -1,11 +1,10 @@
 // External
-import React from 'react';
 import { useSelector } from 'react-redux';
 
 // Internal
 import styles from './styles.module.scss';
 
-const InitialView = () => {
+export default function InitialView() {
 	const reference = useSelector( ( state ) => state.reference );
 
 	if ( reference.length ) {
@@ -66,6 +65,4 @@ const InitialView = () => {
 			</div>
 		</div>
 	);
-};
-
-export default InitialView;
+}

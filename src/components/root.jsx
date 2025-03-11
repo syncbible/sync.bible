@@ -1,5 +1,5 @@
 // External
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
@@ -13,7 +13,7 @@ import styles from './root.module.scss';
 import { closeReferenceSelectorMobile, fetchDataAsync } from '../actions';
 import { rootClasses } from './utils';
 
-const Root = () => {
+export default function Root() {
 	const dispatch = useDispatch();
 
 	// Fetch the other data we need - we precache this as a lot of features depend on it
@@ -76,6 +76,4 @@ const Root = () => {
 			</div>
 		</div>
 	);
-};
-
-export default React.memo( Root );
+}

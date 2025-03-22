@@ -6398,7 +6398,7 @@ bible.Data.supportedVersions = {
 	},
 	BulVeren: { name: 'Veren’s Contemporary Bible', language: 'bg' },
 	BretonNT: { name: 'Breton New Testament (Koad 21)', language: 'br' },
-	bssNT: { name: 'Bible in Akoose', language: 'bss' },
+	bss2011eb: { name: 'Bible in Akoose', language: 'bss' },
 	CebPinadayag: { name: 'Cebuano Pinadayag', language: 'ceb' },
 	Che1860: {
 		name: 'Cherokee New Testament (1860) with Sequoyah transliterated forms',

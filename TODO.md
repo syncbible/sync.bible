@@ -2,6 +2,7 @@
 
 -   John 8:34 - slave is missing
 -   Luke 7:18 - leading comma?
+-   more translations: https://ebible.org/download.php
 -   Search in chapter
 -   Filter search results by strongs number eg life
 -   fix SweFolk1998 and VietNVB and GerOffBist

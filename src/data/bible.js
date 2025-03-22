@@ -6244,6 +6244,15 @@ bible.Data.bookNamesByLanguage = {
 bible.Data.bookNamesByLanguage.he = bible.Data.bookNamesByLanguage.hbo;
 bible.Data.bookNamesByLanguage.azb = bible.Data.bookNamesByLanguage.az;
 
+// TODO
+bible.Data.bookNamesByLanguage.eko = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.kde = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mgh = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.nyu = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.seh = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.tke = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.wmw = bible.Data.bookNamesByLanguage.en;
+
 bible.Data.rtlLanguages = [
 	'he',
 	'hbo',
@@ -6475,6 +6484,17 @@ bible.Data.supportedVersions = {
 		language: 'el',
 	},
 	GerZurcher: { name: 'Deutsche Zürcher Bibel von 1931.', language: 'de' },
+	eko2008eb: { name: 'Kote New Testament', language: 'eko' },
+	kde2008eb: {
+		name: 'LILAILANO LYAHAMBI LYA NNUNGU KWA VANU VAMMALELE',
+		language: 'kde',
+	},
+	mgh2009eb: { name: 'Makhuwa-Meetto do Novo Testamento', language: 'mgh' },
+	mgh2016eb: { name: 'Makua New Testament 2015', language: 'mgh' },
+	nyu2010eb: { name: 'Nyungwe', language: 'nyu' },
+	seh1983eb: { name: 'Sena do Novo Testamento', language: 'seh' },
+	tke2009eb: { name: 'Takwane do Novo Testamento', language: 'tke' },
+	wmw2013eb: { name: 'Habari Ngema', language: 'wmw' },
 	Esperanto: { name: 'Esperanto Londona Biblio', language: 'eo' },
 	SpaPlatense: { name: 'Biblia Platense (Straubinger)', language: 'es' },
 	SpaRV: { name: 'La Santa Biblia Reina-Valera (1909)', language: 'es' },
@@ -6895,6 +6915,13 @@ bible.Data.interfaceLanguages = {
 	lzh: '文言（中文）(Classical Chinese)',
 	mal: 'മലയാളം (Malayalam)',
 	mg: 'Malagasy',
+	eko: 'Mozambique - Koti',
+	kde: 'Mozambique - Makonde',
+	mgh: 'Mozambique - Makua',
+	nyu: 'Mozambique - Nyungwe',
+	seh: 'Mozambique - Sena',
+	tke: 'Mozambique - Takwane',
+	wmw: 'Mozambique - Mwani',
 	mi: 'Maori',
 	mn: 'Монгол (Mongolian)',
 	my: 'Бирм (Myanmar)',

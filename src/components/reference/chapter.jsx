@@ -13,7 +13,6 @@ import VerseWrapper from './verse-wrapper';
 import styles from './styles.module.scss';
 import {
 	mapVersionToData,
-	areReferencesInSync,
 	getNumberOfVerses,
 	getHarmonisedReference,
 } from '../../lib/reference';
@@ -32,6 +31,7 @@ function getLanguageFromVersion( version, book ) {
 
 const Chapter = ( { book, chapter, index } ) => {
 	const reference = useSelector( ( state ) => state.reference );
+	const inSync = useSelector( ( state ) => state.settings.inSync );
 	const currentReference = reference[ index ];
 	const version = currentReference.version;
 	const startVerse = currentReference.verse;
@@ -263,7 +263,7 @@ const Chapter = ( { book, chapter, index } ) => {
 								version={ version }
 								chapter={ chapter }
 								verse={ verseNumber + 1 }
-								isCurrentRef={ isCurrentRef( verseNumber ) }
+								isCurrentRef={ !! isCurrentRef( verseNumber ) }
 							/>
 						</div>
 					);
@@ -278,9 +278,7 @@ const Chapter = ( { book, chapter, index } ) => {
 			<div className={ styles.invisible } ref={ textToCopyRef }>
 				{ textToCopyText }
 			</div>
-			{ areReferencesInSync( reference )
-				? getSyncVerses()
-				: getDifferentVerses( version ) }
+			{ inSync ? getSyncVerses() : getDifferentVerses( version ) }
 		</div>
 	);
 };

@@ -6,11 +6,10 @@ import classnames from 'classnames';
 // Internal
 import ReferenceComponent from '../reference';
 import styles from './style.module.scss';
-import { areReferencesInSync } from '../../lib/reference';
 
 const ReferenceWrapper = () => {
 	const reference = useSelector( ( state ) => state.reference );
-	const inSync = areReferencesInSync( reference );
+	const inSync = useSelector( ( state ) => state.settings.inSync );
 	const searchSelect = useSelector( ( state ) => state.searchSelect );
 	const sidebarOpen = useSelector( ( state ) => state.sidebar );
 

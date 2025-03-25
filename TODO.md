@@ -16,7 +16,6 @@
 -   add animation to current verse
 -   show the whole range for cross references
 -   make it clear that we need original for several features, so when we dont have it show that we need it and add explain
--   fix the sidebar on initial load - don't set KJV as initial interface lang
 -   show verse for context in combined. only show verses with more than one result
 
 -   There are some texts from crosswire that couldn't be converted

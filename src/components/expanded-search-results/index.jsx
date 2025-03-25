@@ -1,18 +1,19 @@
 // External dependencies
-import React from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies.
 import Verse from '../reference/verse';
 
-const ExpandedSearchResults = ( { book, chapter, verse } ) => {
-	if ( ! book || ! chapter || ! verse ) {
-		return null;
-	}
-
+/** Component to show expanded search results for a verse */
+export default function ExpandedSearchResults( { book, chapter, verse } ) {
 	const interfaceLanguage = useSelector( ( state ) => {
 		return state.settings.interfaceLanguage;
 	} );
+
+	if ( ! book || ! chapter || ! verse ) {
+		return null;
+	}
 
 	const adjustedReference = {
 		book: book,
@@ -29,6 +30,10 @@ const ExpandedSearchResults = ( { book, chapter, verse } ) => {
 			/>
 		</div>
 	);
-};
+}
 
-export default React.memo( ExpandedSearchResults );
+ExpandedSearchResults.propTypes = {
+	book: PropTypes.string,
+	chapter: PropTypes.number,
+	verse: PropTypes.number,
+};

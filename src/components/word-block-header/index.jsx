@@ -1,12 +1,18 @@
 // External dependencies
-import React from 'react';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import RemoveSvg from '../svg/remove';
 import CopyToClipboard from '../copy-to-clipboard';
 import styles from './styles.module.scss';
 
-const WordBlockHeader = ( { children, className, textToCopy, onRemove } ) => {
+/** Header component for word blocks with optional copy and remove actions */
+export default function WordBlockHeader( {
+	children,
+	className,
+	textToCopy,
+	onRemove,
+} ) {
 	return (
 		<div className={ className }>
 			{ children }
@@ -25,6 +31,11 @@ const WordBlockHeader = ( { children, className, textToCopy, onRemove } ) => {
 			</span>
 		</div>
 	);
-};
+}
 
-export default React.memo( WordBlockHeader );
+WordBlockHeader.propTypes = {
+	children: PropTypes.node,
+	className: PropTypes.string,
+	textToCopy: PropTypes.oneOfType( [ PropTypes.string, PropTypes.object ] ),
+	onRemove: PropTypes.func,
+};

@@ -1,12 +1,18 @@
 // External
-import React from 'react';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 // Internal
 import bible from '../../data/bible.js';
 import styles from './styles.module.scss';
 
-const VersionSelect = ( { name, value = 'default', onChange, large } ) => {
+/** Component for selecting Bible versions with language grouping */
+export default function VersionSelect( {
+	name,
+	value = 'default',
+	onChange,
+	large,
+} ) {
 	const classes = classnames(
 		styles.sidebarSelect,
 		large ? styles.large : styles.small
@@ -17,8 +23,11 @@ const VersionSelect = ( { name, value = 'default', onChange, large } ) => {
 			name={ name }
 			value={ value }
 			onChange={ ( event ) => {
-				if ( typeof ga !== 'undefined' ) {
-					gtag( 'event', 'select_content', {
+				if (
+					typeof window !== 'undefined' &&
+					typeof window.gtag !== 'undefined'
+				) {
+					window.gtag( 'event', 'select_content', {
 						content_type: 'version',
 						item_id: value,
 					} );
@@ -62,6 +71,11 @@ const VersionSelect = ( { name, value = 'default', onChange, large } ) => {
 			} ) }
 		</select>
 	);
-};
+}
 
-export default React.memo( VersionSelect );
+VersionSelect.propTypes = {
+	name: PropTypes.string,
+	value: PropTypes.string,
+	onChange: PropTypes.func.isRequired,
+	large: PropTypes.bool,
+};

@@ -1,7 +1,7 @@
 // External dependencies
-import React from 'react';
 import classnames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import {
@@ -11,7 +11,8 @@ import {
 } from '../../actions';
 import styles from './styles.module.scss';
 
-const TrayFilter = ( { children, filter, title } ) => {
+/** Filter component for tray visibility */
+export default function TrayFilter( { children, filter, title } ) {
 	const dispatch = useDispatch();
 	const activeTray = useSelector( ( state ) => state.trays );
 
@@ -35,6 +36,10 @@ const TrayFilter = ( { children, filter, title } ) => {
 			{ children }
 		</span>
 	);
-};
+}
 
-export default React.memo( TrayFilter );
+TrayFilter.propTypes = {
+	children: PropTypes.node.isRequired,
+	filter: PropTypes.string.isRequired,
+	title: PropTypes.string.isRequired,
+};

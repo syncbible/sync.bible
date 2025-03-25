@@ -1,5 +1,4 @@
 // External dependencies
-import React from 'react';
 import { useSelector } from 'react-redux';
 
 // Internal dependencies
@@ -7,7 +6,7 @@ import styles from './styles.module.scss';
 import SortGroupResults from '../sort-group-results/index';
 import SyncBible from '../svg/syncbible';
 
-const CombinedAll = () => {
+export default function CombinedAll() {
 	const { compareMode } = useSelector( ( state ) => {
 		return {
 			compareMode: state.settings.compareMode,
@@ -37,6 +36,4 @@ const CombinedAll = () => {
 			</p>
 		</div>
 	);
-};
-
-export default React.memo( CombinedAll );
+}

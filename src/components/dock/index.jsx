@@ -1,5 +1,5 @@
 // External
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import classnames from 'classnames';
 
@@ -14,7 +14,7 @@ import Controls from '../controls';
 import styles from './style.module.scss';
 import VersionSelect from '../version-select';
 
-const Dock = () => {
+export default function Dock() {
 	const dispatch = useDispatch();
 	const versionArray = useSelector(
 		( state ) =>
@@ -58,6 +58,4 @@ const Dock = () => {
 			</div>
 		</div>
 	);
-};
-
-export default React.memo( Dock );
+}

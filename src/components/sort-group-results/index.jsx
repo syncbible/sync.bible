@@ -295,8 +295,8 @@ const SortGroupResults = ( {
 						{ allowPreview && group === 'verse' && (
 							<ExpandedSearchResults
 								book={ reference.book }
-								chapter={ reference.chapter }
-								verse={ reference.verse }
+								chapter={ parseInt( reference.chapter ) }
+								verse={ parseInt( reference.verse ) }
 							/>
 						) }
 					</div>

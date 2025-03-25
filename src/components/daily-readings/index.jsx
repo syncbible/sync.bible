@@ -1,10 +1,10 @@
 // External dependencies
-import React, { useState, Fragment } from 'react';
+import { useState, Fragment } from 'react';
 
 // Internal dependencies
 import DailyReadingLink from './daily-reading-link';
 import styles from './styles.module.scss';
-import dailyReadings from '../../data/cdrplan.min.js'
+import dailyReadings from '../../data/cdrplan.min.js';
 
 const getMonthName = ( monthNumber ) => {
 	const month = new Date( 1970, monthNumber, 1 );
@@ -40,7 +40,7 @@ function getDaysIntoYear( date ) {
 	);
 }
 
-const DailyReadings = () => {
+export default function DailyReadings() {
 	const [ selectedMonth, setSelectedMonth ] = useState(
 		new Date().getMonth()
 	);
@@ -60,29 +60,29 @@ const DailyReadings = () => {
 	const selectedDate = new Date( 1970, selectedMonth, selectedDay );
 	const daysIntoYear = getDaysIntoYear( selectedDate );
 
-	const dailyReadingsList = dailyReadings[
-		daysIntoYear - 1
-	].Readings.map( ( reading, key ) => {
-		return (
-			<li key={ key }>
-				{ reading.Refs.map( ( oneRef, index ) => {
-					const book = oneRef.Book;
-					const chapter = oneRef.Chapter ? oneRef.Chapter : 1;
-					const verses = oneRef.Verses;
-					return (
-						<Fragment key={ index }>
-							<DailyReadingLink
-								book={ book }
-								chapter={ chapter }
-								verses={ verses }
-							/>
-							<br />
-						</Fragment>
-					);
-				} ) }
-			</li>
-		);
-	} );
+	const dailyReadingsList = dailyReadings[ daysIntoYear - 1 ].Readings.map(
+		( reading, key ) => {
+			return (
+				<li key={ key }>
+					{ reading.Refs.map( ( oneRef, index ) => {
+						const book = oneRef.Book;
+						const chapter = oneRef.Chapter ? oneRef.Chapter : 1;
+						const verses = oneRef.Verses;
+						return (
+							<Fragment key={ index }>
+								<DailyReadingLink
+									book={ book }
+									chapter={ chapter }
+									verses={ verses }
+								/>
+								<br />
+							</Fragment>
+						);
+					} ) }
+				</li>
+			);
+		}
+	);
 
 	return (
 		<div className={ styles.dailyReadings }>
@@ -107,6 +107,4 @@ const DailyReadings = () => {
 			<ol>{ dailyReadingsList }</ol>
 		</div>
 	);
-};
-
-export default React.memo( DailyReadings );
+}

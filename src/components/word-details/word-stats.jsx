@@ -1,12 +1,12 @@
 // External dependencies
-import React from 'react';
-import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies.
 import styles from './styles.module.scss';
 import SortGroupResults from '../sort-group-results';
 
-const WordStats = ( { strongsNumber, version } ) => {
+/** Component for displaying word statistics and grouping options */
+export default function WordStats( { strongsNumber, version } ) {
 	return (
 		<div className={ styles.wordStats }>
 			<h2>Stats for { version }</h2>
@@ -20,6 +20,9 @@ const WordStats = ( { strongsNumber, version } ) => {
 			/>
 		</div>
 	);
-};
+}
 
-export default React.memo( WordStats );
+WordStats.propTypes = {
+	strongsNumber: PropTypes.string.isRequired,
+	version: PropTypes.string.isRequired,
+};

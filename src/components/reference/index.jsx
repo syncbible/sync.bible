@@ -8,11 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setScrollChapter, setScrollChapterSynced } from '../../actions';
 import Chapter from './chapter';
 import styles from './styles.module.scss';
-import {
-	getNextChapter,
-	getPreviousChapter,
-	areReferencesInSync,
-} from '../../lib/reference';
+import { getNextChapter, getPreviousChapter } from '../../lib/reference';
 
 let oldHeight = 0,
 	scroller = null,
@@ -45,8 +41,9 @@ const getReferencesFromProps = ( nextProps ) => {
 const ReferenceComponent = ( props ) => {
 	// We use a local component state to handle scrolling
 	const [ references, setReferences ] = useState( {} );
-	const stateReference = useSelector( ( state ) => state.reference );
-	const stateReferencesInSync = areReferencesInSync( stateReference );
+	const stateReferencesInSync = useSelector(
+		( state ) => state.settings.inSync
+	);
 	const referenceWindow = useRef();
 	const inSync = useSelector( ( state ) => state.settings.inSync );
 	const dispatch = useDispatch();

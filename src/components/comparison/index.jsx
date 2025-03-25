@@ -32,9 +32,9 @@ const Comparison = () => {
 					chapter: referenceArray[ 1 ],
 					verse: referenceArray[ 2 ],
 				};
-				const markup = referenceControl.map( ( { version } ) => {
+				const markup = referenceControl.map( ( { version }, index ) => {
 					return (
-						<div>
+						<div key={ index }>
 							<Title
 								book={ reference.book }
 								chapter={ reference.chapter }

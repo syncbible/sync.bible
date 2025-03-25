@@ -1,12 +1,12 @@
 // External
-import React from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal
 import { removeColumn } from '../../actions';
 import RemoveSvg from '../svg/remove';
 
-const RemoveColumnButton = ( { index } ) => {
+export default function RemoveColumnButton( { index } ) {
 	const dispatch = useDispatch();
 
 	return (
@@ -17,6 +17,8 @@ const RemoveColumnButton = ( { index } ) => {
 			<RemoveSvg />
 		</button>
 	);
-};
+}
 
-export default React.memo( RemoveColumnButton );
+RemoveColumnButton.propTypes = {
+	index: PropTypes.number.isRequired,
+};

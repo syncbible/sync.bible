@@ -1,11 +1,9 @@
 // External
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import classnames from 'classnames';
-import { Waypoint } from 'react-waypoint';
-import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal
-import { setScrollChapter } from '../../actions';
 import CopyToClipboard from '../copy-to-clipboard';
 import Verse from './verse';
 import VerseNumber from './verse-number';
@@ -27,14 +25,15 @@ const getClassName = ( book, version ) => {
 	return styles.verse;
 };
 
-const VerseWrapper = ( {
+/** Component for wrapping verses with numbers and copy functionality */
+export default function VerseWrapper( {
 	book,
 	version,
 	chapter,
 	verse,
 	isCurrentRef,
 	lang,
-} ) => {
+} ) {
 	const verseWrapperRef = useRef( null );
 	const reference = { book, chapter: chapter - 1, verse: verse - 1 };
 
@@ -69,6 +68,13 @@ const VerseWrapper = ( {
 			</div>
 		</div>
 	);
-};
+}
 
-export default React.memo( VerseWrapper );
+VerseWrapper.propTypes = {
+	book: PropTypes.string.isRequired,
+	version: PropTypes.string.isRequired,
+	chapter: PropTypes.number.isRequired,
+	verse: PropTypes.number.isRequired,
+	isCurrentRef: PropTypes.bool,
+	lang: PropTypes.string,
+};

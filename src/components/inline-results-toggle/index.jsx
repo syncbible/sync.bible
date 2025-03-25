@@ -1,5 +1,4 @@
 // External dependencies
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
@@ -8,7 +7,8 @@ import UnfoldLess from '../svg/unfold-less';
 import UnfoldMore from '../svg/unfold-more';
 import styles from './styles.module.scss';
 
-const InlineResultsToggle = () => {
+/** Toggle component for expanding/collapsing inline search results */
+export default function InlineResultsToggle() {
 	const dispatch = useDispatch();
 	const expandedSearchResults = useSelector(
 		( state ) => state.settings.expandedSearchResults
@@ -38,6 +38,4 @@ const InlineResultsToggle = () => {
 			<UnfoldMore />
 		</a>
 	);
-};
-
-export default React.memo( InlineResultsToggle );
+}

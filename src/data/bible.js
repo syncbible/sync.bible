@@ -6252,6 +6252,23 @@ bible.Data.bookNamesByLanguage.nyu = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.seh = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.tke = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.wmw = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.anv = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.bcw = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.bfd = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.bmo = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.ken = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.kkj = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mcp = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mcu = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.meq = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mfh = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mfi = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mif = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mqb = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.muy = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.nhu = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.xed = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.yam = bible.Data.bookNamesByLanguage.en;
 
 bible.Data.rtlLanguages = [
 	'he',
@@ -6399,6 +6416,32 @@ bible.Data.supportedVersions = {
 	BulVeren: { name: 'Veren’s Contemporary Bible', language: 'bg' },
 	BretonNT: { name: 'Breton New Testament (Koad 21)', language: 'br' },
 	bss2011eb: { name: 'Bible in Akoose', language: 'bss' },
+	anv2010eb: { name: 'Ŋwɛ menomenyɛɛ́ mekɛ́', language: 'anv' },
+	bcw2005eb: {
+		name: 'Zliya Yǝwǝn kwǝma wǝzǝ naa dzǝkǝn Yesǝw Kǝristǝw',
+		language: 'bcw',
+	},
+	bfd1999eb: {
+		name: 'Bafut: Ǹtoò Kristo yî Ǹsɨgɨ̀nǝ̀: mɨ̀kàà yî mfiì New Testament',
+		language: 'bfd',
+	},
+	bmo2019eb: { name: 'Ŋwaʼaŋlɨ Kɨǹ a Fhi', language: 'bmo' },
+	ken2010eb: { name: 'Ɛkáti Nku Nkɔ', language: 'ken' },
+	kkj1999eb: { name: 'Mɛlɛpi mɛ Njambiyɛ Jɔnja Mbon', language: 'kkj' },
+	mcp2014eb: { name: 'Kálaad Zɛmbî : Sɔ ̧ á Gúgwáan', language: 'mcp' },
+	mcu2001eb: { name: 'Mvù Ŋgɔ̀ŋ Feê', language: 'mcu' },
+	meq2012eb: { name: 'Dzam Weɗeye', language: 'meq' },
+	mfh2019eb: {
+		name: 'Wakità Zəzagəla Wakità Aŋa Makəs Vok Slawda Mawga',
+		language: 'mfh',
+	},
+	mfi1999eb: { name: 'Wakita á Dadaamiya', language: 'mfi' },
+	mif2007eb: { name: 'Mejəwey-mey Mawiya', language: 'mif' },
+	mqb2010eb: { name: "Aɓan 'am wiya awan", language: 'mqb' },
+	muy2013eb: { name: 'Ma Mʉweni Sulumani ge Melefit', language: 'muy' },
+	nhu2011eb: { name: "Ŋwa' Nyo' Moŋkan mo Monfɛm", language: 'nhu' },
+	xed2013eb: { name: 'Deftera Lfiɗa Dzratawi', language: 'xed' },
+	yam2011eb: { name: 'Ŋwàk Nwì Ma Rʉ̀k Nə̀ Fi', language: 'yam' },
 	CebPinadayag: { name: 'Cebuano Pinadayag', language: 'ceb' },
 	Che1860: {
 		name: 'Cherokee New Testament (1860) with Sequoyah transliterated forms',
@@ -6870,7 +6913,24 @@ bible.Data.interfaceLanguages = {
 	bea: 'Beaver (Dane-zaa)',
 	bg: 'български (Bulgarian)',
 	br: 'Brezhoneg (Breton)',
-	bss: 'Akoose',
+	bss: 'Cameroon - Akoose',
+	anv: 'Cameroon - Denya',
+	bcw: 'Cameroon - Bana',
+	bfd: 'Cameroon - Bafut',
+	bmo: 'Cameroon - Bambalang',
+	ken: 'Cameroon - Kenyang',
+	kkj: 'Cameroon - Kako',
+	mcp: 'Cameroon - Makaa',
+	mcu: 'Cameroon - Mambila',
+	meq: 'Cameroon - Merey',
+	mfh: 'Cameroon - Matal',
+	mfi: 'Cameroon - Wandala',
+	mif: 'Cameroon - Mofu-Gudur',
+	mqb: 'Cameroon - Mbuko',
+	muy: 'Cameroon - Muyang',
+	nhu: 'Cameroon - Noone',
+	xed: 'Cameroon - Hdi',
+	yam: 'Cameroon - Yamba',
 	ceb: 'Cebuano',
 	chr: 'Cherokee',
 	ckb: 'کوردیی سۆرانی (Kurdi Sorani)',

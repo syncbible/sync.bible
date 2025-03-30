@@ -6269,6 +6269,8 @@ bible.Data.bookNamesByLanguage.muy = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.nhu = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.xed = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.yam = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.arq = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.thv = bible.Data.bookNamesByLanguage.en;
 
 bible.Data.rtlLanguages = [
 	'he',
@@ -6507,6 +6509,16 @@ bible.Data.supportedVersions = {
 		language: 'fa',
 		tongue: 'fa',
 	},
+	arq2018eb: {
+		name: 'العهد الجديد باللهجة الجزائرية',
+		language: 'arq',
+		tongue: 'dz',
+	},
+	thv2020eb: {
+		name: '	Awal n Messineɣ s Tamahaq',
+		language: 'thv',
+		tongue: 'dz',
+	},
 	Afr1953: {
 		name: '1933/1953 Afrikaans Bybel',
 		language: 'af',
@@ -6522,7 +6534,7 @@ bible.Data.supportedVersions = {
 	Azeri: {
 		name: 'مقدَس کتاب آذربايجان ديلی',
 		language: 'azb',
-		tongue: 'azb',
+		tongue: 'az',
 	},
 	BeaMRK: {
 		name: 'The Gospel of Mark in Beaver (Danezaa)',
@@ -7458,9 +7470,9 @@ bible.Data.tongues = {
 	grc: 'Ελληνικά (Ancient Greek)',
 	hbo: 'עברית (Hebrew)',
 	af: 'Afrikaans',
+	dz: 'الجزائر (Algeria)',
 	ar: 'عربى (Arabic)',
-	az: 'آذری شمالی (Northern Azeri)',
-	azb: 'آذری (Azeri)',
+	az: 'آذری (Azeri)',
 	be: 'беларуская (Belarusian)',
 	bg: 'български (Bulgarian)',
 	br: 'Brezhoneg (Breton)',
@@ -7564,6 +7576,8 @@ bible.Data.interfaceLanguages = {
 	grc: 'Ελληνικά (Ancient Greek)',
 	hbo: 'עברית (Hebrew)',
 	af: 'Afrikaans',
+	arq: 'الجزائر (Algeria)',
+	thv: 'Tamahaq, Tahaggart',
 	ar: 'عربى (Arabic)',
 	az: 'آذری شمالی (Northern Azeri)',
 	azb: 'آذری (Azeri)',

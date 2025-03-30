@@ -38,14 +38,15 @@ export default function VersionSelect( {
 			<option disabled hidden value="default">
 				Select a version to get started
 			</option>
-			{ Object.keys( bible.Data.interfaceLanguages ).map( ( key ) => {
+			{ Object.keys( bible.Data.tongues ).map( ( key ) => {
 				const versionsForLanguage = Object.keys(
 					bible.Data.supportedVersions
-				).filter(
-					( versionForLanguage ) =>
+				).filter( ( versionForLanguage ) => {
+					return (
 						bible.Data.supportedVersions[ versionForLanguage ]
-							.language === key
-				);
+							.tongue === key
+					);
+				} );
 				const versionOption = versionsForLanguage.map( ( version ) => {
 					const versionData = bible.Data.supportedVersions[ version ];
 					return (
@@ -63,7 +64,7 @@ export default function VersionSelect( {
 				return (
 					<optgroup
 						key={ 'optgroup' + key }
-						label={ bible.Data.interfaceLanguages[ key ] }
+						label={ bible.Data.tongues[ key ] }
 					>
 						{ versionOption }
 					</optgroup>

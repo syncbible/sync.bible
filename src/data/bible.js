@@ -6271,6 +6271,65 @@ bible.Data.bookNamesByLanguage.xed = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.yam = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.arq = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.thv = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.aer = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.alh = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.aly = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.amx = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.aoi = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.are = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.awk = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.bvr = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.dhg = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.dhgdhuwa = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.dif = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.dji = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.djj = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.djr = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.dwuliv = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.dwy = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.engPEV = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.engbarkley = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.engnna = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.gia = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.gnn = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.gue = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.guf = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.gup = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.gupk = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.gupmay = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.gvn = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.jao = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.kjn = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.kky = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.kld = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.kux = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.lrg = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mph = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mpj = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mwf = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mwp = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.nay = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.nna = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.ntj = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.nuy = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.nys = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.piu = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.pjt = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.rmb = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.rop = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.tcs = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.thd = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.tiw = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.tiwm = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.ulk = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.ulk = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.wbp = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.wim = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.wlg = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.wmt = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.wrk = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.wro = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.yij = bible.Data.bookNamesByLanguage.en;
 
 bible.Data.rtlLanguages = [
 	'he',
@@ -6530,6 +6589,252 @@ bible.Data.supportedVersions = {
 		tongue: 'ar',
 	},
 	AraSVD: { name: 'Arabic Bible', language: 'ar', tongue: 'ar' },
+	aer2014eb: {
+		name: 'Angkentye Mwerre',
+		language: 'aer',
+		tongue: 'australia',
+	},
+	aly2009eb: { name: 'Alyawarr Bible', language: 'aly', tongue: 'australia' },
+	amx2015eb: {
+		name: 'Anmatyerr Bible',
+		language: 'amx',
+		tongue: 'australia',
+	},
+	aoi2019eb: {
+		name: 'Anindilyakwa Bible',
+		language: 'aoi',
+		tongue: 'australia',
+	},
+	are1997eb: {
+		name: 'Altjirraka angkatja - Arrarnturna kngartiwukala',
+		language: 'are',
+		tongue: 'australia',
+	},
+	awk1892eb: {
+		name: 'EUANGELION UNNI TA JESU-ÚBA CHRIST-KO-BA UPATOARA LUKA-UMBA',
+		language: 'awk',
+		tongue: 'australia',
+	},
+	bvr2008eb: {
+		name: 'Nyanyapa Arrku Gun-nika Gun-molamola Janguny: Minypa Jesus Christ Guna-ganyja Arrburrwa Gun-geka Rum',
+		language: 'bvr',
+		tongue: 'australia',
+	},
+	dhg2019eb: {
+		name: 'Djangu Selections',
+		language: 'dhg',
+		tongue: 'australia',
+	},
+	dhgdhuwa2019eb: {
+		name: "Dhuwa Dhaŋu'mi Mäk+",
+		language: 'dhgduwadha',
+		tongue: 'australia',
+	},
+	dif1897eb: {
+		name: 'TESTAMENTA MARRA',
+		language: 'dif',
+		tongue: 'australia',
+	},
+	dji1985eb: { name: 'Djinang Bible', language: 'dji', tongue: 'australia' },
+	djj2023eb: {
+		name: 'Ndjébbana Bible Portions',
+		language: 'djj',
+		tongue: 'australia',
+	},
+	djr2008eb: {
+		name: 'God-Waŋarrwu Walŋamirr Dhäruk',
+		language: 'djr',
+		tongue: 'australia',
+	},
+	dwuliv2021eb: {
+		name: 'Liyagawumirr Luke',
+		language: 'dwuliv',
+		tongue: 'australia',
+	},
+	dwy2019eb: {
+		name: 'Djesuwalaŋuwuy latjuꞌ dhäwuꞌ Markkuŋu wukirriwuy',
+		language: 'dwy',
+		tongue: 'australia',
+	},
+	engPEV2019eb: {
+		name: 'Australian Aboriginal - Plain English Version',
+		language: 'engPEV',
+		tongue: 'australia',
+	},
+	engbarkley2024eb: {
+		name: 'Barkley Bible Portions',
+		language: 'en',
+		tongue: 'en',
+	},
+	engnna2010eb: {
+		name: 'Nyangumarta English Bible',
+		language: 'engnna',
+		tongue: 'australia',
+	},
+	gia1978eb: { name: 'Jawunany', language: 'gia', tongue: 'australia' },
+	gnn2017eb: { name: 'Gumatj Bible', language: 'gnn', tongue: 'australia' },
+	gue1984eb: {
+		name: 'Gurindji Scripture Portions',
+		language: 'gue',
+		tongue: 'australia',
+	},
+	guf2023eb: {
+		name: 'Gupapuyngu Bible Portions',
+		language: 'guf',
+		tongue: 'australia',
+	},
+	gup2018eb: {
+		name: 'God Nuye Kunwok',
+		language: 'gup',
+		tongue: 'australia',
+	},
+	gupk2021eb: {
+		name: 'Kuninjku Gospel Selections',
+		language: 'gupk',
+		tongue: 'australia',
+	},
+	gupmay2022eb: {
+		name: 'Mayali Selections',
+		language: 'gupmay',
+		tongue: 'australia',
+	},
+	gvn1984eb: { name: 'Godumu Kuku', language: 'gvn', tongue: 'australia' },
+	jao1980eb: {
+		name: 'Yanyuwa - Luke, Mark, Acts, Genesis, Ruth, and Romans',
+		language: 'jao',
+		tongue: 'australia',
+	},
+	kjn1967eb: {
+		name: 'Kunjen Mark Portions',
+		language: 'kjn',
+		tongue: 'australia',
+	},
+	kky1888eb: {
+		name: 'Gugu Yimidhirr Matthew Sample',
+		language: 'kky',
+		tongue: 'australia',
+	},
+	kld1839eb: {
+		name: 'GURRE KAMILAROI',
+		language: 'kld',
+		tongue: 'australia',
+	},
+	kux2018eb: {
+		name: 'Kukatja Scriptures',
+		language: 'kux',
+		tongue: 'australia',
+	},
+	lrg2023eb: {
+		name: 'Larrakia Christmas Story',
+		language: 'lrg',
+		tongue: 'australia',
+	},
+	mph2015eb: {
+		name: 'Mawng Mark and other Scripture portions',
+		language: 'mph',
+		tongue: 'australia',
+	},
+	mpj1999eb: {
+		name: 'Mamamili Wangka',
+		language: 'mpj',
+		tongue: 'australia',
+	},
+	mwf2018eb: {
+		name: 'Murrinhpatha Bible',
+		language: 'mwf',
+		tongue: 'australia',
+	},
+	mwp2014eb: {
+		name: 'Minar Poelayzimayl',
+		language: 'mwp',
+		tongue: 'australia',
+	},
+	nay1864eb: {
+		name: 'Tungarar Jehobald YARILDEWALLIN',
+		language: 'nay',
+		tongue: 'australia',
+	},
+	nna2010eb: {
+		name: 'Nyangumarta Bible',
+		language: 'nna',
+		tongue: 'australia',
+	},
+	ntj2007eb: {
+		name: 'Mama Kuurrku Wangka',
+		language: 'ntj',
+		tongue: 'australia',
+	},
+	nuy2010eb: {
+		name: 'Ana-Maṉngulg Ana-Wubiba -- Anu-gadhuwa Ana-lhaawu',
+		language: 'nuy',
+		tongue: 'australia',
+	},
+	nys2018eb: { name: 'Nyoongar Bible', language: 'nys', tongue: 'australia' },
+	piu2006eb: { name: 'Luritja Bible', language: 'piu', tongue: 'australia' },
+	pjt2019eb: { name: 'Tjukurpa Palya', language: 'pjt', tongue: 'australia' },
+	rmb2021eb: {
+		name: 'Rembarrnga Christmas Story',
+		language: 'rmb',
+		tongue: 'australia',
+	},
+	rop2018eb: { name: 'Holi Baibul', language: 'rop', tongue: 'australia' },
+	tcs2016eb: {
+		name: 'Baibol Tores Streit Yumplatok',
+		language: 'tcs',
+		tongue: 'australia',
+	},
+	thd1975eb: {
+		name: 'Kuuk Thayorre Bible Portions',
+		language: 'thd',
+		tongue: 'australia',
+	},
+	tiw2000eb: { name: 'Tiwi Bible', language: 'tiw', tongue: 'australia' },
+	tiwmeb: { name: 'Tiwi Modern', language: 'tiwm', tongue: 'australia' },
+	ulk1902eb: {
+		name: 'Meriam Mir Bible - 1902',
+		language: 'ulk',
+		tongue: 'australia',
+	},
+	ulk1989eb: {
+		name: 'Meriam Mir Bible - 1989',
+		language: 'ulk',
+		tongue: 'australia',
+	},
+	wbp2014eb: {
+		name: 'Warlpiri Short Bible',
+		language: 'wbp',
+		tongue: 'australia',
+	},
+	wim1984eb: {
+		name: 'Wik Inangan Kan-Kanam God.antama',
+		language: 'wim',
+		tongue: 'australia',
+	},
+	wlg2021eb: {
+		name: 'Kunbarlang Christmas Story and Part of Acts 1',
+		language: 'wlg',
+		tongue: 'australia',
+	},
+	wmt1985eb: {
+		name: 'Wangki Wulyu Jirrkirlikanujuwal',
+		language: 'wmt',
+		tongue: 'australia',
+	},
+	wrk1983eb: {
+		name: 'Garrwa Shorter New Testament',
+		language: 'wrk',
+		tongue: 'australia',
+	},
+	wro1943eb: {
+		name: 'Worrorra Mark & Luke',
+		language: 'wro',
+		tongue: 'australia',
+	},
+	yij1983eb: {
+		name: 'NYIRTINGU MANYKA WANTHARNA NGURRAY',
+		language: 'yij',
+		tongue: 'australia',
+	},
 	NorthernAzeri: { name: 'Northern Azeri', language: 'az', tongue: 'az' },
 	Azeri: {
 		name: 'مقدَس کتاب آذربايجان ديلی',
@@ -7472,6 +7777,7 @@ bible.Data.tongues = {
 	af: 'Afrikaans',
 	dz: 'الجزائر (Algeria)',
 	ar: 'عربى (Arabic)',
+	australia: 'Australia',
 	az: 'آذری (Azeri)',
 	be: 'беларуская (Belarusian)',
 	bg: 'български (Bulgarian)',

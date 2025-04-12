@@ -6347,6 +6347,32 @@ bible.Data.bookNamesByLanguage.syl = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.syl = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.tbzsim = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.udi = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.cao = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.cap = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.cav = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.cax = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.ese = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.gnw = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.gui = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.gyr = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.ign = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.quh = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.qul = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.srq = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.tna = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.bib = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.box = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.cme = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.dyu = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.gux = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.guxg = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.nhr = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.nnw = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.tpu = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.tsn = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.wib = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.xrb = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.xsm = bible.Data.bookNamesByLanguage.en;
 
 bible.Data.rtlLanguages = [
 	'he',
@@ -6946,15 +6972,140 @@ bible.Data.supportedVersions = {
 		language: 'bg',
 		tongue: 'bg',
 	},
+	cao2010eb: {
+		name: 'Chácobo - Dios Chani',
+		language: 'cao',
+		tongue: 'bolivia',
+	},
+	cap2009eb: {
+		name: 'Chipaya - Ew Testamento: Chipay Tawkquiztan',
+		language: 'cap',
+		tongue: 'bolivia',
+	},
+	cav2012eb: {
+		name: 'Cavineña - Yusuja Quisarati',
+		language: 'cav',
+		tongue: 'bolivia',
+	},
+	cax2012eb: {
+		name: 'Chiquitano - Manitanati Tuparrü',
+		language: 'cax',
+		tongue: 'bolivia',
+	},
+	ese2012eb: {
+		name: 'Ese Ejja - Eyacuiñajjija Esohui',
+		language: 'ese',
+		tongue: 'bolivia',
+	},
+	gnw2012eb: {
+		name: 'Guaraní, Eastern Bolivian - Nuevo Testamento Guaraní Pe',
+		language: 'gnw',
+		tongue: 'bolivia',
+	},
+	gui2012eb: {
+		name: 'Guaraní, Western Bolivian - Nuevo Testamento Guaraní Pe',
+		language: 'gui',
+		tongue: 'bolivia',
+	},
+	gyr2011eb: {
+		name: 'Guarayu - Tũpa Ñehengagüer',
+		language: 'gyr',
+		tongue: 'bolivia',
+	},
+	ign2012eb: {
+		name: 'Ignaciano - Eta Táurinaquene máechajiriruvahi ema Viya eta viyehe, ticaijare puito Eta Nuevo Testamento',
+		language: 'ign',
+		tongue: 'bolivia',
+	},
+	quhNT2011eb: {
+		name: 'Quechua, North Bolivian - Mosoj Testamento',
+		language: 'quh',
+		tongue: 'bolivia',
+	},
+	qul1985eb: {
+		name: 'Quechua, South Bolivian - Dios Parlapawanchej',
+		language: 'qul',
+		tongue: 'bolivia',
+	},
+	srqNT1977eb: {
+		name: 'Sirionó - Mbia Cheẽ',
+		language: 'srq',
+		tongue: 'bolivia',
+	},
+	tna2009eb: {
+		name: 'Tacana - Diusu sa mimi',
+		language: 'tna',
+		tongue: 'bolivia',
+	},
+	nhr2012eb: {
+		name: "Naro - Ka̱bas Qae-xg'ae sa",
+		language: 'nhr',
+		tongue: 'botswana',
+	},
+	tsn1993eb: {
+		name: 'Setswana - Biblica® Open Lefoko: La Botshelo Kgolagano e Ntsha',
+		language: 'tsn',
+		tongue: 'botswana',
+	},
 	BretonNT: {
 		name: 'Breton New Testament (Koad 21)',
 		language: 'br',
 		tongue: 'br',
 	},
-	BeaMRK: {
-		name: 'The Gospel of Mark in Beaver (Danezaa)',
-		language: 'bea',
-		tongue: 'canada',
+	bib2001eb: {
+		name: 'Bisa - Wosoci Gʊaasɩbabaa Daa',
+		language: 'bib',
+		tongue: 'burkinafaso',
+	},
+	box2012eb: {
+		name: 'Buamu -  Dónbeenì páaníi fĩnle vũahṹ',
+		language: 'box',
+		tongue: 'burkinafaso',
+	},
+	cme2011eb: {
+		name: 'Cerma - Diiloŋ-nelma Tobisĩfɛlɛnni',
+		language: 'cme',
+		tongue: 'burkinafaso',
+	},
+	dyu2013eb: {
+		name: 'Julakan - Biblu Ala ta Kuma',
+		language: 'dyu',
+		tongue: 'burkinafaso',
+	},
+	gux2020eb: {
+		name: 'Gourmanchéma - Bible Gourma',
+		language: 'gux',
+		tongue: 'burkinafaso',
+	},
+	guxg2020eb: {
+		name: 'Gourmanchéma - Bible Gourmantche',
+		language: 'gux',
+		tongue: 'burkinafaso',
+	},
+	nnw1999eb: {
+		name: 'Nuni, Southern - Yɩɩ sʋywáŋʋ́ sagɩ',
+		language: 'nnw',
+		tongue: 'burkinafaso',
+	},
+	wib2013eb: {
+		name: 'Toussian, Southern - wĩn nɩ̀vɩ̀nɩ̀ tirlɛ',
+		language: 'wib',
+		tongue: 'burkinafaso',
+	},
+	xrb1993eb: {
+		name: 'Karaboro, Eastern: YÃHÃ NAAMBIYÃRFÃN SABA',
+		language: 'xrb',
+		tongue: 'burkinafaso',
+	},
+	xsm1997eb: {
+		name: 'Kasem - 	Wɛ Tɔnɔ dɩ kasɩm',
+		language: 'xsm',
+		tongue: 'burkinafaso',
+	},
+	tpu2020eb: {
+		name: 'Tampuan - គម្ពីរ​ភាសា​ទំពួន',
+		language: 'tpu',
+		tongue: 'cambodia',
 	},
 	bss2011eb: { name: 'Bible in Akoose', language: 'bss', tongue: 'cm' },
 	anv2010eb: { name: 'Ŋwɛ menomenyɛɛ́ mekɛ́', language: 'anv', tongue: 'cm' },
@@ -7009,6 +7160,11 @@ bible.Data.supportedVersions = {
 		name: 'Ŋwàk Nwì Ma Rʉ̀k Nə̀ Fi',
 		language: 'yam',
 		tongue: 'cm',
+	},
+	BeaMRK: {
+		name: 'The Gospel of Mark in Beaver (Danezaa)',
+		language: 'bea',
+		tongue: 'canada',
 	},
 	CebPinadayag: { name: 'Cebuano Pinadayag', language: 'ceb', tongue: 'ceb' },
 	Che1860: {
@@ -7524,7 +7680,11 @@ bible.Data.supportedVersions = {
 	},
 	Kekchi: { name: "K'ekchi' Bible", language: 'kek', tongue: 'kek' },
 	Kaz: { name: 'Киелі кітап', language: 'kk', tongue: 'kk' },
-	KhmerNT: { name: 'Khmer Christian Bible', language: 'km', tongue: 'km' },
+	KhmerNT: {
+		name: 'Khmer Christian Bible',
+		language: 'km',
+		tongue: 'cambodia',
+	},
 	KorHKJV: {
 		name: 'Hangul King James Version',
 		language: 'ko',
@@ -7879,12 +8039,17 @@ bible.Data.tongues = {
 	belize: 'Belize',
 	benin: 'Benin',
 	bg: 'български (Bulgarian)',
+	bolivia: 'Bolivia',
+	botswana: 'Botswana',
+	burkinafaso: 'Burkina Faso',
 	br: 'Brezhoneg (Breton)',
+	brazil: 'Brazil',
+	cambodia: 'Cambodia',
 	canada: 'Canada',
-	cm: 'Cameroon',
 	ceb: 'Cebuano',
 	chr: 'Cherokee',
 	ckb: 'کوردیی سۆرانی (Kurdi Sorani)',
+	cm: 'Cameroon',
 	cop: 'ϯⲙⲉⲧⲣⲉⲙⲛ̀ⲭⲏⲙⲓ (Coptic)',
 	cs: 'Čeština (Czech)',
 	cu: 'Church Slavonic',

@@ -6330,6 +6330,23 @@ bible.Data.bookNamesByLanguage.wmt = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.wrk = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.wro = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.yij = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.bba = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.bel = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.ben = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.ben = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.ben = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.bzj = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.dop = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.fue = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.fuhbkf = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mkl = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mop = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.soy = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.syl = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.syl = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.syl = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.tbzsim = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.udi = bible.Data.bookNamesByLanguage.en;
 
 bible.Data.rtlLanguages = [
 	'he',
@@ -6841,12 +6858,84 @@ bible.Data.supportedVersions = {
 		language: 'azb',
 		tongue: 'az',
 	},
-	BeaMRK: {
-		name: 'The Gospel of Mark in Beaver (Danezaa)',
-		language: 'bea',
-		tongue: 'canada',
+	udi2020eb: { name: 'Udi Bible', language: 'udi', tongue: 'azerbaijan' },
+	ben2006eb: { name: 'পবিত্র বাইবেল', language: 'ben', tongue: 'bangladesh' },
+	benirv2019eb: {
+		name: 'ইন্ডিয়ান রিভাইজড ভার্সন (IRV) - বেঙ্গলী',
+		language: 'ben',
+		tongue: 'bangladesh',
+	},
+	benobcv2019eb: {
+		name: 'Biblica® মুক্তভাবে বাংলা সমকালীন সংস্করণের',
+		language: 'ben',
+		tongue: 'bangladesh',
+	},
+	syl2014eb: {
+		name: 'Sylheti New Testament (Bengali)',
+		language: 'syl',
+		tongue: 'bangladesh',
+	},
+	syll2014eb: {
+		name: 'Sylheti New Testament (Latin)',
+		language: 'syl',
+		tongue: 'bangladesh',
+	},
+	syls2014eb: {
+		name: 'Sylheti New Testament (Sylo)',
+		language: 'syl',
+		tongue: 'bangladesh',
 	},
 	Bela: { name: 'Belarusian Bible', language: 'be', tongue: 'be' },
+	beln2021eb: {
+		name: 'Новы Запавет і Кнігі Старога Запавету',
+		language: 'bel',
+		tongue: 'be',
+	},
+	mop2012eb: {
+		name: "Le'ec Ada' U T'an A Dios A Tumulbene - Mopán Maya NT",
+		language: 'mop',
+		tongue: 'belize',
+	},
+	bzj2012eb: {
+		name: 'Di Nyoo Testiment eena Bileez Kriol',
+		language: 'bzj',
+		tongue: 'belize',
+	},
+	dop1999eb: {
+		name: 'PIIPILI ƖSƆ TƆM TAKƎLAƔA - Lokpa Bible',
+		language: 'dop',
+		tongue: 'benin',
+	},
+	fue2011eb: {
+		name: 'Alkawal Kesal - Fulfulde Borgu NT',
+		language: 'fue',
+		tongue: 'benin',
+	},
+	fuhBKF2012eb: {
+		name: 'Fulfulfe Burkina, Dewtere Laamɗo Amaana Keso',
+		language: 'fuhbkf',
+		tongue: 'benin',
+	},
+	mkl2006eb: {
+		name: 'Akabuu Titɔ̃i Idei Ilaaɔ - Mokole NT',
+		language: 'mkl',
+		tongue: 'benin',
+	},
+	bba2013eb: {
+		name: 'Bibeli Gusunɔn Gari',
+		language: 'bba',
+		tongue: 'benin',
+	},
+	soy2010eb: {
+		name: 'Nkomine Fal Ritɛlɛ́ - Sola NT',
+		language: 'soy',
+		tongue: 'benin',
+	},
+	tbz2001eb: {
+		name: 'Bibiri Kuyie Nnɑ́ɑǹtì Pɑ́tíri',
+		language: 'tbzsim',
+		tongue: 'benin',
+	},
 	BulCarigradNT: {
 		name: 'Bulgarian New Testament from 1914, known as Tsarigrad Edition',
 		language: 'bg',
@@ -6861,6 +6950,11 @@ bible.Data.supportedVersions = {
 		name: 'Breton New Testament (Koad 21)',
 		language: 'br',
 		tongue: 'br',
+	},
+	BeaMRK: {
+		name: 'The Gospel of Mark in Beaver (Danezaa)',
+		language: 'bea',
+		tongue: 'canada',
 	},
 	bss2011eb: { name: 'Bible in Akoose', language: 'bss', tongue: 'cm' },
 	anv2010eb: { name: 'Ŋwɛ menomenyɛɛ́ mekɛ́', language: 'anv', tongue: 'cm' },
@@ -7779,7 +7873,11 @@ bible.Data.tongues = {
 	ar: 'عربى (Arabic)',
 	australia: 'Australia',
 	az: 'آذری (Azeri)',
+	azerbaijan: 'Azerbaijan',
+	bangladesh: 'বাংলা (Bangladesh)',
 	be: 'беларуская (Belarusian)',
+	belize: 'Belize',
+	benin: 'Benin',
 	bg: 'български (Bulgarian)',
 	br: 'Brezhoneg (Breton)',
 	canada: 'Canada',

@@ -1,6 +1,8 @@
 ## Todo
 
 -   more translations: https://ebible.org/download.php
+    -   Tsakhur didn't work
+    -       Новы Запавет і Кнігі Старога Запавету - didn't work
 -   Search in chapter
 -   Filter search results by strongs number eg life
 -   fix SweFolk1998 and VietNVB and GerOffBist

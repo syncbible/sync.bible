@@ -17,7 +17,7 @@ export default function Navigation( { index, version } ) {
 	const handleChangeVersion = useCallback(
 		( event ) => {
 			dispatch( changeVersion( event.target.name, event.target.value ) );
-			event.target.blur();
+			//event.target.blur();
 		},
 		[ dispatch ]
 	);

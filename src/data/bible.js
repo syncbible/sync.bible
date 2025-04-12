@@ -6373,6 +6373,44 @@ bible.Data.bookNamesByLanguage.tsn = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.wib = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.xrb = bible.Data.bookNamesByLanguage.en;
 bible.Data.bookNamesByLanguage.xsm = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.apn = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.apu = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.apy = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.bkq = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.bor = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.cul = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.des = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.gub = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.gun = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.hix = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.jaa = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.kbc = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.kgk = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.kgp = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.kpj = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.kyz = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mav = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mbc = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mbj = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.mbl = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.myu = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.nab = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.pab = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.pad = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.pah = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.plu = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.pt = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.pt = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.pt = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.pt = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.por = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.ram = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.rkb = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.ter = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.tuo = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.txu = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.urb = bible.Data.bookNamesByLanguage.en;
+bible.Data.bookNamesByLanguage.xav = bible.Data.bookNamesByLanguage.en;
 
 bible.Data.rtlLanguages = [
 	'he',
@@ -7051,6 +7089,196 @@ bible.Data.supportedVersions = {
 		name: 'Breton New Testament (Koad 21)',
 		language: 'br',
 		tongue: 'br',
+	},
+	apn1999eb: {
+		name: 'Apalaí - Ritonõpo Omiry: A Bíblia Sagrada na língua Aparai do Brasil',
+		language: 'apn',
+		tongue: 'brazil',
+	},
+	apu2004eb: {
+		name: 'Apinayé - Tĩrtũm kapẽr ã kagà nyw',
+		language: 'apu',
+		tongue: 'brazil',
+	},
+	apy2017eb: {
+		name: 'Apurinã - Teoso sãkire amaneri',
+		language: 'apy',
+		tongue: 'brazil',
+	},
+	bkq2011eb: {
+		name: 'Bakairí - Deus Itaumbyry',
+		language: 'bkq',
+		tongue: 'brazil',
+	},
+	bor2020eb: {
+		name: 'Borôro - Pao Kurireu Bataru Kurireu; O Novo Testamento',
+		language: 'bor',
+		tongue: 'brazil',
+	},
+	cul2014eb: {
+		name: 'Canela - PAHPÃM JARKWA CUPAHTI JÕ KÀHHÔC',
+		language: 'cul',
+		tongue: 'brazil',
+	},
+	des2011eb: {
+		name: 'Desano - Goãmʉ Yare Wereripʉ',
+		language: 'des',
+		tongue: 'brazil',
+	},
+	gub2007eb: {
+		name: "Guajajára - Tupàn ze'eg",
+		language: 'gub',
+		tongue: 'brazil',
+	},
+	gun2004eb: {
+		name: "Mbyá Guaraní -Nhanderuete ayvu iky'a e'ỹ va'e",
+		language: 'gun',
+		tongue: 'brazil',
+	},
+	hix2012eb: {
+		name: 'Hixkaryána - Khoryenkom Karyehtanà',
+		language: 'hix',
+		tongue: 'brazil',
+	},
+	jaa2020eb: {
+		name: 'Jamamadí - Teoso Ka Yama Hani',
+		language: 'jaa',
+		tongue: 'brazil',
+	},
+	kbc2012eb: {
+		name: "Kaapor - Tupã Je'ẽha",
+		language: 'kbc',
+		tongue: 'brazil',
+	},
+	kgk2006eb: {
+		name: 'Kadiwéu - Gela Liwai Lotaɡ̶anaɡ̶axi Aneotedoɡ̶oji',
+		language: 'kgk',
+		tongue: 'brazil',
+	},
+	kgpNT2011eb: {
+		name: 'Kaingang - Topẽ vĩ rá',
+		language: 'kgp',
+		tongue: 'brazil',
+	},
+	kpj2011eb: {
+		name: "Kaiwá - Nhandejáry Nhe'ẽ",
+		language: 'kpj',
+		tongue: 'brazil',
+	},
+	kyz2012eb: {
+		name: 'Karajá - Deuxu Rybe Tyyriti',
+		language: 'kyz',
+		tongue: 'brazil',
+	},
+	mav2011eb: {
+		name: "Kayabí - Janeruwarete 'Ga Je'eg",
+		language: 'mav',
+		tongue: 'brazil',
+	},
+	mbc2013eb: {
+		name: 'Kayapó - Metĩndjwỳnh Kute Memã Kabẽn Ny Jarẽnh',
+		language: 'mbc',
+		tongue: 'brazil',
+	},
+	mbj2011eb: {
+		name: 'Culina - El Nuevo Testamento en el idioma Culina (mádija) del Perú',
+		language: 'mbj',
+		tongue: 'brazil',
+	},
+	mbl2011eb: {
+		name: "Macushi - Amenan pe paapaya uyetato'kon",
+		language: 'mbl',
+		tongue: 'brazil',
+	},
+	myu2010eb: {
+		name: 'Maxakalí - Topa Yõg Tappet',
+		language: 'myu',
+		tongue: 'brazil',
+	},
+	nab2012eb: {
+		name: 'Mundurukú - Deus ekawẽntup Kawẽn iisuat ekawẽn',
+		language: 'nab',
+		tongue: 'brazil',
+	},
+	pab2012eb: {
+		name: 'Nadëb - Pop Hagä Do Panyyg Hanäm Do Hahỹỹh',
+		language: 'pab',
+		tongue: 'brazil',
+	},
+	pad2010eb: {
+		name: 'Nambikuára Southern - Txa²wã¹sũ̱³na² Wãn³txa²',
+		language: 'pad',
+		tongue: 'brazil',
+	},
+	pah1996eb: {
+		name: 'Palikúr - Uhokri Gannasan',
+		language: 'pah',
+		tongue: 'brazil',
+	},
+	plu1982eb: {
+		name: 'Parecís - Waitare Wenati Aho',
+		language: 'plu',
+		tongue: 'brazil',
+	},
+	porWBTC1999eb: {
+		name: 'Paumarí - Deus Athi Kapapirani Hida',
+		language: 'pt',
+		tongue: 'brazil',
+	},
+	porblt2022eb: {
+		name: 'Português - Biblia Livre Para Todos',
+		language: 'pt',
+		tongue: 'brazil',
+	},
+	porbr2018eb: {
+		name: 'Português - Novo Testamento: Versão Fácil de Ler',
+		language: 'pt',
+		tongue: 'brazil',
+	},
+	porbrbsl2022eb: {
+		name: 'Português - Bíblia Livre	Portuguese Bíblia Livre',
+		language: 'pt',
+		tongue: 'brazil',
+	},
+	portft2018eb: {
+		name: 'portugues - A Bíblia Sagrada, Tradução para Tradutores',
+		language: 'por',
+		tongue: 'brazil',
+	},
+	ram2012eb: {
+		name: 'Português - Bíblia Portuguesa Mundial',
+		language: 'ram',
+		tongue: 'brazil',
+	},
+	rkb2011eb: {
+		name: 'Rikbaktsa - Deus Harere Aibaky Sesus mymyspirikpoko naha',
+		language: 'rkb',
+		tongue: 'brazil',
+	},
+	ter2012eb: {
+		name: 'Sateré - Sateré-Mawé	Tupana Ehay Satere Mawe Pusupuo',
+		language: 'ter',
+		tongue: 'brazil',
+	},
+	tuoNT2009eb: {
+		name: 'Tenharim - Tupanaʼga nhiʼig̃a',
+		language: 'tuo',
+		tongue: 'brazil',
+	},
+	txu2012eb: {
+		name: "Terêna - Emo'u Itukó'oviti",
+		language: 'txu',
+		tongue: 'brazil',
+	},
+	urb2012eb: {
+		name: "Tucano - Õ'âkĩ̶ hɨ yeere uúkũri turi Tukano",
+		language: 'urb',
+		tongue: 'brazil',
+	},
+	xav2004eb: {
+		name: "Xavánte| - Re ĩhâimana u'âsi mono zadawa wasu'u",
+		language: 'xav',
+		tongue: 'brazil',
 	},
 	bib2001eb: {
 		name: 'Bisa - Wosoci Gʊaasɩbabaa Daa',
@@ -8043,7 +8271,7 @@ bible.Data.tongues = {
 	botswana: 'Botswana',
 	burkinafaso: 'Burkina Faso',
 	br: 'Brezhoneg (Breton)',
-	brazil: 'Brazil',
+	brazil: 'Brasil',
 	cambodia: 'Cambodia',
 	canada: 'Canada',
 	ceb: 'Cebuano',

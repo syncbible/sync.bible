@@ -10,7 +10,6 @@
 -   Search in chapter/book
 -   Filter search results by strongs number eg life
 -   turn off suggestions for reference input
--   Matt 26:56 - in harmonised version the text is missing
 -   show common words under a list of passages, or rare words, or words that are used in more than one section
 -   add animation to current verse
 -   show the whole range for cross references

@@ -167,10 +167,28 @@ export function setScrollChapterSynced( book, chapter ) {
 }
 
 export const settingsChange = ( settingName, settingValue ) => {
-	var returnValue = {
+	const returnValue = {
 		type: 'SETTINGS_CHANGE',
 	};
 	returnValue[ settingName ] = settingValue;
+
+	return returnValue;
+};
+
+export const addVersion = ( version ) => {
+	const returnValue = {
+		type: 'ADD_VERSION',
+	};
+	returnValue[ 'version' ] = version;
+
+	return returnValue;
+};
+
+export const toggleVersion = ( version ) => {
+	const returnValue = {
+		type: 'TOGGLE_VERSION',
+	};
+	returnValue[ 'version' ] = version;
 
 	return returnValue;
 };

@@ -34,7 +34,7 @@ const HelpTray = () => {
 				<div className="content">
 					<div className="content-padding">
 						<p>
-							<a href="/help">Watch help videos.</a>
+							<a href="/help/index.html">Watch help videos.</a>
 						</p>
 						<h3>Keyboard shortcuts</h3>
 						<ul>

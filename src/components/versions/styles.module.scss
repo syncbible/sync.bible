@@ -1,0 +1,14 @@
+.versions {
+    padding: 10px;
+}
+
+.fieldset {
+    margin-top: 1em;
+
+    > label {
+        font-weight: 500;
+    }
+}
+
+.buttons { float: right; position: sticky; top: .5em; }
+.buttons button { padding: 0 1em; }

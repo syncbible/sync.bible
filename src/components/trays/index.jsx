@@ -23,6 +23,7 @@ import WordDetails from '../word-details';
 import CombinedAll from '../combined-all';
 import Help from './help';
 import Search from '../search';
+import VersionsTray from '../versions';
 
 // SVGs
 import BookSvg from '../svg/book';
@@ -35,6 +36,7 @@ import TableChartSvg from '../svg/table-chart';
 import CalendarSvg from '../svg/calendar';
 import JoinFull from '../svg/join-full';
 import CogSvg from '../svg/cog';
+import LibraryBooksSvg from '../svg/library-books';
 
 const trays = [
 	{
@@ -92,6 +94,13 @@ const trays = [
 		text: 'Dailies',
 		component: DailyReadings,
 		icon: <CalendarSvg />,
+	},
+	{
+		visible: false,
+		id: 'versions',
+		text: 'Versions',
+		component: VersionsTray,
+		icon: <LibraryBooksSvg />,
 	},
 	{
 		visible: false,

@@ -55,7 +55,7 @@ export const getCrossReferences = ( data, reference ) => {
 
 	// Combine both sets of cross refs.
 	const combinedCrossRefs = crossReferenceArray.concat( reverseCrossRefs );
-	const uniqueCrossRefs = [ ...new Set( combinedCrossRefs ) ];
+	const uniqueCrossRefs = [ ...combinedCrossRefs ];
 
 	return uniqueCrossRefs.map( ( referencePosition ) => {
 		let firstReferencePosition = referencePosition;

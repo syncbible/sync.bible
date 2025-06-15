@@ -6,6 +6,7 @@ import classnames from 'classnames';
 // Internal
 import {
 	addColumnAction,
+	addVersion,
 	settingsChange,
 	updateSearchForm,
 } from '../../actions';
@@ -36,6 +37,7 @@ export default function Dock() {
 			dispatch( addColumnAction( version ) );
 			dispatch( updateSearchForm( 'version', version ) );
 			dispatch( settingsChange( 'interfaceLanguage', version ) );
+			dispatch( addVersion( version ) );
 			event.target.blur();
 		},
 		[ addColumnAction, updateSearchForm, settingsChange ]

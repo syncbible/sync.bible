@@ -8735,7 +8735,6 @@ bible.Data.supportedVersions = {
 		name: 'Spanish Traducción de dominio público (Mateo a Romanos)',
 		language: 'es',
 		tongue: 'es',
-		strongs: true,
 	},
 	SpaVNT: {
 		name: 'Spanish 1858 Reina Valera New Testament',
@@ -9144,7 +9143,6 @@ bible.Data.supportedVersions = {
 		name: 'De ganse Heilige Schrift bevattende al de kanonieke boeken van het Oude en Nieuwe Testament, met de apocriefe (deuterocanonieke) boeken',
 		language: 'nl',
 		tongue: 'nl',
-		strongs: true,
 	},
 	NlCanisius1939: {
 		name: 'Petrus Canisius Translation',
@@ -9372,23 +9370,23 @@ bible.Data.supportedVersions = {
 		language: 'yo',
 		tongue: 'yo',
 	},
-	ChiNCVs: { name: '新译本', language: 'zh-hans', tongue: 'zh-hans' },
+	ChiNCVs: { name: '新译本', language: 'zh-hans', tongue: 'zh' },
 	ChiSB: {
 		name: '思高本 (Sīgāo Běn), 聖經：思高聖經學會譯釋',
 		language: 'zh-hant',
-		tongue: 'zh-hant',
+		tongue: 'zh',
 	},
 	ChiUns: {
 		name: '和合本 (简体字)',
 		language: 'zh-hans',
 		strongs: true,
-		tongue: 'zh-hans',
+		tongue: 'zh',
 	},
 	ChiUn: {
 		name: '和合本 (繁體字)',
 		language: 'zh-hant',
 		strongs: true,
-		tongue: 'zh-hant',
+		tongue: 'zh',
 	},
 	// TODO - versions to fix
 	alqALG1998eb: {
@@ -14748,7 +14746,7 @@ bible.Data.supportedVersions = {
 	engNET2016eb: {
 		language: 'en',
 		tongue: 'en',
-		name: 'English - NET Bible',
+		name: 'English - NET Bible with Strongs',
 		strongs: true,
 	},
 	engourb2016eb: {
@@ -15152,8 +15150,7 @@ bible.Data.tongues = {
 	vi: 'Vietnamese (Tiếng Việt)',
 	vls: 'Vlaams',
 	yo: 'Yoruba ',
-	'zh-hans': '中国人 (Chinese)',
-	'zh-hant': '中国人 (Chinese)',
+	zh: '中国人 (Chinese)',
 	zm: 'Zambia',
 	zw: 'Zimbabwe',
 };
@@ -15994,4 +15991,5 @@ bible.isRtlVersion = function ( version, book ) {
 		return true;
 	}
 };
+
 export default bible;

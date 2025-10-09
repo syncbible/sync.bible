@@ -1,6 +1,5 @@
 // External
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 // Internal
 import WordSingle from './word-single';
@@ -18,7 +17,16 @@ function startsWithPunctuation( word ) {
 	);
 }
 
-const WordComponent = ( { word, version, prevWord, reference, index } ) => {
+const WordComponent = ( {
+	word,
+	version,
+	prevWord,
+	reference,
+	index,
+	lcData,
+	farsiTranslations,
+	strongsObjectWithFamilies,
+} ) => {
 	if ( ! word ) {
 		return null;
 	}
@@ -32,14 +40,12 @@ const WordComponent = ( { word, version, prevWord, reference, index } ) => {
 
 	const getWordSingle = ( wordSingleValue, lemmaSingle, morphSingle ) => {
 		if ( version === 'LC' ) {
-			return useSelector( ( state ) =>
-				getLiteralConsistentTranslation(
-					state.data.LC,
-					wordSingleValue,
-					lemmaSingle,
-					morphSingle,
-					prevWord
-				)
+			return getLiteralConsistentTranslation(
+				lcData,
+				wordSingleValue,
+				lemmaSingle,
+				morphSingle,
+				prevWord
 			);
 		}
 
@@ -77,6 +83,16 @@ const WordComponent = ( { word, version, prevWord, reference, index } ) => {
 				lemmaSingle,
 				morphSingle
 			);
+			const literalConsistentTranslation =
+				version === 'LC'
+					? getLiteralConsistentTranslation(
+							lcData,
+							wordSingleValue,
+							lemmaSingle,
+							morphSingle
+					  )
+					: null;
+
 			if ( version === 'LC' ) {
 				return (
 					<React.Fragment key={ key }>
@@ -90,6 +106,13 @@ const WordComponent = ( { word, version, prevWord, reference, index } ) => {
 							version={ version }
 							reference={ reference }
 							index={ index }
+							farsiTranslations={ farsiTranslations }
+							literalConsistentTranslation={
+								literalConsistentTranslation
+							}
+							strongsObjectWithFamilies={
+								strongsObjectWithFamilies
+							}
 						/>
 					</React.Fragment>
 				);
@@ -104,6 +127,9 @@ const WordComponent = ( { word, version, prevWord, reference, index } ) => {
 					version={ version }
 					reference={ reference }
 					index={ index }
+					farsiTranslations={ farsiTranslations }
+					literalConsistentTranslation={ literalConsistentTranslation }
+					strongsObjectWithFamilies={ strongsObjectWithFamilies }
 				/>
 			);
 		} );
@@ -116,4 +142,29 @@ const WordComponent = ( { word, version, prevWord, reference, index } ) => {
 	return <React.Fragment key={ word }> { wordString }</React.Fragment>;
 };
 
-export default React.memo( WordComponent );
+// Custom comparison function for better memoization
+const arePropsEqual = ( prevProps, nextProps ) => {
+	// Compare arrays properly for word prop
+	const prevWord = prevProps.word;
+	const nextWord = nextProps.word;
+
+	if ( ! prevWord && ! nextWord ) {
+		return true;
+	}
+	if ( ! prevWord || ! nextWord ) {
+		return false;
+	}
+
+	return (
+		prevWord[ 0 ] === nextWord[ 0 ] && // wordValue
+		prevWord[ 1 ] === nextWord[ 1 ] && // lemma
+		prevWord[ 2 ] === nextWord[ 2 ] && // morph
+		prevProps.version === nextProps.version &&
+		prevProps.index === nextProps.index &&
+		prevProps.reference.book === nextProps.reference.book &&
+		prevProps.reference.chapter === nextProps.reference.chapter &&
+		prevProps.reference.verse === nextProps.reference.verse
+	);
+};
+
+export default React.memo( WordComponent, arePropsEqual );

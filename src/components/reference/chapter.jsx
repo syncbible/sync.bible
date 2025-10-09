@@ -1,9 +1,19 @@
 // External
-import React, { createRef, useEffect, useRef, Fragment, useState } from 'react';
+import React, {
+	createRef,
+	useEffect,
+	useRef,
+	Fragment,
+	useState,
+	useMemo,
+} from 'react';
 import { Waypoint } from 'react-waypoint';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+// Note: react-window is imported but not yet implemented in render
+// This is prepared for future virtualization implementation
+// import { FixedSizeList as List } from 'react-window';
 
 // Internal
 import bible from '../../data/bible.js';
@@ -37,10 +47,15 @@ const Chapter = ( { book, chapter, index } ) => {
 	const startVerse = currentReference.verse;
 	const endVerse = currentReference.endVerse;
 	const numberOfVerses = getNumberOfVerses( { book, chapter } );
-	const verseMap = [];
-	for ( let number = 0; number < numberOfVerses; number++ ) {
-		verseMap.push( number );
-	}
+
+	// Memoize verseMap to avoid recreating on every render
+	const verseMap = useMemo( () => {
+		const map = [];
+		for ( let number = 0; number < numberOfVerses; number++ ) {
+			map.push( number );
+		}
+		return map;
+	}, [ numberOfVerses ] );
 
 	const dispatch = useDispatch();
 

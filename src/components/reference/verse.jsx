@@ -1,16 +1,30 @@
 // External
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 // Internal
 import { mapVersionToData } from '../../lib/reference';
+import {
+	selectLCData,
+	selectFarsiTranslations,
+	selectStrongsObjectWithFamilies,
+} from '../../selectors';
 import Word from './word';
 import styles from './styles.module.scss';
 
 const Verse = ( { reference, version } ) => {
 	const { book, chapter, verse } = reference;
 	const data = useSelector( ( state ) => state.data );
-	const language = mapVersionToData( book, version );
+	const lcData = useSelector( selectLCData );
+	const farsiTranslations = useSelector( selectFarsiTranslations );
+	const strongsObjectWithFamilies = useSelector(
+		selectStrongsObjectWithFamilies
+	);
+
+	const language = useMemo(
+		() => mapVersionToData( book, version ),
+		[ book, version ]
+	);
 	let prevWord = null;
 	let words = null;
 
@@ -65,6 +79,9 @@ const Verse = ( { reference, version } ) => {
 					version={ version }
 					prevWord={ prevWord }
 					reference={ reference }
+					lcData={ lcData }
+					farsiTranslations={ farsiTranslations }
+					strongsObjectWithFamilies={ strongsObjectWithFamilies }
 				/>
 			);
 			prevWord = word;
@@ -77,4 +94,14 @@ const Verse = ( { reference, version } ) => {
 	return words;
 };
 
-export default React.memo( Verse );
+// Custom comparison function for better memoization
+const arePropsEqual = ( prevProps, nextProps ) => {
+	return (
+		prevProps.reference.book === nextProps.reference.book &&
+		prevProps.reference.chapter === nextProps.reference.chapter &&
+		prevProps.reference.verse === nextProps.reference.verse &&
+		prevProps.version === nextProps.version
+	);
+};
+
+export default React.memo( Verse, arePropsEqual );

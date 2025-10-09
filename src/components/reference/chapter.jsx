@@ -11,9 +11,6 @@ import { Waypoint } from 'react-waypoint';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-// Note: react-window is imported but not yet implemented in render
-// This is prepared for future virtualization implementation
-// import { FixedSizeList as List } from 'react-window';
 
 // Internal
 import bible from '../../data/bible.js';

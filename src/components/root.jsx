@@ -1,5 +1,5 @@
 // External
-import { useEffect } from 'react';
+import { useEffect, useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
@@ -12,6 +12,7 @@ import InitialView from './inital-view';
 import styles from './root.module.scss';
 import { closeReferenceSelectorMobile, fetchDataAsync } from '../actions';
 import { rootClasses } from './utils';
+import { selectAllSettings, selectReferenceData } from '../selectors';
 
 export default function Root() {
 	const dispatch = useDispatch();
@@ -27,25 +28,20 @@ export default function Root() {
 		dispatch( fetchDataAsync( 'lemmas' ) ); // So that stats and comparison tabs work offline.
 	}, [] ); // Use the useEffect so this runs after the component mounts.
 
-	const reference = useSelector( ( state ) => state.reference );
-	const darkMode = useSelector( ( state ) => state.settings.darkMode );
-	const compareMode = useSelector( ( state ) => state.settings.compareMode );
-	const expandedSearchResults = useSelector(
-		( state ) => state.settings.expandedSearchResults
-	);
-	const fontFamily = useSelector( ( state ) => state.settings.fontFamily );
-	const fontSize = useSelector( ( state ) => state.settings.fontSize );
+	const reference = useSelector( selectReferenceData );
+	const settings = useSelector( selectAllSettings );
+	const { darkMode, compareMode, expandedSearchResults, fontFamily, fontSize } =
+		settings;
 
-	const getBodyStyles = () => {
-		var bodyStyles = 'body, .root { ';
-		bodyStyles += 'font-family: ' + fontFamily + ';';
-		bodyStyles += 'font-size: ' + fontSize + ';';
-		bodyStyles += '}';
-		return bodyStyles;
-	};
-	const clearReferenceSelector = () => {
+	// Memoize body styles to avoid recalculation
+	const bodyStyles = useMemo( () => {
+		return `body, .root { font-family: ${ fontFamily }; font-size: ${ fontSize }; }`;
+	}, [ fontFamily, fontSize ] );
+
+	// Memoize callback to avoid recreating on every render
+	const clearReferenceSelector = useCallback( () => {
 		dispatch( closeReferenceSelectorMobile() );
-	};
+	}, [ dispatch ] );
 
 	useEffect( () => {
 		// show the fallback errors which are hidden initially.
@@ -53,14 +49,24 @@ export default function Root() {
 		window.errors.style.display = 'block';
 	}, [] );
 
-	const classes = rootClasses( darkMode, compareMode, expandedSearchResults );
-	const referenceComponent = ! compareMode && (
-		<>
-			<Dock />
-			<div onClick={ clearReferenceSelector }>
-				<ReferenceWrapper />
-			</div>
-		</>
+	// Memoize classes to avoid recalculation
+	const classes = useMemo(
+		() => rootClasses( darkMode, compareMode, expandedSearchResults ),
+		[ darkMode, compareMode, expandedSearchResults ]
+	);
+
+	// Memoize reference component
+	const referenceComponent = useMemo(
+		() =>
+			! compareMode && (
+				<>
+					<Dock />
+					<div onClick={ clearReferenceSelector }>
+						<ReferenceWrapper />
+					</div>
+				</>
+			),
+		[ compareMode, clearReferenceSelector ]
 	);
 
 	return (
@@ -68,7 +74,7 @@ export default function Root() {
 			<div className={ styles.root }>
 				{ reference.length > 0 && <Trays /> }
 
-				<style>{ getBodyStyles() }</style>
+				<style>{ bodyStyles }</style>
 				<KeyboardShortcuts />
 				<WordHighlight />
 				{ referenceComponent }

@@ -1,36 +1,30 @@
 // External
 import React from 'react';
 import classnames from 'classnames';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // Internal
 import { activateSearchSelect, selectWord, updateData } from '../../actions';
 import { getFamily } from '../../lib/word';
 import morphology from '../../lib/morphology';
-import { getLiteralConsistentTranslation } from '../utils.js';
 
 const WordSingleComponent = ( props ) => {
 	// wordText is the word to display, usually the same as word unless this is LC.
-	const { lemma, morph, version, word, wordText, reference, index } = props;
-	const lemmaArray = lemma ? lemma.split( /[\&\s]/ ) : []; // Split by space or &.
-
-	const dispatch = useDispatch();
 	const {
+		lemma,
+		morph,
+		version,
+		word,
+		wordText,
+		reference,
+		index,
 		farsiTranslations,
 		literalConsistentTranslation,
 		strongsObjectWithFamilies,
-	} = useSelector( ( state ) => {
-		return {
-			farsiTranslations: state.data.farsiTranslations,
-			literalConsistentTranslation: getLiteralConsistentTranslation(
-				state.data.LC,
-				word,
-				lemma,
-				morph
-			),
-			strongsObjectWithFamilies: state.data.strongsObjectWithFamilies,
-		};
-	}, shallowEqual );
+	} = props;
+	const lemmaArray = lemma ? lemma.split( /[\&\s]/ ) : []; // Split by space or &.
+
+	const dispatch = useDispatch();
 
 	const clearHighlightWord = () => {
 		window.updateAppComponent( 'highlightedWord', '' );
@@ -154,4 +148,21 @@ const WordSingleComponent = ( props ) => {
 	);
 };
 
-export default React.memo( WordSingleComponent );
+// Custom comparison function for better memoization
+const arePropsEqual = ( prevProps, nextProps ) => {
+	// Only re-render if these specific props change
+	return (
+		prevProps.lemma === nextProps.lemma &&
+		prevProps.morph === nextProps.morph &&
+		prevProps.word === nextProps.word &&
+		prevProps.wordText === nextProps.wordText &&
+		prevProps.version === nextProps.version &&
+		prevProps.literalConsistentTranslation ===
+			nextProps.literalConsistentTranslation &&
+		prevProps.reference.book === nextProps.reference.book &&
+		prevProps.reference.chapter === nextProps.reference.chapter &&
+		prevProps.reference.verse === nextProps.reference.verse
+	);
+};
+
+export default React.memo( WordSingleComponent, arePropsEqual );

@@ -4,22 +4,16 @@ import { useSelector } from 'react-redux';
 
 // Internal
 import { mapVersionToData } from '../../lib/reference';
-import {
-	selectLCData,
-	selectFarsiTranslations,
-	selectStrongsObjectWithFamilies,
-} from '../../selectors';
+import { selectVerseComponentData } from '../../selectors';
 import Word from './word';
 import styles from './styles.module.scss';
 
 const Verse = ( { reference, version } ) => {
 	const { book, chapter, verse } = reference;
-	const data = useSelector( ( state ) => state.data );
-	const lcData = useSelector( selectLCData );
-	const farsiTranslations = useSelector( selectFarsiTranslations );
-	const strongsObjectWithFamilies = useSelector(
-		selectStrongsObjectWithFamilies
-	);
+
+	// Single selector instead of 4 separate subscriptions - improves performance
+	const { data, lcData, farsiTranslations, strongsObjectWithFamilies } =
+		useSelector( selectVerseComponentData );
 
 	const language = useMemo(
 		() => mapVersionToData( book, version ),

@@ -140,3 +140,20 @@ export const selectAllSettings = createSelector(
 		fontSize: settings.fontSize,
 	})
 );
+
+// Combined selector for Verse component to reduce subscriptions
+// Returns all data needed by Verse in a single subscription
+export const selectVerseComponentData = createSelector(
+	[
+		selectData,
+		selectLCData,
+		selectFarsiTranslations,
+		selectStrongsObjectWithFamilies,
+	],
+	(data, lcData, farsiTranslations, strongsObjectWithFamilies) => ({
+		data,
+		lcData,
+		farsiTranslations,
+		strongsObjectWithFamilies,
+	})
+);

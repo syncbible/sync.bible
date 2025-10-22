@@ -2,7 +2,10 @@ const data = ( state = {}, action ) => {
 	switch ( action.type ) {
 		case 'REQUEST_DATA': {
 			// Only create new state if the key doesn't exist or isn't already empty
-			if ( state[ action.key ] && Object.keys( state[ action.key ] ).length === 0 ) {
+			if (
+				state[ action.key ] &&
+				Object.keys( state[ action.key ] ).length === 0
+			) {
 				return state;
 			}
 			return {

@@ -1,5 +1,5 @@
 // External
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 import classnames from 'classnames';
 import { useDispatch } from 'react-redux';
 
@@ -22,23 +22,43 @@ const WordSingleComponent = ( props ) => {
 		literalConsistentTranslation,
 		strongsObjectWithFamilies,
 	} = props;
-	const lemmaArray = lemma ? lemma.split( /[\&\s]/ ) : []; // Split by space or &.
+	const lemmaArray = useMemo(
+		() => ( lemma ? lemma.split( /[\&\s]/ ) : [] ),
+		[ lemma ]
+	);
 
 	const dispatch = useDispatch();
 
-	const clearHighlightWord = () => {
+	const clearHighlightWord = useCallback( () => {
 		window.updateAppComponent( 'highlightedWord', '' );
-	};
+	}, [] );
 
-	const highlightWord = () => {
+	const highlightWord = useCallback( () => {
 		window.updateAppComponent( 'highlightedWord', lemmaArray );
-	};
+	}, [ lemmaArray ] );
 
-	const getTitle = () => {
-		let titleText = '';
+	const parseTranslations = useCallback(
+		( farsiTranslations ) => {
+			return (
+				farsiTranslations.translations &&
+				Object.keys( farsiTranslations.translations ).map(
+					( translation ) => {
+						return farsiTranslations.translations[ translation ].join(
+							', '
+						);
+					}
+				)
+			);
+		},
+		[]
+	);
+
+	// Memoize expensive title computation
+	const titleText = useMemo( () => {
+		let text = '';
 
 		if ( lemmaArray.length > 0 ) {
-			titleText += lemmaArray
+			text += lemmaArray
 				.map( ( oneLemma ) => {
 					let extraTitleText = oneLemma;
 					if ( morph ) {
@@ -64,21 +84,22 @@ const WordSingleComponent = ( props ) => {
 			farsiTranslations &&
 			farsiTranslations[ word ]
 		) {
-			titleText += '  |  ' + farsiTranslations[ word ].translation;
+			text += '  |  ' + farsiTranslations[ word ].translation;
 
 			const listOfTranslations = parseTranslations(
 				farsiTranslations[ word ]
 			);
 			if ( listOfTranslations.length > 0 ) {
-				titleText += '  |  ' + listOfTranslations;
+				text += '  |  ' + listOfTranslations;
 			}
 		}
 
-		return titleText;
-	};
+		return text;
+	}, [ lemmaArray, morph, version, word, farsiTranslations, parseTranslations ] );
 
-	const getClassName = () => {
-		// Do this firstfor speed.
+	// Memoize expensive className computation
+	const className = useMemo( () => {
+		// Do this first for speed.
 		if ( lemma === 'added' ) {
 			return classnames( 'single', lemma );
 		}
@@ -92,55 +113,57 @@ const WordSingleComponent = ( props ) => {
 		}
 
 		return classnames( 'single', lemmaArray, family );
-	};
+	}, [ lemma, lemmaArray, strongsObjectWithFamilies ] );
 
-	const parseTranslations = ( farsiTranslations ) => {
-		return (
-			farsiTranslations.translations &&
-			Object.keys( farsiTranslations.translations ).map(
-				( translation ) => {
-					return farsiTranslations.translations[ translation ].join(
-						', '
+	const handleClick = useCallback(
+		( event ) => {
+			if ( event.altKey || event.ctrlKey || event.metaKey ) {
+				// Update the literal consistent translation.
+				if ( version === 'LC' ) {
+					const translation = window.prompt(
+						word + ' ' + lemma + ' ' + morph,
+						literalConsistentTranslation
+					);
+					dispatch(
+						updateData( {
+							version: 'LC',
+							word,
+							lemma,
+							morph,
+							translation,
+						} )
 					);
 				}
-			)
-		);
-	};
+
+				// Update the farsi strongs translation.
+				if ( version === 'NMV_strongs' ) {
+					reference.index = index;
+					dispatch( activateSearchSelect( reference ) );
+				}
+			} else {
+				dispatch( selectWord( props ) );
+			}
+		},
+		[
+			version,
+			word,
+			lemma,
+			morph,
+			literalConsistentTranslation,
+			reference,
+			index,
+			props,
+			dispatch,
+		]
+	);
 
 	return (
 		<span
-			className={ getClassName() }
+			className={ className }
 			onMouseOver={ highlightWord }
 			onMouseOut={ clearHighlightWord }
-			onClick={ ( event ) => {
-				if ( event.altKey || event.ctrlKey || event.metaKey ) {
-					// Update the literal consistent translation.
-					if ( version === 'LC' ) {
-						const translation = window.prompt(
-							word + ' ' + lemma + ' ' + morph,
-							literalConsistentTranslation
-						);
-						dispatch(
-							updateData( {
-								version: 'LC',
-								word,
-								lemma,
-								morph,
-								translation,
-							} )
-						);
-					}
-
-					// Update the farsi strongs translation.
-					if ( version === 'NMV_strongs' ) {
-						reference.index = index;
-						dispatch( activateSearchSelect( reference ) );
-					}
-				} else {
-					dispatch( selectWord( props ) );
-				}
-			} }
-			title={ getTitle() }
+			onClick={ handleClick }
+			title={ titleText }
 			key={ lemma }
 		>
 			{ wordText }
@@ -161,7 +184,9 @@ const arePropsEqual = ( prevProps, nextProps ) => {
 			nextProps.literalConsistentTranslation &&
 		prevProps.reference.book === nextProps.reference.book &&
 		prevProps.reference.chapter === nextProps.reference.chapter &&
-		prevProps.reference.verse === nextProps.reference.verse
+		prevProps.reference.verse === nextProps.reference.verse &&
+		prevProps.farsiTranslations === nextProps.farsiTranslations && // Check for Farsi updates
+		prevProps.strongsObjectWithFamilies === nextProps.strongsObjectWithFamilies // Check for Strongs updates
 	);
 };
 

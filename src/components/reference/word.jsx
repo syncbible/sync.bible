@@ -163,7 +163,10 @@ const arePropsEqual = ( prevProps, nextProps ) => {
 		prevProps.index === nextProps.index &&
 		prevProps.reference.book === nextProps.reference.book &&
 		prevProps.reference.chapter === nextProps.reference.chapter &&
-		prevProps.reference.verse === nextProps.reference.verse
+		prevProps.reference.verse === nextProps.reference.verse &&
+		prevProps.lcData === nextProps.lcData && // Check for LC data updates
+		prevProps.farsiTranslations === nextProps.farsiTranslations && // Check for Farsi updates
+		prevProps.strongsObjectWithFamilies === nextProps.strongsObjectWithFamilies // Check for Strongs updates
 	);
 };
 

@@ -94,6 +94,8 @@ const Verse = ( { reference, version } ) => {
 	return words;
 };
 
+// Note: We don't need to check data in comparison because useSelector
+// will automatically trigger re-renders when state.data changes.
 // Custom comparison function for better memoization
 const arePropsEqual = ( prevProps, nextProps ) => {
 	return (

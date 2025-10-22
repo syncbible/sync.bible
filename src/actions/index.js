@@ -614,16 +614,30 @@ export const selectWord = ( props ) => {
 				// Get the reference.
 				const { book, chapter, verse, index } = searchSelect;
 
-				// Update the data in memory.
+				// Get the current word
 				const currentWord =
 					data[ 'NMV_strongs' ][ book ][ chapter ][ verse ][ index ];
-				data[ 'NMV_strongs' ][ book ][ chapter ][ verse ][ index ] = [
-					currentWord[ 0 ],
-					lemma,
-				];
 
-				// Push the update to the store.
-				dispatch( receiveData( 'NMV_strongs', data[ 'NMV_strongs' ] ) );
+				// Create a new verse array with the updated word
+				const updatedVerse = [
+					...data[ 'NMV_strongs' ][ book ][ chapter ][ verse ],
+				];
+				updatedVerse[ index ] = [ currentWord[ 0 ], lemma ];
+
+				// Create new nested objects to ensure reference changes
+				const updatedNMVStrongs = {
+					...data[ 'NMV_strongs' ],
+					[ book ]: {
+						...data[ 'NMV_strongs' ][ book ],
+						[ chapter ]: [
+							...data[ 'NMV_strongs' ][ book ][ chapter ],
+						],
+					},
+				};
+				updatedNMVStrongs[ book ][ chapter ][ verse ] = updatedVerse;
+
+				// Push the update to the store with new reference
+				dispatch( receiveData( 'NMV_strongs', updatedNMVStrongs ) );
 			} else {
 				dispatch(
 					appendToSearchForm( searchSelect, props[ searchSelect ] )

@@ -38,6 +38,7 @@ function getLanguageFromVersion( version, book ) {
 
 const Chapter = ( { book, chapter, index } ) => {
 	const reference = useSelector( ( state ) => state.reference );
+	const data = useSelector( ( state ) => state.data );
 	const inSync = useSelector( ( state ) => state.settings.inSync );
 	const currentReference = reference[ index ];
 	const version = currentReference.version;
@@ -59,16 +60,29 @@ const Chapter = ( { book, chapter, index } ) => {
 	// used to scroll to the current chapter
 	const currentRef = useRef();
 
-	// probably move this to the parent
-	useEffect( () => {
+	// Memoize the versions that need to be fetched to avoid re-dispatching
+	const versionsToFetch = useMemo( () => {
+		const toFetch = [];
 		reference.forEach( ( { book, version } ) => {
-			dispatch( fetchData( mapVersionToData( book, version ) ) );
-			if ( version === 'LC' ) {
-				// This is needed as LC is mapped to original. It needs both data sources to work.
-				dispatch( fetchData( 'LC' ) );
+			const dataKey = mapVersionToData( book, version );
+			// Only add to fetch list if data doesn't exist
+			if ( ! data[ dataKey ] ) {
+				toFetch.push( { dataKey, version } );
+			}
+			// LC needs both original and LC data
+			if ( version === 'LC' && ! data[ 'LC' ] ) {
+				toFetch.push( { dataKey: 'LC', version: 'LC' } );
 			}
 		} );
-	}, [ reference ] );
+		return toFetch;
+	}, [ reference, data ] );
+
+	// Only dispatch fetches for versions we don't have yet
+	useEffect( () => {
+		versionsToFetch.forEach( ( { dataKey } ) => {
+			dispatch( fetchData( dataKey ) );
+		} );
+	}, [ versionsToFetch, dispatch ] );
 
 	useEffect( () => {
 		scrollToCurrentChapter();

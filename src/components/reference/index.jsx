@@ -218,6 +218,7 @@ const ReferenceComponent = ( props ) => {
 						book={ currentBook }
 						chapter={ currentChapter }
 						index={ props.index }
+						useVirtualization={ true }
 					/>
 				</div>
 			</div>
@@ -251,6 +252,7 @@ const ReferenceComponent = ( props ) => {
 								book={ book }
 								chapter={ chapter }
 								index={ props.index }
+								useVirtualization={ false }
 							/>
 						</div>
 					);

@@ -11,6 +11,7 @@ import { Waypoint } from 'react-waypoint';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Virtuoso } from 'react-virtuoso';
 
 // Internal
 import bible from '../../data/bible.js';
@@ -36,7 +37,7 @@ function getLanguageFromVersion( version, book ) {
 	return bible.Data.supportedVersions[ version ].language;
 }
 
-const Chapter = ( { book, chapter, index } ) => {
+const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 	const reference = useSelector( ( state ) => state.reference );
 	const data = useSelector( ( state ) => state.data );
 	const inSync = useSelector( ( state ) => state.settings.inSync );
@@ -158,107 +159,228 @@ const Chapter = ( { book, chapter, index } ) => {
 			</div>
 		);
 
+		// Filter verses if we have a range
+		const filteredVerses = useMemo( () => {
+			if ( ! endVerse || ! startVerse ) {
+				return verseMap;
+			}
+			return verseMap.filter( ( verse, verseNumber ) => {
+				return (
+					verseNumber + 1 >= startVerse && verseNumber < endVerse
+				);
+			} );
+		}, [ verseMap, startVerse, endVerse ] );
+
+		const renderSyncVerse = ( verseIndex ) => {
+			const verseNumber = useVirtualization
+				? filteredVerses[ verseIndex ]
+				: verseIndex;
+
+			if ( ! useVirtualization && endVerse && startVerse ) {
+				if ( verseNumber + 1 < startVerse || verseNumber >= endVerse ) {
+					return null;
+				}
+			}
+
+			return (
+				<div
+					className={ styles.singleReference }
+					key={ verseNumber }
+					ref={ isCurrentRef( verseNumber ) }
+				>
+					{ book === 'Harmony' && (
+						<Waypoint
+							topOffset={ 0 }
+							onEnter={ ( { previousPosition } ) => {
+								if ( previousPosition === 'above' ) {
+									dispatch(
+										setScrollChapterHarmonised(
+											chapter,
+											verseNumber
+										)
+									);
+								}
+							} }
+							onLeave={ ( { currentPosition } ) => {
+								if ( currentPosition === 'above' ) {
+									dispatch(
+										setScrollChapterHarmonised(
+											chapter,
+											verseNumber
+										)
+									);
+								}
+							} }
+						>
+							<span
+								style={ {
+									height: '1px',
+								} }
+							/>
+						</Waypoint>
+					) }
+					{ reference.map( ( { version }, index ) => {
+						if ( book === 'Harmony' ) {
+							parsedReference = getHarmonisedReference( {
+								book,
+								chapter,
+								verseNumber,
+								index,
+							} );
+						} else {
+							parsedReference = {
+								book,
+								chapter,
+								verseNumber,
+								index,
+							};
+						}
+						const newVerseNumber =
+							parsedReference.verseNumber !== null
+								? parsedReference.verseNumber + 1
+								: null;
+
+						// Render empty placeholder if chapter or verse is null (Harmony mode)
+						if ( parsedReference.chapter === null || newVerseNumber === null ) {
+							return (
+								<div
+									key={ 'empty-' + index }
+									className={ styles.verseWrapper }
+									style={ {
+										flexBasis: 0,
+										flexGrow: 1,
+										maxWidth: '600px',
+									} }
+								>
+									{/* Empty column placeholder */}
+								</div>
+							);
+						}
+
+						return (
+							<VerseWrapper
+								lang={ getLanguageFromVersion(
+									version,
+									book
+								) }
+								book={ parsedReference.book }
+								version={ version }
+								chapter={ parsedReference.chapter }
+								verse={ newVerseNumber }
+								key={
+									'versewrapper' + index + newVerseNumber
+								}
+								isCurrentRef={
+									!! isCurrentRef(
+										parsedReference.verseNumber
+									)
+								}
+							/>
+						);
+					} ) }
+				</div>
+			);
+		};
+
+		// Use virtualization or regular map based on prop
+		if ( useVirtualization ) {
+			return (
+				<div>
+					{ title }
+					<Virtuoso
+						totalCount={ filteredVerses.length }
+						itemContent={ renderSyncVerse }
+						useWindowScroll
+						customScrollParent={
+							typeof window !== 'undefined'
+								? document.getElementById(
+										'referenceWindow' + index
+								  )
+								: undefined
+						}
+					/>
+				</div>
+			);
+		}
+
 		return (
 			<div>
 				{ title }
-				{ verseMap.map( ( verse, verseNumber ) => {
-					if ( endVerse && startVerse ) {
-						if ( verseNumber + 1 < startVerse ) {
-							return;
-						}
-						if ( verseNumber >= endVerse ) {
-							return;
-						}
-					}
-
-					return (
-						<div
-							className={ styles.singleReference }
-							key={ verseNumber }
-							ref={ isCurrentRef( verseNumber ) }
-						>
-							{ book === 'Harmony' && (
-								<Waypoint
-									topOffset={ 0 }
-									onEnter={ ( { previousPosition } ) => {
-										if ( previousPosition === 'above' ) {
-											dispatch(
-												setScrollChapterHarmonised(
-													chapter,
-													verseNumber
-												)
-											);
-										}
-									} }
-									onLeave={ ( { currentPosition } ) => {
-										if ( currentPosition === 'above' ) {
-											dispatch(
-												setScrollChapterHarmonised(
-													chapter,
-													verseNumber
-												)
-											);
-										}
-									} }
-								>
-									<span
-										style={ {
-											height: '1px',
-										} }
-									/>
-								</Waypoint>
-							) }
-							{ reference.map( ( { version }, index ) => {
-								if ( book === 'Harmony' ) {
-									parsedReference = getHarmonisedReference( {
-										book,
-										chapter,
-										verseNumber,
-										index,
-									} );
-								} else {
-									parsedReference = {
-										book,
-										chapter,
-										verseNumber,
-										index,
-									};
-								}
-								const newVerseNumber =
-									parsedReference.verseNumber !== null
-										? parsedReference.verseNumber + 1
-										: null;
-								return (
-									<VerseWrapper
-										lang={ getLanguageFromVersion(
-											version,
-											book
-										) }
-										book={ parsedReference.book }
-										version={ version }
-										chapter={ parsedReference.chapter }
-										verse={ newVerseNumber }
-										key={
-											'versewrapper' +
-											index +
-											newVerseNumber
-										}
-										isCurrentRef={
-											!! isCurrentRef(
-												parsedReference.verseNumber
-											)
-										}
-									/>
-								);
-							} ) }
-						</div>
-					);
-				} ) }
+				{ verseMap.map( ( verse, verseNumber ) =>
+					renderSyncVerse( verseNumber )
+				) }
 			</div>
 		);
 	};
 
 	const getDifferentVerses = ( version ) => {
+		// Filter verses if we have a range
+		const filteredVerses = useMemo( () => {
+			if ( ! endVerse || ! startVerse ) {
+				return verseMap;
+			}
+			return verseMap.filter( ( verse, verseNumber ) => {
+				return (
+					verseNumber + 1 >= startVerse && verseNumber < endVerse
+				);
+			} );
+		}, [ verseMap, startVerse, endVerse ] );
+
+		const renderVerse = ( verseIndex ) => {
+			const verseNumber = useVirtualization
+				? filteredVerses[ verseIndex ]
+				: verseIndex;
+
+			if ( ! useVirtualization && endVerse && startVerse ) {
+				if ( verseNumber + 1 < startVerse || verseNumber >= endVerse ) {
+					return null;
+				}
+			}
+
+			return (
+				<div
+					className={ styles.singleReference }
+					key={ verseNumber }
+					ref={ isCurrentRef( verseNumber ) }
+				>
+					<VerseWrapper
+						lang={ getLanguageFromVersion( version, book ) }
+						book={ book }
+						version={ version }
+						chapter={ chapter }
+						verse={ verseNumber + 1 }
+						isCurrentRef={ !! isCurrentRef( verseNumber ) }
+					/>
+				</div>
+			);
+		};
+
+		// Use virtualization or regular map based on prop
+		if ( useVirtualization ) {
+			return (
+				<div>
+					<Title
+						book={ book }
+						chapter={ chapter }
+						version={ version }
+						customClickHandler={ customClickHandler }
+					/>
+					<Virtuoso
+						totalCount={ filteredVerses.length }
+						itemContent={ renderVerse }
+						useWindowScroll
+						customScrollParent={
+							typeof window !== 'undefined'
+								? document.getElementById(
+										'referenceWindow' + index
+								  )
+								: undefined
+						}
+					/>
+				</div>
+			);
+		}
+
 		return (
 			<div>
 				<Title
@@ -267,33 +389,9 @@ const Chapter = ( { book, chapter, index } ) => {
 					version={ version }
 					customClickHandler={ customClickHandler }
 				/>
-				{ verseMap.map( ( verse, verseNumber ) => {
-					if ( endVerse && startVerse ) {
-						if ( verseNumber + 1 < startVerse ) {
-							return;
-						}
-						if ( verseNumber >= endVerse ) {
-							return;
-						}
-					}
-
-					return (
-						<div
-							className={ styles.singleReference }
-							key={ verseNumber }
-							ref={ isCurrentRef( verseNumber ) }
-						>
-							<VerseWrapper
-								lang={ getLanguageFromVersion( version, book ) }
-								book={ book }
-								version={ version }
-								chapter={ chapter }
-								verse={ verseNumber + 1 }
-								isCurrentRef={ !! isCurrentRef( verseNumber ) }
-							/>
-						</div>
-					);
-				} ) }
+				{ verseMap.map( ( verse, verseNumber ) =>
+					renderVerse( verseNumber )
+				) }
 			</div>
 		);
 	};
@@ -309,9 +407,10 @@ const Chapter = ( { book, chapter, index } ) => {
 	);
 };
 
-Chapter.protoTypes = {
+Chapter.propTypes = {
 	book: PropTypes.string.isRequired,
 	chapter: PropTypes.number.isRequired,
 	index: PropTypes.number.isRequired,
+	useVirtualization: PropTypes.bool,
 };
 export default React.memo( Chapter );

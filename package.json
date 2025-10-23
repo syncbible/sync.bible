@@ -24,6 +24,7 @@
     "react-redux": "^9.1.2",
     "react-router": "^6.26.0",
     "react-router-dom": "^6.26.0",
+    "react-virtuoso": "^4.14.1",
     "react-waypoint": "^10.3.0",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",

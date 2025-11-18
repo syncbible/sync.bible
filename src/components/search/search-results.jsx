@@ -13,7 +13,7 @@ import { removeFromList, toggleListItemVisible } from '../../actions';
 
 const SearchResults = () => {
 	const dispatch = useDispatch();
-	const [ activeTab, setActiveTab ] = useState( 'search' );
+	const [ activeTabs, setActiveTabs ] = useState( {} );
 	const list = useSelector( ( state ) => state.list );
 	const userInterface = useSelector( ( state ) => state.userInterface );
 	const searchTerms = list.filter(
@@ -54,6 +54,14 @@ const SearchResults = () => {
 			searchTerm.data.lemma +
 			' ' +
 			searchTerm.data.morph;
+
+		const activeTab = activeTabs[ searchTerm.id ] || 'search';
+		const setActiveTab = ( tab ) => {
+			setActiveTabs( ( prev ) => ( {
+				...prev,
+				[ searchTerm.id ]: tab,
+			} ) );
+		};
 
 		const getActiveTab = () => {
 			if ( activeTab === 'search' ) {

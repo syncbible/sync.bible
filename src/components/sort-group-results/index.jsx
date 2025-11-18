@@ -51,6 +51,7 @@ const SortGroupResults = ( {
 	initialSort,
 	allowPreview,
 	supportsWord,
+	results = null,
 } ) => {
 	const dispatch = useDispatch();
 	const [ group, setGroup ] = useState( initialGroup );
@@ -74,7 +75,25 @@ const SortGroupResults = ( {
 		return state.list;
 	}, shallowEqual );
 
-	if ( type && strongsNumber && version ) {
+	if ( results ) {
+		// Use the provided results prop directly (e.g., from SearchStats for a single search term)
+		const groupedResults = useMemo(
+			() =>
+				getGroupedResults(
+					results,
+					group,
+					sort,
+					interfaceLanguage
+				),
+			[ results, group, sort, interfaceLanguage ]
+		);
+		totalResultsCount = results.length;
+		countedResults = useMemo(
+			() => getCountedResults( groupedResults, group ),
+			[ groupedResults, group ]
+		);
+		selectedResultsGrouped = groupedResults;
+	} else if ( type && strongsNumber && version ) {
 		const groupedResults = useMemo(
 			() =>
 				getGroupedResults(

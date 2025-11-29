@@ -16,3 +16,26 @@
 
 .buttons { float: right; position: sticky; top: .5em; }
 .buttons button { padding: 0 1em; }
+
+.searchContainer {
+    background: var(--background-ui);
+    margin-bottom: 1em;
+    position: sticky;
+    top: 0;
+    padding: 0.5em 0;
+    z-index: 1;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+
+    &:focus {
+        outline: none;
+        border-color: #666;
+    }
+}

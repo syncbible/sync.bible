@@ -1,5 +1,5 @@
 // External
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
@@ -9,6 +9,7 @@ import { toggleVersion, settingsChange } from '../../actions';
 
 const Versions = ( { trays } ) => {
 	const dispatch = useDispatch();
+	const [ searchQuery, setSearchQuery ] = useState( '' );
 	const availableVersions = useSelector(
 		( state ) => state.settings.versions
 	);
@@ -59,16 +60,42 @@ const Versions = ( { trays } ) => {
 						</button>
 					</div>
 				) }
-				<legend>Select versions to use</legend>
+				<div className={ styles.searchContainer }>
+					<legend>Select versions or search</legend>
+					<input
+						type="text"
+						placeholder="Search versions..."
+						value={ searchQuery }
+						onChange={ ( e ) => setSearchQuery( e.target.value ) }
+						className={ styles.searchInput }
+					/>
+				</div>
+
 				{ Object.keys( bible.Data.tongues ).map( ( key ) => {
+					const languageName = bible.Data.tongues[ key ];
 					const versionsForLanguage = Object.keys(
 						bible.Data.supportedVersions
 					).filter( ( versionForLanguage ) => {
+						const versionData =
+							bible.Data.supportedVersions[ versionForLanguage ];
+						const query = searchQuery.toLowerCase();
+						const matchesSearch =
+							searchQuery === '' ||
+							versionForLanguage
+								.toLowerCase()
+								.includes( query ) ||
+							versionData.name.toLowerCase().includes( query ) ||
+							languageName.toLowerCase().includes( query );
 						return (
 							bible.Data.supportedVersions[ versionForLanguage ]
-								.tongue === key
+								.tongue === key && matchesSearch
 						);
 					} );
+					// Skip empty language groups
+					if ( versionsForLanguage.length === 0 ) {
+						return null;
+					}
+
 					const versionOption = versionsForLanguage.map(
 						( version ) => {
 							const versionData =

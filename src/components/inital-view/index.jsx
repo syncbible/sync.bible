@@ -1,11 +1,32 @@
 // External
-import { useSelector } from 'react-redux';
+import { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 // Internal
 import styles from './styles.module.scss';
+import VersionSelect from '../version-select';
+import {
+	addColumnAction,
+	addVersion,
+	settingsChange,
+	updateSearchForm,
+} from '../../actions';
 
 export default function InitialView() {
+	const dispatch = useDispatch();
 	const reference = useSelector( ( state ) => state.reference );
+
+	const onSelectVersion = useCallback(
+		( event ) => {
+			const version = event.target.value;
+			dispatch( addColumnAction( version ) );
+			dispatch( updateSearchForm( 'version', version ) );
+			dispatch( settingsChange( 'interfaceLanguage', version ) );
+			dispatch( addVersion( version ) );
+			event.target.blur();
+		},
+		[ dispatch ]
+	);
 
 	if ( reference.length ) {
 		return null;
@@ -13,20 +34,23 @@ export default function InitialView() {
 
 	return (
 		<div className={ styles.initialView }>
-			<div className={ styles.logo }>
-				<object
-					type="image/svg+xml"
-					data="syncbible.svg"
-					width="150"
-					height="150"
-				></object>
-			</div>
 			<div className={ styles.content }>
+				<div className={ styles.logo }>
+					<object
+						type="image/svg+xml"
+						data="syncbible.svg"
+						width="150"
+						height="150"
+					></object>
+				</div>
 				<h1>sync.bible</h1>
 				<p>
 					sync.bible is a tool to help you understand the bible
 					better.
 				</p>
+				<div className={ styles.versionSelectContainer }>
+					<VersionSelect onChange={ onSelectVersion } large={ true } />
+				</div>
 				{ localStorage && (
 					<p className="installation-info">
 						<br />

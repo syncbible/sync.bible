@@ -6267,7 +6267,7 @@
 	},
 	"ανηλθον": {
 		"G424": {
-			"V-2AAI-1S": "go up"
+			"V-2AAI-1S": "went I up"
 		}
 	},
 	"ανημεροι": {
@@ -19489,7 +19489,7 @@
 	},
 	"διδακτοις": {
 		"G1318": {
-			"A-DPM": "taught"
+			"A-DPM": "teaching"
 		}
 	},
 	"διδαξαι": {
@@ -22364,7 +22364,7 @@
 	},
 	"εβλασφημει": {
 		"G987": {
-			"V-IAI-3S": "speak blasphemeer"
+			"V-IAI-3S": "blasphemed"
 		}
 	},
 	"εβλασφημησαν": {
@@ -23893,7 +23893,7 @@
 	},
 	"εθνεσιν": {
 		"G1484": {
-			"N-DPN": "Gentile"
+			"N-DPN": "Gentiles"
 		}
 	},
 	"εθνη": {
@@ -33510,7 +33510,7 @@
 	},
 	"επισκοπης": {
 		"G1984": {
-			"N-GSF": "the office of a bishop"
+			"N-GSF": "of visitation"
 		}
 	},
 	"επισκοποις": {
@@ -34006,7 +34006,7 @@
 	},
 	"επιτιμων": {
 		"G2008": {
-			"V-PAP-NSM": "straitly charge"
+			"V-PAP-NSM": "rebuked"
 		}
 	},
 	"επιτρεπεται": {
@@ -36305,7 +36305,7 @@
 	},
 	"ετερος": {
 		"G2087": {
-			"A-NSM": "altered"
+			"A-NSM": "other"
 		}
 	},
 	"ετερου": {
@@ -36921,7 +36921,7 @@
 	},
 	"ευθεως": {
 		"G2112": {
-			"ADV": "anon"
+			"ADV": "immediately"
 		}
 	},
 	"ευθυδρομησαμεν": {
@@ -61519,7 +61519,7 @@
 	},
 	"ουχι": {
 		"G3780": {
-			"PRT-I": "nay",
+			"PRT-I": "no",
 			"PRT-N": "nay"
 		}
 	},
@@ -62782,7 +62782,7 @@
 	},
 	"παραδοσεων": {
 		"G3862": {
-			"N-GPF": "deliverances"
+			"N-GPF": "fathers"
 		}
 	},
 	"παραδοσιν": {
@@ -68357,7 +68357,7 @@
 	},
 	"πνευματικοις": {
 		"G4152": {
-			"A-DPN": "spiritual",
+			"A-DPN": "to spiritual",
 			"A-DPM": "spiritual"
 		}
 	},
@@ -68384,7 +68384,7 @@
 	},
 	"πνευματος": {
 		"G4151": {
-			"N-GSN": "spirit"
+			"N-GSN": "of spirit"
 		}
 	},
 	"πνευματων": {
@@ -74137,7 +74137,7 @@
 	},
 	"σεαυτον": {
 		"G4572": {
-			"F-2ASM": "you"
+			"F-2ASM": "yourself"
 		}
 	},
 	"σεαυτου": {
@@ -78505,7 +78505,7 @@
 	},
 	"συνκρινοντες": {
 		"G4793": {
-			"V-PAP-NPM": "compare among with"
+			"V-PAP-NPM": "with judging"
 		}
 	},
 	"συνκυπτουσα": {
@@ -87840,7 +87840,7 @@
 	},
 	"ψυχης": {
 		"G5590": {
-			"N-GSF": "souls"
+			"N-GSF": "soul"
 		}
 	},
 	"ψυχικη": {
@@ -176414,7 +176414,7 @@
 	},
 	"פקד": {
 		"H6485": {
-			"HVqp3ms": "visit",
+			"HVqp3ms": "he had visited",
 			"HVqa": "visit",
 			"HVqrmsa": "visit",
 			"HVqc": "visit",
@@ -198406,7 +198406,7 @@
 	},
 	"תלכנה": {
 		"H3212": {
-			"HVqw3fp": "went",
+			"HVqw3fp": "they went",
 			"HVqi3fp": "went",
 			"HVqi2fp": "went"
 		}
@@ -201190,7 +201190,7 @@
 	},
 	"תצא": {
 		"H3318": {
-			"HVqw3fs": "go out",
+			"HVqw3fs": "she went out",
 			"HVqi3fs": "go out",
 			"HVqi2ms": "go out",
 			"HVqj2ms": "go out",
@@ -204185,7 +204185,7 @@
 	},
 	"תת": {
 		"H5414": {
-			"HVqc": "be made given"
+			"HVqc": "give"
 		}
 	},
 	"תתאבלו": {

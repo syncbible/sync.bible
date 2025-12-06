@@ -1,11 +1,18 @@
 // External
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import classnames from 'classnames';
 
 // Internal
 import bible from '../../data/bible.js';
 import styles from './styles.module.scss';
-import { toggleVersion, settingsChange } from '../../actions';
+import {
+	addColumnAction,
+	addVersion,
+	updateSearchForm,
+	toggleVersion,
+	settingsChange,
+} from '../../actions';
 
 const Versions = ( { trays } ) => {
 	const dispatch = useDispatch();
@@ -23,6 +30,17 @@ const Versions = ( { trays } ) => {
 	const referenceVersions = reference.map( ( ref ) => ref.version );
 	const usedVersions = [ ...referenceVersions, interfaceLanguage ];
 	const allVersions = Object.keys( bible.Data.supportedVersions );
+
+	const onSelectVersion = useCallback(
+		( version ) => {
+			dispatch( addColumnAction( version ) );
+			dispatch( updateSearchForm( 'version', version ) );
+			dispatch( settingsChange( 'interfaceLanguage', version ) );
+			dispatch( addVersion( version ) );
+			event.target.blur();
+		},
+		[ dispatch ]
+	);
 
 	return (
 		<div className={ styles.versions }>
@@ -61,7 +79,7 @@ const Versions = ( { trays } ) => {
 					</div>
 				) }
 				<div className={ styles.searchContainer }>
-					<legend>Select versions or search</legend>
+					<legend>Select version or search</legend>
 					<input
 						type="text"
 						placeholder="Search versions..."
@@ -95,38 +113,52 @@ const Versions = ( { trays } ) => {
 					if ( versionsForLanguage.length === 0 ) {
 						return null;
 					}
-
+					const labelClasses = classnames(
+						styles.versionLabel,
+						interfaceLanguage && styles.withCheckbox
+					);
 					const versionOption = versionsForLanguage.map(
 						( version ) => {
 							const versionData =
 								bible.Data.supportedVersions[ version ];
 							return (
 								<li key={ version }>
-									<label title={ versionData.name }>
-										<input
-											id={ version }
-											type="checkbox"
-											disabled={
-												usedVersions.indexOf(
-													version
-												) > -1
+									<label
+										title={ versionData.name }
+										className={ labelClasses }
+										onClick={ () => {
+											if ( ! interfaceLanguage ) {
+												onSelectVersion( version );
 											}
-											checked={
-												availableVersions.indexOf(
-													version
-												) > -1
-											}
-											onChange={ () => {
-												// TODO - load the version and cache it.
-												dispatch(
-													toggleVersion( version )
-												);
-											} }
-										/>{ ' ' }
-										{ version }
-										{ versionData.strongs
-											? ' *'
-											: '' } - { versionData.name }
+										} }
+									>
+										{ interfaceLanguage && (
+											<input
+												id={ version }
+												type="checkbox"
+												disabled={
+													usedVersions.indexOf(
+														version
+													) > -1
+												}
+												checked={
+													availableVersions.indexOf(
+														version
+													) > -1
+												}
+												onChange={ () => {
+													// TODO - load the version and cache it.
+													dispatch(
+														toggleVersion( version )
+													);
+												} }
+											/>
+										) }
+										<span className={ styles.versionCode }>
+											{ version }
+											{ versionData.strongs ? ' *' : '' }
+										</span>
+										<span>{ versionData.name }</span>
 									</label>
 								</li>
 							);

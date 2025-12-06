@@ -1,5 +1,5 @@
 .versions {
-    padding: 10px;
+    padding: 0 10px 10px 10px;
 }
 
 .fieldset {
@@ -19,11 +19,16 @@
 
 .searchContainer {
     background: var(--background-ui);
+    box-shadow: 0 10px 10px 10px var(--background-ui);
     margin-bottom: 1em;
     position: sticky;
     top: 0;
-    padding: 0.5em 0;
+    padding: 1em 0 0;
     z-index: 1;
+
+    legend {
+        margin-bottom: .5em;
+    }
 }
 
 .searchInput {
@@ -38,4 +43,28 @@
         outline: none;
         border-color: #666;
     }
+}
+
+.versionLabel {
+    cursor: pointer;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 8fr 11fr;
+    margin-bottom: 10px;
+
+    span {
+        word-break: break-word;
+    }
+
+    &:hover {
+        color:var(--accent)
+    }
+
+    &.withCheckbox {
+        grid-template-columns: 2fr 8fr 11fr;
+    }
+
+   input[type="checkbox"] {
+        margin-top: 5px;
+   }
 }

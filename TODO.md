@@ -1,12 +1,12 @@
 ## Todo
 
--   Something wrong with the book titles in vulgate versions. Eg text is Revelation but title says James
+-   Something wrong with the book titles in vulgate versions. Eg text is Revelation but title says James, ext of Job pretends to be Judith
 -   John 16:32 -> 1 Kings 22:17
 -   1 Chron 16:7 - missing the LORD in ESV?
 -   Job 35:8 - missing a word in the ESV?
 -   more translations: https://ebible.org/download.php
     -   Tsakhur didn't work
-    -                   Новы Запавет і Кнігі Старога Запавету - didn't work
+    -                     Новы Запавет і Кнігі Старога Запавету - didn't work
 -   Search in chapter
 -   Filter search results by strongs number eg life
 -   fix SweFolk1998 and VietNVB and GerOffBist

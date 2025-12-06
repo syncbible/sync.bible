@@ -1,32 +1,12 @@
 // External
-import { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // Internal
 import styles from './styles.module.scss';
-import VersionSelect from '../version-select';
-import {
-	addColumnAction,
-	addVersion,
-	settingsChange,
-	updateSearchForm,
-} from '../../actions';
+import Versions from '../versions';
 
 export default function InitialView() {
-	const dispatch = useDispatch();
 	const reference = useSelector( ( state ) => state.reference );
-
-	const onSelectVersion = useCallback(
-		( event ) => {
-			const version = event.target.value;
-			dispatch( addColumnAction( version ) );
-			dispatch( updateSearchForm( 'version', version ) );
-			dispatch( settingsChange( 'interfaceLanguage', version ) );
-			dispatch( addVersion( version ) );
-			event.target.blur();
-		},
-		[ dispatch ]
-	);
 
 	if ( reference.length ) {
 		return null;
@@ -34,7 +14,7 @@ export default function InitialView() {
 
 	return (
 		<div className={ styles.initialView }>
-			<div className={ styles.content }>
+			<div className={ styles.leftPanel }>
 				<div className={ styles.logo }>
 					<object
 						type="image/svg+xml"
@@ -48,12 +28,8 @@ export default function InitialView() {
 					sync.bible is a tool to help you understand the bible
 					better.
 				</p>
-				<div className={ styles.versionSelectContainer }>
-					<VersionSelect onChange={ onSelectVersion } large={ true } />
-				</div>
 				{ localStorage && (
 					<p className="installation-info">
-						<br />
 						Once the scripts have loaded, they will be cached, so
 						the app will work offline.
 					</p>
@@ -63,12 +39,13 @@ export default function InitialView() {
 					<a href="http://scruffian.wordpress.com/contact/">
 						Email me
 					</a>
-					,
+					,{ ' ' }
 					<a
 						href="#"
 						onClick={ () => {
 							localStorage.clear();
 							window.location.href = '/';
+							window.location.reload();
 						} }
 					>
 						clear settings and start over
@@ -86,6 +63,9 @@ export default function InitialView() {
 						syncbible webkit
 					</a>
 				</p>
+			</div>
+			<div className={ styles.rightPanel }>
+				<Versions />
 			</div>
 		</div>
 	);

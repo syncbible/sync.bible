@@ -6,7 +6,6 @@
 	max-width: 100%;
 	text-indent: 5px;
 
-	font-family: 'Courier New', Courier, monospace;
 
 	optgroup {
 		color: var(--color-dimmed);
@@ -21,6 +20,6 @@
 	}
 
 	&.small {
-		max-width: 90px;
+		max-width: 100px;
 	}
 }

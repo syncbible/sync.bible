@@ -29,6 +29,7 @@ export default function VersionSelect( {
 
 	return (
 		<select
+			dir="ltr" // Even for RTL languages, this select works LTR
 			className={ classes }
 			name={ name }
 			value={ value }

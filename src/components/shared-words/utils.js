@@ -34,5 +34,6 @@ export function getSharedWordsFromBookmarks( listOfReferences, original ) {
 			} );
 		}
 	} );
+
 	return words;
 }

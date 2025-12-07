@@ -26,6 +26,7 @@ export default function SharedWords( { listOfReferences } ) {
 
 	const sharedWordsRendered = Object.keys( sharedWords )
 		.filter( ( word ) => sharedWords[ word ] > 1 )
+		.sort( ( wordA, wordB ) => sharedWords[ wordB ] > sharedWords[ wordA ] )
 		.map( ( word, index ) => (
 			<li key={ index }>
 				<WordBlockLink

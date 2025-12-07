@@ -79,6 +79,7 @@ const SearchBlock = ( props ) => {
 
 	return (
 		<div dir={ bible.isRtlVersion( interfaceLanguage ) ? 'rtl' : 'ltr' }>
+			Found { results.length } results in { props.data.version }{ ' ' }
 			<InlineResultsToggle />
 			<ol className={ styles.results }>{ renderedResults }</ol>
 		</div>

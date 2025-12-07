@@ -6,13 +6,12 @@
 -   Job 35:8 - missing a word in the ESV?
 -   more translations: https://ebible.org/download.php
     -   Tsakhur didn't work
-    -                     Новы Запавет і Кнігі Старога Запавету - didn't work
+    -                       Новы Запавет і Кнігі Старога Запавету - didn't work
 -   Search in chapter
 -   Filter search results by strongs number eg life
 -   fix SweFolk1998 and VietNVB and GerOffBist
 -   redo dead sea scrolls text?
 -   move all strongs texts up
--   search for stranger and pilgrim and look at stats
 -   Search in chapter/book
 -   Filter search results by strongs number eg life
 -   turn off suggestions for reference input

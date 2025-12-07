@@ -7,11 +7,10 @@
     -   vulgate has title as a separate verse
 
 -   John 16:32 -> 1 Kings 22:17
--   Search in chapter
+-   Search in chapter/book
 -   fix SweFolk1998 and VietNVB and GerOffBist
 -   redo dead sea scrolls text?
 -   move all strongs texts up
--   Search in chapter/book
 -   turn off suggestions for reference input
 -   show common words under a list of passages, or rare words, or words that are used in more than one section
 -   add animation to current verse

@@ -1,10 +1,10 @@
 // External dependencies
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // Internal dependencies
 import Bookmark from '../svg/bookmark';
 import CombinedResults from '../word-details/combined';
-import SharedWords from './shared-words.jsx';
+import SharedWords from '../shared-words';
 import Single from './single';
 import styles from './styles.module.scss';
 
@@ -26,7 +26,7 @@ export default function BookMarks() {
 				<Single bookmark={ bookmark } key={ key } index={ key } />
 			) ) }
 			<CombinedResults type="bookmark" />
-			<SharedWords bookmarks={ bookmarks } />
+			<SharedWords list={ bookmarks } />
 		</>
 	);
 }

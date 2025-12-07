@@ -11,7 +11,7 @@ import WordBlockLink from '../word-details/word-block-link.jsx';
 export default function SharedWords( { list } ) {
 	const dispatch = useDispatch();
 
-	if ( list && list.length > 0 ) {
+	if ( list.length > 0 ) {
 		// Get the data for bookmark lemmas.
 		dispatch( fetchData( 'original' ) );
 	}

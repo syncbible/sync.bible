@@ -7,8 +7,6 @@
     -   vulgate has title as a separate verse
 
 -   John 16:32 -> 1 Kings 22:17
--   1 Chron 16:7 - missing the LORD in ESV?
--   Job 35:8 - missing a word in the ESV?
 -   Search in chapter
 -   fix SweFolk1998 and VietNVB and GerOffBist
 -   redo dead sea scrolls text?

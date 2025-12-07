@@ -1,6 +1,11 @@
 ## Todo
 
 -   Something wrong with the book titles in vulgate versions. Eg text is Revelation but title says James, ext of Job pretends to be Judith
+
+    -   vulgate thinks psalms is esther!
+    -   some psalms are one out in vulgate and wycliff
+    -   vulgate has title as a separate verse
+
 -   John 16:32 -> 1 Kings 22:17
 -   1 Chron 16:7 - missing the LORD in ESV?
 -   Job 35:8 - missing a word in the ESV?
@@ -52,9 +57,6 @@ Text issues
 -   search doesn't match part of a word
 -   search for repeated words
 -   highlight verse number itself for current
--   vulgate thinks psalms is esther!
--   some psalms are one out in vulgate and wycliff
--   vulgate has title as a separate verse
 
 lower priority
 

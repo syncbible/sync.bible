@@ -1,13 +1,14 @@
 // External dependencies
 import React, { useState, useMemo } from 'react';
 import { countBy, sortBy } from 'lodash';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 // Internal dependencies
 import SearchLink from '../search-link';
 import styles from './styles.module.scss';
 import InlineResultsToggle from '../inline-results-toggle';
 import bible from '../../data/bible.js';
+import { selectWord } from '../../actions';
 
 const groupResultsByStrongs = ( results ) => {
 	const grouped = {};
@@ -30,6 +31,7 @@ const groupResultsByStrongs = ( results ) => {
 };
 
 const SearchBlock = ( props ) => {
+	const dispatch = useDispatch();
 	const interfaceLanguage = useSelector(
 		( state ) => state.settings.interfaceLanguage
 	);
@@ -84,13 +86,37 @@ const SearchBlock = ( props ) => {
 		} );
 	};
 
+	const handleStrongsClick = ( strongsNumber ) => {
+		dispatch(
+			selectWord( {
+				lemma: strongsNumber,
+				version: props.data.version,
+			} )
+		);
+	};
+
+	const highlight = ( strongsNumber ) => {
+		window.updateAppComponent( 'highlightedWord', strongsNumber );
+	};
+
+	const unHighlight = () => {
+		window.updateAppComponent( 'highlightedWord', null );
+	};
+
 	let renderedResults;
 	if ( sortBy === 'strongs' ) {
 		renderedResults = strongsNumbers.map( ( strongsNumber ) => (
 			<div key={ strongsNumber } className={ styles.strongsGroup }>
 				<p className={ styles.strongsHeading }>
-					{ strongsNumber } (
-					{ groupedResults[ strongsNumber ].length })
+					<a
+						onClick={ () => handleStrongsClick( strongsNumber ) }
+						onMouseOver={ () => highlight( strongsNumber ) }
+						onMouseOut={ unHighlight }
+						className={ `${ strongsNumber } ${ styles.strongsLink }` }
+					>
+						{ strongsNumber } (
+						{ groupedResults[ strongsNumber ].length })
+					</a>
 				</p>
 				<ol className={ styles.results }>
 					{ renderResultsForStrongs( strongsNumber ) }

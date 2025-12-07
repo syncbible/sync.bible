@@ -27,6 +27,7 @@ export default function InlineResultsToggle() {
 			<a
 				className={ styles.foundInExtra }
 				onClick={ collapseSearchResults }
+				title="Hide reference context"
 			>
 				<UnfoldLess />
 			</a>
@@ -34,7 +35,11 @@ export default function InlineResultsToggle() {
 	}
 
 	return (
-		<a className={ styles.foundInExtra } onClick={ expandSearchResults }>
+		<a
+			className={ styles.foundInExtra }
+			onClick={ expandSearchResults }
+			title="Show reference context"
+		>
 			<UnfoldMore />
 		</a>
 	);

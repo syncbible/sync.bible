@@ -301,15 +301,15 @@ export default function Compare() {
 					<button onClick={ addAllWords }>Select all words</button>
 				) }
 			</div>
-			<button
+			<a
 				className={ styles.button }
 				onClick={ () => {
 					dispatch( settingsChange( 'compareMode', true ) );
 					setCompareAllChapters( true );
 				} }
 			>
-				All chapters
-			</button>
+				Compare all chapters
+			</a>
 		</div>
 	);
 }

@@ -38,9 +38,8 @@ const WordBlockLink = ( { strongsNumber, version, count } ) => {
 				onMouseOver={ () => highlight( strongsNumber ) }
 				onMouseOut={ unHighlight }
 			>
-				{ strongsNumber }
-			</a>{ ' ' }
-			{ count }
+				{ strongsNumber } { count && '(' + count + ')' }
+			</a>
 		</span>
 	);
 };

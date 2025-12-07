@@ -39,7 +39,7 @@ export default function SharedWords( { bookmarks } ) {
 			onToggle={ () => {
 				setOpen( ! open );
 			} }
-			header={ 'Shared Words' }
+			header={ 'Shared words' }
 			title={ 'Words that are used in more than one bookmark' }
 		>
 			<ol>{ sharedWordsRendered }</ol>

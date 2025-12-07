@@ -33,6 +33,7 @@ export default function SharedWords( { listOfReferences } ) {
 					key={ index }
 					strongsNumber={ word }
 					count={ sharedWords[ word ] }
+					version="original"
 				/>
 			</li>
 		) );

@@ -1,5 +1,5 @@
 // External dependencies
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { countBy, sortBy } from 'lodash';
 import { useSelector } from 'react-redux';
 
@@ -9,11 +9,43 @@ import styles from './styles.module.scss';
 import InlineResultsToggle from '../inline-results-toggle';
 import bible from '../../data/bible.js';
 
+const groupResultsByStrongs = ( results ) => {
+	const grouped = {};
+	results.forEach( ( result ) => {
+		if ( result.matchDetails ) {
+			const details = Array.isArray( result.matchDetails )
+				? result.matchDetails
+				: [ result.matchDetails ];
+			details.forEach( ( detail ) => {
+				if ( detail.strongsNumber ) {
+					if ( ! grouped[ detail.strongsNumber ] ) {
+						grouped[ detail.strongsNumber ] = [];
+					}
+					grouped[ detail.strongsNumber ].push( result );
+				}
+			} );
+		}
+	} );
+	return grouped;
+};
+
 const SearchBlock = ( props ) => {
 	const interfaceLanguage = useSelector(
 		( state ) => state.settings.interfaceLanguage
 	);
 	const { visible, sorted, terms, results } = props;
+	const [ sortBy, setSortBy ] = useState( 'reference' );
+
+	const groupedResults = useMemo(
+		() => ( results ? groupResultsByStrongs( results ) : {} ),
+		[ results ]
+	);
+
+	const strongsNumbers = useMemo(
+		() => Object.keys( groupedResults ),
+		[ groupedResults ]
+	);
+
 	if ( ! results ) {
 		return <div className={ styles.noResults }>Loading…</div>;
 	}
@@ -26,8 +58,46 @@ const SearchBlock = ( props ) => {
 		);
 	}
 
+	const renderResultsForStrongs = ( strongsNumber ) => {
+		const resultsForStrongs = groupedResults[ strongsNumber ];
+		if ( ! resultsForStrongs ) {
+			return null;
+		}
+
+		return resultsForStrongs.map( ( result, index ) => {
+			const globalIndex = results.findIndex(
+				( r ) => r.reference === result.reference
+			);
+			const isActive =
+				props &&
+				typeof props.current !== 'undefined' &&
+				props.current === globalIndex;
+			return (
+				<SearchLink
+					key={ `${ strongsNumber }-${ index }` }
+					index={ index }
+					referenceString={ result.reference }
+					wordId={ props.id }
+					isActive={ isActive }
+				/>
+			);
+		} );
+	};
+
 	let renderedResults;
-	if ( sorted ) {
+	if ( sortBy === 'strongs' ) {
+		renderedResults = strongsNumbers.map( ( strongsNumber ) => (
+			<div key={ strongsNumber } className={ styles.strongsGroup }>
+				<p className={ styles.strongsHeading }>
+					{ strongsNumber } (
+					{ groupedResults[ strongsNumber ].length })
+				</p>
+				<ol className={ styles.results }>
+					{ renderResultsForStrongs( strongsNumber ) }
+				</ol>
+			</div>
+		) );
+	} else if ( sorted ) {
 		const countedResults = countBy( results );
 		const countedResultsArray = Object.keys( countedResults ).map(
 			( key ) => ( {
@@ -79,15 +149,28 @@ const SearchBlock = ( props ) => {
 
 	return (
 		<div dir={ bible.isRtlVersion( interfaceLanguage ) ? 'rtl' : 'ltr' }>
-			{ /*<form>
-				<label>Filter by word</label>
-				<select>
-					<option></option>
-				</select>
-			</form>*/ }
-			Found { results.length } results in { props.data.version }{ ' ' }
 			<InlineResultsToggle />
-			<ol className={ styles.results }>{ renderedResults }</ol>
+			Found { results.length } results in { props.data.version }{ ' ' }
+			{ strongsNumbers.length > 0 && (
+				<form className={ styles.sortForm }>
+					<label>Sort by</label>
+					<select
+						value={ sortBy }
+						onChange={ ( event ) =>
+							setSortBy( event.target.value )
+						}
+						className={ styles.select }
+					>
+						<option value="reference">Reference</option>
+						<option value="strongs">Strong's Number</option>
+					</select>
+				</form>
+			) }
+			{ sortBy === 'strongs' || sorted ? (
+				<div>{ renderedResults }</div>
+			) : (
+				<ol className={ styles.results }>{ renderedResults }</ol>
+			) }
 		</div>
 	);
 };

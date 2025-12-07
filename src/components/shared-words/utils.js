@@ -1,8 +1,8 @@
-export function getSharedWordsFromBookmarks( bookmarks, original ) {
+export function getSharedWordsFromBookmarks( listOfReferences, original ) {
 	const words = {};
-	bookmarks.forEach( ( item ) => {
+	listOfReferences.forEach( ( reference ) => {
 		const allLemmasInBookmark = [];
-		const { book, chapter, verse } = item.data.reference;
+		const { book, chapter, verse } = reference;
 		if (
 			original &&
 			original[ book ] &&

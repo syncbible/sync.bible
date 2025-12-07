@@ -8,16 +8,19 @@ import Collapsible from '../collapsible/index.jsx';
 import { getSharedWordsFromBookmarks } from './utils.js';
 import WordBlockLink from '../word-details/word-block-link.jsx';
 
-export default function SharedWords( { list } ) {
+export default function SharedWords( { listOfReferences } ) {
 	const dispatch = useDispatch();
 
-	if ( list && list.length > 0 ) {
+	if ( listOfReferences && listOfReferences.length > 0 ) {
 		// Get the data for bookmark lemmas.
 		dispatch( fetchData( 'original' ) );
 	}
 	const original = useSelector( ( state ) => state.data[ 'original' ] );
 
-	const sharedWords = getSharedWordsFromBookmarks( list, original );
+	const sharedWords = getSharedWordsFromBookmarks(
+		listOfReferences,
+		original
+	);
 
 	const [ open, setOpen ] = useState( false );
 

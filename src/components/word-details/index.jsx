@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 // Internal dependencies
 import styles from './styles.module.scss';
 import CombinedResults from './combined';
+import { getReferenceFromSearchResult } from '../../lib/reference.js';
+import SharedWords from '../shared-words';
 import WordBlock from './word-block';
 
 const WordDetails = () => {
@@ -12,6 +14,14 @@ const WordDetails = () => {
 	const userInterface = useSelector( ( state ) => state.userInterface );
 	const words = list.filter( ( { listType } ) => listType === 'word' );
 	const [ focus, setFocus ] = useState( null );
+	const allResults = words
+		.filter( ( word ) => word.results )
+		.map( ( word ) =>
+			word.results.map( ( result ) =>
+				getReferenceFromSearchResult( result.reference )
+			)
+		)
+		.flat();
 
 	return words && words.length ? (
 		<div className={ styles.wordDetails }>
@@ -33,6 +43,7 @@ const WordDetails = () => {
 				);
 			} ) }
 			<CombinedResults type="word" />
+			<SharedWords listOfReferences={ allResults } />
 		</div>
 	) : (
 		<div className={ styles.wordBlockHelp }>

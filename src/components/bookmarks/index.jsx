@@ -26,7 +26,11 @@ export default function BookMarks() {
 				<Single bookmark={ bookmark } key={ key } index={ key } />
 			) ) }
 			<CombinedResults type="bookmark" />
-			<SharedWords list={ bookmarks } />
+			<SharedWords
+				listOfReferences={ bookmarks.map(
+					( item ) => item.data.reference
+				) }
+			/>
 		</>
 	);
 }

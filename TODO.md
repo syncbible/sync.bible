@@ -4,9 +4,6 @@
 -   John 16:32 -> 1 Kings 22:17
 -   1 Chron 16:7 - missing the LORD in ESV?
 -   Job 35:8 - missing a word in the ESV?
--   more translations: https://ebible.org/download.php
-    -   Tsakhur didn't work
-    -   Новы Запавет і Кнігі Старога Запавету didn't work
 -   Search in chapter
 -   Filter search results by strongs number eg life
 -   fix SweFolk1998 and VietNVB and GerOffBist
@@ -20,6 +17,8 @@
 -   show the whole range for cross references
 -   make it clear that we need original for several features, so when we dont have it show that we need it and add explain
 
+Text issues
+
 -   There are some texts from crosswire that couldn't be converted
 
     -   GerHfa2002
@@ -27,6 +26,10 @@
     -   Wulfila
     -   Nestle1904
     -   There are also some texts that say they have strongs but didn't convert right
+
+    -   more translations: https://ebible.org/download.php
+    -   Tsakhur didn't work
+    -   Новы Запавет і Кнігі Старога Запавету didn't work
 
 -   replace חׇpointing
 -   collapse all button

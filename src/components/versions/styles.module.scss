@@ -50,14 +50,16 @@
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: 8fr 11fr;
-    margin-bottom: 10px;
+    margin: 0 -10px 10px -10px;
+    padding: 0 10px;
 
     span {
         word-break: break-word;
     }
 
     &:hover {
-        color:var(--accent)
+        background: var(--background);
+        color:var(--color-bright)
     }
 
     &.withCheckbox {

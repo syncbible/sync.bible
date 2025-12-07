@@ -55,8 +55,12 @@ javascripture.api.search = {
 	resetMatches: function () {
 		this.results.matches = {};
 	},
-	addReference: function ( bookName, chapterNumber, verseNumber ) {
-		// We could add more to the results object here, but for now we just need the reference.
+	addReference: function (
+		bookName,
+		chapterNumber,
+		verseNumber,
+		matchDetails
+	) {
 		this.results.references.push( {
 			reference:
 				bookName +
@@ -64,6 +68,7 @@ javascripture.api.search = {
 				( chapterNumber + 1 ) +
 				'.' +
 				( verseNumber + 1 ),
+			matchDetails: matchDetails || null,
 		} );
 	},
 	lookForTerm: function () {
@@ -171,21 +176,34 @@ javascripture.api.search = {
 													term
 												)
 											) {
-												console.log( type );
-												console.log( wordType );
-												console.log( term );
+												var matchDetail = {
+													word:
+														typeof word === 'string'
+															? word
+															: word[ 0 ],
+													strongsNumber:
+														typeof word === 'string'
+															? null
+															: word[ 1 ],
+													morphology:
+														typeof word === 'string'
+															? null
+															: word[ 2 ],
+												};
+
 												if (
 													parameters.clusivity ===
 													'exclusive'
 												) {
 													self.results.matches[
 														term
-													] = true;
+													] = matchDetail;
 												} else {
 													self.addReference(
 														bookName,
 														chapterNumber,
-														verseNumber
+														verseNumber,
+														matchDetail
 													);
 												}
 											}
@@ -210,10 +228,20 @@ javascripture.api.search = {
 								matchesLength > 0 &&
 								matchesLength >= termsLength
 							) {
+								// Collect all match details from the matches object
+								var allMatches = Object.keys(
+									self.results.matches
+								).map( function ( key ) {
+									return self.results.matches[ key ];
+								} );
+
 								self.addReference(
 									bookName,
 									chapterNumber,
-									verseNumber
+									verseNumber,
+									allMatches.length > 1
+										? allMatches
+										: allMatches[ 0 ]
 								);
 								self.resetMatches(); //not sure if resetting is the right thing to do here - need to work out how to count matches in the same verse mulipule times
 							}

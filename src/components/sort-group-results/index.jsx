@@ -78,13 +78,7 @@ const SortGroupResults = ( {
 	if ( results ) {
 		// Use the provided results prop directly (e.g., from SearchStats for a single search term)
 		const groupedResults = useMemo(
-			() =>
-				getGroupedResults(
-					results,
-					group,
-					sort,
-					interfaceLanguage
-				),
+			() => getGroupedResults( results, group, sort, interfaceLanguage ),
 			[ results, group, sort, interfaceLanguage ]
 		);
 		totalResultsCount = results.length;
@@ -266,6 +260,11 @@ const SortGroupResults = ( {
 					selectedResultsGrouped[ result ][ 0 ],
 					group
 				);
+
+				// Don't output verse that only have one word in.
+				if ( countedResults[ referenceString ] < 2 ) {
+					return null;
+				}
 				const label = Array.isArray( selectedResultsGrouped )
 					? getLabel( selectedResultsGrouped[ result ][ 0 ] )
 					: result;

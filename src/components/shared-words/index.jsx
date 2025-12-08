@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchData } from '../../actions/index.js';
 import Collapsible from '../collapsible/index.jsx';
 import {
-	getSharedWordsFromBookmarks,
+	getSharedWordsFromReferences,
 	getListOfReferencesFromType,
 } from './utils.js';
 import WordBlockLink from '../word-details/word-block-link.jsx';
@@ -22,7 +22,7 @@ export default function SharedWords( { type } ) {
 	}
 	const original = useSelector( ( state ) => state.data[ 'original' ] );
 
-	const sharedWords = getSharedWordsFromBookmarks(
+	const sharedWords = getSharedWordsFromReferences(
 		listOfReferences,
 		original
 	);
@@ -50,7 +50,9 @@ export default function SharedWords( { type } ) {
 				setOpen( ! open );
 			} }
 			header={ 'Shared words' }
-			title={ 'Words that are used in more than one bookmark' }
+			title={
+				'Words that are used in more than one references - the number is how many references each word is used in.'
+			}
 		>
 			<ol>{ sharedWordsRendered }</ol>
 		</Collapsible>

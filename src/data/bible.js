@@ -15991,6 +15991,5 @@ bible.isRtlVersion = function ( version, book ) {
 		return true;
 	}
 };
-console.log( Object.keys( bible.Data.supportedVersions ) );
-console.log( Object.keys( bible.Data.tongues ) );
+
 export default bible;

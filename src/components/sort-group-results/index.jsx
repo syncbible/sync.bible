@@ -52,6 +52,7 @@ const SortGroupResults = ( {
 	allowPreview,
 	supportsWord,
 	results = null,
+	minCountToShow = 1,
 } ) => {
 	const dispatch = useDispatch();
 	const [ group, setGroup ] = useState( initialGroup );
@@ -262,7 +263,7 @@ const SortGroupResults = ( {
 				);
 
 				// Don't output verse that only have one word in.
-				if ( countedResults[ referenceString ] < 2 ) {
+				if ( countedResults[ referenceString ] < minCountToShow ) {
 					return null;
 				}
 				const label = Array.isArray( selectedResultsGrouped )

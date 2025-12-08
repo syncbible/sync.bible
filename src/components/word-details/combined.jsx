@@ -45,6 +45,7 @@ const CombinedResults = ( { type } ) => {
 				initialGroup="verse"
 				initialSort="desc"
 				allowPreview={ true }
+				minCountToShow={ 2 }
 			/>
 		</Collapsible>
 	);

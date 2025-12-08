@@ -1,14 +1,9 @@
 // External dependencies
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Internal dependencies
-import {
-	compareTwoReferences,
-	calculateRareWords,
-	calculateCommonWords,
-	calculateConnectionQuality,
-} from '../../lib/reference';
+import { compareTwoReferences } from '../../lib/reference';
 import {
 	fetchData,
 	selectWord,
@@ -22,6 +17,7 @@ import { getBooks, getCompareChapters } from '../../lib/select-helpers';
 import styles from './styles.module.scss';
 import bible from '../../data/bible.js';
 import Connections from './connections';
+import Lemma from './lemma';
 
 export default function Compare() {
 	const [ compareAllChapters, setCompareAllChapters ] = useState( false );
@@ -70,7 +66,9 @@ export default function Compare() {
 		}
 
 		const overlapMarkup = overlap.map( ( lemma ) => (
-			<div key={ lemma }>{ getWord( lemma ) }</div>
+			<div key={ lemma }>
+				<Lemma lemma={ lemma } />
+			</div>
 		) );
 
 		return (
@@ -148,7 +146,7 @@ export default function Compare() {
 				{ lemma } -{ ' ' }
 				{ strongsDictionary && strongsDictionary[ lemma ].lemma }
 				{ ' - ' }
-				{ strongsDictionary && strongsDictionary[ lemma ].translit }
+				{ strongsDictionary && strongsDictionary[ lemma ].xlit }
 			</div>
 		);
 	};

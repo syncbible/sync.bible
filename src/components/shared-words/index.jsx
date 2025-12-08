@@ -9,7 +9,7 @@ import {
 	getSharedWordsFromReferences,
 	getListOfReferencesFromType,
 } from './utils.js';
-import WordBlockLink from '../word-details/word-block-link.jsx';
+import Lemma from '../lemma';
 
 export default function SharedWords( { type } ) {
 	const list = useSelector( ( state ) => state.list );
@@ -34,9 +34,9 @@ export default function SharedWords( { type } ) {
 		.sort( ( wordA, wordB ) => sharedWords[ wordB ] > sharedWords[ wordA ] )
 		.map( ( word, index ) => (
 			<li key={ index }>
-				<WordBlockLink
+				<Lemma
 					key={ index }
-					strongsNumber={ word }
+					lemma={ word }
 					count={ sharedWords[ word ] }
 					version="original"
 				/>

@@ -17,7 +17,7 @@ import { getBooks, getCompareChapters } from '../../lib/select-helpers';
 import styles from './styles.module.scss';
 import bible from '../../data/bible.js';
 import Connections from './connections';
-import Lemma from './lemma';
+import Lemma from '../lemma';
 
 export default function Compare() {
 	const [ compareAllChapters, setCompareAllChapters ] = useState( false );
@@ -67,7 +67,7 @@ export default function Compare() {
 
 		const overlapMarkup = overlap.map( ( lemma ) => (
 			<div key={ lemma }>
-				<Lemma lemma={ lemma } />
+				<Lemma lemma={ lemma } version="original" />
 			</div>
 		) );
 

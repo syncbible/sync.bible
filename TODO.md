@@ -1,6 +1,7 @@
 ## Todo
 
 -   scroll to result when clicking on a word
+-   shortcuts for trays
 
 -   Something wrong with the book titles in vulgate versions. Eg text is Revelation but title says James, ext of Job pretends to be Judith
 

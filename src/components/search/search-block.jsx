@@ -9,6 +9,7 @@ import styles from './styles.module.scss';
 import InlineResultsToggle from '../inline-results-toggle';
 import bible from '../../data/bible.js';
 import { selectWord } from '../../actions';
+import { getReferenceFromSearchResult } from '../../lib/reference';
 
 const groupResultsByStrongs = ( results ) => {
 	const grouped = {};
@@ -35,12 +36,24 @@ const SearchBlock = ( props ) => {
 	const interfaceLanguage = useSelector(
 		( state ) => state.settings.interfaceLanguage
 	);
-	const { visible, sorted, terms, results } = props;
+
+	const { visible, sorted, results } = props;
 	const [ sortBy, setSortBy ] = useState( 'reference' );
 
+	const [ filterBy, setFilterBy ] = useState( 'all' );
+
+	const filteredResults =
+		results &&
+		results.filter( ( { reference } ) => {
+			return (
+				filterBy === 'all' ||
+				filterBy === getReferenceFromSearchResult( reference ).book
+			);
+		} );
 	const groupedResults = useMemo(
-		() => ( results ? groupResultsByStrongs( results ) : {} ),
-		[ results ]
+		() =>
+			filteredResults ? groupResultsByStrongs( filteredResults ) : {},
+		[ filteredResults ]
 	);
 
 	const strongsNumbers = useMemo(
@@ -59,6 +72,16 @@ const SearchBlock = ( props ) => {
 			</div>
 		);
 	}
+
+	const resultsBooks = [ ...results ].reduce(
+		( prev, current, index, acc ) => {
+			acc[ index ] = getReferenceFromSearchResult(
+				current.reference
+			).book;
+			return acc;
+		},
+		[]
+	);
 
 	const renderResultsForStrongs = ( strongsNumber ) => {
 		const resultsForStrongs = groupedResults[ strongsNumber ];
@@ -124,7 +147,7 @@ const SearchBlock = ( props ) => {
 			</div>
 		) );
 	} else if ( sorted ) {
-		const countedResults = countBy( results );
+		const countedResults = countBy( filteredResults );
 		const countedResultsArray = Object.keys( countedResults ).map(
 			( key ) => ( {
 				key,
@@ -155,8 +178,8 @@ const SearchBlock = ( props ) => {
 			} );
 	} else {
 		renderedResults =
-			Array.isArray( results ) &&
-			results.map( ( result, index ) => {
+			Array.isArray( filteredResults ) &&
+			filteredResults.map( ( result, index ) => {
 				const isActive =
 					props &&
 					typeof props.current !== 'undefined' &&
@@ -179,17 +202,38 @@ const SearchBlock = ( props ) => {
 			Found { results.length } results in { props.data.version }{ ' ' }
 			{ strongsNumbers.length > 0 && (
 				<form className={ styles.sortForm }>
-					<label>Sort by</label>
-					<select
-						value={ sortBy }
-						onChange={ ( event ) =>
-							setSortBy( event.target.value )
-						}
-						className={ styles.select }
-					>
-						<option value="reference">Reference</option>
-						<option value="strongs">Strong's Number</option>
-					</select>
+					<fieldset>
+						<div>
+							<label htmlFor="sort-search">Sort by</label>
+							<select
+								value={ sortBy }
+								onChange={ ( event ) =>
+									setSortBy( event.target.value )
+								}
+								name="sort-search"
+							>
+								<option value="reference">Reference</option>
+								<option value="strongs">Strongs</option>
+							</select>
+						</div>
+						<div>
+							<label htmlFor="filter-search">Show</label>
+							<select
+								name="filter-search"
+								onChange={ ( event ) =>
+									setFilterBy( event.target.value )
+								}
+								value={ filterBy }
+							>
+								<option value="all">All</option>
+								{ [ ...new Set( resultsBooks ) ].map(
+									( book, index ) => (
+										<option key={ index }>{ book }</option>
+									)
+								) }
+							</select>
+						</div>
+					</fieldset>
 				</form>
 			) }
 			{ sortBy === 'strongs' || sorted ? (

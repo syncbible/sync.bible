@@ -1,3 +1,6 @@
+// Internal imports.
+import { getReferenceFromSearchResult } from '../../lib/reference';
+
 export function getSharedWordsFromBookmarks( listOfReferences, original ) {
 	const words = {};
 	listOfReferences.forEach( ( reference ) => {
@@ -36,4 +39,20 @@ export function getSharedWordsFromBookmarks( listOfReferences, original ) {
 	} );
 
 	return words;
+}
+
+export function getListOfReferencesFromType( list, type ) {
+	const filteredList = list.filter( ( { listType } ) => listType === type );
+	if ( type === 'bookmark' ) {
+		return filteredList.map( ( item ) => item.data.reference );
+	}
+
+	return filteredList
+		.filter( ( word ) => word.results )
+		.map( ( word ) =>
+			word.results.map( ( result ) =>
+				getReferenceFromSearchResult( result.reference )
+			)
+		)
+		.flat();
 }

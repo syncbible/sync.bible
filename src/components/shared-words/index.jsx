@@ -5,10 +5,15 @@ import { useSelector, useDispatch } from 'react-redux';
 // Internal dependencies
 import { fetchData } from '../../actions/index.js';
 import Collapsible from '../collapsible/index.jsx';
-import { getSharedWordsFromBookmarks } from './utils.js';
+import {
+	getSharedWordsFromBookmarks,
+	getListOfReferencesFromType,
+} from './utils.js';
 import WordBlockLink from '../word-details/word-block-link.jsx';
 
-export default function SharedWords( { listOfReferences } ) {
+export default function SharedWords( { type } ) {
+	const list = useSelector( ( state ) => state.list );
+	const listOfReferences = getListOfReferencesFromType( list, type );
 	const dispatch = useDispatch();
 
 	if ( listOfReferences.length > 0 ) {

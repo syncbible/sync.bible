@@ -14,14 +14,6 @@ const WordDetails = () => {
 	const userInterface = useSelector( ( state ) => state.userInterface );
 	const words = list.filter( ( { listType } ) => listType === 'word' );
 	const [ focus, setFocus ] = useState( null );
-	const allResults = words
-		.filter( ( word ) => word.results )
-		.map( ( word ) =>
-			word.results.map( ( result ) =>
-				getReferenceFromSearchResult( result.reference )
-			)
-		)
-		.flat();
 
 	return words && words.length ? (
 		<div className={ styles.wordDetails }>
@@ -43,7 +35,7 @@ const WordDetails = () => {
 				);
 			} ) }
 			<CombinedResults type="word" />
-			<SharedWords listOfReferences={ allResults } />
+			<SharedWords type="word" />
 		</div>
 	) : (
 		<div className={ styles.wordBlockHelp }>

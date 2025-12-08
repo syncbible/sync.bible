@@ -7,10 +7,8 @@
     -   vulgate has title as a separate verse
 
 -   John 16:32 -> 1 Kings 22:17
--   Search in chapter/book
 -   fix SweFolk1998 and VietNVB and GerOffBist
 -   redo dead sea scrolls text?
--   move all strongs texts up
 -   turn off suggestions for reference input
 -   show common words under a list of passages, or rare words, or words that are used in more than one section
 -   add animation to current verse
@@ -34,10 +32,8 @@ Text issues
 -   replace חׇpointing
 -   collapse all button
 -   hover verse and highlight all words
--   surface shared words between all found verses
 -   most similar verse
 -   Ex 3:14 in ESV
--   explain why combined doesn't show until you do a search
 -   combined when sorted - books out of order for the 1 result case
 -   copy multiple verses / both versions
 -   select a color

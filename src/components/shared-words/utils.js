@@ -1,8 +1,5 @@
 // Internal imports.
-import {
-	getReferenceText,
-	getReferenceFromSearchResult,
-} from '../../lib/reference';
+import { getReferenceText, getReferenceFromString } from '../../lib/reference';
 
 export function getSharedWordsFromReferences(
 	listOfReferences,
@@ -20,7 +17,7 @@ export function getSharedWordsFromReferences(
 	const lemmasPerReference = uniqueReferences.map( ( referenceString ) => {
 		const allLemmasInReference = [];
 		const { book, chapter, verse } =
-			getReferenceFromSearchResult( referenceString );
+			getReferenceFromString( referenceString );
 		if (
 			data.original &&
 			data.original[ book ] &&
@@ -37,8 +34,7 @@ export function getSharedWordsFromReferences(
 					const lemmas = word[ 1 ].split( / |\// );
 					if ( lemmas ) {
 						lemmas.forEach( ( lemma ) => {
-							// Exclude lemmas that aren't numbers.
-
+							// Exclude popular lemmas.
 							if (
 								lemma &&
 								data.strongsObjectWithFamilies[ lemma ].count <
@@ -51,7 +47,6 @@ export function getSharedWordsFromReferences(
 				}
 			);
 		}
-
 		return [ ...new Set( allLemmasInReference ) ];
 	} );
 

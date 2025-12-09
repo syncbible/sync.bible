@@ -82,6 +82,19 @@ export const getReferenceText = ( referenceObject ) => {
 	);
 };
 
+export const getReferenceFromString = ( referenceString ) => {
+	const parts = referenceString.split( ' ' );
+	const book = parts[ 0 ];
+	const chapterAndVerse = parts[ 1 ].split( ':' );
+	const chapter = parseInt( chapterAndVerse[ 0 ] );
+	const verse = parseInt( chapterAndVerse[ 1 ] );
+	return {
+		book,
+		chapter,
+		verse,
+	};
+};
+
 export const getAllLemmasFromReference = ( reference, data ) => {
 	const verse =
 		data[ reference.version ][ reference.book ][ reference.chapter - 1 ][

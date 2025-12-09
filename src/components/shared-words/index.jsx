@@ -10,8 +10,10 @@ import {
 	getListOfReferencesFromType,
 } from './utils.js';
 import Lemma from '../lemma';
+import styles from './styles.module.scss';
 
 export default function SharedWords( { type } ) {
+	const [ limit, setLimit ] = useState( 100 );
 	const list = useSelector( ( state ) => state.list );
 	const listOfReferences = getListOfReferencesFromType( list, type );
 	const dispatch = useDispatch();
@@ -20,11 +22,12 @@ export default function SharedWords( { type } ) {
 		// Get the data for bookmark lemmas.
 		dispatch( fetchData( 'original' ) );
 	}
-	const original = useSelector( ( state ) => state.data[ 'original' ] );
+	const data = useSelector( ( state ) => state.data );
 
 	const sharedWords = getSharedWordsFromReferences(
 		listOfReferences,
-		original
+		data,
+		limit
 	);
 
 	const [ open, setOpen ] = useState( false );
@@ -43,18 +46,30 @@ export default function SharedWords( { type } ) {
 			</li>
 		) );
 
-	return sharedWordsRendered.length > 0 ? (
+	return listOfReferences.length > 1 ? (
 		<Collapsible
 			open={ open }
 			onToggle={ () => {
 				setOpen( ! open );
 			} }
 			header={ 'Shared words' }
-			title={
-				'Words that are used in more than one references - the number is how many references each word is used in.'
-			}
 		>
-			<ol>{ sharedWordsRendered }</ol>
+			Words that are used in more than one reference
+			<br />
+			with less than{ ' ' }
+			<input
+				type="number"
+				name="limit"
+				value={ limit }
+				onChange={ ( event ) =>
+					setLimit( Number( event.target.value ) )
+				}
+				className={ styles.limit }
+			/>{ ' ' }
+			uses
+			{ sharedWordsRendered.length > 0 && (
+				<ol>{ sharedWordsRendered }</ol>
+			) }
 		</Collapsible>
 	) : null;
 }

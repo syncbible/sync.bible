@@ -4,7 +4,11 @@ import {
 	getReferenceFromSearchResult,
 } from '../../lib/reference';
 
-export function getSharedWordsFromReferences( listOfReferences, original ) {
+export function getSharedWordsFromReferences(
+	listOfReferences,
+	data,
+	limit = 100
+) {
 	// First make the list of references unique.
 	const uniqueReferences = [ ...new Set( listOfReferences ) ];
 
@@ -18,29 +22,37 @@ export function getSharedWordsFromReferences( listOfReferences, original ) {
 		const { book, chapter, verse } =
 			getReferenceFromSearchResult( referenceString );
 		if (
-			original &&
-			original[ book ] &&
-			original[ book ][ chapter ] &&
-			original[ book ][ chapter - 1 ][ verse - 1 ] &&
-			typeof original[ book ][ chapter - 1 ][ verse - 1 ] !== 'string'
+			data.original &&
+			data.original[ book ] &&
+			data.original[ book ][ chapter ] &&
+			data.original[ book ][ chapter - 1 ][ verse - 1 ] &&
+			typeof data.original[ book ][ chapter - 1 ][ verse - 1 ] !==
+				'string'
 		) {
-			original[ book ][ chapter - 1 ][ verse - 1 ].forEach( ( word ) => {
-				if ( ! word[ 1 ] ) {
-					return;
+			data.original[ book ][ chapter - 1 ][ verse - 1 ].forEach(
+				( word ) => {
+					if ( ! word[ 1 ] ) {
+						return;
+					}
+					const lemmas = word[ 1 ].split( / |\// );
+					if ( lemmas ) {
+						lemmas.forEach( ( lemma ) => {
+							// Exclude lemmas that aren't numbers.
+
+							if (
+								lemma &&
+								data.strongsObjectWithFamilies[ lemma ].count <
+									limit
+							) {
+								allLemmasInReference.push( lemma );
+							}
+						} );
+					}
 				}
-				const lemmas = word[ 1 ].split( / |\// );
-				if ( lemmas ) {
-					lemmas.forEach( ( lemma ) => {
-						// Exclude lemmas that aren't numbers.
-						if ( lemma && parseInt( lemma.substring( 1 ) ) ) {
-							allLemmasInReference.push( lemma );
-						}
-					} );
-				}
-			} );
+			);
 		}
 
-		return allLemmasInReference;
+		return [ ...new Set( allLemmasInReference ) ];
 	} );
 
 	// Validate.

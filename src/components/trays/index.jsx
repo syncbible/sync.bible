@@ -38,7 +38,7 @@ import JoinFull from '../svg/join-full';
 import CogSvg from '../svg/cog';
 import LibraryBooksSvg from '../svg/library-books';
 
-const trays = [
+export const trays = [
 	{
 		visible: true,
 		id: 'goto',

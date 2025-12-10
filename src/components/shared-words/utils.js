@@ -72,8 +72,13 @@ export function getSharedWordsFromReferences(
 export function getListOfReferencesFromType( list, type ) {
 	const filteredList = list.filter( ( { listType } ) => listType === type );
 	if ( type === 'bookmark' ) {
-		return filteredList.map( ( item ) =>
-			getReferenceText( item.data.reference )
+		return filteredList.map(
+			( item ) =>
+				item.data.reference.book +
+				'.' +
+				item.data.reference.chapter +
+				'.' +
+				item.data.reference.verse
 		);
 	}
 

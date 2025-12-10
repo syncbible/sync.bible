@@ -83,11 +83,11 @@ export const getReferenceText = ( referenceObject ) => {
 };
 
 export const getReferenceFromString = ( referenceString ) => {
-	const parts = referenceString.split( ' ' );
+	console.log( referenceString );
+	const parts = referenceString.split( '.' );
 	const book = parts[ 0 ];
-	const chapterAndVerse = parts[ 1 ].split( ':' );
-	const chapter = parseInt( chapterAndVerse[ 0 ] );
-	const verse = parseInt( chapterAndVerse[ 1 ] );
+	const chapter = parseInt( parts[ 1 ] );
+	const verse = parseInt( parts[ 2 ] );
 	return {
 		book,
 		chapter,

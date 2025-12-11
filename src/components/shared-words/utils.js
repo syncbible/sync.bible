@@ -37,7 +37,7 @@ export function getSharedWordsFromReferences(
 							// Exclude popular lemmas.
 							if (
 								lemma &&
-								data.strongsObjectWithFamilies[ lemma ].count <
+								data.[ lemma ].count <
 									limit
 							) {
 								allLemmasInReference.push( lemma );

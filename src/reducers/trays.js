@@ -4,12 +4,11 @@ const trays = ( state = 'goto', action ) => {
 	const parsedFilter = parseInt( action.filter );
 	switch ( action.type ) {
 		case 'SET_TRAY_VISIBILITY_FILTER':
-			if ( typeof parsedFilter === 'number' ) {
-				console.log( parsedFilter );
-				return (
-					traysList[ parsedFilter - 1 ] &&
-					traysList[ parsedFilter - 1 ].id
-				);
+			if (
+				typeof parsedFilter === 'number' &&
+				traysList[ parsedFilter - 1 ]
+			) {
+				return traysList[ parsedFilter - 1 ].id;
 			}
 			return action.filter;
 

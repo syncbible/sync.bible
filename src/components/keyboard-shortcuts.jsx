@@ -98,7 +98,17 @@ const KeyboardShortcuts = () => {
 			( event, combo ) => goToChapter( event, combo )
 		);
 		mousetrap.bind(
-			[ 'alt+1', 'alt+2', 'alt+3', 'alt+4', 'alt+5', 'alt+6' ],
+			[
+				'alt+1',
+				'alt+2',
+				'alt+3',
+				'alt+4',
+				'alt+5',
+				'alt+6',
+				'alt+7',
+				'alt+8',
+				'alt+9',
+			],
 			( event, combo ) => openTray( event, combo )
 		);
 		mousetrap.bind( [ 'esc' ], () => dispatch( deactivateSearchSelect() ) );

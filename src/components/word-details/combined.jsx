@@ -7,7 +7,7 @@ import { setTrayVisibilityFilter } from '../../actions';
 import Collapsible from '../collapsible';
 import JoinFull from '../svg/join-full';
 import SortGroupResults from '../sort-group-results';
-import { hasDisplayableCombinedResults } from '../../lib/reference';
+import { getCombinedResults } from '../../lib/reference';
 
 const CombinedResults = ( { type } ) => {
 	const dispatch = useDispatch();
@@ -16,20 +16,30 @@ const CombinedResults = ( { type } ) => {
 		return state.list.filter( ( { listType } ) => listType === type );
 	} );
 
-	if ( words.length < 2 ) {
-		return null;
-	}
+	// Compute combined results once here and check if there's displayable content
+	// Pass the precomputed results to SortGroupResults to avoid duplicate computation
+	const precomputedData = useMemo( () => {
+		if ( words.length < 2 ) {
+			return null;
+		}
 
-	// Check if there are any actual combined results that will pass the minCountToShow filter
-	// NOTE: This calls getCombinedResults(), which SortGroupResults will also call again.
-	// This duplication is a tradeoff to avoid rendering the Collapsible wrapper when there's no content.
-	const _results = words.map( ( { results } ) => results );
-	const hasDisplayableResults = useMemo(
-		() => hasDisplayableCombinedResults( _results, 'verse', 2 ),
-		[ JSON.stringify( _results ) ]
-	);
+		const _results = words.map( ( { results } ) => results );
+		const combined = getCombinedResults( _results, 'verse' );
 
-	if ( ! hasDisplayableResults ) {
+		// Count occurrences to check if any reference appears at least twice (minCountToShow = 2)
+		const referenceCounts = {};
+		combined.forEach( ( ref ) => {
+			referenceCounts[ ref ] = ( referenceCounts[ ref ] || 0 ) + 1;
+		} );
+
+		const hasDisplayable = Object.values( referenceCounts ).some(
+			( count ) => count >= 2
+		);
+
+		return hasDisplayable ? _results : null;
+	}, [ words ] );
+
+	if ( ! precomputedData ) {
 		return null;
 	}
 
@@ -60,6 +70,7 @@ const CombinedResults = ( { type } ) => {
 				initialSort="desc"
 				allowPreview={ true }
 				minCountToShow={ 2 }
+				precomputedResults={ precomputedData }
 			/>
 		</Collapsible>
 	);

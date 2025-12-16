@@ -53,6 +53,7 @@ const SortGroupResults = ( {
 	supportsWord,
 	results = null,
 	minCountToShow = 1,
+	precomputedResults = null,
 } ) => {
 	const dispatch = useDispatch();
 	const [ group, setGroup ] = useState( initialGroup );
@@ -97,71 +98,51 @@ const SortGroupResults = ( {
 					sort,
 					interfaceLanguage
 				),
-			[ getGroupedResults, _list, group, sort, interfaceLanguage ]
+			[ _list, group, sort, interfaceLanguage ]
 		);
 		totalResultsCount = _list.results.length;
 		countedResults = useMemo(
 			() => getCountedResults( groupedResults, group ),
-			[ getCountedResults, groupedResults, group ]
+			[ groupedResults, group ]
 		);
 		selectedResultsGrouped = groupedResults;
 	} else {
-		const _results = _list.map( ( { results } ) => {
-			return results;
-		} );
-
-		const _combinedResults = useMemo(
-			() => getCombinedResults( _results ),
-			[ getCombinedResults, _results ]
-		);
-		const _combinedResultsGrouped = useMemo(
-			() => getCombinedResults( _results, group ),
-			[ getCombinedResults, _results, group ]
+		// Use precomputed results if available (passed from parent), otherwise compute them
+		const _results = useMemo(
+			() => precomputedResults || _list.map( ( { results } ) => results ),
+			[ precomputedResults, _list ]
 		);
 
-		// TODO - calling this twice seens very inefficient.
-		const selectedResults = useMemo(
-			() =>
-				getGroupedResults(
-					_combinedResults,
-					group,
-					sort,
-					interfaceLanguage
-				),
-			[
-				getGroupedResults,
-				_combinedResults,
+		// Consolidate combined results calculation into a single memoized computation
+		const combinedResultsData = useMemo( () => {
+			// Get all combined results (no grouping) for total count
+			const allCombinedResults = getCombinedResults( _results );
+
+			// Get combined results WITH initial grouping to collapse duplicates within same verse/chapter/book
+			// This is necessary because otherwise if a passage contains lots of instances of the same word
+			// it would be counted as significant. We need to combine the results by group before grouping them again.
+			const combinedResultsGrouped = getCombinedResults( _results, group );
+
+			// Apply sorting and final grouping
+			const sortedGroupedResults = getGroupedResults(
+				combinedResultsGrouped,
 				group,
 				sort,
-				interfaceLanguage,
-			]
-		);
+				interfaceLanguage
+			);
 
-		// results are all the results to do things like percentages
-		// resultsGrouped are grouped by the selected group.
-		// This is necessary because otherwise if a passage contains lots of instances of the same word it would be counted as significant by getGroupedResults
-		// Instead we have to combined the results by group before grouping them again.
-		totalResultsCount = _combinedResults.length;
+			return {
+				totalCount: allCombinedResults.length,
+				groupedResults: sortedGroupedResults,
+			};
+		}, [ _results, group, sort, interfaceLanguage ] );
+
+		totalResultsCount = combinedResultsData.totalCount;
 		countedResults = useMemo(
-			() => getCountedResults( selectedResults, group ),
-			[ getCountedResults, selectedResults, group ]
+			() => getCountedResults( combinedResultsData.groupedResults, group ),
+			[ combinedResultsData.groupedResults, group ]
 		);
-		selectedResultsGrouped = useMemo(
-			() =>
-				getGroupedResults(
-					_combinedResultsGrouped,
-					group,
-					sort,
-					interfaceLanguage
-				),
-			[
-				getGroupedResults,
-				_combinedResultsGrouped,
-				group,
-				sort,
-				interfaceLanguage,
-			]
-		);
+		selectedResultsGrouped = combinedResultsData.groupedResults;
 	}
 
 	const groupSelector = (

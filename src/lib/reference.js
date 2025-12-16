@@ -602,19 +602,6 @@ export function getCombinedResults( listResults, group ) {
 	return combinedResults;
 }
 
-export function hasDisplayableCombinedResults( listResults, group = 'verse', minCount = 2 ) {
-	const combinedResults = getCombinedResults( listResults, group );
-
-	// Count occurrences of each reference
-	const referenceCounts = {};
-	combinedResults.forEach( ( ref ) => {
-		referenceCounts[ ref ] = ( referenceCounts[ ref ] || 0 ) + 1;
-	} );
-
-	// Check if any reference appears at least minCount times
-	return Object.values( referenceCounts ).some( ( count ) => count >= minCount );
-}
-
 export const getGroupedResults = (
 	results,
 	selectedGroup,

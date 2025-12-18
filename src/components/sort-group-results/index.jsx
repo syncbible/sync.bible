@@ -2,6 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 // Internal dependencies.
 import { goToReferenceAction } from '../../actions';
@@ -13,36 +14,8 @@ import {
 } from '../../lib/reference';
 import ExpandedSearchResults from '../expanded-search-results';
 import InlineResultsToggle from '../inline-results-toggle';
+import { getReferenceStringByGroup, getCountedResults } from './utils';
 
-function getReferenceStringByGroup( reference, group ) {
-	if ( group === 'word' || group === 'morph' ) {
-		return reference.word[ 0 ];
-	}
-
-	if ( group === 'book' ) {
-		return reference[ 0 ];
-	}
-	if ( group === 'chapter' ) {
-		return reference[ 0 ] + '.' + reference[ 1 ];
-	}
-
-	return reference.join( '.' );
-}
-
-function getCountedResults( results, group ) {
-	const countedResults = {};
-	results.forEach( ( resultArray ) => {
-		const referenceString = getReferenceStringByGroup(
-			resultArray[ 0 ],
-			group
-		);
-
-		countedResults[ referenceString ] = resultArray.length;
-	} );
-	return countedResults;
-}
-
-let totalResultsCount, countedResults, selectedResultsGrouped;
 const SortGroupResults = ( {
 	type = null,
 	version,
@@ -77,72 +50,79 @@ const SortGroupResults = ( {
 		return state.list;
 	}, shallowEqual );
 
-	if ( results ) {
-		// Use the provided results prop directly (e.g., from SearchStats for a single search term)
-		const groupedResults = useMemo(
-			() => getGroupedResults( results, group, sort, interfaceLanguage ),
-			[ results, group, sort, interfaceLanguage ]
+	// Determine which code path we're using
+	const useDirectResults = !!results;
+	const useListResults = !results && type && strongsNumber && version;
+	const useCombinedResults = !results && !(type && strongsNumber && version);
+
+	// Branch 1: Direct results
+	const directGroupedResults = useMemo(
+		() => useDirectResults ? getGroupedResults( results, group, sort, interfaceLanguage ) : null,
+		[ useDirectResults, results, group, sort, interfaceLanguage ]
+	);
+	const directCountedResults = useMemo(
+		() => directGroupedResults ? getCountedResults( directGroupedResults, group ) : null,
+		[ directGroupedResults, group ]
+	);
+
+	// Branch 2: List results
+	const listGroupedResults = useMemo(
+		() => useListResults ? getGroupedResults( _list.results, group, sort, interfaceLanguage ) : null,
+		[ useListResults, _list, group, sort, interfaceLanguage ]
+	);
+	const listCountedResults = useMemo(
+		() => listGroupedResults ? getCountedResults( listGroupedResults, group ) : null,
+		[ listGroupedResults, group ]
+	);
+
+	// Branch 3: Combined results
+	const _results = useMemo(
+		() => useCombinedResults ? (precomputedResults || _list.map( ( { results } ) => results )) : null,
+		[ useCombinedResults, precomputedResults, _list ]
+	);
+	const combinedResultsData = useMemo( () => {
+		if (!useCombinedResults || !_results) return null;
+
+		// Get all combined results (no grouping) for total count
+		const allCombinedResults = getCombinedResults( _results );
+
+		// Get combined results WITH initial grouping to collapse duplicates within same verse/chapter/book
+		// This is necessary because otherwise if a passage contains lots of instances of the same word
+		// it would be counted as significant. We need to combine the results by group before grouping them again.
+		const combinedResultsGrouped = getCombinedResults( _results, group );
+
+		// Apply sorting and final grouping
+		const sortedGroupedResults = getGroupedResults(
+			combinedResultsGrouped,
+			group,
+			sort,
+			interfaceLanguage
 		);
+
+		return {
+			totalCount: allCombinedResults.length,
+			groupedResults: sortedGroupedResults,
+		};
+	}, [ useCombinedResults, _results, group, sort, interfaceLanguage ] );
+	const combinedCountedResults = useMemo(
+		() => combinedResultsData ? getCountedResults( combinedResultsData.groupedResults, group ) : null,
+		[ combinedResultsData, group ]
+	);
+
+	// Select the appropriate results based on which path we're using
+	let totalResultsCount, countedResults, selectedResultsGrouped;
+	if ( useDirectResults ) {
 		totalResultsCount = results.length;
-		countedResults = useMemo(
-			() => getCountedResults( groupedResults, group ),
-			[ groupedResults, group ]
-		);
-		selectedResultsGrouped = groupedResults;
-	} else if ( type && strongsNumber && version ) {
-		const groupedResults = useMemo(
-			() =>
-				getGroupedResults(
-					_list.results,
-					group,
-					sort,
-					interfaceLanguage
-				),
-			[ _list, group, sort, interfaceLanguage ]
-		);
+		countedResults = directCountedResults;
+		selectedResultsGrouped = directGroupedResults;
+	} else if ( useListResults ) {
 		totalResultsCount = _list.results.length;
-		countedResults = useMemo(
-			() => getCountedResults( groupedResults, group ),
-			[ groupedResults, group ]
-		);
-		selectedResultsGrouped = groupedResults;
+		countedResults = listCountedResults;
+		selectedResultsGrouped = listGroupedResults;
 	} else {
-		// Use precomputed results if available (passed from parent), otherwise compute them
-		const _results = useMemo(
-			() => precomputedResults || _list.map( ( { results } ) => results ),
-			[ precomputedResults, _list ]
-		);
-
-		// Consolidate combined results calculation into a single memoized computation
-		const combinedResultsData = useMemo( () => {
-			// Get all combined results (no grouping) for total count
-			const allCombinedResults = getCombinedResults( _results );
-
-			// Get combined results WITH initial grouping to collapse duplicates within same verse/chapter/book
-			// This is necessary because otherwise if a passage contains lots of instances of the same word
-			// it would be counted as significant. We need to combine the results by group before grouping them again.
-			const combinedResultsGrouped = getCombinedResults( _results, group );
-
-			// Apply sorting and final grouping
-			const sortedGroupedResults = getGroupedResults(
-				combinedResultsGrouped,
-				group,
-				sort,
-				interfaceLanguage
-			);
-
-			return {
-				totalCount: allCombinedResults.length,
-				groupedResults: sortedGroupedResults,
-			};
-		}, [ _results, group, sort, interfaceLanguage ] );
-
-		totalResultsCount = combinedResultsData.totalCount;
-		countedResults = useMemo(
-			() => getCountedResults( combinedResultsData.groupedResults, group ),
-			[ combinedResultsData.groupedResults, group ]
-		);
-		selectedResultsGrouped = combinedResultsData.groupedResults;
+		totalResultsCount = combinedResultsData?.totalCount;
+		countedResults = combinedCountedResults;
+		selectedResultsGrouped = combinedResultsData?.groupedResults;
 	}
 
 	const groupSelector = (
@@ -306,4 +286,20 @@ const SortGroupResults = ( {
 	);
 };
 
-export default React.memo( SortGroupResults );
+SortGroupResults.propTypes = {
+	type: PropTypes.string,
+	version: PropTypes.string,
+	strongsNumber: PropTypes.string,
+	initialGroup: PropTypes.string.isRequired,
+	initialSort: PropTypes.string.isRequired,
+	allowPreview: PropTypes.bool,
+	supportsWord: PropTypes.bool,
+	results: PropTypes.array,
+	minCountToShow: PropTypes.number,
+	precomputedResults: PropTypes.array,
+};
+
+const MemoizedSortGroupResults = React.memo( SortGroupResults );
+MemoizedSortGroupResults.displayName = 'SortGroupResults';
+
+export default MemoizedSortGroupResults;

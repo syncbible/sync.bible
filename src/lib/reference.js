@@ -582,23 +582,42 @@ export const getCombinedResults = ( list, group ) => {
 };*/
 
 export function getCombinedResults( listResults, group ) {
-	let combinedResults = [];
-	listResults.forEach( ( results ) => {
-		const resultsArray =
-			results &&
-			results.map( ( { reference } ) => {
-				const referenceArray = reference.split( '.' );
-				if ( group === 'book' ) {
-					return referenceArray[ 0 ];
-				} else if ( group === 'chapter' ) {
-					return referenceArray[ 0 ] + '.' + referenceArray[ 1 ];
+	// Use a Set to track uniqueness across all results as we go
+	const seenInCurrentList = new Set();
+	const combinedResults = [];
+
+	for ( const results of listResults ) {
+		if ( ! results ) continue;
+
+		seenInCurrentList.clear();
+
+		for ( const { reference } of results ) {
+			let key;
+			if ( group === 'book' ) {
+				// Extract book without splitting the entire string
+				const dotIndex = reference.indexOf( '.' );
+				key = dotIndex > -1 ? reference.substring( 0, dotIndex ) : reference;
+			} else if ( group === 'chapter' ) {
+				// Extract book.chapter without splitting the entire string
+				const firstDot = reference.indexOf( '.' );
+				if ( firstDot > -1 ) {
+					const secondDot = reference.indexOf( '.', firstDot + 1 );
+					key = secondDot > -1 ? reference.substring( 0, secondDot ) : reference;
+				} else {
+					key = reference;
 				}
-				return reference;
-			} );
-		// Make these results unique.
-		const uniqueResults = [ ...new Set( resultsArray ) ];
-		combinedResults = combinedResults.concat( uniqueResults );
-	} );
+			} else {
+				key = reference;
+			}
+
+			// Only add if we haven't seen it in the current list
+			if ( ! seenInCurrentList.has( key ) ) {
+				seenInCurrentList.add( key );
+				combinedResults.push( key );
+			}
+		}
+	}
+
 	return combinedResults;
 }
 

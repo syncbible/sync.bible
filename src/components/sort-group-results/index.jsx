@@ -24,6 +24,7 @@ const SortGroupResults = ( {
 	initialSort,
 	allowPreview,
 	supportsWord,
+	supportsStrongs = false,
 	results = null,
 	minCountToShow = 1,
 	precomputedResults = null,
@@ -138,6 +139,7 @@ const SortGroupResults = ( {
 				<option value="verse">verse</option>
 				{ supportsWord && <option value="word">word</option> }
 				{ supportsWord && <option value="morph">morph</option> }
+				{ supportsStrongs && <option value="strongs">strongs</option> }
 			</select>
 		</div>
 	);
@@ -168,6 +170,9 @@ const SortGroupResults = ( {
 		if ( group === 'word' ) {
 			return result.word && result.word[ 0 ];
 		}
+		if ( group === 'strongs' ) {
+			return result.strongsNumber;
+		}
 		if ( group === 'book' ) {
 			if ( Array.isArray( result ) ) {
 				return result[ 0 ];
@@ -189,7 +194,7 @@ const SortGroupResults = ( {
 
 	const getReference = ( result ) => {
 		let referenceString;
-		if ( group === 'word' || group === 'morph' ) {
+		if ( group === 'word' || group === 'morph' || group === 'strongs' ) {
 			referenceString = result[ 0 ].reference;
 		} else {
 			const reference = result[ 0 ];
@@ -294,6 +299,7 @@ SortGroupResults.propTypes = {
 	initialSort: PropTypes.string.isRequired,
 	allowPreview: PropTypes.bool,
 	supportsWord: PropTypes.bool,
+	supportsStrongs: PropTypes.bool,
 	results: PropTypes.array,
 	minCountToShow: PropTypes.number,
 	precomputedResults: PropTypes.array,

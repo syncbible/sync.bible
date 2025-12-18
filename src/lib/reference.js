@@ -691,6 +691,28 @@ export const getGroupedResults = (
 		resultsToDisplay = groupBy( results, function ( { word } ) {
 			return word && word[ 2 ];
 		} );
+	} else if ( selectedGroup === 'strongs' ) {
+		// Group by Strong's number from matchDetails
+		resultsToDisplay = {};
+		results.forEach( ( result ) => {
+			if ( result.matchDetails ) {
+				const details = Array.isArray( result.matchDetails )
+					? result.matchDetails
+					: [ result.matchDetails ];
+				details.forEach( ( detail ) => {
+					if ( detail.strongsNumber ) {
+						if ( ! resultsToDisplay[ detail.strongsNumber ] ) {
+							resultsToDisplay[ detail.strongsNumber ] = [];
+						}
+						// Add the full result with strongsNumber property for compatibility
+						resultsToDisplay[ detail.strongsNumber ].push( {
+							...result,
+							strongsNumber: detail.strongsNumber,
+						} );
+					}
+				} );
+			}
+		} );
 	}
 
 	if ( sort !== 'reference' ) {

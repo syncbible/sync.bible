@@ -19,6 +19,7 @@ export default function SearchStats( { results, data } ) {
 				initialGroup="book"
 				initialSort="reference"
 				supportsWord={ false }
+				supportsStrongs={ true }
 			/>
 		</div>
 	);

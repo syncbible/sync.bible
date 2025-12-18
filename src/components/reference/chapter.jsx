@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import { Waypoint } from 'react-waypoint';
 import ReactDOM from 'react-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Virtuoso } from 'react-virtuoso';
 
@@ -38,9 +38,14 @@ function getLanguageFromVersion( version, book ) {
 }
 
 const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
-	const reference = useSelector( ( state ) => state.reference );
-	const data = useSelector( ( state ) => state.data );
-	const inSync = useSelector( ( state ) => state.settings.inSync );
+	const { reference, data, inSync } = useSelector(
+		( state ) => ({
+			reference: state.reference,
+			data: state.data,
+			inSync: state.settings.inSync,
+		}),
+		shallowEqual
+	);
 	const currentReference = reference[ index ];
 	const version = currentReference.version;
 	const startVerse = currentReference.verse;

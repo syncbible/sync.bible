@@ -1,6 +1,6 @@
 // External
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import classnames from 'classnames';
 
 // Internal
@@ -8,10 +8,15 @@ import ReferenceComponent from '../reference';
 import styles from './style.module.scss';
 
 const ReferenceWrapper = () => {
-	const reference = useSelector( ( state ) => state.reference );
-	const inSync = useSelector( ( state ) => state.settings.inSync );
-	const searchSelect = useSelector( ( state ) => state.searchSelect );
-	const sidebarOpen = useSelector( ( state ) => state.sidebar );
+	const { reference, inSync, searchSelect, sidebarOpen } = useSelector(
+		( state ) => ({
+			reference: state.reference,
+			inSync: state.settings.inSync,
+			searchSelect: state.searchSelect,
+			sidebarOpen: state.sidebar,
+		}),
+		shallowEqual
+	);
 
 	let references;
 

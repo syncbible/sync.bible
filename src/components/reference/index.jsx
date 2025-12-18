@@ -50,7 +50,7 @@ const ReferenceComponent = ( props ) => {
 
 	useEffect( () => {
 		setReferences( getReferencesFromProps( props ) );
-	}, [ props ] );
+	}, [ props.reference?.book, props.reference?.chapter, props.index ] );
 
 	useLayoutEffect( () => {
 		console && console.log( new Date() - timer );

@@ -18,6 +18,13 @@
 		font-size: 1em;
 		height: 1.8em;
 	}
+
+	input[type="submit"]:disabled {
+		background: $grey;
+		color: $grey-dark;
+		cursor: not-allowed;
+		opacity: 0.6;
+	}
 }
 
 .picker-button {

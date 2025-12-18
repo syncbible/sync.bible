@@ -1,6 +1,6 @@
 // External
-import React, { useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useCallback, useMemo } from 'react';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import classnames from 'classnames';
 
 // Internal
@@ -20,16 +20,29 @@ const Versions = ( { trays } ) => {
 	const availableVersions = useSelector(
 		( state ) => state.settings.versions
 	);
-	const { interfaceLanguage, compareMode } = useSelector( ( state ) => {
-		return {
+	const { interfaceLanguage, compareMode } = useSelector(
+		( state ) => ({
 			compareMode: state.settings.compareMode,
 			interfaceLanguage: state.settings.interfaceLanguage,
-		};
-	} );
+		}),
+		shallowEqual
+	);
 	const reference = useSelector( ( state ) => state.reference );
-	const referenceVersions = reference.map( ( ref ) => ref.version );
-	const usedVersions = [ ...referenceVersions, interfaceLanguage ];
-	const allVersions = Object.keys( bible.Data.supportedVersions );
+
+	const referenceVersions = useMemo(
+		() => reference.map( ( ref ) => ref.version ),
+		[ reference ]
+	);
+
+	const usedVersions = useMemo(
+		() => [ ...referenceVersions, interfaceLanguage ],
+		[ referenceVersions, interfaceLanguage ]
+	);
+
+	const allVersions = useMemo(
+		() => Object.keys( bible.Data.supportedVersions ),
+		[]
+	);
 
 	const onSelectVersion = useCallback(
 		( version ) => {

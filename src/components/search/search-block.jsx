@@ -42,14 +42,17 @@ const SearchBlock = ( props ) => {
 
 	const [ filterBy, setFilterBy ] = useState( 'all' );
 
-	const filteredResults =
-		results &&
-		results.filter( ( { reference } ) => {
-			return (
-				filterBy === 'all' ||
-				filterBy === getReferenceFromSearchResult( reference ).book
-			);
-		} );
+	const filteredResults = useMemo(
+		() =>
+			results?.filter( ( { reference } ) => {
+				return (
+					filterBy === 'all' ||
+					filterBy === getReferenceFromSearchResult( reference ).book
+				);
+			} ),
+		[ results, filterBy ]
+	);
+
 	const groupedResults = useMemo(
 		() =>
 			filteredResults ? groupResultsByStrongs( filteredResults ) : {},

@@ -11,6 +11,7 @@ import TrayList from './tray-list';
 import Footer from '../footer';
 import { toggleSidebar } from '../../actions';
 import { rootClasses } from '../utils';
+import { selectAllSettings } from '../../selectors';
 
 // Tray comonents
 import BookMarks from '../bookmarks';
@@ -129,12 +130,8 @@ const Trays = () => {
 		typeof navigator !== 'undefined' &&
 		/iPad|iPhone|iPod/.test( navigator.userAgent );
 
-	// If you combine these they stop working.
-	const darkMode = useSelector( ( state ) => state.settings.darkMode );
-	const compareMode = useSelector( ( state ) => state.settings.compareMode );
-	const expandedSearchResults = useSelector(
-		( state ) => state.settings.expandedSearchResults
-	);
+	// Using selectAllSettings selector to combine multiple settings subscriptions
+	const { darkMode, compareMode, expandedSearchResults } = useSelector( selectAllSettings );
 	const drawerWidth = compareMode ? '100vw' : 350;
 
 	if ( interfaceLanguage ) {

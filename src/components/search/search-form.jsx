@@ -63,15 +63,11 @@ const SearchForm = ( { isActive } ) => {
 		event.preventDefault();
 		dispatch( clearSearch() );
 	};
-	const isSubmitButtonDisabled = () => {
-		return false;
-		return (
-			! versionHasLoaded || Object.keys( versionHasLoaded ).length === 0
-		);
-	};
+
+	const isSubmitButtonDisabled = ! versionHasLoaded;
 
 	const searchButtonText = () => {
-		if ( isSubmitButtonDisabled() ) {
+		if ( isSubmitButtonDisabled ) {
 			return 'Loading ' + searchForm.version + '...';
 		}
 
@@ -94,15 +90,19 @@ const SearchForm = ( { isActive } ) => {
 			dispatch( settingsChange( 'expandedSearchResults', true ) );
 		}
 	};
-	const change = ( event ) => {
-		dispatch( updateSearchForm( event.target.name, event.target.value ) );
-	};
+	const change = useCallback(
+		( event ) => {
+			dispatch( updateSearchForm( event.target.name, event.target.value ) );
+		},
+		[ dispatch ]
+	);
+
 	const selectChange = useCallback(
 		( event ) => {
-			change( event );
+			dispatch( updateSearchForm( event.target.name, event.target.value ) );
 			dispatch( fetchData( event.target.value ) );
 		},
-		[ change, fetchData ]
+		[ dispatch ]
 	);
 	const pickerButton = ( mode ) => {
 		return (
@@ -122,14 +122,12 @@ const SearchForm = ( { isActive } ) => {
 		textInput.focus();
 	}, [ isActive ] );
 
-	// Get the data if its not loaded
+	// Fetch data for selected version if not already loaded
 	useEffect( () => {
-		if ( isSubmitButtonDisabled ) {
-			if ( searchForm.version ) {
-				dispatch( fetchData( searchForm.version ) );
-			}
+		if ( searchForm.version && ! versionHasLoaded ) {
+			dispatch( fetchData( searchForm.version ) );
 		}
-	}, [ searchForm.version ] );
+	}, [ searchForm.version, versionHasLoaded, dispatch ] );
 
 	const variants = {
 		open: { height: 'auto' },
@@ -240,7 +238,7 @@ const SearchForm = ( { isActive } ) => {
 					<input
 						type="submit"
 						value={ searchButtonText() }
-						disabled={ isSubmitButtonDisabled() }
+						disabled={ isSubmitButtonDisabled }
 					/>
 					<input type="reset" value="Reset" onClick={ reset } />
 				</fieldset>

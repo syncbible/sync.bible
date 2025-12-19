@@ -13,9 +13,10 @@ export function getSharedWordsFromReferences(
 		return {};
 	}
 
-	// Then for each reference get the list of unique lemmas per reference.
-	const lemmasPerReference = uniqueReferences.map( ( referenceString ) => {
-		const allLemmasInReference = [];
+	// Count all occurrences of each lemma across all references
+	const words = {};
+
+	uniqueReferences.forEach( ( referenceString ) => {
 		const { book, chapter, verse } =
 			getReferenceFromString( referenceString );
 		if (
@@ -40,30 +41,16 @@ export function getSharedWordsFromReferences(
 								data.strongsObjectWithFamilies[ lemma ].count <
 									limit
 							) {
-								allLemmasInReference.push( lemma );
+								if ( ! words[ lemma ] ) {
+									words[ lemma ] = 0;
+								}
+								words[ lemma ] = words[ lemma ] + 1;
 							}
 						} );
 					}
 				}
 			);
 		}
-		return [ ...new Set( allLemmasInReference ) ];
-	} );
-
-	// Validate.
-	if ( ! lemmasPerReference || lemmasPerReference.length < 1 ) {
-		return {};
-	}
-
-	// Then count how many of each lemma we have.
-	const words = {};
-	lemmasPerReference.forEach( ( lemmas ) => {
-		lemmas.forEach( ( lemma ) => {
-			if ( ! words[ lemma ] ) {
-				words[ lemma ] = 0;
-			}
-			words[ lemma ] = words[ lemma ] + 1;
-		} );
 	} );
 
 	return words;

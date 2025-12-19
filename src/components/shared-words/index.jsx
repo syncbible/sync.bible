@@ -42,6 +42,13 @@ function SharedWords( { type } ) {
 			const numA = parseInt( wordA.substring( 1 ) );
 			const numB = parseInt( wordB.substring( 1 ) );
 			return numA - numB;
+		} else if ( sortBy === 'significance' ) {
+			// Sort by significance (high to low)
+			const totalUsesA = data.strongsObjectWithFamilies?.[ wordA ]?.count || 1;
+			const totalUsesB = data.strongsObjectWithFamilies?.[ wordB ]?.count || 1;
+			const significanceA = sharedWords[ wordA ] / totalUsesA;
+			const significanceB = sharedWords[ wordB ] / totalUsesB;
+			return significanceB - significanceA;
 		}
 		return 0;
 	};
@@ -90,6 +97,7 @@ function SharedWords( { type } ) {
 				className={ styles.select }
 			>
 				<option value="count-desc">Uses</option>
+				<option value="significance">Significance</option>
 				<option value="strongs">Strong&apos;s number</option>
 			</select>
 			{ sharedWordsRendered.length > 0 && (

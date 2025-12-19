@@ -1,5 +1,5 @@
 // Internal imports.
-import { getReferenceText, getReferenceFromString } from '../../lib/reference';
+import { getReferenceFromString } from '../../lib/reference';
 
 export function getSharedWordsFromReferences(
 	listOfReferences,
@@ -21,7 +21,7 @@ export function getSharedWordsFromReferences(
 		if (
 			data.original &&
 			data.original[ book ] &&
-			data.original[ book ][ chapter ] &&
+			data.original[ book ][ chapter - 1 ] &&
 			data.original[ book ][ chapter - 1 ][ verse - 1 ] &&
 			typeof data.original[ book ][ chapter - 1 ][ verse - 1 ] !==
 				'string'

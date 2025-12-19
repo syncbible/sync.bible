@@ -15,7 +15,7 @@ import styles from './styles.module.scss';
 
 function SharedWords( { type } ) {
 	const [ limit, setLimit ] = useState( 100 );
-	const [ sortBy, setSortBy ] = useState( 'count-desc' );
+	const [ sortBy, setSortBy ] = useState( 'significance' );
 	const list = useSelector( ( state ) => state.list );
 	const listOfReferences = getListOfReferencesFromType( list, type );
 	const dispatch = useDispatch();

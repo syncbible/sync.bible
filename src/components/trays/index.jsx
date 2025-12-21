@@ -33,7 +33,7 @@ import CompareSvg from '../svg/compare';
 import HelpSvg from '../svg/help';
 import EyeSvg from '../svg/eye';
 import SearchSvg from '../svg/search';
-import TableChartSvg from '../svg/table-chart';
+import StatsSvg from '../svg/stats';
 import CalendarSvg from '../svg/calendar';
 import JoinFull from '../svg/join-full';
 import CogSvg from '../svg/cog';
@@ -80,7 +80,7 @@ export const trays = [
 		id: 'stats',
 		text: 'Stats',
 		component: Stats,
-		icon: <TableChartSvg />,
+		icon: <StatsSvg />,
 	},
 	{
 		visible: false,
@@ -131,7 +131,8 @@ const Trays = () => {
 		/iPad|iPhone|iPod/.test( navigator.userAgent );
 
 	// Using selectAllSettings selector to combine multiple settings subscriptions
-	const { darkMode, compareMode, expandedSearchResults } = useSelector( selectAllSettings );
+	const { darkMode, compareMode, expandedSearchResults } =
+		useSelector( selectAllSettings );
 	const drawerWidth = compareMode ? '100vw' : 350;
 
 	if ( interfaceLanguage ) {

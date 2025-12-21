@@ -19,6 +19,7 @@ import {
 	setTrayVisibilityFilter,
 } from '../../actions';
 import { getBooks, getCompareChapters } from '../../lib/select-helpers';
+import WordStatsTable from '../word-stats-table';
 
 import styles from './styles.module.scss';
 
@@ -35,172 +36,12 @@ const Rare = () => {
 		() => calculateCommonWords( reference, data ),
 		[ reference, data ]
 	);
-	const strongsDictionary = useSelector(
-		( state ) => state.data.strongsDictionary
-	);
-	const strongsObjectWithFamilies = useSelector(
-		( state ) => state.data.strongsObjectWithFamilies
-	);
 
 	useEffect( () => {
 		if ( isActiveTray ) {
 			dispatch( fetchData( 'original' ) );
 		}
 	}, [ isActiveTray ] );
-
-	const sortByTotalAsc = ( a, b ) => {
-		return (
-			strongsObjectWithFamilies[ a ].count -
-			strongsObjectWithFamilies[ b ].count
-		);
-	};
-
-	const sortByTotalDesc = ( a, b ) => {
-		return (
-			strongsObjectWithFamilies[ b ].count -
-			strongsObjectWithFamilies[ a ].count
-		);
-	};
-
-	const sortByUsesDesc = ( a, b ) => {
-		return common[ b ] - common[ a ];
-	};
-
-	const sortByUsesAsc = ( a, b ) => {
-		return common[ a ] - common[ b ];
-	};
-
-	const sortBySignificanceAsc = ( a, b ) => {
-		const significanceA =
-			common[ a ] / strongsObjectWithFamilies[ a ].count;
-		const significanceB =
-			common[ b ] / strongsObjectWithFamilies[ b ].count;
-		return significanceA - significanceB;
-	};
-
-	const sortBySignificanceDesc = ( a, b ) => {
-		const significanceA =
-			common[ a ] / strongsObjectWithFamilies[ a ].count;
-		const significanceB =
-			common[ b ] / strongsObjectWithFamilies[ b ].count;
-		return significanceB - significanceA;
-	};
-
-	const getSortFunction = () => {
-		switch ( sort ) {
-			case 'usesDesc':
-				return sortByUsesDesc;
-
-			case 'usesAsc':
-				return sortByUsesAsc;
-
-			case 'totalAsc':
-				return sortByTotalAsc;
-
-			case 'totalDesc':
-				return sortByTotalDesc;
-
-			case 'significanceAsc':
-				return sortBySignificanceAsc;
-
-			case 'significanceDesc':
-				return sortBySignificanceDesc;
-		}
-	};
-
-	const getCommonWords = () => {
-		if ( ! common || common.length === 0 ) {
-			return null;
-		}
-
-		const commonWords = Object.keys( common )
-			.sort( getSortFunction() )
-			.map( ( lemma ) => {
-				const significance = (
-					common[ lemma ] / strongsObjectWithFamilies[ lemma ].count
-				).toFixed( 3 );
-				return (
-					<tr
-						key={ lemma }
-						className={ lemma }
-						onMouseEnter={ () => {
-							window.updateAppComponent(
-								'highlightedWord',
-								lemma
-							);
-						} }
-						onClick={ () =>
-							dispatch(
-								selectWord( { lemma, version: 'original' } )
-							)
-						}
-					>
-						<td>{ lemma }</td>
-						<td>
-							{ strongsDictionary &&
-								strongsDictionary[ lemma ].lemma }
-						</td>
-						<td>
-							{ ( strongsDictionary &&
-								strongsDictionary[ lemma ].xlit ) ||
-								strongsDictionary[ lemma ].translit }
-						</td>
-						<td>{ common[ lemma ] }</td>
-						<td>{ strongsObjectWithFamilies[ lemma ].count }</td>
-						<td>{ significance }</td>
-					</tr>
-				);
-			} );
-
-		return (
-			<table>
-				<thead>
-					<tr>
-						<th>Strongs</th>
-						<th>Word</th>
-						<th>Transliteration</th>
-						<th
-							className={ styles.sort }
-							onClick={ () =>
-								sort === 'usesDesc'
-									? setSort( 'usesAsc' )
-									: setSort( 'usesDesc' )
-							}
-						>
-							Uses in reference
-							{ sort === 'usesAsc' ? ' ↓' : '' }
-							{ sort === 'usesDesc' ? ' ↑' : '' }
-						</th>
-						<th
-							className={ styles.sort }
-							onClick={ () =>
-								sort === 'totalDesc'
-									? setSort( 'totalAsc' )
-									: setSort( 'totalDesc' )
-							}
-						>
-							Total uses
-							{ sort === 'totalAsc' ? ' ↓' : '' }
-							{ sort === 'totalDesc' ? ' ↑' : '' }
-						</th>
-						<th
-							className={ styles.sort }
-							onClick={ () =>
-								sort === 'significanceDesc'
-									? setSort( 'significanceAsc' )
-									: setSort( 'significanceDesc' )
-							}
-						>
-							Significance
-							{ sort === 'significanceAsc' ? ' ↓' : '' }
-							{ sort === 'significanceDesc' ? ' ↑' : '' }
-						</th>
-					</tr>
-				</thead>
-				<tbody>{ commonWords }</tbody>
-			</table>
-		);
-	};
 
 	const getVerses = ( reference ) => {
 		if ( reference && reference.book && reference.chapter ) {
@@ -292,7 +133,13 @@ const Rare = () => {
 			<div className={ styles.statsResults }>
 				<div>
 					<h2>All words</h2>
-					<div>{ getCommonWords() }</div>
+					<div>
+						<WordStatsTable
+							common={ common }
+							sort={ sort }
+							setSort={ setSort }
+						/>
+					</div>
 				</div>
 			</div>
 		</>

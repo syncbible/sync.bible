@@ -1,5 +1,8 @@
 ## Todo
 
+-   add stats to cross references for rare words
+-   make the sidebar resizeable
+-   add a right sidebar or a second sidebar
 -   scroll to result when clicking on a word
 -   keyboard navigation
 -   sort shared words by significance

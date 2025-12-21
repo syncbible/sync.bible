@@ -1,9 +1,11 @@
 // External dependencies
+import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
 import { selectWord } from '../../actions';
 import { createSortFunctions, getSortFunction } from './word-stats-utils';
+import stripPointing from '../../lib/strip-pointing.js';
 import styles from './styles.module.scss';
 
 export default function WordStatsTable( { common, sort, setSort } ) {
@@ -19,7 +21,11 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 		return null;
 	}
 
-	const sortFunctions = createSortFunctions( common, strongsObjectWithFamilies );
+	const sortFunctions = createSortFunctions(
+		common,
+		strongsObjectWithFamilies,
+		strongsDictionary
+	);
 	const sortFunction = getSortFunction( sort, sortFunctions );
 
 	const commonWords = Object.keys( common )
@@ -31,28 +37,18 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 			return (
 				<tr
 					key={ lemma }
-					className={ lemma }
+					className={ classnames( lemma, styles.row ) }
 					onMouseEnter={ () => {
-						window.updateAppComponent(
-							'highlightedWord',
-							lemma
-						);
+						window.updateAppComponent( 'highlightedWord', lemma );
 					} }
 					onClick={ () =>
-						dispatch(
-							selectWord( { lemma, version: 'original' } )
-						)
+						dispatch( selectWord( { lemma, version: 'original' } ) )
 					}
 				>
 					<td>{ lemma }</td>
 					<td>
 						{ strongsDictionary &&
-							strongsDictionary[ lemma ].lemma }
-					</td>
-					<td>
-						{ ( strongsDictionary &&
-							strongsDictionary[ lemma ].xlit ) ||
-							strongsDictionary[ lemma ].translit }
+							stripPointing( strongsDictionary[ lemma ].lemma ) }
 					</td>
 					<td>{ common[ lemma ] }</td>
 					<td>{ strongsObjectWithFamilies[ lemma ].count }</td>
@@ -65,9 +61,30 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 		<table>
 			<thead>
 				<tr>
-					<th>Strongs</th>
-					<th>Word</th>
-					<th>Transliteration</th>
+					<th
+						className={ styles.sort }
+						onClick={ () =>
+							sort === 'strongsDesc'
+								? setSort( 'strongsAsc' )
+								: setSort( 'strongsDesc' )
+						}
+					>
+						Strongs
+						{ sort === 'strongsAsc' ? '\u00A0↓' : '' }
+						{ sort === 'strongsDesc' ? '\u00A0↑' : '' }
+					</th>
+					<th
+						className={ styles.sort }
+						onClick={ () =>
+							sort === 'wordDesc'
+								? setSort( 'wordAsc' )
+								: setSort( 'wordDesc' )
+						}
+					>
+						Word
+						{ sort === 'wordAsc' ? '\u00A0↓' : '' }
+						{ sort === 'wordDesc' ? '\u00A0↑' : '' }
+					</th>
 					<th
 						className={ styles.sort }
 						onClick={ () =>
@@ -76,9 +93,9 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 								: setSort( 'usesDesc' )
 						}
 					>
-						Uses in reference
-						{ sort === 'usesAsc' ? ' ↓' : '' }
-						{ sort === 'usesDesc' ? ' ↑' : '' }
+						Uses
+						{ sort === 'usesAsc' ? '\u00A0↓' : '' }
+						{ sort === 'usesDesc' ? '\u00A0↑' : '' }
 					</th>
 					<th
 						className={ styles.sort }
@@ -88,9 +105,9 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 								: setSort( 'totalDesc' )
 						}
 					>
-						Total uses
-						{ sort === 'totalAsc' ? ' ↓' : '' }
-						{ sort === 'totalDesc' ? ' ↑' : '' }
+						Total
+						{ sort === 'totalAsc' ? '\u00A0↓' : '' }
+						{ sort === 'totalDesc' ? '\u00A0↑' : '' }
 					</th>
 					<th
 						className={ styles.sort }
@@ -99,10 +116,11 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 								? setSort( 'significanceAsc' )
 								: setSort( 'significanceDesc' )
 						}
+						title="Significance (Uses / Total)"
 					>
-						Significance
-						{ sort === 'significanceAsc' ? ' ↓' : '' }
-						{ sort === 'significanceDesc' ? ' ↑' : '' }
+						Sig.
+						{ sort === 'significanceAsc' ? '\u00A0↓' : '' }
+						{ sort === 'significanceDesc' ? '\u00A0↑' : '' }
 					</th>
 				</tr>
 			</thead>

@@ -1,4 +1,29 @@
-export const createSortFunctions = ( common, strongsObjectWithFamilies ) => {
+export const createSortFunctions = ( common, strongsObjectWithFamilies, strongsDictionary ) => {
+	const sortByStrongsAsc = ( a, b ) => {
+		// Extract the numeric part from Strong's numbers (e.g., "H123" -> 123)
+		const numA = parseInt( a.substring( 1 ) );
+		const numB = parseInt( b.substring( 1 ) );
+		return numA - numB;
+	};
+
+	const sortByStrongsDesc = ( a, b ) => {
+		const numA = parseInt( a.substring( 1 ) );
+		const numB = parseInt( b.substring( 1 ) );
+		return numB - numA;
+	};
+
+	const sortByWordAsc = ( a, b ) => {
+		const wordA = strongsDictionary?.[ a ]?.lemma || '';
+		const wordB = strongsDictionary?.[ b ]?.lemma || '';
+		return wordA.localeCompare( wordB );
+	};
+
+	const sortByWordDesc = ( a, b ) => {
+		const wordA = strongsDictionary?.[ a ]?.lemma || '';
+		const wordB = strongsDictionary?.[ b ]?.lemma || '';
+		return wordB.localeCompare( wordA );
+	};
+
 	const sortByTotalAsc = ( a, b ) => {
 		return (
 			strongsObjectWithFamilies[ a ].count -
@@ -38,6 +63,10 @@ export const createSortFunctions = ( common, strongsObjectWithFamilies ) => {
 	};
 
 	return {
+		sortByStrongsAsc,
+		sortByStrongsDesc,
+		sortByWordAsc,
+		sortByWordDesc,
 		sortByTotalAsc,
 		sortByTotalDesc,
 		sortByUsesDesc,
@@ -49,6 +78,18 @@ export const createSortFunctions = ( common, strongsObjectWithFamilies ) => {
 
 export const getSortFunction = ( sort, sortFunctions ) => {
 	switch ( sort ) {
+		case 'strongsAsc':
+			return sortFunctions.sortByStrongsAsc;
+
+		case 'strongsDesc':
+			return sortFunctions.sortByStrongsDesc;
+
+		case 'wordAsc':
+			return sortFunctions.sortByWordAsc;
+
+		case 'wordDesc':
+			return sortFunctions.sortByWordDesc;
+
 		case 'usesDesc':
 			return sortFunctions.sortByUsesDesc;
 

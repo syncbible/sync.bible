@@ -1,5 +1,5 @@
 // External dependencies
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -10,12 +10,12 @@ import {
 	getSharedWordsFromReferences,
 	getListOfReferencesFromType,
 } from './utils.js';
-import Lemma from '../lemma';
+import WordStatsTable from '../word-stats-table';
 import styles from './styles.module.scss';
 
 function SharedWords( { type } ) {
 	const [ limit, setLimit ] = useState( 100 );
-	const [ sortBy, setSortBy ] = useState( 'significance' );
+	const [ sortBy, setSortBy ] = useState( 'significanceDesc' );
 	const list = useSelector( ( state ) => state.list );
 	const listOfReferences = getListOfReferencesFromType( list, type );
 	const dispatch = useDispatch();
@@ -32,40 +32,21 @@ function SharedWords( { type } ) {
 		limit
 	);
 
+	// Filter to only show words that appear more than once
+	const filteredSharedWords = useMemo( () => {
+		const filtered = {};
+		Object.keys( sharedWords ).forEach( ( word ) => {
+			if ( sharedWords[ word ] > 1 ) {
+				filtered[ word ] = sharedWords[ word ];
+			}
+		} );
+		return filtered;
+	}, [ sharedWords ] );
+
 	const [ open, setOpen ] = useState( false );
 
-	const sortWords = ( wordA, wordB ) => {
-		if ( sortBy === 'count-desc' ) {
-			return sharedWords[ wordB ] - sharedWords[ wordA ];
-		} else if ( sortBy === 'strongs' ) {
-			// Sort by Strong's number (numeric comparison)
-			const numA = parseInt( wordA.substring( 1 ) );
-			const numB = parseInt( wordB.substring( 1 ) );
-			return numA - numB;
-		} else if ( sortBy === 'significance' ) {
-			// Sort by significance (high to low)
-			const totalUsesA = data.strongsObjectWithFamilies?.[ wordA ]?.count || 1;
-			const totalUsesB = data.strongsObjectWithFamilies?.[ wordB ]?.count || 1;
-			const significanceA = sharedWords[ wordA ] / totalUsesA;
-			const significanceB = sharedWords[ wordB ] / totalUsesB;
-			return significanceB - significanceA;
-		}
-		return 0;
-	};
-
-	const sharedWordsRendered = Object.keys( sharedWords )
-		.filter( ( word ) => sharedWords[ word ] > 1 )
-		.sort( sortWords )
-		.map( ( word, index ) => (
-			<li key={ index }>
-				<Lemma
-					key={ index }
-					lemma={ word }
-					count={ sharedWords[ word ] }
-					version="original"
-				/>
-			</li>
-		) );
+	// Convert SharedWords sort format to WordStatsTable format
+	const convertedSort = sortBy === 'count-desc' ? 'usesDesc' : sortBy;
 
 	return listOfReferences.length > 1 ? (
 		<Collapsible
@@ -75,33 +56,31 @@ function SharedWords( { type } ) {
 			} }
 			header={ 'Shared words' }
 		>
-			Words that are used in more than one reference
-			<br />
-			with less than{ ' ' }
-			<input
-				type="number"
-				name="limit"
-				value={ limit }
-				onChange={ ( event ) =>
-					setLimit( Number( event.target.value ) )
-				}
-				className={ styles.limit }
-			/>{ ' ' }
-			uses
-			<br />
-			<label htmlFor="shared-words-sort">Sort by:</label>{ ' ' }
-			<select
-				id="shared-words-sort"
-				value={ sortBy }
-				onChange={ ( event ) => setSortBy( event.target.value ) }
-				className={ styles.select }
-			>
-				<option value="count-desc">Uses</option>
-				<option value="significance">Significance</option>
-				<option value="strongs">Strong&apos;s number</option>
-			</select>
-			{ sharedWordsRendered.length > 0 && (
-				<ol>{ sharedWordsRendered }</ol>
+			<div>
+				Words that are used in more than one reference
+				<br />
+				with less than{ ' ' }
+				<input
+					type="number"
+					name="limit"
+					value={ limit }
+					onChange={ ( event ) =>
+						setLimit( Number( event.target.value ) )
+					}
+					className={ styles.limit }
+				/>{ ' ' }
+				uses
+			</div>
+			{ Object.keys( filteredSharedWords ).length > 0 ? (
+				<div className={ styles.tableWrapper }>
+					<WordStatsTable
+						common={ filteredSharedWords }
+						sort={ convertedSort }
+						setSort={ setSortBy }
+					/>
+				</div>
+			) : (
+				<p>No shared words found.</p>
 			) }
 		</Collapsible>
 	) : null;

@@ -1,9 +1,9 @@
 // External dependencies
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Internal dependencies
-import { compareTwoReferences } from '../../lib/reference';
+import { compareTwoReferences, calculateCommonWords } from '../../lib/reference';
 import {
 	fetchData,
 	selectWord,
@@ -17,10 +17,11 @@ import { getBooks, getCompareChapters } from '../../lib/select-helpers';
 import styles from './styles.module.scss';
 import bible from '../../data/bible.js';
 import Connections from './connections';
-import Lemma from '../lemma';
+import WordStatsTable from '../word-stats-table';
 
 export default function Compare() {
 	const [ compareAllChapters, setCompareAllChapters ] = useState( false );
+	const [ sortBy, setSortBy ] = useState( 'significanceDesc' );
 	const dispatch = useDispatch();
 	const isOriginalLoaded = useSelector(
 		( state ) => 'undefined' !== typeof state.data.original
@@ -34,9 +35,26 @@ export default function Compare() {
 	);
 	const overlap = useSelector( ( state ) => compareTwoReferences( state ) );
 	const limit = useSelector( ( state ) => state.referenceInfo.limit );
-	const strongsDictionary = useSelector(
-		( state ) => state.data.strongsDictionary
-	);
+	const data = useSelector( ( state ) => state.data );
+
+	// Calculate word counts for both references
+	const overlapWithCounts = useMemo( () => {
+		if ( ! overlap || ! reference || ! referenceToCompareWith ) {
+			return {};
+		}
+
+		const ref1Counts = calculateCommonWords( reference, data ) || {};
+		const ref2Counts = calculateCommonWords( referenceToCompareWith, data ) || {};
+
+		// Combine counts for overlapping words
+		const combined = {};
+		overlap.forEach( ( lemma ) => {
+			combined[ lemma ] = ( ref1Counts[ lemma ] || 0 ) + ( ref2Counts[ lemma ] || 0 );
+		} );
+
+		return combined;
+	}, [ overlap, reference, referenceToCompareWith, data ] );
+
 	const addAllWords = () => {
 		overlap.forEach( ( lemma ) => addWord( lemma ) );
 	};
@@ -65,16 +83,16 @@ export default function Compare() {
 			return 'No connections found';
 		}
 
-		const overlapMarkup = overlap.map( ( lemma ) => (
-			<div key={ lemma }>
-				<Lemma lemma={ lemma } version="original" />
-			</div>
-		) );
-
 		return (
 			<div>
-				<span>Connections ({ overlap.length }):</span>
-				{ overlapMarkup }
+				<h3>Connections ({ overlap.length }):</h3>
+				<div className={ styles.tableWrapper }>
+					<WordStatsTable
+						common={ overlapWithCounts }
+						sort={ sortBy }
+						setSort={ setSortBy }
+					/>
+				</div>
 			</div>
 		);
 	};
@@ -129,26 +147,6 @@ export default function Compare() {
 		}
 
 		return <option>-</option>;
-	};
-
-	const getWord = ( lemma ) => {
-		return (
-			<div
-				key={ lemma }
-				className={ lemma }
-				onMouseEnter={ () => {
-					window.updateAppComponent( 'highlightedWord', lemma );
-				} }
-				onClick={ () => {
-					dispatch( selectWord( { lemma, version: 'original' } ) );
-				} }
-			>
-				{ lemma } -{ ' ' }
-				{ strongsDictionary && strongsDictionary[ lemma ].lemma }
-				{ ' - ' }
-				{ strongsDictionary && strongsDictionary[ lemma ].xlit }
-			</div>
-		);
 	};
 
 	const changeLimit = ( event ) =>

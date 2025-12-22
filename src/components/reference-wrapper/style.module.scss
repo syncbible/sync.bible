@@ -2,17 +2,13 @@
 
 .reference-wrapper {
 	background: var(--background);
-	margin-left: $dock-height;
 	transition-property: margin;
 	transition-duration: 200ms;
 	transition-timing-function: ease-out;
 }
 
 .reference-wrapper-sidebar-open {
-	@media ( min-width: 960px ) {
-		margin-left: $sidebar-width;
-
-	}
+	// Margin is now set via inline styles for dynamic width
 }
 
 .reference-wrapper-inner {

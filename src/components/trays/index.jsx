@@ -1,15 +1,14 @@
 // External dependencies
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 // Internal dependencies
 import styles from './styles.module.scss';
-import SidebarControls from './sidebar-controls';
 import TrayList from './tray-list';
 import Footer from '../footer';
-import { toggleSidebar } from '../../actions';
+import { toggleSidebar, closeSidebar } from '../../actions';
 import { rootClasses } from '../utils';
 import { selectAllSettings } from '../../selectors';
 
@@ -125,6 +124,7 @@ const Trays = () => {
 		( state ) => state.settings.interfaceLanguage
 	);
 	const sidebarOpen = useSelector( ( state ) => state.sidebar );
+	const activeTrays = useSelector( ( state ) => state.trays );
 	const drawerBleeding = 10; // Might be too small.
 	const iOS =
 		typeof navigator !== 'undefined' &&
@@ -133,7 +133,24 @@ const Trays = () => {
 	// Using selectAllSettings selector to combine multiple settings subscriptions
 	const { darkMode, compareMode, expandedSearchResults } =
 		useSelector( selectAllSettings );
-	const drawerWidth = compareMode ? '100vw' : 350;
+
+	// Calculate drawer width based on number of active trays
+	const baseTrayWidth = 290;
+	const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+	const calculatedWidth = compareMode
+		? '100vw'
+		: activeTrays.length > 0
+			? baseTrayWidth * activeTrays.length
+			: 0;
+	const drawerWidth = compareMode ? '100vw' : calculatedWidth;
+	const drawerLeftOffset = compareMode ? 0 : 60;
+
+	// Close sidebar when all trays are closed
+	useEffect( () => {
+		if ( sidebarOpen && activeTrays.length === 0 ) {
+			dispatch( closeSidebar() );
+		}
+	}, [ activeTrays.length, sidebarOpen, dispatch ] );
 
 	if ( interfaceLanguage ) {
 		return (
@@ -156,10 +173,11 @@ const Trays = () => {
 						zIndex: sidebarOpen ? 9 : -1, // Needed to keep the drawer from sitting over the canvas on initial load.
 						'& .MuiDrawer-paper': {
 							background: 'var(--background)',
-							boxShadow: 'none',
+							boxShadow: '2px 0 10px var(--shadow)',
 							boxSizing: 'border-box',
 							color: 'var(--color)',
 							width: compareMode ? '100%' : drawerWidth,
+						left: drawerLeftOffset, // Offset by dock width on desktop, 0 on mobile
 						},
 						'& .MuiBackdrop-root': {
 							display: 'none',
@@ -188,7 +206,6 @@ const Trays = () => {
 								: styles.isReferenceMode
 						) }
 					>
-						<SidebarControls trays={ trays } />
 						<TrayList trays={ trays } />
 					</div>
 				</SwipeableDrawer>

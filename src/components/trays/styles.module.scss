@@ -9,33 +9,31 @@
 
 .trayList {
 	background: var(--background-ui);
+	display: flex;
+	flex-direction: row;
 	overflow: hidden;
-	position: absolute;
-	left: $dock-height;
-	top: 0;
-	bottom: 0;
+	width: 100%;
+	height: 100%;
 }
 
 .isReferenceMode {
-	left: calc( 0px - $sidebar-width - $dock-height );
-	width: calc( $sidebar-width - $dock-height );
-
-	&.sidebarOpen {
-		left: $dock-height;
-	}
+	// Positioning handled in component sx prop
 }
 
 .isCompareMode {
 	width: calc( 100vw - $dock-height - 1px );
 }
 
-
 .tray {
 	display: flex;
-	flex-wrap: wrap;
-	height: calc( 100vh - $dock-height );
+	flex-direction: column;
+	height: 100%;
 	overflow: auto;
 	z-index: 10;
+	width: $sidebar-width;
+	min-width: $sidebar-width;
+	flex-shrink: 0;
+	box-shadow: 2px 0 10px var(--shadow);
 
 	select, button, input {
 		background-color: var(--background);
@@ -50,6 +48,48 @@
 			background-color: var(--color-dimmed);
 			color: var(--hover);
 		}
+	}
+}
+
+.trayHeader {
+	background: var(--background-ui);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: $dock-height;
+	padding: 0 10px;
+	position: sticky;
+	top: 0;
+	z-index: 19;
+	flex-shrink: 0;
+}
+
+.trayHeaderRight {
+	display: flex;
+	align-items: center;
+	gap: 0;
+}
+
+button.trayHeaderButton,
+.trayClose {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+
+	svg {
+		width: 24px;
+		height: 24px;
+		fill: var(--color-dimmed);
+	}
+
+	&:hover svg {
+		fill: var(--color);
 	}
 }
 
@@ -80,7 +120,7 @@
 }
 
 .visible {
-	display: block;
+	display: flex;
 }
 
 .hidden {
@@ -189,6 +229,7 @@
 .sidebarControlsInner {
 	display: flex;
 	align-items: center;
+	flex: 1;
 }
 
 .sidebar-controls-right-outer {

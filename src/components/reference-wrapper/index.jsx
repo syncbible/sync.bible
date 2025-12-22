@@ -8,12 +8,13 @@ import ReferenceComponent from '../reference';
 import styles from './style.module.scss';
 
 const ReferenceWrapper = () => {
-	const { reference, inSync, searchSelect, sidebarOpen } = useSelector(
+	const { reference, inSync, searchSelect, sidebarOpen, activeTrays } = useSelector(
 		( state ) => ({
 			reference: state.reference,
 			inSync: state.settings.inSync,
 			searchSelect: state.searchSelect,
 			sidebarOpen: state.sidebar,
+			activeTrays: state.trays,
 		}),
 		shallowEqual
 	);
@@ -45,8 +46,24 @@ const ReferenceWrapper = () => {
 		sidebarOpen ? styles.referenceWrapperSidebarOpen : null,
 		searchSelect ? 'search-select' : null
 	);
+
+	// Calculate dynamic margin based on number of active trays
+	const baseTrayWidth = 290;
+	const dockHeight = 60;
+	const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+	// On mobile, sidebar overlays, so no margin adjustment needed
+	const dynamicMargin = isMobile
+		? dockHeight
+		: sidebarOpen && activeTrays.length > 0
+			? baseTrayWidth * activeTrays.length + dockHeight
+			: dockHeight;
+
 	return (
-		<div className={ className }>
+		<div
+			className={ className }
+			style={ { marginLeft: `${dynamicMargin}px` } }
+		>
 			<div className={ styles.referenceWrapperInner }>{ references }</div>
 		</div>
 	);

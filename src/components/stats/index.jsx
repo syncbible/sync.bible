@@ -29,7 +29,7 @@ const Rare = () => {
 	const isOriginalLoaded = useSelector(
 		( state ) => 'undefined' !== typeof state.data.original
 	);
-	const isActiveTray = useSelector( ( state ) => state.trays === 'stats' );
+	const isActiveTray = useSelector( ( state ) => state.trays.includes( 'stats' ) );
 	const reference = useSelector( ( state ) => state.referenceInfo.reference );
 	const data = useSelector( ( state ) => state.data );
 	const common = useMemo(

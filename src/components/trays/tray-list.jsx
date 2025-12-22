@@ -1,26 +1,77 @@
 // External
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
 
 // Internal
-import ListHeader from '../list-header';
+import { removeTray, fetchData, closeAllListItems } from '../../actions';
+import { mapVersionToData } from '../../lib/reference';
+import Close from '../svg/close';
+import Clear from '../clear';
+import UnfoldLessDouble from '../svg/unfold-less-double';
 import styles from './styles.module.scss';
 
 const TrayList = ( { trays } ) => {
-	const activeTray = useSelector( ( state ) => state.trays );
+	const dispatch = useDispatch();
+	const activeTrays = useSelector( ( state ) => state.trays );
+	const interfaceLanguage = useSelector(
+		( state ) => state.settings.interfaceLanguage
+	);
+	const list = useSelector( ( state ) => state.list );
+	const userInterface = useSelector( ( state ) => state.userInterface );
+	const wordListItems = useSelector( ( state ) => {
+		return (
+			state.list.filter( ( listItem ) => listItem.listType === 'word' )
+				.length > 1
+		);
+	} );
+	const bookmarkListItems = useSelector( ( state ) => {
+		return (
+			state.list.filter(
+				( listItem ) => listItem.listType === 'bookmark'
+			).length > 1
+		);
+	} );
+	const searchListItems = useSelector( ( state ) => {
+		return (
+			state.list.filter( ( listItem ) => listItem.listType === 'search' )
+				.length > 1
+		);
+	} );
+
+	const closeAllForTray = ( trayId ) => {
+		// Get all list items of this type
+		const itemsOfType = list.filter( ( item ) => item.listType === trayId );
+		// Get their IDs
+		const itemIds = itemsOfType.map( ( item ) => item.id );
+		// Close them
+		dispatch( closeAllListItems( itemIds ) );
+	};
+
+	const hasOpenItemsForTray = ( trayId ) => {
+		// Get all list items of this type
+		const itemsOfType = list.filter( ( item ) => item.listType === trayId );
+		// Check if any are open
+		return itemsOfType.some( ( item ) => userInterface[ item.id ] );
+	};
+
+	useEffect( () => {
+		// Load data for OT and NT
+		const otData = mapVersionToData( 'Genesis', interfaceLanguage );
+		const ntData = mapVersionToData( 'Matthew', interfaceLanguage );
+		dispatch( fetchData( otData ) );
+		if ( ntData !== otData ) {
+			dispatch( fetchData( ntData ) );
+		}
+	}, [ interfaceLanguage, dispatch ] );
 
 	return trays.map( ( tray ) => {
-		let header;
-		if (
-			tray.id === 'search' ||
-			tray.id === 'word' ||
-			tray.id === 'bookmark'
-		) {
-			header = <ListHeader tray={ tray.id } />;
-		}
+		const isActive = activeTrays.includes( tray.id );
+		const hasListItems =
+			( tray.id === 'word' && wordListItems ) ||
+			( tray.id === 'bookmark' && bookmarkListItems ) ||
+			( tray.id === 'search' && searchListItems );
 
-		const isActive = activeTray === tray.id;
 		return (
 			<div
 				key={ tray.id }
@@ -29,7 +80,34 @@ const TrayList = ( { trays } ) => {
 					isActive ? styles.visible : styles.hidden
 				) }
 			>
-				{ header }
+				<div className={ styles.trayHeader }>
+					<h3 className={ styles.trayTitle }>{ tray.text }</h3>
+					<div className={ styles.trayHeaderRight }>
+						{ hasListItems && (
+							<>
+								{ hasOpenItemsForTray( tray.id ) && (
+									<button
+										className={ styles.trayHeaderButton }
+										onClick={ () => {
+											closeAllForTray( tray.id );
+										} }
+										title="Close all"
+									>
+										<UnfoldLessDouble />
+									</button>
+								) }
+								<Clear selectedTrayId={ tray.id } />
+							</>
+						) }
+						<button
+							className={ styles.trayHeaderButton }
+							onClick={ () => dispatch( removeTray( tray.id ) ) }
+							title={ `Close ${ tray.text }` }
+						>
+							<Close />
+						</button>
+					</div>
+				</div>
 				<tray.component isActive={ isActive } />
 			</div>
 		);

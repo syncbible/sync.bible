@@ -135,6 +135,27 @@ export const setTrayVisibilityFilter = ( filter ) => {
 	};
 };
 
+export const toggleTray = ( trayId ) => {
+	return {
+		type: 'TOGGLE_TRAY',
+		trayId,
+	};
+};
+
+export const addTray = ( trayId ) => {
+	return {
+		type: 'ADD_TRAY',
+		trayId,
+	};
+};
+
+export const removeTray = ( trayId ) => {
+	return {
+		type: 'REMOVE_TRAY',
+		trayId,
+	};
+};
+
 export const setScrollChapter = ( book, chapter, index ) => {
 	return {
 		book,
@@ -646,7 +667,8 @@ export const selectWord = ( props ) => {
 			}
 			dispatch( deactivateSearchSelect() );
 		} else {
-			dispatch( setTrayVisibilityFilter( 'word' ) );
+			dispatch( openSidebar() );
+			dispatch( addTray( 'word' ) );
 
 			lemma &&
 				lemma.split( /[\&\s]/ ).map( ( strongsNumber ) => {
@@ -672,9 +694,20 @@ export const selectWord = ( props ) => {
 };
 
 export const addToList = ( item ) => {
-	return {
-		type: 'ADD_TO_LIST',
-		item: item,
+	return ( dispatch, getState ) => {
+		const state = getState();
+		// Get all items of the same type from the list
+		const itemsOfSameType = state.list.filter(
+			( listItem ) => listItem.listType === item.listType
+		);
+		// Get their IDs
+		const itemIdsToClose = itemsOfSameType.map( ( listItem ) => listItem.id );
+
+		dispatch( {
+			type: 'ADD_TO_LIST',
+			item: item,
+			itemIdsToClose: itemIdsToClose,
+		} );
 	};
 };
 
@@ -702,9 +735,10 @@ export const toggleListItemVisible = ( item ) => {
 	};
 };
 
-export const closeAllListItems = () => {
+export const closeAllListItems = ( itemIds ) => {
 	return {
 		type: 'CLOSE_ALL_LIST_ITEMS',
+		itemIds,
 	};
 };
 

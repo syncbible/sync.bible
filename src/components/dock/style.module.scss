@@ -5,7 +5,7 @@
 	box-shadow: 0 0 10px 5px var(--shadow);
 	position: fixed;
 	right: 0;
-	left: $dock-height;
+	left: 0;
 	top: 0;
 	transition: margin 200ms;
 	z-index: 8;
@@ -36,17 +36,12 @@
 }
 
 .dock-with-sidebar-open {
+	// Positioning is now fully handled via inline styles for dynamic width
 	@media ( max-width: 959px ) {
 		left: $dock-height;
-	}
-
-	@media ( min-width: 960px ) {
-		left: 0;
-		margin-left: $sidebar-width;
-		width: calc( 100% - $sidebar-width );
 	}
 }
 
 .noReference {
-	left: 0;
+	// Positioning is handled via inline styles
 }

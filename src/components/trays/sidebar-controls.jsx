@@ -13,11 +13,9 @@ import LeftPanelClose from '../svg/left-panel-close';
 /** Controls component for sidebar with version selection and close button */
 export default function SidebarControls( { trays } ) {
 	const dispatch = useDispatch();
-	const activeTray = useSelector( ( state ) => state.trays );
 	const interfaceLanguage = useSelector(
 		( state ) => state.settings.interfaceLanguage
 	);
-	const selectedTray = trays.find( ( tray ) => activeTray === tray.id );
 
 	useEffect( () => {
 		// Load data for OT and NT
@@ -31,11 +29,7 @@ export default function SidebarControls( { trays } ) {
 
 	return (
 		<div className={ styles.sidebarControls }>
-			<span className={ styles.sidebarControlsInner }>
-				<span className={ styles.sidebarControlsTitle }>
-					{ selectedTray.text }
-				</span>
-			</span>
+			<span className={ styles.sidebarControlsInner } />
 
 			<span className={ styles.sidebarControlsRightOuter }>
 				<VersionSelect

@@ -5,10 +5,14 @@ const userInterface = ( state = {}, action ) => {
 			delete dataForId.clickedWord;
 			delete dataForId.morphology;
 			const id = JSON.stringify( dataForId );
-			// Close all other lists.
-			Object.keys( state ).forEach( ( key ) => {
-				state[ key ] = false;
-			} );
+			// Close only items of the same type
+			if ( action.itemIdsToClose ) {
+				action.itemIdsToClose.forEach( ( itemId ) => {
+					if ( state[ itemId ] !== undefined ) {
+						state[ itemId ] = false;
+					}
+				} );
+			}
 			state[ id ] = true;
 			return { ...state };
 
@@ -21,9 +25,19 @@ const userInterface = ( state = {}, action ) => {
 			return { ...state };
 
 		case 'CLOSE_ALL_LIST_ITEMS':
-			Object.keys( state ).forEach( ( key ) => {
-				state[ key ] = false;
-			} );
+			if ( action.itemIds ) {
+				// Close only specific items
+				action.itemIds.forEach( ( id ) => {
+					if ( state[ id ] !== undefined ) {
+						state[ id ] = false;
+					}
+				} );
+			} else {
+				// Close all items (backwards compatibility)
+				Object.keys( state ).forEach( ( key ) => {
+					state[ key ] = false;
+				} );
+			}
 			return { ...state };
 
 		default:

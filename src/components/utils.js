@@ -1,10 +1,9 @@
 import classnames from 'classnames';
 
-export function rootClasses( darkMode, compareMode, expandedSearchResults ) {
+export function rootClasses( darkMode, expandedSearchResults ) {
 	return classnames( 'root', {
 		'dark-mode-on': darkMode === true,
 		'dark-mode-off': darkMode === false,
-		'compare-mode': compareMode === true,
 		'expanded-search-results': expandedSearchResults === true,
 	} );
 }

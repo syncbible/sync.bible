@@ -2,11 +2,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 // Internal dependencies
 import styles from './styles.module.scss';
 import TrayList from './tray-list';
+import ResizeHandle from './resize-handle';
 import Footer from '../footer';
 import { toggleSidebar, closeSidebar } from '../../actions';
 import { rootClasses } from '../utils';
@@ -125,25 +125,16 @@ const Trays = () => {
 	);
 	const sidebarOpen = useSelector( ( state ) => state.sidebar );
 	const activeTrays = useSelector( ( state ) => state.trays );
-	const drawerBleeding = 10; // Might be too small.
-	const iOS =
-		typeof navigator !== 'undefined' &&
-		/iPad|iPhone|iPod/.test( navigator.userAgent );
 
 	// Using selectAllSettings selector to combine multiple settings subscriptions
-	const { darkMode, compareMode, expandedSearchResults } =
+	const { darkMode, expandedSearchResults, sidebarWidth } =
 		useSelector( selectAllSettings );
 
 	// Calculate drawer width based on number of active trays
-	const baseTrayWidth = 290;
 	const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-	const calculatedWidth = compareMode
-		? '100vw'
-		: activeTrays.length > 0
-			? baseTrayWidth * activeTrays.length
-			: 0;
-	const drawerWidth = compareMode ? '100vw' : calculatedWidth;
-	const drawerLeftOffset = compareMode ? 0 : 60;
+	const defaultWidth = activeTrays.length * 290;
+	const customWidth = sidebarWidth || defaultWidth;
+	const drawerLeftOffset = 60;
 
 	// Close sidebar when all trays are closed
 	useEffect( () => {
@@ -154,61 +145,35 @@ const Trays = () => {
 
 	if ( interfaceLanguage ) {
 		return (
-			<div
-				className={ classnames(
-					styles.trays,
-					compareMode ? styles.isCompareModeWrapper : null
-				) }
-			>
+			<div className={ styles.trays }>
 				<Footer trays={ trays } />
-				<SwipeableDrawer
-					className={ rootClasses(
-						darkMode,
-						compareMode,
-						expandedSearchResults
-					) }
-					sx={ {
-						width: drawerWidth,
-						flexShrink: 0,
-						zIndex: sidebarOpen ? 9 : -1, // Needed to keep the drawer from sitting over the canvas on initial load.
-						'& .MuiDrawer-paper': {
-							background: 'var(--background)',
-							boxShadow: '2px 0 10px var(--shadow)',
-							boxSizing: 'border-box',
-							color: 'var(--color)',
-							width: compareMode ? '100%' : drawerWidth,
-						left: drawerLeftOffset, // Offset by dock width on desktop, 0 on mobile
-						},
-						'& .MuiBackdrop-root': {
-							display: 'none',
-						},
-					} }
-					anchor="left"
-					open={ sidebarOpen }
-					onClose={ () => dispatch( toggleSidebar() ) }
-					onOpen={ () => dispatch( toggleSidebar() ) }
-					disableSwipeToOpen={ false }
-					disableBackdropTransition={ ! iOS }
-					disableDiscovery={ iOS }
-					disableEnforceFocus
-					ModalProps={ {
-						keepMounted: true,
-					} }
-					BackdropProps={ { invisible: true } }
-					swipeAreaWidth={ drawerBleeding }
-				>
+				{ sidebarOpen && (
 					<div
 						className={ classnames(
-							styles.trayList,
-							sidebarOpen ? styles.sidebarOpen : null,
-							compareMode
-								? styles.isCompareMode
-								: styles.isReferenceMode
+							styles.customDrawer,
+							rootClasses( darkMode, expandedSearchResults )
 						) }
+						style={ {
+							width: `${ customWidth }px`,
+							left: drawerLeftOffset,
+						} }
 					>
-						<TrayList trays={ trays } />
+						<div
+							className={ classnames(
+								styles.trayList,
+								styles.sidebarOpen,
+								styles.isReferenceMode
+							) }
+							style={ { width: `${ customWidth }px` } }
+						>
+							<TrayList
+								trays={ trays }
+								sidebarWidth={ customWidth }
+							/>
+							{ activeTrays.length > 0 && <ResizeHandle /> }
+						</div>
 					</div>
-				</SwipeableDrawer>
+				) }
 			</div>
 		);
 	}

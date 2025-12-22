@@ -18,22 +18,24 @@ export default function Dock() {
 	const showControls = useSelector( ( state ) => state.reference.length > 0 );
 	const sidebarOpen = useSelector( ( state ) => state.sidebar );
 	const activeTrays = useSelector( ( state ) => state.trays );
+	const sidebarWidth = useSelector( ( state ) => state.settings.sidebarWidth );
 	const className = classnames(
 		styles.dock,
 		sidebarOpen ? styles.dockWithSidebarOpen : null,
 		showControls ? null : styles.noReference
 	);
 
-	// Calculate dynamic margin and width based on number of active trays
-	const baseTrayWidth = 290;
+	// Calculate dynamic margin and width based on sidebar width
 	const dockHeight = 60;
 	const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+	const defaultWidth = activeTrays.length * 290;
+	const customWidth = sidebarWidth || defaultWidth;
 
 	// On mobile, sidebar overlays, so no margin adjustment needed
 	const dynamicMargin = isMobile
 		? dockHeight
 		: dockHeight + (sidebarOpen && activeTrays.length > 0
-			? baseTrayWidth * activeTrays.length
+			? customWidth
 			: 0);
 	const dynamicWidth = `calc(100% - ${dynamicMargin}px)`;
 

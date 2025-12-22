@@ -11,7 +11,7 @@ import Clear from '../clear';
 import UnfoldLessDouble from '../svg/unfold-less-double';
 import styles from './styles.module.scss';
 
-const TrayList = ( { trays } ) => {
+const TrayList = ( { trays, sidebarWidth } ) => {
 	const dispatch = useDispatch();
 	const activeTrays = useSelector( ( state ) => state.trays );
 	const interfaceLanguage = useSelector(
@@ -19,6 +19,10 @@ const TrayList = ( { trays } ) => {
 	);
 	const list = useSelector( ( state ) => state.list );
 	const userInterface = useSelector( ( state ) => state.userInterface );
+
+	// Calculate per-tray width by dividing sidebar width by number of active trays
+	const trayWidth =
+		activeTrays.length > 0 ? sidebarWidth / activeTrays.length : 290;
 	const wordListItems = useSelector( ( state ) => {
 		return (
 			state.list.filter( ( listItem ) => listItem.listType === 'word' )
@@ -72,6 +76,10 @@ const TrayList = ( { trays } ) => {
 			( tray.id === 'bookmark' && bookmarkListItems ) ||
 			( tray.id === 'search' && searchListItems );
 
+		// Calculate z-index: leftmost tray gets highest z-index
+		const trayPosition = activeTrays.indexOf( tray.id );
+		const zIndex = isActive ? 100 - trayPosition : 10;
+
 		return (
 			<div
 				key={ tray.id }
@@ -79,6 +87,11 @@ const TrayList = ( { trays } ) => {
 					styles.tray,
 					isActive ? styles.visible : styles.hidden
 				) }
+				style={ {
+					width: `${ trayWidth }px`,
+					minWidth: `${ trayWidth }px`,
+					zIndex: zIndex,
+				} }
 			>
 				<div className={ styles.trayHeader }>
 					<h3 className={ styles.trayTitle }>{ tray.text }</h3>
@@ -100,7 +113,7 @@ const TrayList = ( { trays } ) => {
 							</>
 						) }
 						<button
-							className={ styles.trayHeaderButton }
+							className={ classnames( styles.trayHeaderButton ) }
 							onClick={ () => dispatch( removeTray( tray.id ) ) }
 							title={ `Close ${ tray.text }` }
 						>

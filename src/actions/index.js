@@ -716,10 +716,18 @@ export const toggleListItemVisible = ( item ) => {
 	};
 };
 
-export const closeAllListItems = ( itemIds ) => {
-	return {
-		type: 'CLOSE_ALL_LIST_ITEMS',
-		itemIds,
+export const closeAllListItems = ( trayId ) => {
+	return ( dispatch, getState ) => {
+		const list = getState().list;
+		// Get all list items of this type
+		const itemsOfType = list.filter( ( item ) => item.listType === trayId );
+		// Get their IDs
+		const itemIds = itemsOfType.map( ( item ) => item.id );
+
+		dispatch( {
+			type: 'CLOSE_ALL_LIST_ITEMS',
+			itemIds,
+		} );
 	};
 };
 

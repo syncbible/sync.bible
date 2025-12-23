@@ -45,12 +45,7 @@ const TrayList = ( { trays, sidebarWidth } ) => {
 	} );
 
 	const closeAllForTray = ( trayId ) => {
-		// Get all list items of this type
-		const itemsOfType = list.filter( ( item ) => item.listType === trayId );
-		// Get their IDs
-		const itemIds = itemsOfType.map( ( item ) => item.id );
-		// Close them
-		dispatch( closeAllListItems( itemIds ) );
+		dispatch( closeAllListItems( trayId ) );
 	};
 
 	const hasOpenItemsForTray = ( trayId ) => {

@@ -1,6 +1,7 @@
 // External
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import classnames from 'classnames';
 
 // Internal
 import { fetchData } from '../../actions';

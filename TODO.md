@@ -1,11 +1,7 @@
 ## Todo
 
--   add stats to cross references for rare words
--   make the sidebar resizeable
--   add a right sidebar or a second sidebar
 -   scroll to result when clicking on a word
 -   keyboard navigation
--   sort shared words by significance
 -   John 16:32 -> 1 Kings 22:17
 -   fix SweFolk1998 and VietNVB and GerOffBist
 -   redo dead sea scrolls text?

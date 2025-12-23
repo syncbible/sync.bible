@@ -33,7 +33,7 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 		.map( ( lemma ) => {
 			const significance = (
 				common[ lemma ] / strongsObjectWithFamilies[ lemma ].count
-			).toFixed( 3 );
+			).toFixed( 2 );
 			return (
 				<tr
 					key={ lemma }
@@ -45,8 +45,15 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 						dispatch( selectWord( { lemma, version: 'original' } ) )
 					}
 				>
-					<td>{ lemma }</td>
-					<td>
+					<td
+						title={
+							strongsDictionary &&
+							strongsDictionary[ lemma ].xlit
+								? strongsDictionary[ lemma ].xlit
+								: ''
+						}
+					>
+						{ lemma }{ '\u00A0' }
 						{ strongsDictionary &&
 							stripPointing( strongsDictionary[ lemma ].lemma ) }
 					</td>
@@ -61,18 +68,6 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 		<table>
 			<thead>
 				<tr>
-					<th
-						className={ styles.sort }
-						onClick={ () =>
-							sort === 'strongsDesc'
-								? setSort( 'strongsAsc' )
-								: setSort( 'strongsDesc' )
-						}
-					>
-						Strongs
-						{ sort === 'strongsAsc' ? '\u00A0↓' : '' }
-						{ sort === 'strongsDesc' ? '\u00A0↑' : '' }
-					</th>
 					<th
 						className={ styles.sort }
 						onClick={ () =>

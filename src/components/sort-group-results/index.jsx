@@ -168,7 +168,13 @@ const SortGroupResults = ( {
 			return result.word && result.word[ 2 ];
 		}
 		if ( group === 'word' ) {
-			return result.word && result.word[ 0 ];
+			// Combine Strong's number and word (Hebrew/Greek)
+			const word = result.word && result.word[ 0 ];
+			const strongsNum = result.strongsNumber;
+			if ( strongsNum && word ) {
+				return `${ strongsNum } ${ word }`;
+			}
+			return word || strongsNum;
 		}
 		if ( group === 'strongs' ) {
 			return result.strongsNumber;

@@ -22,7 +22,7 @@ const TrayList = ( { trays, sidebarWidth } ) => {
 
 	// Calculate per-tray width by dividing sidebar width by number of active trays
 	const trayWidth =
-		activeTrays.length > 0 ? sidebarWidth / activeTrays.length : 290;
+		activeTrays.length > 0 ? sidebarWidth / activeTrays.length : 320;
 	const wordListItems = useSelector( ( state ) => {
 		return (
 			state.list.filter( ( listItem ) => listItem.listType === 'word' )

@@ -13,7 +13,7 @@ export default function ResizeHandle() {
 	const rafId = useRef( null );
 
 	// Calculate default width based on number of trays
-	const defaultWidth = activeTrays.length * 290;
+	const defaultWidth = activeTrays.length * 320;
 	const currentWidth = sidebarWidth || defaultWidth;
 
 	const handleMouseDown = useCallback( ( e ) => {
@@ -35,7 +35,7 @@ export default function ResizeHandle() {
 		// Use requestAnimationFrame for smooth updates
 		rafId.current = requestAnimationFrame( () => {
 			const deltaX = e.clientX - startX.current;
-			const newWidth = Math.max( 290, startWidth.current + deltaX );
+			const newWidth = Math.max( 320, startWidth.current + deltaX );
 
 			dispatch( settingsChange( 'sidebarWidth', newWidth ) );
 		} );

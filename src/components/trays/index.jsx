@@ -132,7 +132,7 @@ const Trays = () => {
 
 	// Calculate drawer width based on number of active trays
 	const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-	const defaultWidth = activeTrays.length * 290;
+	const defaultWidth = activeTrays.length * 320;
 	const customWidth = sidebarWidth || defaultWidth;
 	const drawerLeftOffset = 60;
 

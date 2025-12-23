@@ -29,7 +29,7 @@ export default function Dock() {
 	// Calculate dynamic margin and width based on sidebar width
 	const dockHeight = 60;
 	const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-	const defaultWidth = activeTrays.length * 290;
+	const defaultWidth = activeTrays.length * 320;
 	const customWidth = sidebarWidth || defaultWidth;
 
 	// On mobile, sidebar overlays, so no margin adjustment needed

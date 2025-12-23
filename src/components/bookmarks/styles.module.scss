@@ -1,6 +1,11 @@
 .description {
 	padding: .5rem;
 	vertical-align: top;
+
+	svg {
+		fill: var(--color);
+		vertical-align: middle;
+	}
 }
 
 .header {

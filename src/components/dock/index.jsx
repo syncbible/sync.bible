@@ -20,10 +20,7 @@ export default function Dock() {
 	const sidebarWidth = useSelector(
 		( state ) => state.settings.sidebarWidth
 	);
-	const className = classnames(
-		styles.dock,
-		showControls ? null : styles.noReference
-	);
+	const className = styles.dock;
 
 	// Calculate dynamic margin and width based on sidebar width
 	const isMobile = typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;

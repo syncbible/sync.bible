@@ -207,56 +207,6 @@ button.trayHeaderButton,
 	}
 }
 
-.sidebar-controls {
-	background: var(--background-ui);
-	box-shadow: 0 0 10px 5px var(--shadow);
-	display: flex;
-		align-items: center;
-		justify-content: space-between;
-	height: $dock-height;
-	position: sticky;
-	top: 0;
-	left: 0;
-	overflow: hidden;
-	padding-left: 10px;
-
-	z-index: 19;
-
-	svg {
-		fill: var(--color);
-	}
-}
-
-.sidebar-icon {
-	padding: 0 5px;
-}
-
-.sidebarControlsInner {
-	display: flex;
-	align-items: center;
-	flex: 1;
-}
-
-.sidebar-controls-right-outer {
-	display: flex;
-}
-
-.export {
-	line-height: 24px;
-}
-
-.inline a {
-	vertical-align: top;
-}
-
-.sidebarButton {
-	background: var(--background-ui);
-	border-bottom: none;
-	border-left: none;
-	border-top: none;
-	width: $dock-height;
-}
-
 .resizeHandle {
 	position: absolute;
 	right: 0;

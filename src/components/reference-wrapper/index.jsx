@@ -44,7 +44,6 @@ const ReferenceWrapper = () => {
 
 	const className = classnames(
 		styles.referenceWrapper,
-		activeTrays.length > 0 ? styles.referenceWrapperSidebarOpen : null,
 		searchSelect ? 'search-select' : null
 	);
 

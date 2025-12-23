@@ -22,7 +22,6 @@ export default function Dock() {
 	);
 	const className = classnames(
 		styles.dock,
-		activeTrays.length > 0 ? styles.dockWithSidebarOpen : null,
 		showControls ? null : styles.noReference
 	);
 

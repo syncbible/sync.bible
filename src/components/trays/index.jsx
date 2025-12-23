@@ -150,11 +150,7 @@ const Trays = () => {
 						} }
 					>
 						<div
-							className={ classnames(
-								styles.trayList,
-								styles.sidebarOpen,
-								styles.isReferenceMode
-							) }
+							className={ styles.trayList }
 							style={ { width: `${ customWidth }px` } }
 						>
 							<TrayList

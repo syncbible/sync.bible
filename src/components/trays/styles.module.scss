@@ -28,14 +28,6 @@
 	position: relative;
 }
 
-.isReferenceMode {
-	// Positioning handled in component sx prop
-}
-
-.isCompareMode {
-	width: calc( 100vw - $dock-height - 1px );
-}
-
 .tray {
 	display: flex;
 	flex-direction: column;

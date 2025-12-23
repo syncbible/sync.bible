@@ -35,13 +35,6 @@
 	margin: 0 auto;
 }
 
-.dock-with-sidebar-open {
-	// Positioning is now fully handled via inline styles for dynamic width
-	@media ( max-width: 959px ) {
-		left: $dock-height;
-	}
-}
-
 .noReference {
 	// Positioning is handled via inline styles
 }

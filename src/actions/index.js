@@ -649,7 +649,6 @@ export const selectWord = ( props ) => {
 			}
 			dispatch( deactivateSearchSelect() );
 		} else {
-			dispatch( openSidebar() );
 			dispatch( addTray( 'word' ) );
 
 			lemma &&

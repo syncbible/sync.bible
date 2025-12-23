@@ -16,14 +16,13 @@ export default function Dock() {
 		shallowEqual
 	);
 	const showControls = useSelector( ( state ) => state.reference.length > 0 );
-	const sidebarOpen = useSelector( ( state ) => state.sidebar );
 	const activeTrays = useSelector( ( state ) => state.trays );
 	const sidebarWidth = useSelector(
 		( state ) => state.settings.sidebarWidth
 	);
 	const className = classnames(
 		styles.dock,
-		sidebarOpen ? styles.dockWithSidebarOpen : null,
+		activeTrays.length > 0 ? styles.dockWithSidebarOpen : null,
 		showControls ? null : styles.noReference
 	);
 
@@ -36,7 +35,7 @@ export default function Dock() {
 	const dynamicMargin = isMobile
 		? DOCK_HEIGHT
 		: DOCK_HEIGHT +
-		  ( sidebarOpen && activeTrays.length > 0 ? customWidth : 0 );
+		  ( activeTrays.length > 0 ? customWidth : 0 );
 	const dynamicWidth = `calc(100% - ${ dynamicMargin }px)`;
 
 	return (

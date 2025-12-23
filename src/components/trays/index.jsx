@@ -8,7 +8,6 @@ import styles from './styles.module.scss';
 import TrayList from './tray-list';
 import ResizeHandle from './resize-handle';
 import Footer from '../footer';
-import { toggleSidebar, closeSidebar } from '../../actions';
 import { rootClasses } from '../utils';
 import { selectAllSettings } from '../../selectors';
 import { TRAY_WIDTH, DOCK_HEIGHT, MOBILE_BREAKPOINT } from '../../constants/dimensions';
@@ -120,11 +119,9 @@ export const trays = [
 ];
 
 const Trays = () => {
-	const dispatch = useDispatch();
 	const interfaceLanguage = useSelector(
 		( state ) => state.settings.interfaceLanguage
 	);
-	const sidebarOpen = useSelector( ( state ) => state.sidebar );
 	const activeTrays = useSelector( ( state ) => state.trays );
 
 	// Using selectAllSettings selector to combine multiple settings subscriptions
@@ -137,18 +134,11 @@ const Trays = () => {
 	const customWidth = sidebarWidth || defaultWidth;
 	const drawerLeftOffset = DOCK_HEIGHT;
 
-	// Close sidebar when all trays are closed
-	useEffect( () => {
-		if ( sidebarOpen && activeTrays.length === 0 ) {
-			dispatch( closeSidebar() );
-		}
-	}, [ activeTrays.length, sidebarOpen, dispatch ] );
-
 	if ( interfaceLanguage ) {
 		return (
 			<div className={ styles.trays }>
 				<Footer trays={ trays } />
-				{ sidebarOpen && (
+				{ activeTrays.length > 0 && (
 					<div
 						className={ classnames(
 							styles.customDrawer,
@@ -171,7 +161,7 @@ const Trays = () => {
 								trays={ trays }
 								sidebarWidth={ customWidth }
 							/>
-							{ activeTrays.length > 0 && <ResizeHandle /> }
+							<ResizeHandle />
 						</div>
 					</div>
 				) }

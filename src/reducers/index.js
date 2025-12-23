@@ -15,7 +15,6 @@ import settings from "./settings";
 import trays from "./trays";
 import userInterface from "./user-interface";
 import wordDetails from "./word-details";
-import sidebar from "./sidebar";
 import similarReferences from "./similar-references";
 import referenceInfo from "./reference-info";
 
@@ -36,7 +35,6 @@ export default (history) => {
     searchSelect,
     searchTerms,
     settings,
-    sidebar,
     trays,
     userInterface,
     wordDetails,

@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Internal
-import { addToList, openSidebar, addTray } from '../../actions';
+import { addToList, addTray } from '../../actions';
 import styles from './styles.module.scss';
 import Bookmark from '../svg/bookmark';
 import { getCrossReferences } from '../../lib/cross-references';
@@ -14,7 +14,6 @@ const VerseNumber = ( { book, chapter, verse } ) => {
 	const data = useSelector( ( state ) => state.data );
 
 	const addBookmarkAction = () => {
-		dispatch( openSidebar() );
 		dispatch( addTray( 'bookmark' ) );
 		dispatch(
 			addToList( {

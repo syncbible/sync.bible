@@ -9,12 +9,11 @@ import styles from './style.module.scss';
 import { TRAY_WIDTH, DOCK_HEIGHT, MOBILE_BREAKPOINT } from '../../constants/dimensions';
 
 const ReferenceWrapper = () => {
-	const { reference, inSync, searchSelect, sidebarOpen, activeTrays, sidebarWidth } = useSelector(
+	const { reference, inSync, searchSelect, activeTrays, sidebarWidth } = useSelector(
 		( state ) => ({
 			reference: state.reference,
 			inSync: state.settings.inSync,
 			searchSelect: state.searchSelect,
-			sidebarOpen: state.sidebar,
 			activeTrays: state.trays,
 			sidebarWidth: state.settings.sidebarWidth,
 		}),
@@ -45,7 +44,7 @@ const ReferenceWrapper = () => {
 
 	const className = classnames(
 		styles.referenceWrapper,
-		sidebarOpen ? styles.referenceWrapperSidebarOpen : null,
+		activeTrays.length > 0 ? styles.referenceWrapperSidebarOpen : null,
 		searchSelect ? 'search-select' : null
 	);
 
@@ -57,7 +56,7 @@ const ReferenceWrapper = () => {
 	// On mobile, sidebar overlays, so no margin adjustment needed
 	const dynamicMargin = isMobile
 		? DOCK_HEIGHT
-		: sidebarOpen && activeTrays.length > 0
+		: activeTrays.length > 0
 			? customWidth + DOCK_HEIGHT
 			: DOCK_HEIGHT;
 

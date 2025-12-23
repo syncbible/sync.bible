@@ -5,6 +5,7 @@ import classnames from 'classnames';
 // Internal
 import Navigation from '../navigation';
 import styles from './style.module.scss';
+import { TRAY_WIDTH, DOCK_HEIGHT, MOBILE_BREAKPOINT } from '../../constants/dimensions';
 
 export default function Dock() {
 	const versionArray = useSelector(
@@ -27,15 +28,14 @@ export default function Dock() {
 	);
 
 	// Calculate dynamic margin and width based on sidebar width
-	const dockHeight = 60;
-	const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-	const defaultWidth = activeTrays.length * 320;
+	const isMobile = typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;
+	const defaultWidth = activeTrays.length * TRAY_WIDTH;
 	const customWidth = sidebarWidth || defaultWidth;
 
 	// On mobile, sidebar overlays, so no margin adjustment needed
 	const dynamicMargin = isMobile
-		? dockHeight
-		: dockHeight +
+		? DOCK_HEIGHT
+		: DOCK_HEIGHT +
 		  ( sidebarOpen && activeTrays.length > 0 ? customWidth : 0 );
 	const dynamicWidth = `calc(100% - ${ dynamicMargin }px)`;
 

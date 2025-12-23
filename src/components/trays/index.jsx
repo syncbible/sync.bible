@@ -11,6 +11,7 @@ import Footer from '../footer';
 import { toggleSidebar, closeSidebar } from '../../actions';
 import { rootClasses } from '../utils';
 import { selectAllSettings } from '../../selectors';
+import { TRAY_WIDTH, DOCK_HEIGHT, MOBILE_BREAKPOINT } from '../../constants/dimensions';
 
 // Tray comonents
 import BookMarks from '../bookmarks';
@@ -131,10 +132,10 @@ const Trays = () => {
 		useSelector( selectAllSettings );
 
 	// Calculate drawer width based on number of active trays
-	const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-	const defaultWidth = activeTrays.length * 320;
+	const isMobile = typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;
+	const defaultWidth = activeTrays.length * TRAY_WIDTH;
 	const customWidth = sidebarWidth || defaultWidth;
-	const drawerLeftOffset = 60;
+	const drawerLeftOffset = DOCK_HEIGHT;
 
 	// Close sidebar when all trays are closed
 	useEffect( () => {

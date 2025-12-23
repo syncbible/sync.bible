@@ -6,6 +6,7 @@ import classnames from 'classnames';
 // Internal
 import ReferenceComponent from '../reference';
 import styles from './style.module.scss';
+import { TRAY_WIDTH, DOCK_HEIGHT, MOBILE_BREAKPOINT } from '../../constants/dimensions';
 
 const ReferenceWrapper = () => {
 	const { reference, inSync, searchSelect, sidebarOpen, activeTrays, sidebarWidth } = useSelector(
@@ -49,17 +50,16 @@ const ReferenceWrapper = () => {
 	);
 
 	// Calculate dynamic margin based on sidebar width
-	const dockHeight = 60;
-	const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-	const defaultWidth = activeTrays.length * 320;
+	const isMobile = typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;
+	const defaultWidth = activeTrays.length * TRAY_WIDTH;
 	const customWidth = sidebarWidth || defaultWidth;
 
 	// On mobile, sidebar overlays, so no margin adjustment needed
 	const dynamicMargin = isMobile
-		? dockHeight
+		? DOCK_HEIGHT
 		: sidebarOpen && activeTrays.length > 0
-			? customWidth + dockHeight
-			: dockHeight;
+			? customWidth + DOCK_HEIGHT
+			: DOCK_HEIGHT;
 
 	return (
 		<div

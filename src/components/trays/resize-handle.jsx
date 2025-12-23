@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { settingsChange } from '../../actions';
 import styles from './styles.module.scss';
+import { TRAY_WIDTH } from '../../constants/dimensions';
 
 export default function ResizeHandle() {
 	const dispatch = useDispatch();
@@ -13,7 +14,7 @@ export default function ResizeHandle() {
 	const rafId = useRef( null );
 
 	// Calculate default width based on number of trays
-	const defaultWidth = activeTrays.length * 320;
+	const defaultWidth = activeTrays.length * TRAY_WIDTH;
 	const currentWidth = sidebarWidth || defaultWidth;
 
 	const handleMouseDown = useCallback( ( e ) => {
@@ -35,7 +36,7 @@ export default function ResizeHandle() {
 		// Use requestAnimationFrame for smooth updates
 		rafId.current = requestAnimationFrame( () => {
 			const deltaX = e.clientX - startX.current;
-			const newWidth = Math.max( 320, startWidth.current + deltaX );
+			const newWidth = Math.max( TRAY_WIDTH, startWidth.current + deltaX );
 
 			dispatch( settingsChange( 'sidebarWidth', newWidth ) );
 		} );

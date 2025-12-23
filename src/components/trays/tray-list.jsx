@@ -10,6 +10,7 @@ import Close from '../svg/close';
 import Clear from '../clear';
 import UnfoldLessDouble from '../svg/unfold-less-double';
 import styles from './styles.module.scss';
+import { TRAY_WIDTH } from '../../constants/dimensions';
 
 const TrayList = ( { trays, sidebarWidth } ) => {
 	const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const TrayList = ( { trays, sidebarWidth } ) => {
 
 	// Calculate per-tray width by dividing sidebar width by number of active trays
 	const trayWidth =
-		activeTrays.length > 0 ? sidebarWidth / activeTrays.length : 320;
+		activeTrays.length > 0 ? sidebarWidth / activeTrays.length : TRAY_WIDTH;
 	const wordListItems = useSelector( ( state ) => {
 		return (
 			state.list.filter( ( listItem ) => listItem.listType === 'word' )

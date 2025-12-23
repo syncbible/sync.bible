@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 
 // Internal dependencies
 import TrayFilter from '../../components/trays/filter';
+import Controls from '../controls';
 import styles from './styles.module.scss';
 
 export default function Footer( { trays } ) {
 	return (
 		<div className={ styles.footer }>
+			<Controls />
 			{ trays.map( ( tray ) => {
 				return (
 					<TrayFilter

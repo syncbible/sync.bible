@@ -18,6 +18,7 @@ const Collapsible = ( {
 	onMouseOver,
 	onMouseOut,
 	open,
+	reference,
 } ) => {
 	const variants = {
 		open: {
@@ -49,6 +50,7 @@ const Collapsible = ( {
 					className={ className }
 					textToCopy={ textToCopy }
 					onRemove={ onRemove }
+					reference={ reference }
 				>
 					{ header }
 				</WordBlockHeader>

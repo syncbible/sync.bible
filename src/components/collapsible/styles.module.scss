@@ -32,14 +32,18 @@ div.header {
 	a {
 		color: var(--background);
 		display: inline-block;
+
+		&:hover {
+			background: none;
+		}
 	}
 
 	svg {
 		color: var(--background);
 		fill: var(--background);
 
-		&:hover [fill] {
-			fill: $hover;
+		&:hover {
+			background: none;
 		}
 	}
 

@@ -10,10 +10,6 @@
 		border-left: none;
 	}
 
-	&:last-of-type {
-		width: $total-column-width - ( $dock-height * 2 );
-	}
-
 	select {
 		border-right: none;
 		border-top: none;

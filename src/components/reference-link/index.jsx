@@ -6,9 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { goToReferenceHelper } from '../../lib/reference.js';
 import ReferenceText from '../reference-text';
 import { goToReferenceAction } from '../../actions/index.js';
+import BookSvg from '../svg/book';
 
 //The right way to do a link
-const ReferenceLink = ( { reference, number } ) => {
+const ReferenceLink = ( { reference, number, isIcon } ) => {
 	const dispatch = useDispatch();
 	const inSync = useSelector( ( state ) => state.settings.inSync );
 	const targetColumn = useSelector(
@@ -28,7 +29,7 @@ const ReferenceLink = ( { reference, number } ) => {
 			} }
 		>
 			{ typeof number !== 'undefined' && parseInt( number ) + 1 + '.' }{ ' ' }
-			<ReferenceText reference={ reference } />
+			{ isIcon ? <BookSvg /> : <ReferenceText reference={ reference } /> }
 		</a>
 	);
 };

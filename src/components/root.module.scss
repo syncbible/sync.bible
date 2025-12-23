@@ -39,7 +39,7 @@ button svg {
 }
 
 select {
-	text-indent: .3em;
+	/*text-indent: .3em;*/
 }
 input {
 	text-indent: .3em;
@@ -71,7 +71,7 @@ select {
 	background-position: calc(100% - 5px) center;
 	background-repeat: no-repeat;
 
-	padding-right: 23px;
+	padding: 0 23px 0 12px;
 }
 
 optgroup {

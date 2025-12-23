@@ -2,7 +2,7 @@
 
 .dock {
 	background-color: var(--background-ui);
-	box-shadow: 0 0 10px 5px var(--shadow);
+	box-shadow: -10px 0 10px 0 var(--shadow);
 	position: fixed;
 	right: 0;
 	left: 0;
@@ -33,7 +33,6 @@
 	display: flex;
 	justify-content: center;
 	margin: 0 auto;
-	padding-right: $dock-height;
 }
 
 .dock-with-sidebar-open {

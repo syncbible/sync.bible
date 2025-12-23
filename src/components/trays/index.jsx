@@ -1,6 +1,6 @@
 // External dependencies
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import classnames from 'classnames';
 
 // Internal dependencies

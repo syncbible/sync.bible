@@ -1,14 +1,11 @@
 // External
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import classnames from 'classnames';
 
 // Internal
-import { removeTray, fetchData, closeAllListItems } from '../../actions';
+import { fetchData } from '../../actions';
 import { mapVersionToData } from '../../lib/reference';
-import Close from '../svg/close';
-import Clear from '../clear';
-import UnfoldLessDouble from '../svg/unfold-less-double';
+import TrayHeaderButtons from './tray-header-buttons';
 import styles from './styles.module.scss';
 import { TRAY_WIDTH } from '../../constants/dimensions';
 
@@ -24,34 +21,15 @@ const TrayList = ( { trays, sidebarWidth } ) => {
 	// Calculate per-tray width by dividing sidebar width by number of active trays
 	const trayWidth =
 		activeTrays.length > 0 ? sidebarWidth / activeTrays.length : TRAY_WIDTH;
-	const wordListItems = useSelector( ( state ) => {
-		return (
-			state.list.filter( ( listItem ) => listItem.listType === 'word' )
-				.length > 1
-		);
-	} );
-	const bookmarkListItems = useSelector( ( state ) => {
-		return (
-			state.list.filter(
-				( listItem ) => listItem.listType === 'bookmark'
-			).length > 1
-		);
-	} );
-	const searchListItems = useSelector( ( state ) => {
-		return (
-			state.list.filter( ( listItem ) => listItem.listType === 'search' )
-				.length > 1
-		);
-	} );
 
-	const closeAllForTray = ( trayId ) => {
-		dispatch( closeAllListItems( trayId ) );
+	// Helper to check if a tray has multiple list items
+	const hasMultipleListItems = ( trayId ) => {
+		return list.filter( ( item ) => item.listType === trayId ).length > 1;
 	};
 
+	// Helper to check if any items are open for a tray
 	const hasOpenItemsForTray = ( trayId ) => {
-		// Get all list items of this type
 		const itemsOfType = list.filter( ( item ) => item.listType === trayId );
-		// Check if any are open
 		return itemsOfType.some( ( item ) => userInterface[ item.id ] );
 	};
 
@@ -67,10 +45,7 @@ const TrayList = ( { trays, sidebarWidth } ) => {
 
 	return trays.map( ( tray ) => {
 		const isActive = activeTrays.includes( tray.id );
-		const hasListItems =
-			( tray.id === 'word' && wordListItems ) ||
-			( tray.id === 'bookmark' && bookmarkListItems ) ||
-			( tray.id === 'search' && searchListItems );
+		const hasListItems = hasMultipleListItems( tray.id );
 
 		// Calculate z-index: leftmost tray gets highest z-index
 		const trayPosition = activeTrays.indexOf( tray.id );
@@ -91,31 +66,12 @@ const TrayList = ( { trays, sidebarWidth } ) => {
 			>
 				<div className={ styles.trayHeader }>
 					<h3 className={ styles.trayTitle }>{ tray.text }</h3>
-					<div className={ styles.trayHeaderRight }>
-						{ hasListItems && (
-							<>
-								{ hasOpenItemsForTray( tray.id ) && (
-									<button
-										className={ styles.trayHeaderButton }
-										onClick={ () => {
-											closeAllForTray( tray.id );
-										} }
-										title="Close all"
-									>
-										<UnfoldLessDouble />
-									</button>
-								) }
-								<Clear selectedTrayId={ tray.id } />
-							</>
-						) }
-						<button
-							className={ classnames( styles.trayHeaderButton ) }
-							onClick={ () => dispatch( removeTray( tray.id ) ) }
-							title={ `Close ${ tray.text }` }
-						>
-							<Close />
-						</button>
-					</div>
+					<TrayHeaderButtons
+						trayId={ tray.id }
+						trayText={ tray.text }
+						hasListItems={ hasListItems }
+						hasOpenItems={ hasOpenItemsForTray( tray.id ) }
+					/>
 				</div>
 				<tray.component isActive={ isActive } />
 			</div>

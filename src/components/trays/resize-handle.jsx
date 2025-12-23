@@ -1,21 +1,17 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { settingsChange } from '../../actions';
 import styles from './styles.module.scss';
 import { TRAY_WIDTH } from '../../constants/dimensions';
+import { useTrayDimensions } from '../../hooks/useTrayDimensions';
 
 export default function ResizeHandle() {
 	const dispatch = useDispatch();
-	const activeTrays = useSelector( ( state ) => state.trays );
-	const sidebarWidth = useSelector( ( state ) => state.settings.sidebarWidth );
+	const { customWidth: currentWidth } = useTrayDimensions();
 	const isResizing = useRef( false );
 	const startX = useRef( 0 );
 	const startWidth = useRef( 0 );
 	const rafId = useRef( null );
-
-	// Calculate default width based on number of trays
-	const defaultWidth = activeTrays.length * TRAY_WIDTH;
-	const currentWidth = sidebarWidth || defaultWidth;
 
 	const handleMouseDown = useCallback( ( e ) => {
 		isResizing.current = true;

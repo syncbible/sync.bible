@@ -1,11 +1,11 @@
 // External
 import { useSelector, shallowEqual } from 'react-redux';
-import classnames from 'classnames';
 
 // Internal
 import Navigation from '../navigation';
 import styles from './style.module.scss';
-import { TRAY_WIDTH, DOCK_HEIGHT, MOBILE_BREAKPOINT } from '../../constants/dimensions';
+import { DOCK_HEIGHT } from '../../constants/dimensions';
+import { useTrayDimensions } from '../../hooks/useTrayDimensions';
 
 export default function Dock() {
 	const versionArray = useSelector(
@@ -16,27 +16,18 @@ export default function Dock() {
 		shallowEqual
 	);
 	const showControls = useSelector( ( state ) => state.reference.length > 0 );
-	const activeTrays = useSelector( ( state ) => state.trays );
-	const sidebarWidth = useSelector(
-		( state ) => state.settings.sidebarWidth
-	);
-	const className = styles.dock;
-
-	// Calculate dynamic margin and width based on sidebar width
-	const isMobile = typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;
-	const defaultWidth = activeTrays.length * TRAY_WIDTH;
-	const customWidth = sidebarWidth || defaultWidth;
+	const { isMobile, customWidth, activeTraysCount } = useTrayDimensions();
 
 	// On mobile, sidebar overlays, so no margin adjustment needed
 	const dynamicMargin = isMobile
 		? DOCK_HEIGHT
 		: DOCK_HEIGHT +
-		  ( activeTrays.length > 0 ? customWidth : 0 );
+		  ( activeTraysCount > 0 ? customWidth : 0 );
 	const dynamicWidth = `calc(100% - ${ dynamicMargin }px)`;
 
 	return (
 		<div
-			className={ className }
+			className={ styles.dock }
 			style={ {
 				marginLeft: `${ dynamicMargin }px`,
 				width: dynamicWidth,

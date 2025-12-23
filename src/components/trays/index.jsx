@@ -10,7 +10,8 @@ import ResizeHandle from './resize-handle';
 import Footer from '../footer';
 import { rootClasses } from '../utils';
 import { selectAllSettings } from '../../selectors';
-import { TRAY_WIDTH, DOCK_HEIGHT, MOBILE_BREAKPOINT } from '../../constants/dimensions';
+import { DOCK_HEIGHT } from '../../constants/dimensions';
+import { useTrayDimensions } from '../../hooks/useTrayDimensions';
 
 // Tray comonents
 import BookMarks from '../bookmarks';
@@ -122,23 +123,15 @@ const Trays = () => {
 	const interfaceLanguage = useSelector(
 		( state ) => state.settings.interfaceLanguage
 	);
-	const activeTrays = useSelector( ( state ) => state.trays );
-
-	// Using selectAllSettings selector to combine multiple settings subscriptions
-	const { darkMode, expandedSearchResults, sidebarWidth } =
-		useSelector( selectAllSettings );
-
-	// Calculate drawer width based on number of active trays
-	const isMobile = typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;
-	const defaultWidth = activeTrays.length * TRAY_WIDTH;
-	const customWidth = sidebarWidth || defaultWidth;
+	const { darkMode, expandedSearchResults } = useSelector( selectAllSettings );
+	const { activeTrays, customWidth, activeTraysCount } = useTrayDimensions();
 	const drawerLeftOffset = DOCK_HEIGHT;
 
 	if ( interfaceLanguage ) {
 		return (
 			<div className={ styles.trays }>
 				<Footer trays={ trays } />
-				{ activeTrays.length > 0 && (
+				{ activeTraysCount > 0 && (
 					<div
 						className={ classnames(
 							styles.customDrawer,

@@ -20,4 +20,9 @@ button.clear {
 	&:hover svg {
 		fill: var(--color);
 	}
+
+	&:focus-visible {
+		outline: 2px solid var(--color);
+		outline-offset: -2px;
+	}
 }

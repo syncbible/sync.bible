@@ -14,7 +14,7 @@ export default function CopyToClipboard( {
 	customClickHandler,
 	version,
 } ) {
-	const handleClick = ( event, version ) => {
+	const handleClick = ( event ) => {
 		event.stopPropagation();
 		if ( customClickHandler ) {
 			customClickHandler( version );
@@ -27,7 +27,7 @@ export default function CopyToClipboard( {
 	return (
 		<a
 			className={ styles.copyToClipboard }
-			onClick={ ( event ) => handleClick( event, version ) }
+			onClick={ handleClick }
 		>
 			<CopySvg fill={ fill } />
 		</a>

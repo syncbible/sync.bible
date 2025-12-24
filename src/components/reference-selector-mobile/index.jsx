@@ -75,7 +75,7 @@ const ReferenceSelectorMobile = ( { index, version } ) => {
 			<div className={ styles.chapterList }>
 				<a
 					className={ styles.back }
-					onClick={ ( event ) => backToBooks( event ) }
+					onClick={ backToBooks }
 				>
 					<ArrowBackIcon />
 				</a>

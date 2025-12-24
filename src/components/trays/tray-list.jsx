@@ -8,7 +8,11 @@ import { fetchData } from '../../actions';
 import { mapVersionToData } from '../../lib/reference';
 import TrayHeaderButtons from './tray-header-buttons';
 import styles from './styles.module.scss';
-import { TRAY_WIDTH } from '../../constants/dimensions';
+import {
+	TRAY_WIDTH,
+	TRAY_Z_INDEX_BASE,
+	TRAY_Z_INDEX_INACTIVE,
+} from '../../constants/dimensions';
 
 const TrayList = ( { trays, sidebarWidth } ) => {
 	const dispatch = useDispatch();
@@ -48,9 +52,12 @@ const TrayList = ( { trays, sidebarWidth } ) => {
 		const isActive = activeTrays.includes( tray.id );
 		const hasListItems = hasMultipleListItems( tray.id );
 
-		// Calculate z-index: leftmost tray gets highest z-index
+		// Calculate z-index: leftmost active tray gets highest z-index
+		// This ensures overlapping trays stack correctly from left to right
 		const trayPosition = activeTrays.indexOf( tray.id );
-		const zIndex = isActive ? 100 - trayPosition : 10;
+		const zIndex = isActive
+			? TRAY_Z_INDEX_BASE - trayPosition
+			: TRAY_Z_INDEX_INACTIVE;
 
 		return (
 			<div

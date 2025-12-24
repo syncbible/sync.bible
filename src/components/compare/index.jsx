@@ -27,7 +27,7 @@ export default function Compare() {
 		( state ) => 'undefined' !== typeof state.data.original
 	);
 	const isActiveTray = useSelector(
-		( state ) => state.trays === 'reference'
+		( state ) => state.trays.includes( 'reference' )
 	);
 	const reference = useSelector( ( state ) => state.referenceInfo.reference );
 	const referenceToCompareWith = useSelector(

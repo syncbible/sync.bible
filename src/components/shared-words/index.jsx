@@ -1,5 +1,5 @@
 // External dependencies
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -19,12 +19,14 @@ function SharedWords( { type } ) {
 	const list = useSelector( ( state ) => state.list );
 	const listOfReferences = getListOfReferencesFromType( list, type );
 	const dispatch = useDispatch();
-
-	if ( listOfReferences.length > 0 ) {
-		// Get the data for bookmark lemmas.
-		dispatch( fetchData( 'original' ) );
-	}
 	const data = useSelector( ( state ) => state.data );
+
+	useEffect( () => {
+		if ( listOfReferences.length > 0 ) {
+			// Get the data for bookmark lemmas.
+			dispatch( fetchData( 'original' ) );
+		}
+	}, [ listOfReferences.length, dispatch ] );
 
 	const sharedWords = getSharedWordsFromReferences(
 		listOfReferences,

@@ -2,7 +2,7 @@
 @import '../dimensions.scss';
 
 .collapsible {
-	max-width: calc( $sidebar-width - $dock-height ); // For the full screen view
+	max-width: $sidebar-width; // So they can stack nicely.
 	width: 100%;
 
 	a {
@@ -37,10 +37,6 @@ div.header {
 	svg {
 		color: var(--background);
 		fill: var(--background);
-
-		&:hover [fill] {
-			fill: $hover;
-		}
 	}
 
 	.icons {

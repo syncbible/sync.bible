@@ -30,7 +30,7 @@ export default function Root() {
 
 	const reference = useSelector( selectReferenceData );
 	const settings = useSelector( selectAllSettings );
-	const { darkMode, compareMode, expandedSearchResults, fontFamily, fontSize } =
+	const { darkMode, expandedSearchResults, fontFamily, fontSize } =
 		settings;
 
 	// Memoize body styles to avoid recalculation
@@ -51,22 +51,21 @@ export default function Root() {
 
 	// Memoize classes to avoid recalculation
 	const classes = useMemo(
-		() => rootClasses( darkMode, compareMode, expandedSearchResults ),
-		[ darkMode, compareMode, expandedSearchResults ]
+		() => rootClasses( darkMode, expandedSearchResults ),
+		[ darkMode, expandedSearchResults ]
 	);
 
 	// Memoize reference component
 	const referenceComponent = useMemo(
-		() =>
-			! compareMode && (
-				<>
-					<Dock />
-					<div onClick={ clearReferenceSelector }>
-						<ReferenceWrapper />
-					</div>
-				</>
-			),
-		[ compareMode, clearReferenceSelector ]
+		() => (
+			<>
+				<Dock />
+				<div onClick={ clearReferenceSelector }>
+					<ReferenceWrapper />
+				</div>
+			</>
+		),
+		[ clearReferenceSelector ]
 	);
 
 	return (

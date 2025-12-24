@@ -1,3 +1,8 @@
 .sort, .row {
 	cursor: pointer;
 }
+
+.row td:not(:first-child),
+.sort:not(:first-child) {
+	text-align: center;
+}

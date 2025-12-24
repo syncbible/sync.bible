@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Internal dependencies
 import { removeFromList, toggleListItemVisible } from '../../actions';
 import Collapsible from '../collapsible';
-import ReferenceLink from '../reference-link';
+import ReferenceText from '../reference-text';
 import SearchLink from '../search-link';
 import InlineResultsToggle from '../inline-results-toggle';
 import WordStatsTable from '../word-stats-table';
@@ -39,7 +39,7 @@ export default function Single( { bookmark, index } ) {
 		dispatch( toggleListItemVisible( bookmark ) );
 	};
 
-	const header = <ReferenceLink reference={ reference } />;
+	const header = <ReferenceText reference={ reference } />;
 
 	const renderCrossReferences = () => {
 		if ( ! data.crossReferences ) {
@@ -147,6 +147,7 @@ export default function Single( { bookmark, index } ) {
 			onToggle={ () => handleToggle() }
 			textToCopy={ bookmarkRef }
 			onRemove={ () => dispatch( removeFromList( bookmark ) ) }
+			reference={ reference }
 		>
 			<div ref={ bookmarkRef }>{ renderTabs() }</div>
 		</Collapsible>

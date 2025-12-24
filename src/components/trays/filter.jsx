@@ -5,36 +5,43 @@ import PropTypes from 'prop-types';
 
 // Internal dependencies
 import {
+	toggleTray,
 	setTrayVisibilityFilter,
-	settingsChange,
-	toggleSidebar,
 } from '../../actions';
 import styles from './styles.module.scss';
+import { useIsMobile } from '../../hooks/useIsMobile';
 
 /** Filter component for tray visibility */
 export default function TrayFilter( { children, filter, title } ) {
 	const dispatch = useDispatch();
-	const activeTray = useSelector( ( state ) => state.trays );
+	const activeTrays = useSelector( ( state ) => state.trays );
+	const isActive = activeTrays.includes( filter );
+	const isMobile = useIsMobile();
+
+	const handleClick = ( event ) => {
+		event.preventDefault();
+
+		if ( isMobile ) {
+			// On mobile, only one tray at a time
+			dispatch( setTrayVisibilityFilter( filter ) );
+		} else {
+			// On desktop, toggle the tray on/off
+			dispatch( toggleTray( filter ) );
+		}
+	};
 
 	return (
-		<span
+		<button
+			type="button"
 			title={ title }
 			className={ classnames(
 				styles.trayFilter,
-				filter === activeTray ? styles.active : null
+				isActive ? styles.active : null
 			) }
-			onClick={ ( event ) => {
-				event.preventDefault();
-				if ( activeTray === filter ) {
-					dispatch( toggleSidebar() );
-					dispatch( settingsChange( 'compareMode', false ) );
-				} else {
-					dispatch( setTrayVisibilityFilter( filter ) );
-				}
-			} }
+			onClick={ handleClick }
 		>
 			{ children }
-		</span>
+		</button>
 	);
 }
 

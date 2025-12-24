@@ -1,11 +1,11 @@
 // External
 import { useSelector, shallowEqual } from 'react-redux';
-import classnames from 'classnames';
 
 // Internal
 import Navigation from '../navigation';
-import Controls from '../controls';
 import styles from './style.module.scss';
+import { DOCK_HEIGHT } from '../../constants/dimensions';
+import { useTrayDimensions } from '../../hooks/useTrayDimensions';
 
 export default function Dock() {
 	const versionArray = useSelector(
@@ -16,15 +16,23 @@ export default function Dock() {
 		shallowEqual
 	);
 	const showControls = useSelector( ( state ) => state.reference.length > 0 );
-	const sidebarOpen = useSelector( ( state ) => state.sidebar );
-	const className = classnames(
-		styles.dock,
-		sidebarOpen ? styles.dockWithSidebarOpen : null,
-		showControls ? null : styles.noReference
-	);
+	const { isMobile, customWidth, activeTraysCount } = useTrayDimensions();
+
+	// On mobile, sidebar overlays, so no margin adjustment needed
+	const dynamicMargin = isMobile
+		? DOCK_HEIGHT
+		: DOCK_HEIGHT +
+		  ( activeTraysCount > 0 ? customWidth : 0 );
+	const dynamicWidth = `calc(100% - ${ dynamicMargin }px)`;
 
 	return (
-		<div className={ className }>
+		<div
+			className={ styles.dock }
+			style={ {
+				marginLeft: `${ dynamicMargin }px`,
+				width: dynamicWidth,
+			} }
+		>
 			<div className={ styles.dockVersionSelectors }>
 				{ versionArray.map( ( version, index ) => (
 					<Navigation
@@ -33,7 +41,6 @@ export default function Dock() {
 						index={ index }
 					/>
 				) ) }
-				{ showControls && <Controls /> }
 			</div>
 		</div>
 	);

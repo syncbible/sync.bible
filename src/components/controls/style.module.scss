@@ -1,9 +1,5 @@
 @import '../dimensions.scss';
 
-.controls {
-	position: relative;
-}
-
 .extraOptions {
 	border-top: none;
 	width: $dock-height;
@@ -14,15 +10,17 @@
 }
 
 .addButton {
+	background: var(--background-ui);
 	width: $dock-height;
 }
 
 .addButton.addButton {
-	border-left-width: 1px;
-	border-right-width: 0;
+	border: none;
 }
 
 .menu {
+	background: var(--background-ui);
+	border: none;
 	color: var(--color);
 	width: $dock-height;
 }

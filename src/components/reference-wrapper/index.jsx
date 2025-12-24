@@ -6,17 +6,19 @@ import classnames from 'classnames';
 // Internal
 import ReferenceComponent from '../reference';
 import styles from './style.module.scss';
+import { DOCK_HEIGHT } from '../../constants/dimensions';
+import { useTrayDimensions } from '../../hooks/useTrayDimensions';
 
 const ReferenceWrapper = () => {
-	const { reference, inSync, searchSelect, sidebarOpen } = useSelector(
+	const { reference, inSync, searchSelect } = useSelector(
 		( state ) => ({
 			reference: state.reference,
 			inSync: state.settings.inSync,
 			searchSelect: state.searchSelect,
-			sidebarOpen: state.sidebar,
 		}),
 		shallowEqual
 	);
+	const { isMobile, customWidth, activeTraysCount } = useTrayDimensions();
 
 	let references;
 
@@ -42,11 +44,21 @@ const ReferenceWrapper = () => {
 
 	const className = classnames(
 		styles.referenceWrapper,
-		sidebarOpen ? styles.referenceWrapperSidebarOpen : null,
 		searchSelect ? 'search-select' : null
 	);
+
+	// On mobile, sidebar overlays, so no margin adjustment needed
+	const dynamicMargin = isMobile
+		? DOCK_HEIGHT
+		: activeTraysCount > 0
+			? customWidth + DOCK_HEIGHT
+			: DOCK_HEIGHT;
+
 	return (
-		<div className={ className }>
+		<div
+			className={ className }
+			style={ { marginLeft: `${dynamicMargin}px` } }
+		>
 			<div className={ styles.referenceWrapperInner }>{ references }</div>
 		</div>
 	);

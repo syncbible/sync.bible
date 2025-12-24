@@ -135,6 +135,27 @@ export const setTrayVisibilityFilter = ( filter ) => {
 	};
 };
 
+export const toggleTray = ( trayId ) => {
+	return {
+		type: 'TOGGLE_TRAY',
+		trayId,
+	};
+};
+
+export const addTray = ( trayId ) => {
+	return {
+		type: 'ADD_TRAY',
+		trayId,
+	};
+};
+
+export const removeTray = ( trayId ) => {
+	return {
+		type: 'REMOVE_TRAY',
+		trayId,
+	};
+};
+
 export const setScrollChapter = ( book, chapter, index ) => {
 	return {
 		book,
@@ -584,24 +605,6 @@ export const setReferenceInfoLimit = ( limit ) => {
 	};
 };
 
-export const openSidebar = () => {
-	return {
-		type: 'OPEN_SIDEBAR',
-	};
-};
-
-export const closeSidebar = () => {
-	return {
-		type: 'CLOSE_SIDEBAR',
-	};
-};
-
-export const toggleSidebar = () => {
-	return {
-		type: 'TOGGLE_SIDEBAR',
-	};
-};
-
 export const selectWord = ( props ) => {
 	const { word, lemma, morph, version } = props;
 
@@ -646,7 +649,7 @@ export const selectWord = ( props ) => {
 			}
 			dispatch( deactivateSearchSelect() );
 		} else {
-			dispatch( setTrayVisibilityFilter( 'word' ) );
+			dispatch( addTray( 'word' ) );
 
 			lemma &&
 				lemma.split( /[\&\s]/ ).map( ( strongsNumber ) => {
@@ -672,9 +675,20 @@ export const selectWord = ( props ) => {
 };
 
 export const addToList = ( item ) => {
-	return {
-		type: 'ADD_TO_LIST',
-		item: item,
+	return ( dispatch, getState ) => {
+		const state = getState();
+		// Get all items of the same type from the list
+		const itemsOfSameType = state.list.filter(
+			( listItem ) => listItem.listType === item.listType
+		);
+		// Get their IDs
+		const itemIdsToClose = itemsOfSameType.map( ( listItem ) => listItem.id );
+
+		dispatch( {
+			type: 'ADD_TO_LIST',
+			item: item,
+			itemIdsToClose: itemIdsToClose,
+		} );
 	};
 };
 
@@ -702,9 +716,18 @@ export const toggleListItemVisible = ( item ) => {
 	};
 };
 
-export const closeAllListItems = () => {
-	return {
-		type: 'CLOSE_ALL_LIST_ITEMS',
+export const closeAllListItems = ( trayId ) => {
+	return ( dispatch, getState ) => {
+		const list = getState().list;
+		// Get all list items of this type
+		const itemsOfType = list.filter( ( item ) => item.listType === trayId );
+		// Get their IDs
+		const itemIds = itemsOfType.map( ( item ) => item.id );
+
+		dispatch( {
+			type: 'CLOSE_ALL_LIST_ITEMS',
+			itemIds,
+		} );
 	};
 };
 

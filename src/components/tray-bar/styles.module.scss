@@ -1,0 +1,8 @@
+@import '../dimensions.scss';
+
+.trayBar {
+	background: var(--background-between);
+	height: 100vh;
+	overflow-y: auto;
+	z-index: 20;
+}

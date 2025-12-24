@@ -7,35 +7,34 @@
 	z-index: 19;
 }
 
-.trayList {
-	background: var(--background-ui);
-	overflow: hidden;
-	position: absolute;
-	left: $dock-height;
+.customDrawer {
+	position: fixed;
 	top: 0;
 	bottom: 0;
+	background: var(--background);
+	box-shadow: 2px 0 10px var(--shadow);
+	color: var(--color);
+	z-index: 9;
+	overflow: hidden;
 }
 
-.isReferenceMode {
-	left: calc( 0px - $sidebar-width - $dock-height );
-	width: calc( $sidebar-width - $dock-height );
-
-	&.sidebarOpen {
-		left: $dock-height;
-	}
+.trayList {
+	background: var(--background-ui);
+	display: flex;
+	flex-direction: row;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	position: relative;
 }
-
-.isCompareMode {
-	width: calc( 100vw - $dock-height - 1px );
-}
-
 
 .tray {
 	display: flex;
-	flex-wrap: wrap;
-	height: calc( 100vh - $dock-height );
+	flex-direction: column;
+	height: 100%;
 	overflow: auto;
-	z-index: 10;
+	flex-shrink: 0;
+	box-shadow: 10px 0 10px -10px var(--shadow);
 
 	select, button, input {
 		background-color: var(--background);
@@ -50,6 +49,57 @@
 			background-color: var(--color-dimmed);
 			color: var(--hover);
 		}
+	}
+}
+
+.trayHeader {
+	background: var(--background-ui);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: $dock-height;
+	padding-left: 10px;
+	position: sticky;
+	top: 0;
+	z-index: 19;
+	flex-shrink: 0;
+}
+
+.trayHeaderRight {
+	display: flex;
+	align-items: center;
+	gap: 0;
+}
+
+button.trayHeaderButton,
+.trayClose {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: $dock-height;
+	height: $dock-height;
+
+	svg {
+		width: 24px;
+		height: 24px;
+		fill: var(--color-dimmed);
+	}
+
+	&:hover {
+		color: var(--color-dimmed);
+	}
+
+	&:hover svg {
+		fill: var(--color);
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--color);
+		outline-offset: -2px;
 	}
 }
 
@@ -80,7 +130,7 @@
 }
 
 .visible {
-	display: block;
+	display: flex;
 }
 
 .hidden {
@@ -88,9 +138,13 @@
 }
 
 .trayFilter {
+	background: transparent;
+	border: none;
 	box-sizing: border-box;
+	color: inherit;
 	display: block;
 	cursor: pointer;
+	font: inherit;
 	margin: 0;
 	padding: 14px 0;
 	text-align: center;
@@ -102,6 +156,11 @@
 		svg {
 			fill: var(--color);
 		}
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--color);
+		outline-offset: -2px;
 	}
 
 	svg {
@@ -162,51 +221,13 @@
 	}
 }
 
-.sidebar-controls {
-	background: var(--background-ui);
-	box-shadow: 0 0 10px 5px var(--shadow);
-	display: flex;
-		align-items: center;
-		justify-content: space-between;
-	height: $dock-height;
-	position: sticky;
+.resizeHandle {
+	position: absolute;
+	right: 0;
 	top: 0;
-	left: 0;
-	overflow: hidden;
-	padding-left: 10px;
-
-	z-index: 19;
-
-	svg {
-		fill: var(--color);
-	}
-}
-
-.sidebar-icon {
-	padding: 0 5px;
-}
-
-.sidebarControlsInner {
-	display: flex;
-	align-items: center;
-}
-
-.sidebar-controls-right-outer {
-	display: flex;
-}
-
-.export {
-	line-height: 24px;
-}
-
-.inline a {
-	vertical-align: top;
-}
-
-.sidebarButton {
-	background: var(--background-ui);
-	border-bottom: none;
-	border-left: none;
-	border-top: none;
-	width: $dock-height;
+	bottom: 0;
+	width: 8px;
+	cursor: ew-resize;
+	background: transparent;
+	z-index: 200;
 }

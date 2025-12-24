@@ -108,11 +108,6 @@ export const selectDarkMode = createSelector(
 	(settings) => settings.darkMode
 );
 
-export const selectCompareMode = createSelector(
-	[selectSettings],
-	(settings) => settings.compareMode
-);
-
 export const selectExpandedSearchResults = createSelector(
 	[selectSettings],
 	(settings) => settings.expandedSearchResults
@@ -134,10 +129,10 @@ export const selectAllSettings = createSelector(
 	(settings) => ({
 		inSync: settings.inSync,
 		darkMode: settings.darkMode,
-		compareMode: settings.compareMode,
 		expandedSearchResults: settings.expandedSearchResults,
 		fontFamily: settings.fontFamily,
 		fontSize: settings.fontSize,
+		sidebarWidth: settings.sidebarWidth,
 	})
 );
 

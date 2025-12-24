@@ -11,54 +11,27 @@ import styles from './style.module.scss';
 export default function Clear( { selectedTrayId } ) {
 	const dispatch = useDispatch();
 	const list = useSelector( ( state ) => state.list );
-	const words = list.filter( ( { listType } ) => listType === 'word' );
-	const bookmarks = list.filter(
-		( { listType } ) => listType === 'bookmark'
-	);
-	const searchTerms = list.filter(
-		( { listType } ) => listType === 'search'
-	);
 
-	if (
-		selectedTrayId !== 'bookmark' &&
-		selectedTrayId !== 'word' &&
-		selectedTrayId !== 'search'
-	) {
+	// Check if this tray type supports clearing
+	const CLEARABLE_TRAYS = [ 'bookmark', 'word', 'search' ];
+	if ( ! CLEARABLE_TRAYS.includes( selectedTrayId ) ) {
 		return null;
 	}
 
-	if ( selectedTrayId === 'bookmark' && bookmarks.length === 0 ) {
-		return null;
-	}
-
-	if ( selectedTrayId === 'word' && words.length === 0 ) {
-		return null;
-	}
-
-	if ( selectedTrayId === 'search' && searchTerms.length === 0 ) {
+	// Check if there are any items to clear
+	const itemsOfType = list.filter( ( { listType } ) => listType === selectedTrayId );
+	if ( itemsOfType.length === 0 ) {
 		return null;
 	}
 
 	const clearTray = ( event ) => {
 		event.preventDefault();
-		if ( selectedTrayId === 'bookmark' ) {
-			dispatch( removeTypeFromList( 'bookmark' ) );
-		}
-
-		if ( selectedTrayId === 'word' ) {
-			dispatch( removeTypeFromList( 'word' ) );
-		}
-
-		if ( selectedTrayId === 'search' ) {
-			dispatch( removeTypeFromList( 'search' ) );
-		}
+		dispatch( removeTypeFromList( selectedTrayId ) );
 	};
 
 	return (
 		<button
-			onClick={ ( event ) => {
-				clearTray( event );
-			} }
+			onClick={ clearTray }
 			title="Clear"
 			className={ styles.clear }
 		>

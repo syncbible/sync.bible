@@ -2,10 +2,10 @@
 
 .dock {
 	background-color: var(--background-ui);
-	box-shadow: 0 0 10px 5px var(--shadow);
+	box-shadow: -10px 0 10px 0 var(--shadow);
 	position: fixed;
 	right: 0;
-	left: $dock-height;
+	left: 0;
 	top: 0;
 	transition: margin 200ms;
 	z-index: 8;
@@ -33,20 +33,4 @@
 	display: flex;
 	justify-content: center;
 	margin: 0 auto;
-}
-
-.dock-with-sidebar-open {
-	@media ( max-width: 959px ) {
-		left: $dock-height;
-	}
-
-	@media ( min-width: 960px ) {
-		left: 0;
-		margin-left: $sidebar-width;
-		width: calc( 100% - $sidebar-width );
-	}
-}
-
-.noReference {
-	left: 0;
 }

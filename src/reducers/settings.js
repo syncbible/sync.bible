@@ -1,5 +1,3 @@
-const ROUTER_ON_LOCATION_CHANGED = '@@router/ON_LOCATION_CHANGED';
-
 const initialState = {
 	fontSize: '100%',
 	fontFamily:
@@ -12,8 +10,8 @@ const initialState = {
 	interfaceLanguage: null,
 	type: 'SETTINGS_CHANGE',
 	darkMode: null,
-	compareMode: false,
 	targetColumn: 0,
+	sidebarWidth: null,
 	versions: [
 		'KJV',
 		'ESV',
@@ -66,8 +64,10 @@ export default ( state = initialState, action ) => {
 				],
 			};
 
-		case ROUTER_ON_LOCATION_CHANGED:
-			return { ...state, compareMode: false };
+		case 'TOGGLE_TRAY':
+		case 'ADD_TRAY':
+		case 'REMOVE_TRAY':
+			return { ...state, sidebarWidth: null };
 
 		default:
 			return state;

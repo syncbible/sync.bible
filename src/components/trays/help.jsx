@@ -14,6 +14,35 @@ const HelpTray = () => {
 		window.location.href = '/';
 	};
 
+	const clearCache = async () => {
+		if ( 'serviceWorker' in navigator && 'caches' in window ) {
+			try {
+				// Unregister all service workers
+				const registrations = await navigator.serviceWorker.getRegistrations();
+				for ( const registration of registrations ) {
+					await registration.unregister();
+				}
+
+				// Delete all caches
+				const cacheNames = await caches.keys();
+				await Promise.all(
+					cacheNames.map( ( cacheName ) => caches.delete( cacheName ) )
+				);
+
+				// Clear IndexedDB too
+				indexedDB.deleteDatabase( 'syncbible' );
+
+				alert( 'Cache cleared successfully! The page will now reload.' );
+				window.location.reload( true );
+			} catch ( error ) {
+				console.error( 'Error clearing cache:', error );
+				alert( 'Error clearing cache. Please try again or clear your browser cache manually.' );
+			}
+		} else {
+			alert( 'Service worker or cache API not supported in this browser.' );
+		}
+	};
+
 	const exportFile = ( fileName ) => {
 		const element = document.createElement( 'a' );
 		const file = new Blob(
@@ -119,6 +148,11 @@ const HelpTray = () => {
 				<p>
 					<a href="#" onClick={ clear }>
 						Clear settings and start over
+					</a>
+				</p>
+				<p>
+					<a href="#" onClick={ clearCache }>
+						Clear cache and reload
 					</a>
 				</p>
 				<p>

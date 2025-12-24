@@ -9,13 +9,26 @@ import {
 	setTrayVisibilityFilter,
 } from '../../actions';
 import styles from './styles.module.scss';
-import { MOBILE_BREAKPOINT } from '../../constants/dimensions';
+import { useIsMobile } from '../../hooks/useIsMobile';
 
 /** Filter component for tray visibility */
 export default function TrayFilter( { children, filter, title } ) {
 	const dispatch = useDispatch();
 	const activeTrays = useSelector( ( state ) => state.trays );
 	const isActive = activeTrays.includes( filter );
+	const isMobile = useIsMobile();
+
+	const handleClick = ( event ) => {
+		event.preventDefault();
+
+		if ( isMobile ) {
+			// On mobile, only one tray at a time
+			dispatch( setTrayVisibilityFilter( filter ) );
+		} else {
+			// On desktop, toggle the tray on/off
+			dispatch( toggleTray( filter ) );
+		}
+	};
 
 	return (
 		<button
@@ -25,18 +38,7 @@ export default function TrayFilter( { children, filter, title } ) {
 				styles.trayFilter,
 				isActive ? styles.active : null
 			) }
-			onClick={ ( event ) => {
-				event.preventDefault();
-				const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
-
-				if ( isMobile ) {
-					// On mobile, only one tray at a time
-					dispatch( setTrayVisibilityFilter( filter ) );
-				} else {
-					// On desktop, toggle the tray on/off
-					dispatch( toggleTray( filter ) );
-				}
-			} }
+			onClick={ handleClick }
 		>
 			{ children }
 		</button>

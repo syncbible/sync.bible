@@ -6,9 +6,9 @@ import TrayFilter from '../../components/trays/filter';
 import Controls from '../controls';
 import styles from './styles.module.scss';
 
-export default function Footer( { trays } ) {
+export default function TrayBar( { trays } ) {
 	return (
-		<div className={ styles.footer }>
+		<div className={ styles.trayBar }>
 			<Controls />
 			{ trays.map( ( tray ) => {
 				return (
@@ -26,7 +26,7 @@ export default function Footer( { trays } ) {
 	);
 }
 
-Footer.propTypes = {
+TrayBar.propTypes = {
 	trays: PropTypes.arrayOf(
 		PropTypes.shape( {
 			id: PropTypes.string.isRequired,

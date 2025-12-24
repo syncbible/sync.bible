@@ -18,7 +18,8 @@ export default function TrayFilter( { children, filter, title } ) {
 	const isActive = activeTrays.includes( filter );
 
 	return (
-		<span
+		<button
+			type="button"
 			title={ title }
 			className={ classnames(
 				styles.trayFilter,
@@ -38,7 +39,7 @@ export default function TrayFilter( { children, filter, title } ) {
 			} }
 		>
 			{ children }
-		</span>
+		</button>
 	);
 }
 

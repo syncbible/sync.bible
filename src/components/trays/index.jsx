@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import styles from './styles.module.scss';
 import TrayList from './tray-list';
 import ResizeHandle from './resize-handle';
-import Footer from '../footer';
+import TrayBar from '../tray-bar';
 import { rootClasses } from '../utils';
 import { selectAllSettings } from '../../selectors';
 import { DOCK_HEIGHT } from '../../constants/dimensions';
@@ -130,7 +130,7 @@ const Trays = () => {
 	if ( interfaceLanguage ) {
 		return (
 			<div className={ styles.trays }>
-				<Footer trays={ trays } />
+				<TrayBar trays={ trays } />
 				{ activeTraysCount > 0 && (
 					<div
 						className={ classnames(

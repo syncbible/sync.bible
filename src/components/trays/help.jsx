@@ -1,5 +1,5 @@
 // External dependencies
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 // Internal dependencies
@@ -8,17 +8,78 @@ import styles from './styles.module.scss';
 
 const HelpTray = () => {
 	const data = useSelector( ( state ) => state.data );
+	const [ cacheStatus, setCacheStatus ] = useState( {
+		serviceWorkerActive: false,
+		caches: [],
+		totalCachedFiles: 0,
+		loading: true,
+	} );
 
-	const clear = () => {
-		indexedDB.deleteDatabase( 'syncbible' );
-		window.location.href = '/';
+	const checkCacheStatus = async () => {
+		if ( 'serviceWorker' in navigator && 'caches' in window ) {
+			try {
+				// Check service worker status
+				const registration =
+					await navigator.serviceWorker.getRegistration();
+				const serviceWorkerActive = !! (
+					registration && registration.active
+				);
+
+				// Get all cache names
+				const cacheNames = await caches.keys();
+
+				// Get file count for each cache
+				const cacheDetails = await Promise.all(
+					cacheNames.map( async ( cacheName ) => {
+						const cache = await caches.open( cacheName );
+						const keys = await cache.keys();
+						return {
+							name: cacheName,
+							fileCount: keys.length,
+						};
+					} )
+				);
+
+				const totalCachedFiles = cacheDetails.reduce(
+					( sum, cache ) => sum + cache.fileCount,
+					0
+				);
+
+				setCacheStatus( {
+					serviceWorkerActive,
+					caches: cacheDetails,
+					totalCachedFiles,
+					loading: false,
+				} );
+			} catch ( error ) {
+				console.error( 'Error checking cache status:', error );
+				setCacheStatus( {
+					serviceWorkerActive: false,
+					caches: [],
+					totalCachedFiles: 0,
+					loading: false,
+				} );
+			}
+		} else {
+			setCacheStatus( {
+				serviceWorkerActive: false,
+				caches: [],
+				totalCachedFiles: 0,
+				loading: false,
+			} );
+		}
 	};
+
+	useEffect( () => {
+		checkCacheStatus();
+	}, [] );
 
 	const clearCache = async () => {
 		if ( 'serviceWorker' in navigator && 'caches' in window ) {
 			try {
 				// Unregister all service workers
-				const registrations = await navigator.serviceWorker.getRegistrations();
+				const registrations =
+					await navigator.serviceWorker.getRegistrations();
 				for ( const registration of registrations ) {
 					await registration.unregister();
 				}
@@ -26,20 +87,28 @@ const HelpTray = () => {
 				// Delete all caches
 				const cacheNames = await caches.keys();
 				await Promise.all(
-					cacheNames.map( ( cacheName ) => caches.delete( cacheName ) )
+					cacheNames.map( ( cacheName ) =>
+						caches.delete( cacheName )
+					)
 				);
 
 				// Clear IndexedDB too
 				indexedDB.deleteDatabase( 'syncbible' );
 
-				alert( 'Cache cleared successfully! The page will now reload.' );
+				alert(
+					'Cache cleared successfully! The page will now reload.'
+				);
 				window.location.reload( true );
 			} catch ( error ) {
 				console.error( 'Error clearing cache:', error );
-				alert( 'Error clearing cache. Please try again or clear your browser cache manually.' );
+				alert(
+					'Error clearing cache. Please try again or clear your browser cache manually.'
+				);
 			}
 		} else {
-			alert( 'Service worker or cache API not supported in this browser.' );
+			alert(
+				'Service worker or cache API not supported in this browser.'
+			);
 		}
 	};
 
@@ -141,20 +210,58 @@ const HelpTray = () => {
 					</a>
 					.
 				</p>
-				<p>
-					<br />
-					Version: { globalThis.cacheKey }
-				</p>
-				<p>
-					<a href="#" onClick={ clear }>
-						Clear settings and start over
-					</a>
-				</p>
+				<h3>Offline Status</h3>
+				{ cacheStatus.loading ? (
+					<p>Checking cache status...</p>
+				) : (
+					<div>
+						<p>
+							<strong>Service Worker:</strong>{ ' ' }
+							{ cacheStatus.serviceWorkerActive ? (
+								<span style={ { color: 'green' } }>
+									✓ Active
+								</span>
+							) : (
+								<span style={ { color: 'red' } }>
+									✗ Not Active
+								</span>
+							) }
+						</p>
+						<p>
+							<strong>Cached Files:</strong>{ ' ' }
+							{ cacheStatus.totalCachedFiles }
+						</p>
+						{ cacheStatus.caches.length > 0 && (
+							<div>
+								<strong>Caches:</strong>
+								<ul>
+									{ cacheStatus.caches.map( ( cache ) => (
+										<li key={ cache.name }>
+											{ cache.name }: { cache.fileCount }{ ' ' }
+											files
+										</li>
+									) ) }
+								</ul>
+							</div>
+						) }
+						<p>
+							<strong>Offline Ready:</strong>{ ' ' }
+							{ cacheStatus.serviceWorkerActive &&
+							cacheStatus.totalCachedFiles > 0 ? (
+								<span style={ { color: 'green' } }>✓ Yes</span>
+							) : (
+								<span style={ { color: 'red' } }>✗ No</span>
+							) }
+						</p>
+					</div>
+				) }
 				<p>
 					<a href="#" onClick={ clearCache }>
 						Clear cache and reload
 					</a>
 				</p>
+				<br />
+				<br />
 				<p>
 					Built in Firefox.
 					<br />

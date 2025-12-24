@@ -50,6 +50,11 @@ const SettingsTray = () => {
 		event.target.blur();
 	};
 
+	const clear = () => {
+		indexedDB.deleteDatabase( 'syncbible' );
+		window.location.href = '/';
+	};
+
 	return (
 		<div id="settingsPanel" className={ styles.helpPanel }>
 			<div className="content">
@@ -200,6 +205,11 @@ const SettingsTray = () => {
 							</li>
 						</ul>
 					</form>
+					<p>
+						<a href="#" onClick={ clear }>
+							Clear settings and start over
+						</a>
+					</p>
 				</div>
 			</div>
 		</div>

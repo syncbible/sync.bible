@@ -104,7 +104,7 @@ const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 			'referenceWindow' + index
 		);
 		if ( currrentChapter && referenceWindow ) {
-			currrentChapter.scrollIntoView();
+			currrentChapter.scrollIntoView( { behavior: 'smooth', block: 'start' } );
 			referenceWindow.scrollBy( 0, 0 );
 		}
 	};

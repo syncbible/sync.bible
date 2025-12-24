@@ -84,6 +84,15 @@
 			color: #fff;
 			text-shadow: 1px 1px #000;
 		}
+
+		.verseNumberIcon {
+			z-index: 0;
+		}
+	}
+
+	// High contrast verse number for current verse
+	&.isCurrent .verseNumber {
+		color: var(--background);
 	}
 }
 
@@ -135,6 +144,12 @@
 	text-align: center;
 	width: $column-padding;
 
+	// Ensure verse number text is above the bookmark icon
+	> span:first-child {
+		position: relative;
+		z-index: 1;
+	}
+
 	span:hover {
 		color: var(--accent);
 	}
@@ -151,6 +166,11 @@
 	}
 }
 
+// Show bookmark icon for current verse
+.isCurrent .verseNumberIcon {
+	z-index: 0;
+}
+
 .placeholder {
 	background: var(--background-ui);
 	font-size: .8em;
@@ -158,9 +178,10 @@
 	margin: .4em 0 .5em 0;
 }
 
-.isCurrent {
-	background: var(--active);
-}
+// Removed background highlighting - using bookmark icon color instead
+// .isCurrent {
+// 	background: var(--active);
+// }
 
 .invisible {
 	display: none;

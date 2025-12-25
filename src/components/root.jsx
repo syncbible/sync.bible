@@ -1,6 +1,7 @@
 // External
-import { useEffect, useMemo, useCallback } from 'react';
+import { useEffect, useMemo, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { replace } from '@lagunovsky/redux-react-router';
 
 // Internal
 import Dock from './dock';
@@ -10,12 +11,44 @@ import Trays from './trays';
 import WordHighlight from './word-highlight';
 import InitialView from './inital-view';
 import styles from './root.module.scss';
-import { closeReferenceSelectorMobile, fetchDataAsync } from '../actions';
+import { closeReferenceSelectorMobile, fetchDataAsync, settingsChange } from '../actions';
 import { rootClasses } from './utils';
 import { selectAllSettings, selectReferenceData } from '../selectors';
+import { getReferenceFromHash } from '../lib/reference';
+import bible from '../data/bible';
 
 export default function Root() {
 	const dispatch = useDispatch();
+	const hasInitialized = useRef( false );
+
+	// On initial mount, process URL to set reference and interface language
+	// URL takes precedence over persisted state
+	useEffect( () => {
+		if ( ! hasInitialized.current ) {
+			hasInitialized.current = true;
+
+			if ( window.location.hash ) {
+				const hash = window.location.hash.replace( '#', '' );
+				if ( hash && hash !== '/' ) {
+					// Parse the hash to extract reference data
+					const parsedReferences = getReferenceFromHash( hash );
+					if ( parsedReferences && parsedReferences.length > 0 && parsedReferences[ 0 ] ) {
+						const firstReference = parsedReferences[ 0 ];
+						const version = firstReference.version;
+
+						// Set interface language from the first version in the URL
+						if ( version && bible.Data.supportedVersions[ version ] ) {
+							dispatch( settingsChange( 'interfaceLanguage', version ) );
+						}
+					}
+
+					// Navigate to URL to ensure it takes precedence over persisted state
+					const expectedPath = hash.startsWith( '/' ) ? hash : '/' + hash;
+					dispatch( replace( expectedPath ) );
+				}
+			}
+		}
+	}, [ dispatch ] );
 
 	// Fetch the other data we need - we precache this as a lot of features depend on it
 	// and we want them to work in offline mode.

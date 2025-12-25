@@ -25,6 +25,7 @@ import {
 	getHarmonisedReference,
 } from '../../lib/reference';
 import copyToClipboardHelper from '../../lib/copy-to-clipboard-helper';
+import { DOCK_HEIGHT } from '../../constants/dimensions';
 
 function getLanguageFromVersion( version, book ) {
 	if ( version === 'original' ) {
@@ -39,14 +40,20 @@ function getLanguageFromVersion( version, book ) {
 
 const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 	const { reference, data, inSync } = useSelector(
-		( state ) => ({
+		( state ) => ( {
 			reference: state.reference,
 			data: state.data,
 			inSync: state.settings.inSync,
-		}),
+		} ),
 		shallowEqual
 	);
 	const currentReference = reference[ index ];
+
+	// Guard against null reference during initialization
+	if ( ! currentReference ) {
+		return null;
+	}
+
 	const version = currentReference.version;
 	const startVerse = currentReference.verse;
 	const endVerse = currentReference.endVerse;
@@ -104,8 +111,29 @@ const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 			'referenceWindow' + index
 		);
 		if ( currrentChapter && referenceWindow ) {
-			currrentChapter.scrollIntoView( { behavior: 'smooth', block: 'start' } );
-			referenceWindow.scrollBy( 0, 0 );
+			// Subtract DOCK_HEIGHT to position verse at bottom of dock
+			const targetPosition = currrentChapter.offsetTop - DOCK_HEIGHT;
+			const startPosition = referenceWindow.scrollTop;
+			const distance = targetPosition - startPosition;
+			const duration = 200; // milliseconds
+			let start = null;
+
+			const animation = ( currentTime ) => {
+				if ( start === null ) start = currentTime;
+				const timeElapsed = currentTime - start;
+				const progress = Math.min( timeElapsed / duration, 1 );
+
+				// Ease out quad for smoother deceleration
+				const ease = 1 - Math.pow( 1 - progress, 2 );
+
+				referenceWindow.scrollTop = startPosition + distance * ease;
+
+				if ( timeElapsed < duration ) {
+					requestAnimationFrame( animation );
+				}
+			};
+
+			requestAnimationFrame( animation );
 		}
 	};
 
@@ -170,9 +198,7 @@ const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 				return verseMap;
 			}
 			return verseMap.filter( ( verse, verseNumber ) => {
-				return (
-					verseNumber + 1 >= startVerse && verseNumber < endVerse
-				);
+				return verseNumber + 1 >= startVerse && verseNumber < endVerse;
 			} );
 		}, [ verseMap, startVerse, endVerse ] );
 
@@ -246,7 +272,10 @@ const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 								: null;
 
 						// Render empty placeholder if chapter or verse is null (Harmony mode)
-						if ( parsedReference.chapter === null || newVerseNumber === null ) {
+						if (
+							parsedReference.chapter === null ||
+							newVerseNumber === null
+						) {
 							return (
 								<div
 									key={ 'empty-' + index }
@@ -257,24 +286,19 @@ const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 										maxWidth: '600px',
 									} }
 								>
-									{/* Empty column placeholder */}
+									{ /* Empty column placeholder */ }
 								</div>
 							);
 						}
 
 						return (
 							<VerseWrapper
-								lang={ getLanguageFromVersion(
-									version,
-									book
-								) }
+								lang={ getLanguageFromVersion( version, book ) }
 								book={ parsedReference.book }
 								version={ version }
 								chapter={ parsedReference.chapter }
 								verse={ newVerseNumber }
-								key={
-									'versewrapper' + index + newVerseNumber
-								}
+								key={ 'versewrapper' + index + newVerseNumber }
 								isCurrentRef={
 									!! isCurrentRef(
 										parsedReference.verseNumber
@@ -325,9 +349,7 @@ const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 				return verseMap;
 			}
 			return verseMap.filter( ( verse, verseNumber ) => {
-				return (
-					verseNumber + 1 >= startVerse && verseNumber < endVerse
-				);
+				return verseNumber + 1 >= startVerse && verseNumber < endVerse;
 			} );
 		}, [ verseMap, startVerse, endVerse ] );
 

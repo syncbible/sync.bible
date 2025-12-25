@@ -4,6 +4,8 @@
 .collapsible {
 	max-width: $sidebar-width; // So they can stack nicely.
 	width: 100%;
+	flex: 1 1 auto;
+	min-width: 250px;
 
 	a {
 		text-decoration: none;

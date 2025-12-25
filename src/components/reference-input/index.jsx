@@ -26,8 +26,14 @@ const getReferenceValue = ( reference, scrollChapter, version ) => {
 	const chapter =
 		scrollChapter && scrollChapter?.chapter ? scrollChapter.chapter : '';
 	const book = getBookFromState( reference, scrollChapter );
+
+	// Return empty string if book or version is not valid
+	if ( ! book || ! version ) {
+		return ' ';
+	}
+
 	const tranlatedBook = bible.getTranslatedBookName( book, version );
-	if ( ! tranlatedBook ) {
+	if ( ! tranlatedBook || tranlatedBook === 'problemo' ) {
 		return ' ';
 	}
 	return tranlatedBook + ' ' + chapter;
@@ -41,7 +47,7 @@ const ReferenceInput = ( { index } ) => {
 			return state.scrollChapter[ index ];
 		}
 	} );
-	const version = reference[ index ].version;
+	const version = reference[ index ]?.version ?? 'KJV';
 	const referenceValue = getReferenceValue(
 		reference[ index ],
 		scrollChapter,

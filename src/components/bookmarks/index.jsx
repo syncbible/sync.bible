@@ -22,9 +22,11 @@ export default function BookMarks() {
 					Click the <Bookmark /> to bookmark a verse.
 				</p>
 			) }
-			{ bookmarks.map( ( bookmark, key ) => (
-				<Single bookmark={ bookmark } key={ key } index={ key } />
-			) ) }
+			<div className={ styles.bookmarksContainer }>
+				{ bookmarks.map( ( bookmark, key ) => (
+					<Single bookmark={ bookmark } key={ key } index={ key } />
+				) ) }
+			</div>
 			<CombinedResults type="bookmark" />
 			<SharedWords type="bookmark" />
 		</>

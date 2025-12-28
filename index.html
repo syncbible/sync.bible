@@ -51,7 +51,6 @@
 </body>
 
 <script>
-	globalThis.cacheKey = 'sync.bible.23.1720447802';
 	var javascripture = {
 		data: {},
 		reactHelpers: {},
@@ -71,7 +70,6 @@
 <script type="module" src="src/main.jsx"></script>
 <script>
 	// Attach web workers
-	// has to come before service worker
 	worker.addEventListener( 'message', function( e ) {
 		if( e.data.task === 'search' || e.data.task === 'word' ) {
 			if ( javascripture.reactHelpers.dispatch ) {
@@ -82,57 +80,25 @@
 				} );
 			}
 		}
-
-		/*if( e.data.task === 'loading' ) {
-			document.getElementById( 'loading' ).innerHTML = e.data.html;
-		}*/
 	}, false );
 
-	// Handler for messages coming from the service worker
-	const channel = new BroadcastChannel('sw-messages');
-	channel.addEventListener('message', event => {
-		javascripture.sw = event.data;
-	});
-
-	let newWorker;
+	// Register service worker
 	if( 'serviceWorker' in navigator) {
-		navigator.serviceWorker
-			.register('sw.js?cacheKey=' + globalThis.cacheKey, { updateViaCache: 'imports' } )
+		navigator.serviceWorker.register('sw.js')
 			.then( function( reg ) {
-				reg.addEventListener('updatefound', () => {
-					// An updated service worker has appeared in reg.installing!
-					newWorker = reg.installing;
-					newWorker.addEventListener('statechange', () => {
-						// Has service worker state changed?
-						switch (newWorker.state) {
-							// There is a new service worker available, show the notification
-							case 'installed':
-								if (navigator.serviceWorker.controller) {
-									if ( confirm('A new version of this app is available. Update now?') ) {
-										indexedDB.deleteDatabase('syncbible');
-										newWorker.postMessage({ action: 'skipWaiting' });
-									}
-								}
-							break;
-						}
-					});
-				});
+				console.log('Service Worker registered');
+			})
+			.catch( function( err ) {
+				console.log('Service Worker registration failed:', err);
 			});
 
-			// Handler for messages coming from the service worker
-			navigator.serviceWorker.addEventListener('message', function( event ) {
-				// Send to react
-				javascripture.sw = event.data;
-			} );
-
-			let refreshing;
-			// The event listener that is fired when the service worker updates
-			// Here we reload the page
-			navigator.serviceWorker.addEventListener('controllerchange', function () {
-				if (refreshing) return;
-				window.location.reload();
-				refreshing = true;
-			});
-       }
+		// Auto-reload when service worker updates
+		let refreshing = false;
+		navigator.serviceWorker.addEventListener('controllerchange', function () {
+			if (refreshing) return;
+			window.location.reload();
+			refreshing = true;
+		});
+	}
 </script>
 </html>

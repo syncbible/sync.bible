@@ -1,90 +1,54 @@
-const cacheKey = new URL( location ).searchParams.get( 'cacheKey' );
+// Simple cache version - automatically generated from build
+const CACHE_VERSION = 'sync.bible.24.27784a4';
+const CACHE_NAME = CACHE_VERSION;
 
-self.addEventListener( 'install', function ( e ) {
-	e.waitUntil(
-		caches.open( cacheKey ).then( function ( cache ) {
-			return cache.addAll( [
-				'.',
-				'index.html',
+// Files to cache
+const FILES_TO_CACHE = [
+	'/',
+	'/index.html',
+	'/manifest.json',
+	'/syncbible.svg',
+	'/data/strongsObjectWithFamilies.json',
+	'/data/strongsDictionary.json',
+	'/data/crossReferences.json',
+	'/data/lemmas.json',
+	'/api/searchApi.js',
+	'/workers/worker.js',
+];
 
-				// The Vite build output
-				'assets/index.js',
-				'assets/index.css',
-
-				// Assets
-				'manifest.json',
-				'syncbible.svg',
-
-				//data
-				'data/strongsObjectWithFamilies.json',
-				'data/strongsDictionary.json',
-				'data/crossReferences.json',
-				'data/lemmas.json',
-
-				//api - so that search works offline
-				'api/searchApi.js',
-
-				//workers
-				'workers/worker.js',
-			] );
-		} )
-	);
-} );
-
-function send_message_to_client( client, msg ) {
-	return new Promise( function ( resolve, reject ) {
-		var msg_chan = new MessageChannel();
-
-		msg_chan.port1.onmessage = function ( event ) {
-			if ( event.data.error ) {
-				reject( event.data.error );
-			} else {
-				resolve( event.data );
-			}
-		};
-
-		client.postMessage( msg, [ msg_chan.port2 ] );
-	} );
-}
-
-function send_message_to_all_clients( msg ) {
-	clients.matchAll().then( ( clients ) => {
-		clients.forEach( ( client ) => {
-			send_message_to_client( client, msg ).then( ( m ) =>
-				console.log( 'SW Received Message: ' + m )
-			);
-		} );
-	} );
-}
-
-self.addEventListener( 'fetch', function ( event ) {
-	send_message_to_all_clients( cacheKey );
-	event.respondWith(
-		caches.match( event.request ).then( function ( response ) {
-			return response || fetch( event.request );
-		} )
-	);
-} );
-
-// Delete unused cache
-self.addEventListener( 'activate', function ( event ) {
-	send_message_to_all_clients( cacheKey );
-	var cacheWhitelist = [ cacheKey ];
+// Install - cache files
+self.addEventListener( 'install', ( event ) => {
 	event.waitUntil(
-		caches.keys().then( function ( keyList ) {
+		caches.open( CACHE_NAME ).then( ( cache ) => {
+			return cache.addAll( FILES_TO_CACHE );
+		} )
+	);
+	// Force the waiting service worker to become the active service worker
+	self.skipWaiting();
+} );
+
+// Activate - clean up old caches
+self.addEventListener( 'activate', ( event ) => {
+	event.waitUntil(
+		caches.keys().then( ( cacheNames ) => {
 			return Promise.all(
-				keyList.map( function ( key ) {
-					if ( cacheWhitelist.indexOf( key ) === -1 ) {
-						return caches.delete( key );
+				cacheNames.map( ( cacheName ) => {
+					if ( cacheName !== CACHE_NAME ) {
+						return caches.delete( cacheName );
 					}
 				} )
 			);
 		} )
 	);
+	// Take control of all pages immediately
+	self.clients.claim();
 } );
 
-self.addEventListener( 'message', function ( event ) {
-	if ( event.data.action === 'skipWaiting' ) {
-		self.skipWaiting();
-	}
+// Fetch - serve from cache, fallback to network
+self.addEventListener( 'fetch', ( event ) => {
+	event.respondWith(
+		caches.match( event.request ).then( ( response ) => {
+			return response || fetch( event.request );
+		} )
+	);
 } );

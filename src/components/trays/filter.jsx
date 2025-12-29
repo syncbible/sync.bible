@@ -22,8 +22,13 @@ export default function TrayFilter( { children, filter, title } ) {
 		event.preventDefault();
 
 		if ( isMobile ) {
-			// On mobile, only one tray at a time
-			dispatch( setTrayVisibilityFilter( filter ) );
+			// On mobile, if clicking the already active tray, close it
+			if ( isActive ) {
+				dispatch( toggleTray( filter ) );
+			} else {
+				// Otherwise, replace all trays with just this one
+				dispatch( setTrayVisibilityFilter( filter ) );
+			}
 		} else {
 			// On desktop, toggle the tray on/off
 			dispatch( toggleTray( filter ) );

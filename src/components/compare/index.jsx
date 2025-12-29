@@ -10,7 +10,6 @@ import {
 	setReferenceInfo,
 	setReferenceInfoCompareWith,
 	setReferenceInfoLimit,
-	setTrayVisibilityFilter,
 	settingsChange,
 } from '../../actions';
 import { getBooks, getCompareChapters } from '../../lib/select-helpers';
@@ -59,7 +58,6 @@ export default function Compare() {
 		overlap.forEach( ( lemma ) => addWord( lemma ) );
 	};
 	const addWord = ( lemma ) => {
-		dispatch( setTrayVisibilityFilter( 'word' ) );
 		dispatch(
 			selectWord( {
 				lemma,

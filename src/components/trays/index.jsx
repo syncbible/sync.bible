@@ -131,29 +131,28 @@ const Trays = () => {
 		return (
 			<div className={ styles.trays }>
 				<TrayBar trays={ trays } />
-				{ activeTraysCount > 0 && (
+				<div
+					className={ classnames(
+						styles.customDrawer,
+						rootClasses( darkMode, expandedSearchResults )
+					) }
+					style={ {
+						width: `${ customWidth }px`,
+						left: drawerLeftOffset,
+						display: activeTraysCount > 0 ? undefined : 'none',
+					} }
+				>
 					<div
-						className={ classnames(
-							styles.customDrawer,
-							rootClasses( darkMode, expandedSearchResults )
-						) }
-						style={ {
-							width: `${ customWidth }px`,
-							left: drawerLeftOffset,
-						} }
+						className={ styles.trayList }
+						style={ { width: `${ customWidth }px` } }
 					>
-						<div
-							className={ styles.trayList }
-							style={ { width: `${ customWidth }px` } }
-						>
-							<TrayList
-								trays={ trays }
-								sidebarWidth={ customWidth }
-							/>
-							<ResizeHandle />
-						</div>
+						<TrayList
+							trays={ trays }
+							sidebarWidth={ customWidth }
+						/>
+						<ResizeHandle />
 					</div>
-				) }
+				</div>
 			</div>
 		);
 	}

@@ -1,7 +1,12 @@
 import { trays as traysList } from '../components/trays';
+import { MOBILE_BREAKPOINT } from '../constants/dimensions';
 
 const trays = ( state = [], action ) => {
 	const parsedFilter = parseInt( action.filter );
+	const isMobile =
+		typeof window !== 'undefined' &&
+		window.innerWidth < MOBILE_BREAKPOINT;
+
 	switch ( action.type ) {
 		case 'SET_TRAY_VISIBILITY_FILTER':
 			// Legacy support: replace all trays with just this one
@@ -26,7 +31,12 @@ const trays = ( state = [], action ) => {
 			}
 
 		case 'ADD_TRAY':
-			// Add a tray if not already open
+			// On mobile, only show one tray at a time
+			if ( isMobile ) {
+				// Replace all trays with just this one
+				return [ action.trayId ];
+			}
+			// On desktop, add the tray if not already open
 			if ( ! state.includes( action.trayId ) ) {
 				return [ ...state, action.trayId ];
 			}

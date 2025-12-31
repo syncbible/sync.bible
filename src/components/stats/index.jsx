@@ -134,14 +134,15 @@ const Rare = () => {
 					</select>
 				</div>
 				<LimitControl limit={ limit } onChange={ setLimit } />
-			</div>
-			<div className={ styles.statsResults }>
-				<div>
-					<WordStatsTable
-						common={ common }
-						sort={ sort }
-						setSort={ setSort }
-					/>
+
+				<div className={ styles.statsResults }>
+					<div>
+						<WordStatsTable
+							common={ common }
+							sort={ sort }
+							setSort={ setSort }
+						/>
+					</div>
 				</div>
 			</div>
 		</>

@@ -27,14 +27,9 @@
 }
 
 .statsResults {
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
-
+	overflow-x: auto;
 	> div {
 		flex-grow: 1;
-		margin-bottom: 1rem;
-		padding: .5rem;
 	}
 
 	td {

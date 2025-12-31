@@ -1,7 +1,5 @@
 ## Todo
 
-prevent isolation hover on mobile by detecting touch events not screen size
-Filter common words from stats
 When bookmarking prov 27:17 and ecc 10 - iron, why does the work sharpen come up as a shared word?
 Bookmarks have a horizontal scroll
 Bookmarks in the non primary column shouldn't navigate!

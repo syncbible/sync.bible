@@ -13,8 +13,9 @@ export function getSharedWordsFromReferences(
 		return {};
 	}
 
-	// Count all occurrences of each lemma across all references
-	const words = {};
+	// Track which references each lemma appears in AND total occurrences
+	const wordReferences = {};
+	const wordOccurrences = {};
 
 	uniqueReferences.forEach( ( referenceString ) => {
 		const { book, chapter, verse } =
@@ -27,6 +28,9 @@ export function getSharedWordsFromReferences(
 			typeof data.original[ book ][ chapter - 1 ][ verse - 1 ] !==
 				'string'
 		) {
+			// Track which lemmas appear in this reference
+			const lemmasInThisReference = new Set();
+
 			data.original[ book ][ chapter - 1 ][ verse - 1 ].forEach(
 				( word ) => {
 					if ( ! word[ 1 ] ) {
@@ -38,19 +42,39 @@ export function getSharedWordsFromReferences(
 							// Exclude popular lemmas.
 							if (
 								lemma &&
+								data.strongsObjectWithFamilies[ lemma ] &&
 								data.strongsObjectWithFamilies[ lemma ].count <
 									limit
 							) {
-								if ( ! words[ lemma ] ) {
-									words[ lemma ] = 0;
+								lemmasInThisReference.add( lemma );
+								// Count total occurrences
+								if ( ! wordOccurrences[ lemma ] ) {
+									wordOccurrences[ lemma ] = 0;
 								}
-								words[ lemma ] = words[ lemma ] + 1;
+								wordOccurrences[ lemma ]++;
 							}
 						} );
 					}
 				}
 			);
+
+			// Track unique references for each lemma
+			lemmasInThisReference.forEach( ( lemma ) => {
+				if ( ! wordReferences[ lemma ] ) {
+					wordReferences[ lemma ] = new Set();
+				}
+				wordReferences[ lemma ].add( referenceString );
+			} );
 		}
+	} );
+
+	// Return both reference count and total occurrences
+	const words = {};
+	Object.keys( wordReferences ).forEach( ( lemma ) => {
+		words[ lemma ] = {
+			referenceCount: wordReferences[ lemma ].size,
+			totalOccurrences: wordOccurrences[ lemma ] || 0,
+		};
 	} );
 
 	return words;

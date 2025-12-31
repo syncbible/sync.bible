@@ -35,12 +35,13 @@ function SharedWords( { type } ) {
 		limit
 	);
 
-	// Filter to only show words that appear more than once
+	// Filter to only show words that appear in more than one reference
+	// but display the total occurrences count
 	const filteredSharedWords = useMemo( () => {
 		const filtered = {};
 		Object.keys( sharedWords ).forEach( ( word ) => {
-			if ( sharedWords[ word ] > 1 ) {
-				filtered[ word ] = sharedWords[ word ];
+			if ( sharedWords[ word ].referenceCount > 1 ) {
+				filtered[ word ] = sharedWords[ word ].totalOccurrences;
 			}
 		} );
 		return filtered;

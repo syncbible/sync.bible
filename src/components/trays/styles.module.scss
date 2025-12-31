@@ -75,6 +75,7 @@
 button.trayHeaderButton,
 .trayClose {
 	@extend %iconButton;
+	background: var(--background-ui);
 
 	&:hover {
 		color: var(--color-dimmed);

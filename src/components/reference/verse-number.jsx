@@ -10,9 +10,11 @@ import styles from './styles.module.scss';
 import Bookmark from '../svg/bookmark';
 import { getCrossReferences } from '../../lib/cross-references';
 
-const VerseNumber = ( { book, chapter, verse, isCurrentRef } ) => {
+const VerseNumber = ( { book, chapter, verse, isCurrentRef, columnIndex } ) => {
 	const dispatch = useDispatch();
 	const data = useSelector( ( state ) => state.data );
+	const inSync = useSelector( ( state ) => state.settings.inSync );
+	const targetColumn = useSelector( ( state ) => state.settings.targetColumn );
 
 	const addBookmarkAction = () => {
 		dispatch( addTray( 'bookmark' ) );
@@ -26,8 +28,10 @@ const VerseNumber = ( { book, chapter, verse, isCurrentRef } ) => {
 				visible: true,
 			} )
 		);
-		// Navigate to the bookmarked verse
-		dispatch( goToReferenceAction( { book, chapter, verse } ) );
+		// Only navigate if in sync mode OR this is the target column
+		if ( inSync || columnIndex === targetColumn ) {
+			dispatch( goToReferenceAction( { book, chapter, verse } ) );
+		}
 	};
 
 	// Use consistent gray color for all bookmark icons
@@ -52,6 +56,7 @@ VerseNumber.propTypes = {
 	chapter: PropTypes.number.isRequired,
 	verse: PropTypes.number.isRequired,
 	isCurrentRef: PropTypes.bool,
+	columnIndex: PropTypes.number,
 };
 
 export default VerseNumber;

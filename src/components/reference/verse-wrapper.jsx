@@ -33,6 +33,7 @@ export default function VerseWrapper( {
 	verse,
 	isCurrentRef,
 	lang,
+	columnIndex,
 } ) {
 	const verseWrapperRef = useRef( null );
 	const reference = { book, chapter: chapter - 1, verse: verse - 1 };
@@ -54,6 +55,7 @@ export default function VerseWrapper( {
 						chapter={ chapter }
 						verse={ verse }
 						isCurrentRef={ isCurrentRef }
+						columnIndex={ columnIndex }
 					/>
 					<span className={ styles.hidden }>
 						<CopyToClipboard
@@ -77,4 +79,5 @@ VerseWrapper.propTypes = {
 	verse: PropTypes.number.isRequired,
 	isCurrentRef: PropTypes.bool,
 	lang: PropTypes.string,
+	columnIndex: PropTypes.number,
 };

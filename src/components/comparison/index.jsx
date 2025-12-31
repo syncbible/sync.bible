@@ -52,6 +52,7 @@ const Comparison = () => {
 									'original'
 								}
 								isCurrentRef={ false }
+								columnIndex={ index }
 							/>
 						</div>
 					);

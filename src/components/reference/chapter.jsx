@@ -304,6 +304,7 @@ const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 										parsedReference.verseNumber
 									)
 								}
+								columnIndex={ index }
 							/>
 						);
 					} ) }
@@ -377,6 +378,7 @@ const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 						chapter={ chapter }
 						verse={ verseNumber + 1 }
 						isCurrentRef={ !! isCurrentRef( verseNumber ) }
+						columnIndex={ index }
 					/>
 				</div>
 			);

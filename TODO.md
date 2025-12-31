@@ -1,7 +1,5 @@
 ## Todo
 
-Bookmarks have a horizontal scroll
-Bookmarks in the non primary column shouldn't navigate!
 Scroll word panel to the word when its inserted
 Remove type sensitivity from stats
 Select all branches

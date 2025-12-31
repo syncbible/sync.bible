@@ -27,13 +27,17 @@
 }
 
 .statsResults {
-	overflow-x: auto;
 	> div {
 		flex-grow: 1;
 	}
 
 	td {
 		cursor: pointer;
+	}
+
+	table {
+		border-collapse: collapse;
+		width: 100%;
 	}
 }
 

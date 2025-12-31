@@ -35,32 +35,47 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 				common[ lemma ] / strongsObjectWithFamilies[ lemma ].count
 			).toFixed( 2 );
 			return (
-				<tr
-					key={ lemma }
-					className={ classnames( lemma, styles.row ) }
-					onMouseEnter={ () => {
-						window.updateAppComponent( 'highlightedWord', lemma );
-					} }
-					onClick={ () =>
-						dispatch( selectWord( { lemma, version: 'original' } ) )
-					}
-				>
-					<td
-						title={
-							strongsDictionary &&
-							strongsDictionary[ lemma ].xlit
-								? strongsDictionary[ lemma ].xlit
-								: ''
+				<>
+					<tr
+						key={ `${ lemma }-word` }
+						className={ classnames( lemma, styles.wordRow ) }
+						onMouseEnter={ () => {
+							window.updateAppComponent( 'highlightedWord', lemma );
+						} }
+						onClick={ () =>
+							dispatch( selectWord( { lemma, version: 'original' } ) )
 						}
 					>
-						{ lemma }{ '\u00A0' }
-						{ strongsDictionary &&
-							stripPointing( strongsDictionary[ lemma ].lemma ) }
-					</td>
-					<td>{ common[ lemma ] }</td>
-					<td>{ strongsObjectWithFamilies[ lemma ].count }</td>
-					<td>{ significance }</td>
-				</tr>
+						<td colSpan="4">
+							{ strongsDictionary &&
+								stripPointing( strongsDictionary[ lemma ].lemma ) }
+						</td>
+					</tr>
+					<tr
+						key={ lemma }
+						className={ classnames( lemma, styles.row ) }
+						onMouseEnter={ () => {
+							window.updateAppComponent( 'highlightedWord', lemma );
+						} }
+						onClick={ () =>
+							dispatch( selectWord( { lemma, version: 'original' } ) )
+						}
+					>
+						<td
+							title={
+								strongsDictionary &&
+								strongsDictionary[ lemma ].xlit
+									? strongsDictionary[ lemma ].xlit
+									: ''
+							}
+						>
+							{ lemma }
+						</td>
+						<td>{ common[ lemma ] }</td>
+						<td>{ strongsObjectWithFamilies[ lemma ].count }</td>
+						<td>{ significance }</td>
+					</tr>
+				</>
 			);
 		} );
 

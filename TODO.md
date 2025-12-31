@@ -1,6 +1,5 @@
 ## Todo
 
-When bookmarking prov 27:17 and ecc 10 - iron, why does the work sharpen come up as a shared word?
 Bookmarks have a horizontal scroll
 Bookmarks in the non primary column shouldn't navigate!
 Scroll word panel to the word when its inserted

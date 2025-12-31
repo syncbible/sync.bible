@@ -1,10 +1,7 @@
 ## Todo
 
-Scroll word panel to the word when its inserted
-Remove type sensitivity from stats
-Select all branches
-
--   scroll to result when clicking on a word (add animation to current verse)
+-   Remove type sensitivity from stats
+-   Select all branches
 -   keyboard navigation
 -   John 16:32 -> 1 Kings 22:17
 -   fix SweFolk1998 and VietNVB and GerOffBist

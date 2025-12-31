@@ -13,6 +13,7 @@ import Shuffle from '../svg/shuffle';
 import Stats from '../svg/stats';
 import bible from '../../data/bible.js';
 import { calculateCommonWords } from '../../lib/reference';
+import { useScrollIntoView } from '../../hooks/use-scroll-into-view';
 import searchStyles from '../search/styles.module.scss';
 import styles from './styles.module.scss';
 
@@ -23,9 +24,14 @@ export default function Single( { bookmark, index } ) {
 		( state ) => state.settings.interfaceLanguage
 	);
 	const bookmarkRef = useRef();
+	const collapsibleRef = useRef();
 	const userInterface = useSelector( ( state ) => state.userInterface );
 	const [ activeTab, setActiveTab ] = useState( 'crossReferences' );
 	const [ sort, setSort ] = useState( 'significanceDesc' );
+	const isVisible = userInterface[ bookmark.id ];
+
+	// Scroll into view when this bookmark becomes visible (newly added)
+	useScrollIntoView( collapsibleRef, isVisible );
 	const {
 		data: { reference },
 	} = bookmark;
@@ -141,6 +147,7 @@ export default function Single( { bookmark, index } ) {
 
 	return (
 		<Collapsible
+			ref={ collapsibleRef }
 			key={ index }
 			header={ header }
 			open={ userInterface[ bookmark.id ] }

@@ -5,6 +5,7 @@
 	max-width: $sidebar-width; // So they can stack nicely.
 	width: 100%;
 	min-width: 250px;
+	scroll-margin-top: $dock-height;
 
 	a {
 		text-decoration: none;

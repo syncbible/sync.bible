@@ -1,13 +1,12 @@
 // External dependencies
 import classnames from 'classnames';
 import React from 'react';
-import { motion } from 'framer-motion';
 
 // Internal dependencies
 import styles from './styles.module.scss';
 import WordBlockHeader from '../word-block-header';
 
-const Collapsible = ( {
+const Collapsible = React.forwardRef( ( {
 	children,
 	className,
 	header,
@@ -21,21 +20,9 @@ const Collapsible = ( {
 	onPointerOut,
 	open,
 	reference,
-} ) => {
-	const variants = {
-		open: {
-			height: 'auto',
-		},
-		closed: {
-			height: '0',
-			transition: {
-				duration: 0,
-			},
-		},
-	};
-
+}, ref ) => {
 	return (
-		<div className={ styles.collapsible }>
+		<div className={ styles.collapsible } ref={ ref }>
 			<div
 				className={ classnames(
 					styles.header,
@@ -59,18 +46,16 @@ const Collapsible = ( {
 					{ header }
 				</WordBlockHeader>
 			</div>
-			<motion.div
-				initial="closed"
-				animate={ open ? 'open' : 'closed' }
-				variants={ variants }
-				style={ { overflow: 'hidden' } }
+			<div
+				className={ classnames( styles.content ) }
+				style={ { display: open ? 'block' : 'none' } }
 			>
-				<div className={ classnames( styles.content ) }>
-					{ children }
-				</div>
-			</motion.div>
+				{ children }
+			</div>
 		</div>
 	);
-};
+} );
+
+Collapsible.displayName = 'Collapsible';
 
 export default React.memo( Collapsible );

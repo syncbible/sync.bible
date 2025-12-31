@@ -1,5 +1,5 @@
 // External dependencies
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -12,15 +12,21 @@ import {
 } from './utils.js';
 import WordStatsTable from '../word-stats-table';
 import LimitControl from '../limit-control';
+import { useScrollIntoView } from '../../hooks/use-scroll-into-view';
 import styles from './styles.module.scss';
 
 function SharedWords( { type } ) {
 	const [ limit, setLimit ] = useState( 100 );
 	const [ sortBy, setSortBy ] = useState( 'significanceDesc' );
+	const [ open, setOpen ] = useState( false );
+	const collapsibleRef = useRef( null );
 	const list = useSelector( ( state ) => state.list );
 	const listOfReferences = getListOfReferencesFromType( list, type );
 	const dispatch = useDispatch();
 	const data = useSelector( ( state ) => state.data );
+
+	// Scroll into view when this panel is opened
+	useScrollIntoView( collapsibleRef, open );
 
 	useEffect( () => {
 		if ( listOfReferences.length > 0 ) {
@@ -47,13 +53,12 @@ function SharedWords( { type } ) {
 		return filtered;
 	}, [ sharedWords ] );
 
-	const [ open, setOpen ] = useState( false );
-
 	// Convert SharedWords sort format to WordStatsTable format
 	const convertedSort = sortBy === 'count-desc' ? 'usesDesc' : sortBy;
 
 	return listOfReferences.length > 1 ? (
 		<Collapsible
+			ref={ collapsibleRef }
 			open={ open }
 			onToggle={ () => {
 				setOpen( ! open );

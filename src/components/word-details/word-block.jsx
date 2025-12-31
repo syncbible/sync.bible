@@ -10,6 +10,7 @@ import { getHighlight } from '../strongs-color.js';
 import styles from './styles.module.scss';
 import WordBlockDetails from './word-block-details';
 import { removeFromList, toggleListItemVisible } from '../../actions';
+import { useScrollIntoView } from '../../hooks/use-scroll-into-view';
 
 const WordBlock = ( props ) => {
 	const { data, visible, highlight, setFocus, word } = props;
@@ -21,6 +22,11 @@ const WordBlock = ( props ) => {
 		( state ) => state.data.strongsDictionaryWithFamilies
 	);
 	const wordBlockRef = useRef( null );
+	const collapsibleRef = useRef( null );
+
+	// Scroll into view when this item becomes visible (newly added)
+	useScrollIntoView( collapsibleRef, visible );
+
 	const getSearchParameters = () => {
 		return {
 			clusivity: 'exclusive',
@@ -77,6 +83,7 @@ const WordBlock = ( props ) => {
 
 	return (
 		<Collapsible
+			ref={ collapsibleRef }
 			title={ termTitle( getSearchParameters() ) }
 			header={ header }
 			open={ visible }

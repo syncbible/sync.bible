@@ -1,5 +1,5 @@
 // External dependencies
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Internal dependencies
@@ -18,11 +18,18 @@ import bible from '../../data/bible.js';
 import Connections from './connections';
 import WordStatsTable from '../word-stats-table';
 import LimitControl from '../limit-control';
+import Collapsible from '../collapsible';
+import { useScrollIntoView } from '../../hooks/use-scroll-into-view';
 
 export default function Compare() {
 	const [ compareAllChapters, setCompareAllChapters ] = useState( false );
 	const [ sortBy, setSortBy ] = useState( 'significanceDesc' );
+	const [ open, setOpen ] = useState( false );
+	const collapsibleRef = useRef( null );
 	const dispatch = useDispatch();
+
+	// Scroll into view when this panel is opened
+	useScrollIntoView( collapsibleRef, open );
 	const isOriginalLoaded = useSelector(
 		( state ) => 'undefined' !== typeof state.data.original
 	);
@@ -210,93 +217,100 @@ export default function Compare() {
 	}
 
 	return (
-		<div className={ styles.compare }>
-			<div className={ styles.statsReferenceWrapper }>
-				<div className={ styles.statsReference }>
-					<select
-						className={ styles.compareWithBook }
-						name="compareWithBook"
-						onChange={ compareBookChange }
-						value={ reference ? reference.book : '' }
-					>
-						{ getBooks() }
-					</select>
-					<select
-						name="compareWithChapter"
-						onChange={ compareChapterChange }
-						value={ reference ? reference.chapter : '' }
-					>
-						{ getCompareChapters( reference ) }
-					</select>
-					<select
-						name="compareWithVerses"
-						onChange={ compareVerseChange }
-						value={ reference ? reference.verse : '' }
-					>
-						{ getVerses( reference ) }
-					</select>
+		<Collapsible
+			ref={ collapsibleRef }
+			open={ open }
+			onToggle={ () => setOpen( ! open ) }
+			header={ 'Compare references' }
+		>
+			<div className={ styles.compare }>
+				<div className={ styles.statsReferenceWrapper }>
+					<div className={ styles.statsReference }>
+						<select
+							className={ styles.compareWithBook }
+							name="compareWithBook"
+							onChange={ compareBookChange }
+							value={ reference ? reference.book : '' }
+						>
+							{ getBooks() }
+						</select>
+						<select
+							name="compareWithChapter"
+							onChange={ compareChapterChange }
+							value={ reference ? reference.chapter : '' }
+						>
+							{ getCompareChapters( reference ) }
+						</select>
+						<select
+							name="compareWithVerses"
+							onChange={ compareVerseChange }
+							value={ reference ? reference.verse : '' }
+						>
+							{ getVerses( reference ) }
+						</select>
+					</div>
 				</div>
-			</div>
-			<h3 className={ styles.h3 }>compare with</h3>
-			<div className={ styles.statsReferenceWrapper }>
-				<div className={ styles.statsReference }>
-					<select
-						className={ styles.compareWithBook }
-						name="book"
-						onChange={ bookChange }
-						value={
-							referenceToCompareWith
-								? referenceToCompareWith.book
-								: ''
-						}
-					>
-						{ getBooks() }
-					</select>
-					<select
-						name="chapter"
-						onChange={ chapterChange }
-						value={
-							referenceToCompareWith
-								? referenceToCompareWith.chapter
-								: ''
-						}
-					>
-						{ getCompareChapters( referenceToCompareWith ) }
-					</select>
-					<select
-						name="verses"
-						onChange={ verseChange }
-						value={
-							referenceToCompareWith
-								? referenceToCompareWith.verse
-								: ''
-						}
-					>
-						{ getVerses( referenceToCompareWith ) }
-					</select>
+				<h3 className={ styles.h3 }>compare with</h3>
+				<div className={ styles.statsReferenceWrapper }>
+					<div className={ styles.statsReference }>
+						<select
+							className={ styles.compareWithBook }
+							name="book"
+							onChange={ bookChange }
+							value={
+								referenceToCompareWith
+									? referenceToCompareWith.book
+									: ''
+							}
+						>
+							{ getBooks() }
+						</select>
+						<select
+							name="chapter"
+							onChange={ chapterChange }
+							value={
+								referenceToCompareWith
+									? referenceToCompareWith.chapter
+									: ''
+							}
+						>
+							{ getCompareChapters( referenceToCompareWith ) }
+						</select>
+						<select
+							name="verses"
+							onChange={ verseChange }
+							value={
+								referenceToCompareWith
+									? referenceToCompareWith.verse
+									: ''
+							}
+						>
+							{ getVerses( referenceToCompareWith ) }
+						</select>
+					</div>
 				</div>
+				<LimitControl
+					limit={ limit }
+					onChange={ ( value ) =>
+						dispatch( setReferenceInfoLimit( value ) )
+					}
+				/>
+				<div className={ styles.statsResults }>{ getOverlap() }</div>
+				<div className={ styles.chapterTray }>
+					{ overlap && overlap.length > 0 && (
+						<button onClick={ addAllWords }>Select all words</button>
+					) }
+				</div>
+				<a
+					className={ styles.button }
+					onClick={ () => {
+						dispatch( settingsChange( 'compareMode', true ) );
+						setCompareAllChapters( true );
+					} }
+				>
+					Compare all chapters
+				</a>
 			</div>
-			<LimitControl
-				limit={ limit }
-				onChange={ ( value ) =>
-					dispatch( setReferenceInfoLimit( value ) )
-				}
-			/>
-			<div className={ styles.statsResults }>{ getOverlap() }</div>
-			<div className={ styles.chapterTray }>
-				{ overlap && overlap.length > 0 && (
-					<button onClick={ addAllWords }>Select all words</button>
-				) }
-			</div>
-			<a
-				className={ styles.button }
-				onClick={ () => {
-					dispatch( settingsChange( 'compareMode', true ) );
-					setCompareAllChapters( true );
-				} }
-			>
-				Compare all chapters
-			</a>
-		</div>
+		</Collapsible>
 	);
 }

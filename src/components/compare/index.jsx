@@ -17,6 +17,7 @@ import styles from './styles.module.scss';
 import bible from '../../data/bible.js';
 import Connections from './connections';
 import WordStatsTable from '../word-stats-table';
+import LimitControl from '../limit-control';
 
 export default function Compare() {
 	const [ compareAllChapters, setCompareAllChapters ] = useState( false );
@@ -42,8 +43,8 @@ export default function Compare() {
 			return {};
 		}
 
-		const ref1Counts = calculateCommonWords( reference, data ) || {};
-		const ref2Counts = calculateCommonWords( referenceToCompareWith, data ) || {};
+		const ref1Counts = calculateCommonWords( reference, data, limit ) || {};
+		const ref2Counts = calculateCommonWords( referenceToCompareWith, data, limit ) || {};
 
 		// Combine counts for overlapping words
 		const combined = {};
@@ -52,7 +53,7 @@ export default function Compare() {
 		} );
 
 		return combined;
-	}, [ overlap, reference, referenceToCompareWith, data ] );
+	}, [ overlap, reference, referenceToCompareWith, data, limit ] );
 
 	const addAllWords = () => {
 		overlap.forEach( ( lemma ) => addWord( lemma ) );
@@ -146,9 +147,6 @@ export default function Compare() {
 
 		return <option>-</option>;
 	};
-
-	const changeLimit = ( event ) =>
-		dispatch( setReferenceInfoLimit( event.target.value ) );
 
 	const compareBookChange = ( event ) => {
 		dispatch(
@@ -278,17 +276,12 @@ export default function Compare() {
 					</select>
 				</div>
 			</div>
-			<div className={ styles.statsDescription }>
-				Word with less than{ ' ' }
-				<input
-					type="number"
-					name="limit"
-					value={ limit }
-					onChange={ changeLimit }
-					className={ styles.limit }
-				/>{ ' ' }
-				uses.
-			</div>
+			<LimitControl
+				limit={ limit }
+				onChange={ ( value ) =>
+					dispatch( setReferenceInfoLimit( value ) )
+				}
+			/>
 			<div className={ styles.statsResults }>{ getOverlap() }</div>
 			<div className={ styles.chapterTray }>
 				{ overlap && overlap.length > 0 && (

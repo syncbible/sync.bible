@@ -226,7 +226,7 @@ export const calculateRareWords = ( {
 	);
 };
 
-export const calculateCommonWords = ( reference, data ) => {
+export const calculateCommonWords = ( reference, data, limit = Infinity ) => {
 	if ( ! reference ) {
 		return null;
 	}
@@ -236,10 +236,17 @@ export const calculateCommonWords = ( reference, data ) => {
 	if ( lemmas ) {
 		const counted = {};
 		forEach( lemmas, ( lemma ) => {
-			if ( typeof counted[ lemma ] === 'undefined' ) {
-				counted[ lemma ] = 1;
-			} else {
-				counted[ lemma ] = counted[ lemma ] + 1;
+			// Filter by total Bible count if limit is specified
+			if (
+				data.strongsObjectWithFamilies &&
+				data.strongsObjectWithFamilies[ lemma ] &&
+				data.strongsObjectWithFamilies[ lemma ].count < limit
+			) {
+				if ( typeof counted[ lemma ] === 'undefined' ) {
+					counted[ lemma ] = 1;
+				} else {
+					counted[ lemma ] = counted[ lemma ] + 1;
+				}
 			}
 		} );
 

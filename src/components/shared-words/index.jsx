@@ -11,6 +11,7 @@ import {
 	getListOfReferencesFromType,
 } from './utils.js';
 import WordStatsTable from '../word-stats-table';
+import LimitControl from '../limit-control';
 import styles from './styles.module.scss';
 
 function SharedWords( { type } ) {
@@ -60,19 +61,8 @@ function SharedWords( { type } ) {
 		>
 			<div>
 				Words that are used in more than one reference
-				<br />
-				with less than{ ' ' }
-				<input
-					type="number"
-					name="limit"
-					value={ limit }
-					onChange={ ( event ) =>
-						setLimit( Number( event.target.value ) )
-					}
-					className={ styles.limit }
-				/>{ ' ' }
-				uses
 			</div>
+			<LimitControl limit={ limit } onChange={ setLimit } />
 			{ Object.keys( filteredSharedWords ).length > 0 ? (
 				<div className={ styles.tableWrapper }>
 					<WordStatsTable

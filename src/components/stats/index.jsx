@@ -20,12 +20,14 @@ import {
 } from '../../actions';
 import { getBooks, getCompareChapters } from '../../lib/select-helpers';
 import WordStatsTable from '../word-stats-table';
+import LimitControl from '../limit-control';
 
 import styles from './styles.module.scss';
 
 const Rare = () => {
 	const dispatch = useDispatch();
 	const [ sort, setSort ] = useState( 'usesDesc' );
+	const [ limit, setLimit ] = useState( 100 );
 	const isOriginalLoaded = useSelector(
 		( state ) => 'undefined' !== typeof state.data.original
 	);
@@ -35,8 +37,8 @@ const Rare = () => {
 	const reference = useSelector( ( state ) => state.referenceInfo.reference );
 	const data = useSelector( ( state ) => state.data );
 	const common = useMemo(
-		() => calculateCommonWords( reference, data ),
-		[ reference, data ]
+		() => calculateCommonWords( reference, data, limit ),
+		[ reference, data, limit ]
 	);
 
 	useEffect( () => {
@@ -131,6 +133,7 @@ const Rare = () => {
 						{ getVerses( reference ) }
 					</select>
 				</div>
+				<LimitControl limit={ limit } onChange={ setLimit } />
 			</div>
 			<div className={ styles.statsResults }>
 				<div>

@@ -40,25 +40,37 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 						key={ `${ lemma }-word` }
 						className={ classnames( lemma, styles.wordRow ) }
 						onMouseEnter={ () => {
-							window.updateAppComponent( 'highlightedWord', lemma );
+							window.updateAppComponent(
+								'highlightedWord',
+								lemma
+							);
 						} }
 						onClick={ () =>
-							dispatch( selectWord( { lemma, version: 'original' } ) )
+							dispatch(
+								selectWord( { lemma, version: 'original' } )
+							)
 						}
 					>
 						<td colSpan="4">
 							{ strongsDictionary &&
-								stripPointing( strongsDictionary[ lemma ].lemma ) }
+								stripPointing(
+									strongsDictionary[ lemma ].lemma
+								) }
 						</td>
 					</tr>
 					<tr
 						key={ lemma }
 						className={ classnames( lemma, styles.row ) }
 						onMouseEnter={ () => {
-							window.updateAppComponent( 'highlightedWord', lemma );
+							window.updateAppComponent(
+								'highlightedWord',
+								lemma
+							);
 						} }
 						onClick={ () =>
-							dispatch( selectWord( { lemma, version: 'original' } ) )
+							dispatch(
+								selectWord( { lemma, version: 'original' } )
+							)
 						}
 					>
 						<td
@@ -80,7 +92,7 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 		} );
 
 	return (
-		<table>
+		<table className={ styles.wordStatsTable }>
 			<thead>
 				<tr>
 					<th

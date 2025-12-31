@@ -55,7 +55,8 @@ input[type=reset] {
 	color: var(--color-dimmed);
 	font-size: 1em;
 	height: auto;
-	line-height: 2;
+	width: auto;
+	display: inline;
 }
 
 /* Removes the default <select> styling */

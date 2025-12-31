@@ -1,12 +1,17 @@
+@import '../dimensions.scss';
+
 .statsReferenceWrapper {
 	width: 100%;
 	padding: 10px;
 }
 
 .statsReference {
+	background: var(--background-ui);
 	display: flex;
 	font-size: .7em;
 	gap: 3px;
+	position: sticky;
+	top: $dock-height
 }
 
 

@@ -1,8 +1,12 @@
 @import '../_colors.scss';
+@import '../dimensions.scss';
 
 .search {
+	background: var(--background-ui);
+	box-shadow: 10px 2px 5px rgba(0, 0, 0, 0.1);
 	padding: 0.5rem;
 	width: 100%;
+	z-index: 10;
 
 	form {
 		max-width: 800px;
@@ -58,9 +62,10 @@
 }
 
 .advanced {
-	cursor: pointer;
+	display: flex;
 	font-size: 16px;
 	line-height: 2em;
+	justify-content: space-between;
 	text-align: center;
 	a {
 		color: var(--color-dimmed);

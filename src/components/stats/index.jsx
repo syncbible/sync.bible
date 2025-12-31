@@ -106,33 +106,33 @@ const Rare = () => {
 
 	return (
 		<>
+			<div className={ classnames( styles.statsReference ) }>
+				<select
+					className={ styles.compareWithBook }
+					name="compareWithBook"
+					onChange={ compareBookChange }
+					value={ reference ? reference.book : '' }
+				>
+					{ getBooks() }
+				</select>
+				<select
+					className={ styles.compareWithChapter }
+					name="compareWithChapter"
+					onChange={ compareChapterChange }
+					value={ reference ? reference.chapter : '' }
+				>
+					{ getCompareChapters( reference ) }
+				</select>
+				<select
+					className={ styles.compareWithVerses }
+					name="compareWithVerses"
+					onChange={ compareVerseChange }
+					value={ reference ? reference.verse : '' }
+				>
+					{ getVerses( reference ) }
+				</select>
+			</div>
 			<div className={ styles.statsReferenceWrapper }>
-				<div className={ classnames( styles.statsReference ) }>
-					<select
-						className={ styles.compareWithBook }
-						name="compareWithBook"
-						onChange={ compareBookChange }
-						value={ reference ? reference.book : '' }
-					>
-						{ getBooks() }
-					</select>
-					<select
-						className={ styles.compareWithChapter }
-						name="compareWithChapter"
-						onChange={ compareChapterChange }
-						value={ reference ? reference.chapter : '' }
-					>
-						{ getCompareChapters( reference ) }
-					</select>
-					<select
-						className={ styles.compareWithVerses }
-						name="compareWithVerses"
-						onChange={ compareVerseChange }
-						value={ reference ? reference.verse : '' }
-					>
-						{ getVerses( reference ) }
-					</select>
-				</div>
 				<LimitControl limit={ limit } onChange={ setLimit } />
 
 				<div className={ styles.statsResults }>

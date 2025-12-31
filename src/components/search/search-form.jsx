@@ -92,14 +92,18 @@ const SearchForm = ( { isActive } ) => {
 	};
 	const change = useCallback(
 		( event ) => {
-			dispatch( updateSearchForm( event.target.name, event.target.value ) );
+			dispatch(
+				updateSearchForm( event.target.name, event.target.value )
+			);
 		},
 		[ dispatch ]
 	);
 
 	const selectChange = useCallback(
 		( event ) => {
-			dispatch( updateSearchForm( event.target.name, event.target.value ) );
+			dispatch(
+				updateSearchForm( event.target.name, event.target.value )
+			);
 			dispatch( fetchData( event.target.value ) );
 		},
 		[ dispatch ]
@@ -230,6 +234,7 @@ const SearchForm = ( { isActive } ) => {
 					</motion.div>
 				) }
 				<fieldset className={ styles.advanced }>
+					<input type="reset" value="Reset" onClick={ reset } />
 					<a onClick={ showAdvanced }>
 						{ searchAdvanced ? 'Hide advanced' : 'Show advanced' }
 					</a>
@@ -240,7 +245,6 @@ const SearchForm = ( { isActive } ) => {
 						value={ searchButtonText() }
 						disabled={ isSubmitButtonDisabled }
 					/>
-					<input type="reset" value="Reset" onClick={ reset } />
 				</fieldset>
 			</form>
 		</div>

@@ -238,7 +238,10 @@ const SortGroupResults = ( {
 				if ( countedResults[ referenceString ] < minCountToShow ) {
 					return null;
 				}
-				const label = Array.isArray( selectedResultsGrouped )
+				// For word/morph/strongs groups, always extract label from first result
+				// to preserve original case (since grouping key may be normalized)
+				const shouldExtractLabel = group === 'word' || group === 'morph' || group === 'strongs';
+				const label = Array.isArray( selectedResultsGrouped ) || shouldExtractLabel
 					? getLabel( selectedResultsGrouped[ result ][ 0 ] )
 					: result;
 				const percent = Math.round(

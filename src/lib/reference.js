@@ -692,7 +692,7 @@ export const getGroupedResults = (
 		} );
 	} else if ( selectedGroup === 'word' ) {
 		resultsToDisplay = groupBy( results, function ( { word } ) {
-			return word && word[ 0 ];
+			return word && word[ 0 ] && word[ 0 ].toLowerCase();
 		} );
 	} else if ( selectedGroup === 'morph' ) {
 		resultsToDisplay = groupBy( results, function ( { word } ) {

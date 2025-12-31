@@ -1,6 +1,5 @@
 ## Todo
 
--   Remove type sensitivity from stats
 -   Select all branches
 -   keyboard navigation
 -   John 16:32 -> 1 Kings 22:17

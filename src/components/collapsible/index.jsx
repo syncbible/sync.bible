@@ -17,6 +17,8 @@ const Collapsible = ( {
 	onRemove,
 	onMouseOver,
 	onMouseOut,
+	onPointerOver,
+	onPointerOut,
 	open,
 	reference,
 } ) => {
@@ -43,8 +45,10 @@ const Collapsible = ( {
 					onToggle();
 				} }
 				title={ title }
-				onMouseOver={ () => onMouseOver && onMouseOver() }
-				onMouseOut={ () => onMouseOut && onMouseOut() }
+				onMouseOver={ onMouseOver && ( () => onMouseOver() ) }
+				onMouseOut={ onMouseOut && ( () => onMouseOut() ) }
+				onPointerOver={ onPointerOver }
+				onPointerOut={ onPointerOut }
 			>
 				<WordBlockHeader
 					className={ className }

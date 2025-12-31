@@ -10,11 +10,9 @@ import { getHighlight } from '../strongs-color.js';
 import styles from './styles.module.scss';
 import WordBlockDetails from './word-block-details';
 import { removeFromList, toggleListItemVisible } from '../../actions';
-import { useIsMobile } from '../../hooks/useIsMobile';
 
 const WordBlock = ( props ) => {
 	const { data, visible, highlight, setFocus, word } = props;
-	const isMobile = useIsMobile();
 	const { clickedWord, morphology, lemma, version } = data;
 	const strongsDictionary = useSelector(
 		( state ) => state.data.strongsDictionary
@@ -63,6 +61,20 @@ const WordBlock = ( props ) => {
 		</span>
 	);
 
+	const handlePointerOver = ( event ) => {
+		// Only isolate on mouse/pen, not touch
+		if ( event.pointerType !== 'touch' ) {
+			setFocus( lemma );
+		}
+	};
+
+	const handlePointerOut = ( event ) => {
+		// Only un-isolate on mouse/pen, not touch
+		if ( event.pointerType !== 'touch' ) {
+			setFocus( null );
+		}
+	};
+
 	return (
 		<Collapsible
 			title={ termTitle( getSearchParameters() ) }
@@ -75,8 +87,8 @@ const WordBlock = ( props ) => {
 				setFocus( null );
 				dispatch( removeFromList( props ) );
 			} }
-			onMouseOver={ ! isMobile ? () => setFocus( lemma ) : undefined }
-			onMouseOut={ ! isMobile ? () => setFocus( null ) : undefined }
+			onPointerOver={ handlePointerOver }
+			onPointerOut={ handlePointerOut }
 		>
 			{ highlight && (
 				<style>

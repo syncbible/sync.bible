@@ -17,7 +17,7 @@ import {
 import { isValidWord } from '../lib/word.js';
 import bible from '../data/bible.js';
 
-const cacheKey = 'sync.bible.24.27784a4';
+const cacheKey = 'sync.bible.25.d9cff32';
 
 export const goToReferenceAction = ( reference, targetColumn ) => {
 	return function ( dispatch, getState ) {

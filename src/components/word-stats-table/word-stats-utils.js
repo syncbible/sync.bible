@@ -25,17 +25,15 @@ export const createSortFunctions = ( common, strongsObjectWithFamilies, strongsD
 	};
 
 	const sortByTotalAsc = ( a, b ) => {
-		return (
-			strongsObjectWithFamilies[ a ].count -
-			strongsObjectWithFamilies[ b ].count
-		);
+		const countA = strongsObjectWithFamilies[ a ]?.count || 0;
+		const countB = strongsObjectWithFamilies[ b ]?.count || 0;
+		return countA - countB;
 	};
 
 	const sortByTotalDesc = ( a, b ) => {
-		return (
-			strongsObjectWithFamilies[ b ].count -
-			strongsObjectWithFamilies[ a ].count
-		);
+		const countA = strongsObjectWithFamilies[ a ]?.count || 0;
+		const countB = strongsObjectWithFamilies[ b ]?.count || 0;
+		return countB - countA;
 	};
 
 	const sortByUsesDesc = ( a, b ) => {
@@ -47,18 +45,18 @@ export const createSortFunctions = ( common, strongsObjectWithFamilies, strongsD
 	};
 
 	const sortBySignificanceAsc = ( a, b ) => {
-		const significanceA =
-			common[ a ] / strongsObjectWithFamilies[ a ].count;
-		const significanceB =
-			common[ b ] / strongsObjectWithFamilies[ b ].count;
+		const countA = strongsObjectWithFamilies[ a ]?.count || 1;
+		const countB = strongsObjectWithFamilies[ b ]?.count || 1;
+		const significanceA = common[ a ] / countA;
+		const significanceB = common[ b ] / countB;
 		return significanceA - significanceB;
 	};
 
 	const sortBySignificanceDesc = ( a, b ) => {
-		const significanceA =
-			common[ a ] / strongsObjectWithFamilies[ a ].count;
-		const significanceB =
-			common[ b ] / strongsObjectWithFamilies[ b ].count;
+		const countA = strongsObjectWithFamilies[ a ]?.count || 1;
+		const countB = strongsObjectWithFamilies[ b ]?.count || 1;
+		const significanceA = common[ a ] / countA;
+		const significanceB = common[ b ] / countB;
 		return significanceB - significanceA;
 	};
 

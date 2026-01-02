@@ -197,6 +197,7 @@ export const compareTwoReferences = ( {
 		ref1Lemmas.filter( ( lemma ) => {
 			if (
 				data.strongsObjectWithFamilies &&
+				data.strongsObjectWithFamilies[ lemma ] &&
 				data.strongsObjectWithFamilies[ lemma ].count < limit
 			) {
 				if ( ref2Lemmas.indexOf( lemma ) > -1 ) {
@@ -221,7 +222,10 @@ export const calculateRareWords = ( {
 	const lemmas = getLemmasForReference( reference, data );
 	return uniq(
 		lemmas.filter( ( lemma ) => {
-			return data.strongsObjectWithFamilies[ lemma ].count < limit;
+			return (
+				data.strongsObjectWithFamilies[ lemma ] &&
+				data.strongsObjectWithFamilies[ lemma ].count < limit
+			);
 		} )
 	);
 };

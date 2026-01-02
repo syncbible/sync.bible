@@ -31,9 +31,8 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 	const commonWords = Object.keys( common )
 		.sort( sortFunction )
 		.map( ( lemma ) => {
-			const significance = (
-				common[ lemma ] / strongsObjectWithFamilies[ lemma ].count
-			).toFixed( 2 );
+			const count = strongsObjectWithFamilies[ lemma ]?.count || 1;
+			const significance = ( common[ lemma ] / count ).toFixed( 2 );
 			return (
 				<>
 					<tr
@@ -84,7 +83,7 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 							{ lemma }
 						</td>
 						<td>{ common[ lemma ] }</td>
-						<td>{ strongsObjectWithFamilies[ lemma ].count }</td>
+						<td>{ count }</td>
 						<td>{ significance }</td>
 					</tr>
 				</>

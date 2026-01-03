@@ -77,6 +77,15 @@ const HelpTray = () => {
 	const clearCache = async () => {
 		if ( 'serviceWorker' in navigator && 'caches' in window ) {
 			try {
+				// Clear localStorage
+				localStorage.clear();
+
+				// Clear sessionStorage
+				sessionStorage.clear();
+
+				// Delete IndexedDB
+				indexedDB.deleteDatabase( 'syncbible' );
+
 				// Unregister all service workers
 				const registrations =
 					await navigator.serviceWorker.getRegistrations();
@@ -91,9 +100,6 @@ const HelpTray = () => {
 						caches.delete( cacheName )
 					)
 				);
-
-				// Clear IndexedDB too
-				indexedDB.deleteDatabase( 'syncbible' );
 
 				alert(
 					'Cache cleared successfully! The page will now reload.'

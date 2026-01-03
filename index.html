@@ -41,7 +41,7 @@
 					<div class="content">
 						<p>sync.bible is a tool to help you understand the bible better.</p>
 						<p>Once the scripts have loaded, they will be cached, so the app will work offline.</p>
-						<p>Having problems? <a href="http://scruffian.wordpress.com/contact/">Email me</a>, <a href="#" onClick="javascript:localStorage.clear();window.location.href = '/';">clear settings and start over</a> or <a href="/help/index.html">get help</a></p>
+						<p>Having problems? <a href="http://scruffian.wordpress.com/contact/">Email me</a>, <a href="#" onClick="clear()">clear settings and start over</a> or <a href="/help/index.html">get help</a></p>
 						<p>There are also old versions available in case this one is broken: <a href="https://javascripture.github.io/javascripture">javascripture</a> | <a href="https://syncbible.github.io/syncbible">syncbible-webkit</a></p>
 					</div>
 				</div>
@@ -60,9 +60,39 @@
 	var worker = new Worker('workers/worker.js');
 	var timer = new Date();
 
-	function clear() {
-		indexedDB.deleteDatabase('syncbible');
-		window.location.href="./";
+	async function clear() {
+		try {
+			// Clear localStorage
+			localStorage.clear();
+
+			// Clear sessionStorage
+			sessionStorage.clear();
+
+			// Delete IndexedDB
+			indexedDB.deleteDatabase('syncbible');
+
+			// Clear service worker caches
+			if ('serviceWorker' in navigator && 'caches' in window) {
+				// Unregister all service workers
+				const registrations = await navigator.serviceWorker.getRegistrations();
+				for (const registration of registrations) {
+					await registration.unregister();
+				}
+
+				// Delete all caches
+				const cacheNames = await caches.keys();
+				await Promise.all(
+					cacheNames.map(cacheName => caches.delete(cacheName))
+				);
+			}
+
+			// Reload the page
+			window.location.href = './';
+		} catch (error) {
+			console.error('Error clearing data:', error);
+			// Still try to reload even if there's an error
+			window.location.href = './';
+		}
 	}
 </script>
 

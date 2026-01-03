@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Clear sync.bible Data</title>
+	<style>
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			margin: 0;
+			background: #f5f5f5;
+		}
+		.container {
+			background: white;
+			padding: 2rem;
+			border-radius: 8px;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+			max-width: 500px;
+			text-align: center;
+		}
+		h1 {
+			margin-top: 0;
+			color: #333;
+		}
+		p {
+			color: #666;
+			line-height: 1.6;
+		}
+		.status {
+			margin: 1.5rem 0;
+			padding: 1rem;
+			border-radius: 4px;
+			background: #e3f2fd;
+			color: #1976d2;
+		}
+		.status.success {
+			background: #e8f5e9;
+			color: #388e3c;
+		}
+		.status.error {
+			background: #ffebee;
+			color: #d32f2f;
+		}
+		button {
+			background: #1976d2;
+			color: white;
+			border: none;
+			padding: 0.75rem 1.5rem;
+			border-radius: 4px;
+			font-size: 1rem;
+			cursor: pointer;
+			margin-top: 1rem;
+		}
+		button:hover {
+			background: #1565c0;
+		}
+		button:disabled {
+			background: #ccc;
+			cursor: not-allowed;
+		}
+		.spinner {
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+			border: 2px solid #f3f3f3;
+			border-top: 2px solid #1976d2;
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+			margin-right: 8px;
+			vertical-align: middle;
+		}
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Clear sync.bible Data</h1>
+		<p>This will clear all stored data including:</p>
+		<ul style="text-align: left; color: #666;">
+			<li>localStorage</li>
+			<li>sessionStorage</li>
+			<li>IndexedDB database</li>
+			<li>Service worker caches</li>
+			<li>Service worker registrations</li>
+		</ul>
+		<div id="status" class="status" style="display: none;"></div>
+		<button id="clearBtn" onclick="clearAllData()">Clear All Data</button>
+	</div>
+
+	<script>
+		async function clearAllData() {
+			const statusDiv = document.getElementById('status');
+			const clearBtn = document.getElementById('clearBtn');
+
+			statusDiv.style.display = 'block';
+			statusDiv.className = 'status';
+			statusDiv.innerHTML = '<span class="spinner"></span> Clearing data...';
+			clearBtn.disabled = true;
+
+			try {
+				// Clear localStorage
+				localStorage.clear();
+
+				// Clear sessionStorage
+				sessionStorage.clear();
+
+				// Delete IndexedDB
+				indexedDB.deleteDatabase('syncbible');
+
+				// Clear service worker caches
+				if ('serviceWorker' in navigator && 'caches' in window) {
+					// Unregister all service workers
+					const registrations = await navigator.serviceWorker.getRegistrations();
+					for (const registration of registrations) {
+						await registration.unregister();
+					}
+
+					// Delete all caches
+					const cacheNames = await caches.keys();
+					await Promise.all(
+						cacheNames.map(cacheName => caches.delete(cacheName))
+					);
+				}
+
+				// Success!
+				statusDiv.className = 'status success';
+				statusDiv.innerHTML = '✓ All data cleared successfully!<br><br>Redirecting to home page...';
+
+				// Redirect after 2 seconds
+				setTimeout(() => {
+					window.location.href = '/';
+				}, 2000);
+
+			} catch (error) {
+				console.error('Error clearing data:', error);
+				statusDiv.className = 'status error';
+				statusDiv.innerHTML = '✗ Error clearing data: ' + error.message + '<br><br>Please try again or clear your browser cache manually.';
+				clearBtn.disabled = false;
+			}
+		}
+
+		// Auto-clear if ?auto=true parameter is present
+		if (window.location.search.includes('auto=true')) {
+			clearAllData();
+		}
+	</script>
+</body>
+</html>

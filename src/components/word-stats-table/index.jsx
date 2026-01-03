@@ -51,7 +51,7 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 						}
 					>
 						<td colSpan="4">
-							{ strongsDictionary &&
+							{ strongsDictionary?.[ lemma ]?.lemma &&
 								stripPointing(
 									strongsDictionary[ lemma ].lemma
 								) }
@@ -74,10 +74,7 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 					>
 						<td
 							title={
-								strongsDictionary &&
-								strongsDictionary[ lemma ].xlit
-									? strongsDictionary[ lemma ].xlit
-									: ''
+								strongsDictionary?.[ lemma ]?.xlit || ''
 							}
 						>
 							{ lemma }

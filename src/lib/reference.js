@@ -96,11 +96,14 @@ export const getReferenceFromString = ( referenceString ) => {
 
 export const getAllLemmasFromReference = ( reference, data ) => {
 	const verse =
-		data[ reference.version ][ reference.book ][ reference.chapter - 1 ][
+		data[ reference.version ]?.[ reference.book ]?.[ reference.chapter - 1 ]?.[
 			reference.verse - 1
 		];
+	if ( ! verse ) {
+		return '';
+	}
 	const lemmas = verse.map( ( word ) => {
-		const lemma = word[ 1 ].split( '/' );
+		const lemma = word[ 1 ]?.split( '/' ) || [];
 		// filter out non-numeric lemmas
 		return lemma.filter( ( singleLemma ) => ! isNaN( singleLemma[ 1 ] ) );
 	} );

@@ -1,5 +1,5 @@
 // Simple cache version - automatically generated from build
-const CACHE_VERSION = 'sync.bible.25.9b1e333';
+const CACHE_VERSION = 'sync.bible.25.6b0e81f';
 const CACHE_NAME = CACHE_VERSION;
 
 // Files to cache

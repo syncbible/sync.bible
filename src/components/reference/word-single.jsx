@@ -43,7 +43,7 @@ const WordSingleComponent = ( props ) => {
 				farsiTranslations.translations &&
 				Object.keys( farsiTranslations.translations ).map(
 					( translation ) => {
-						return farsiTranslations.translations[ translation ].join(
+						return farsiTranslations.translations[ translation ]?.join(
 							', '
 						);
 					}

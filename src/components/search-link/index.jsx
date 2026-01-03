@@ -50,7 +50,7 @@ export default function SearchLink( {
 
 		const verseData = getVerseData( reference, interfaceLanguage );
 		const strongsNumbers = verseData.map( ( word ) => {
-			return word[ 1 ];
+			return word?.[ 1 ] || '';
 		} );
 
 		window.updateAppComponent(

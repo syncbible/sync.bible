@@ -1,6 +1,6 @@
 export function getReferenceStringByGroup( reference, group ) {
 	if ( group === 'word' || group === 'morph' ) {
-		return reference.word[ 0 ];
+		return reference.word?.[ 0 ] || '';
 	}
 
 	if ( group === 'strongs' ) {

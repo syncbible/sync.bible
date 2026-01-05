@@ -13,6 +13,11 @@ export function getSharedWordsFromReferences(
 		return {};
 	}
 
+	// Wait for strongsObjectWithFamilies to load
+	if ( ! data.strongsObjectWithFamilies ) {
+		return {};
+	}
+
 	// Track which references each lemma appears in AND total occurrences
 	const wordReferences = {};
 	const wordOccurrences = {};

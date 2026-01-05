@@ -21,6 +21,11 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 		return null;
 	}
 
+	// Wait for strongsObjectWithFamilies to load
+	if ( ! strongsObjectWithFamilies ) {
+		return null;
+	}
+
 	const sortFunctions = createSortFunctions(
 		common,
 		strongsObjectWithFamilies,

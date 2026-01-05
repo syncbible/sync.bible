@@ -218,7 +218,7 @@ export const calculateRareWords = ( {
 	referenceInfo: { reference, limit },
 	data,
 } ) => {
-	if ( ! reference ) {
+	if ( ! reference || ! data.strongsObjectWithFamilies ) {
 		return null;
 	}
 

@@ -17,7 +17,7 @@ import {
 import { isValidWord } from '../lib/word.js';
 import bible from '../data/bible.js';
 
-const cacheKey = 'sync.bible.25.2914fc5';
+const cacheKey = 'sync.bible.25.4418408';
 
 export const goToReferenceAction = ( reference, targetColumn ) => {
 	return function ( dispatch, getState ) {
@@ -567,7 +567,10 @@ export function fetchDataAsync( key ) {
 		}
 
 		try {
-			const response = await fetch( `data/${ key }.json` );
+			const response = await fetch( `data/${ key }.json`, {
+				mode: 'same-origin',
+				credentials: 'same-origin',
+			} );
 			if ( ! response.ok ) {
 				throw new Error( `Response status: ${ response.status }` );
 			}
@@ -579,7 +582,8 @@ export function fetchDataAsync( key ) {
 				return cache.addAll( [ `data/${ key }.json` ] );
 			} );
 		} catch ( error ) {
-			console.log( error.message );
+			console.error( `Failed to fetch ${ key }:`, error.message );
+			console.error( 'Full error:', error );
 		}
 	};
 }

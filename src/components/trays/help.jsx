@@ -101,10 +101,8 @@ const HelpTray = () => {
 					)
 				);
 
-				alert(
-					'Cache cleared successfully! The page will now reload.'
-				);
-				window.location.reload( true );
+				// Redirect to home page
+				window.location.href = './';
 			} catch ( error ) {
 				console.error( 'Error clearing cache:', error );
 				alert(

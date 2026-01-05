@@ -1,4 +1,5 @@
 // External dependencies
+import React from 'react';
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -39,7 +40,7 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 			const count = strongsObjectWithFamilies[ lemma ]?.count || 1;
 			const significance = ( common[ lemma ] / count ).toFixed( 2 );
 			return (
-				<>
+				<React.Fragment key={ lemma }>
 					<tr
 						key={ `${ lemma }-word` }
 						className={ classnames( lemma, styles.wordRow ) }
@@ -88,7 +89,7 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 						<td>{ count }</td>
 						<td>{ significance }</td>
 					</tr>
-				</>
+				</React.Fragment>
 			);
 		} );
 

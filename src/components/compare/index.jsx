@@ -1,5 +1,5 @@
 // External dependencies
-import { useEffect, useState, useMemo, useRef } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Internal dependencies
@@ -18,18 +18,11 @@ import bible from '../../data/bible.js';
 import Connections from './connections';
 import WordStatsTable from '../word-stats-table';
 import LimitControl from '../limit-control';
-import Collapsible from '../collapsible';
-import { useScrollIntoView } from '../../hooks/use-scroll-into-view';
 
 export default function Compare() {
 	const [ compareAllChapters, setCompareAllChapters ] = useState( false );
 	const [ sortBy, setSortBy ] = useState( 'significanceDesc' );
-	const [ open, setOpen ] = useState( false );
-	const collapsibleRef = useRef( null );
 	const dispatch = useDispatch();
-
-	// Scroll into view when this panel is opened
-	useScrollIntoView( collapsibleRef, open );
 	const isOriginalLoaded = useSelector(
 		( state ) => 'undefined' !== typeof state.data.original
 	);
@@ -217,13 +210,7 @@ export default function Compare() {
 	}
 
 	return (
-		<Collapsible
-			ref={ collapsibleRef }
-			open={ open }
-			onToggle={ () => setOpen( ! open ) }
-			header={ 'Compare references' }
-		>
-			<div className={ styles.compare }>
+		<div className={ styles.compare }>
 				<div className={ styles.statsReferenceWrapper }>
 					<div className={ styles.statsReference }>
 						<select
@@ -310,7 +297,6 @@ export default function Compare() {
 				>
 					Compare all chapters
 				</a>
-			</div>
-		</Collapsible>
+		</div>
 	);
 }

@@ -1,5 +1,4 @@
 // External
-import React from 'react';
 
 const Copy = ( { fill } ) => (
 	<svg width="24" height="24" viewBox="0 0 24 24">

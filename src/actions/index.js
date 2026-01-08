@@ -221,7 +221,7 @@ export const showCrossReferences = ( reference ) => {
 	};
 };
 
-export const findSimilarReferences = ( reference, listItem ) => {
+export const findSimilarReferences = ( reference ) => {
 	return function ( dispatch, getState ) {
 		const searchParameters = {
 			clusivity: 'inclusive',

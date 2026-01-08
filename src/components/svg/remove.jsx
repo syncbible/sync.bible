@@ -1,5 +1,4 @@
 // External
-import React from 'react';
 
 const Remove = ( { fill } ) => (
 	<svg version="1.1" width="24" height="24" viewBox="0 0 24 24">

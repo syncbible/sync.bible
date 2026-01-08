@@ -1,5 +1,4 @@
 // External
-import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,7 +9,7 @@ import styles from './styles.module.scss';
 import Bookmark from '../svg/bookmark';
 import { getCrossReferences } from '../../lib/cross-references';
 
-const VerseNumber = ( { book, chapter, verse, isCurrentRef, columnIndex } ) => {
+const VerseNumber = ( { book, chapter, verse, columnIndex } ) => {
 	const dispatch = useDispatch();
 	const data = useSelector( ( state ) => state.data );
 	const inSync = useSelector( ( state ) => state.settings.inSync );

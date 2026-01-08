@@ -1,5 +1,4 @@
 // External
-import React from 'react';
 
 const LeftPanelClose = ( { fill } ) => {
 	return (

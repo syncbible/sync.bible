@@ -1,5 +1,4 @@
 // External
-import React from 'react';
 
 export default function Shuffle( { fill } ) {
 	return (

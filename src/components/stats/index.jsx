@@ -1,13 +1,11 @@
 // External
-import React, { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
 
 // Internal
 import bible from '../../data/bible.js';
 import {
-	compareTwoReferences,
-	calculateRareWords,
 	calculateCommonWords,
 	calculateConnectionQuality,
 } from '../../lib/reference';

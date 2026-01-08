@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 export default function withPropsChecker( WrappedComponent ) {
 	return class PropsChecker extends Component {

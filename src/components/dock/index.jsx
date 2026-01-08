@@ -1,5 +1,4 @@
 // External
-import React from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 
 // Internal
@@ -16,7 +15,6 @@ const Dock = () => {
 			),
 		shallowEqual
 	);
-	const showControls = useSelector( ( state ) => state.reference.length > 0 );
 	const { isMobile, customWidth, activeTraysCount } = useTrayDimensions();
 
 	// On mobile, sidebar overlays, so no margin adjustment needed

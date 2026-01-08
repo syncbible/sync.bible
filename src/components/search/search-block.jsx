@@ -1,6 +1,6 @@
 // External
 import React, { useState, useMemo } from 'react';
-import { countBy, sortBy } from 'lodash';
+import { countBy } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 

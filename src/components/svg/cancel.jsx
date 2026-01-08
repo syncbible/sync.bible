@@ -1,5 +1,4 @@
 // External
-import React from 'react';
 
 const Cancel = ( { fill } ) => (
 	<svg version="1.1" width="20" height="20" viewBox="0 0 512 512">

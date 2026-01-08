@@ -1,5 +1,5 @@
 // External
-import { useEffect, useMemo, useCallback, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { replace } from '@lagunovsky/redux-react-router';
 

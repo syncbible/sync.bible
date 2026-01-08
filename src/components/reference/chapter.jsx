@@ -8,7 +8,6 @@ import React, {
 	useMemo,
 } from 'react';
 import { Waypoint } from 'react-waypoint';
-import ReactDOM from 'react-dom';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Virtuoso } from 'react-virtuoso';

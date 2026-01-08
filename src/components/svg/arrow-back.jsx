@@ -1,7 +1,6 @@
 // External
-import React from 'react';
 
-const ArrowBack = ( { fill } ) => (
+const ArrowBack = () => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		height="24"

@@ -1,6 +1,3 @@
-// External
-import React from 'react';
-
 // Internal
 import styles from './styles.module.scss';
 import SortGroupResults from '../sort-group-results/index';

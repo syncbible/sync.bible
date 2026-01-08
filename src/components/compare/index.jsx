@@ -187,7 +187,8 @@ export default function Compare() {
 		);
 	}
 
-	const allChapters = ''; /*bible.Data.books.map( ( book, id ) => {
+	// Commented out unused code
+	// const allChapters = ''; /*bible.Data.books.map( ( book, id ) => {
 		<h3>All chapters</h3>
 		return bible.Data.verses[ id ].map( ( numberOfChapters, chapter ) => {
 			const parameters = {

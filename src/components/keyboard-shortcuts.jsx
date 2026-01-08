@@ -1,7 +1,7 @@
 // External
 import React, { useEffect } from 'react';
 import mousetrap from 'mousetrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // Internal
 import {

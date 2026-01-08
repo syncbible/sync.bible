@@ -1,5 +1,6 @@
 // External
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -168,6 +169,11 @@ const ReferenceSelectorMobile = ( { index, version } ) => {
 			) }
 		</span>
 	);
+};
+
+ReferenceSelectorMobile.propTypes = {
+	index: PropTypes.number.isRequired,
+	version: PropTypes.string.isRequired,
 };
 
 export default React.memo( ReferenceSelectorMobile );

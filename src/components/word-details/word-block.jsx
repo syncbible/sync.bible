@@ -128,6 +128,10 @@ WordBlock.propTypes = {
 	highlight: PropTypes.bool,
 	setFocus: PropTypes.func,
 	word: PropTypes.object,
+	results: PropTypes.array,
+	current: PropTypes.bool,
+	id: PropTypes.string,
+	loading: PropTypes.bool,
 };
 
 export default React.memo( WordBlock );

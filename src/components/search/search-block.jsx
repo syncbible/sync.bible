@@ -253,6 +253,11 @@ SearchBlock.propTypes = {
 	visible: PropTypes.bool,
 	sorted: PropTypes.array,
 	results: PropTypes.array.isRequired,
+	current: PropTypes.number,
+	id: PropTypes.string,
+	data: PropTypes.shape( {
+		version: PropTypes.string,
+	} ),
 };
 
 export default React.memo( SearchBlock );

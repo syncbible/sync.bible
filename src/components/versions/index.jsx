@@ -15,7 +15,7 @@ import {
 	settingsChange,
 } from '../../actions';
 
-const Versions = ( { trays } ) => {
+const Versions = () => {
 	const dispatch = useDispatch();
 	const [ searchQuery, setSearchQuery ] = useState( '' );
 	const availableVersions = useSelector(
@@ -191,10 +191,6 @@ const Versions = ( { trays } ) => {
 			</form>
 		</div>
 	);
-};
-
-Versions.propTypes = {
-	trays: PropTypes.array.isRequired,
 };
 
 export default Versions;

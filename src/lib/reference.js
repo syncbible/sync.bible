@@ -179,12 +179,6 @@ export const getReferenceFromSearchResult = ( result ) => {
 	};
 };
 
-const getDataFromBook = ( reference, data ) => {
-	return bible.Data.otBooks.indexOf( reference.book ) > -1
-		? data.hebrew
-		: data.greek;
-};
-
 export const compareTwoReferences = ( {
 	referenceInfo: { reference, referenceToCompareWith, limit },
 	data,
@@ -267,7 +261,7 @@ export const calculateCommonWords = ( reference, data, limit = Infinity ) => {
 
 export const calculateConnectionQuality = ( state ) => {
 	const {
-		referenceInfo: { reference, limit },
+		referenceInfo: { reference },
 		data,
 	} = state;
 	if ( ! reference ) {

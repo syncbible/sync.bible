@@ -151,7 +151,7 @@ const WordStatsTable = ( { common, sort, setSort } ) => {
 };
 
 WordStatsTable.propTypes = {
-	common: PropTypes.object.isRequired,
+	common: PropTypes.object,
 	sort: PropTypes.string.isRequired,
 	setSort: PropTypes.func.isRequired,
 };

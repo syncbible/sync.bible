@@ -125,7 +125,7 @@ const WordBlock = ( props ) => {
 WordBlock.propTypes = {
 	data: PropTypes.object.isRequired,
 	visible: PropTypes.bool,
-	highlight: PropTypes.func,
+	highlight: PropTypes.bool,
 	setFocus: PropTypes.func,
 	word: PropTypes.object,
 };

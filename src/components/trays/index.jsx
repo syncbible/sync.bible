@@ -125,7 +125,7 @@ const Trays = () => {
 	);
 	const { darkMode, expandedSearchResults } =
 		useSelector( selectAllSettings );
-	const { activeTrays, customWidth, activeTraysCount } = useTrayDimensions();
+	const { customWidth, activeTraysCount } = useTrayDimensions();
 	const drawerLeftOffset = DOCK_HEIGHT;
 
 	if ( interfaceLanguage ) {

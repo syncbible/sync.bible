@@ -84,13 +84,6 @@ const SearchForm = ( { isActive } ) => {
 	const toggle = ( event ) => {
 		dispatch( updateSearchForm( event.target.name, event.target.checked ) );
 	};
-	const changeExpandedResultsSetting = () => {
-		if ( settings.expandedSearchResults ) {
-			dispatch( settingsChange( 'expandedSearchResults', false ) );
-		} else {
-			dispatch( settingsChange( 'expandedSearchResults', true ) );
-		}
-	};
 	const change = useCallback(
 		( event ) => {
 			dispatch(

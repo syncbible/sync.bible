@@ -14,12 +14,6 @@ const initialState = [
   },
 ];
 
-const openState = {
-  open: true,
-  bookIndex: null,
-  bookName: null,
-};
-
 const referenceSelectorMobile = (state = initialState, action) => {
   switch (action.type) {
     case ROUTER_ON_LOCATION_CHANGED: {

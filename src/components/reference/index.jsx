@@ -12,7 +12,8 @@ import styles from './styles.module.scss';
 import { getNextChapter, getPreviousChapter } from '../../lib/reference';
 
 let oldHeight = 0,
-	scroller = null;
+	scroller = null,
+	isScrolling = false;
 
 const getReferencesFromProps = ( nextProps ) => {
 	if ( ! nextProps.reference || ! nextProps.reference.book ) {

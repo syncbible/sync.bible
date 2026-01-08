@@ -21,8 +21,8 @@ const ReferenceSelector = ( { onGoToReference, onChangeDisplayState } ) => {
 				onSetActiveBook={ ( book ) => {
 					setActive( book );
 				} }
-				onGoToReference={ () => onGoToReference() }
-				onChangeDisplayState={ () => onChangeDisplayState() }
+				onGoToReference={ onGoToReference ? () => onGoToReference() : undefined }
+				onChangeDisplayState={ onChangeDisplayState ? () => onChangeDisplayState() : undefined }
 				active={ isActive }
 			/>
 		);
@@ -30,8 +30,8 @@ const ReferenceSelector = ( { onGoToReference, onChangeDisplayState } ) => {
 };
 
 ReferenceSelector.propTypes = {
-	onGoToReference: PropTypes.func.isRequired,
-	onChangeDisplayState: PropTypes.func.isRequired,
+	onGoToReference: PropTypes.func,
+	onChangeDisplayState: PropTypes.func,
 };
 
 export default React.memo( ReferenceSelector );

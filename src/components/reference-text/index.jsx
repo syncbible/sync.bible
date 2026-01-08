@@ -23,7 +23,7 @@ const ReferenceText = ( { reference } ) => {
 ReferenceText.propTypes = {
 	reference: PropTypes.shape( {
 		book: PropTypes.string.isRequired,
-		chapter: PropTypes.number,
+		chapter: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 		verse: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 	} ).isRequired,
 };

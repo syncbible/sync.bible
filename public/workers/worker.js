@@ -1,4 +1,3 @@
-var module = {};
 var javascripture = {};
 javascripture.api = {};
 

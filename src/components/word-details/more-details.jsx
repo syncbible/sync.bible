@@ -1,6 +1,6 @@
 // External
 import map from 'lodash/map';
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -141,7 +141,7 @@ const MoreDetails = ( { morphologyProp, strongsNumber, version } ) => {
 				{ getKJVDefinitions( strongsNumber ) }
 				<br />
 				<br />
-				<strong>Strong's Derivation</strong>
+				<strong>Strong&apos;s Derivation</strong>
 				<br />
 				{ wordDetail && wordDetail.derivation }
 				<br />

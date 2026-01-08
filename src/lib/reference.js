@@ -286,7 +286,7 @@ export const getReferenceFromHashFragment = function ( hash ) {
 	}
 
 	const version = reference[ 1 ],
-		book = reference[ 2 ].replace( /\%20/gi, ' ' ),
+		book = reference[ 2 ].replace( /%20/gi, ' ' ),
 		chapter = parseInt( reference[ 3 ] ),
 		verse = reference[ 4 ] ? parseInt( reference[ 4 ] ) : 1,
 		endVerse = reference[ 5 ] ? parseInt( reference[ 5 ] ) : null;
@@ -388,7 +388,6 @@ export function getNumberOfVerses( { book, chapter } ) {
 }
 
 export function getHarmonisedReference( {
-	book,
 	chapter,
 	verseNumber,
 	index,

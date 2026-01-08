@@ -149,7 +149,7 @@ const HelpTray = () => {
 							</li>
 						</ul>
 						<p>
-							Versions with a * are indexed with Strong's numbers.
+							Versions with a * are indexed with Strong&apos;s numbers.
 						</p>
 					</div>
 				</div>
@@ -206,7 +206,7 @@ const HelpTray = () => {
 				</p>
 				<p>
 					<a href="https://www.dropbox.com/s/7e05iklpkrtn46n/Genesis%20-%20Jeremiah.pdf?dl=0">
-						Mark's Hebrew Literal
+						Mark&apos;s Hebrew Literal
 					</a>
 					.<br />{ ' ' }
 					<a href="https://www.dropbox.com/s/lrhzis4d9532gf4/Introduction.pdf?dl=0">

@@ -7,7 +7,7 @@ import {
 } from '../lib/reference.js';
 
 const getReferenceFromAction = ( reference, version ) => {
-	const book = reference.book.replace( /\%20/gi, ' ' ),
+	const book = reference.book.replace( /%20/gi, ' ' ),
 		chapter = parseInt( reference.chapter ),
 		verse = reference.verse ? parseInt( reference.verse ) : 1,
 		endVerse = reference.verse ? parseInt( reference.endVerse ) : null;

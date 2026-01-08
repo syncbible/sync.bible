@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 // Internal
 import styles from './styles.module.scss';
 import CombinedResults from './combined';
-import { getReferenceFromSearchResult } from '../../lib/reference.js';
 import SharedWords from '../shared-words';
 import WordBlock from './word-block';
 

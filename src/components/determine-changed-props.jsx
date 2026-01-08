@@ -2,7 +2,7 @@ import { Component } from 'react';
 
 export default function withPropsChecker( WrappedComponent ) {
 	return class PropsChecker extends Component {
-		componentWillReceiveProps( nextProps ) {
+		UNSAFE_componentWillReceiveProps( nextProps ) {
 			Object.keys( nextProps )
 				.filter( ( key ) => {
 					return nextProps[ key ] !== this.props[ key ];

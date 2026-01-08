@@ -24,7 +24,7 @@ const WordSingleComponent = ( props ) => {
 		strongsObjectWithFamilies,
 	} = props;
 	const lemmaArray = useMemo(
-		() => ( lemma ? lemma.split( /[\&\s]/ ) : [] ),
+		() => ( lemma ? lemma.split( /[&\s]/ ) : [] ),
 		[ lemma ]
 	);
 

@@ -5,7 +5,7 @@ const searchTerms = ( state = [], action ) => {
 	let newState;
 
 	switch ( action.type ) {
-		case 'ADD_SEARCH':
+		case 'ADD_SEARCH': {
 			const termPosition = findIndex( state, ( searchTerm ) =>
 				isEqual( searchTerm.terms, action.terms )
 			);
@@ -30,8 +30,9 @@ const searchTerms = ( state = [], action ) => {
 					terms: action.terms,
 				},
 			];
+		}
 
-		case 'TOGGLE_SEARCH':
+		case 'TOGGLE_SEARCH': {
 			const toggleWordPosition = findIndex( state, ( word ) =>
 				isEqual( word.terms, action.terms )
 			);
@@ -49,6 +50,7 @@ const searchTerms = ( state = [], action ) => {
 			}
 
 			return state;
+		}
 
 		case 'REMOVE_SEARCH':
 			return state.filter( ( word ) => {

@@ -8,7 +8,7 @@ const trays = ( state = [], action ) => {
 		window.innerWidth < MOBILE_BREAKPOINT;
 
 	switch ( action.type ) {
-		case 'SET_TRAY_VISIBILITY_FILTER':
+		case 'SET_TRAY_VISIBILITY_FILTER': {
 			// Legacy support: replace all trays with just this one
 			let trayId = action.filter;
 			if (
@@ -18,8 +18,9 @@ const trays = ( state = [], action ) => {
 				trayId = traysList[ parsedFilter - 1 ].id;
 			}
 			return [ trayId ];
+		}
 
-		case 'TOGGLE_TRAY':
+		case 'TOGGLE_TRAY': {
 			// Toggle a tray on/off in the array
 			const trayToToggle = action.trayId;
 			if ( state.includes( trayToToggle ) ) {
@@ -29,6 +30,7 @@ const trays = ( state = [], action ) => {
 				// Add it
 				return [ ...state, trayToToggle ];
 			}
+		}
 
 		case 'ADD_TRAY':
 			// On mobile, only show one tray at a time

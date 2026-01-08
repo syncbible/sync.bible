@@ -4,7 +4,7 @@ const wordDetails = ( state = [], action ) => {
 	let newState;
 
 	switch ( action.type ) {
-		case 'ADD_WORD':
+		case 'ADD_WORD': {
 			const wordPosition = findIndex(
 				state,
 				( word ) => word.strongsNumber === action.strongsNumber
@@ -44,8 +44,9 @@ const wordDetails = ( state = [], action ) => {
 					clickedWord: action.clickedWord,
 				},
 			];
+		}
 
-		case 'TOGGLE_WORD':
+		case 'TOGGLE_WORD': {
 			const toggleWordPosition = findIndex(
 				state,
 				( word ) => word.strongsNumber === action.strongsNumber
@@ -67,6 +68,7 @@ const wordDetails = ( state = [], action ) => {
 			}
 
 			return state;
+		}
 
 		case 'REMOVE_WORD':
 			return state.filter( ( word ) => {

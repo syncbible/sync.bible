@@ -3,7 +3,7 @@ import isEqual from 'lodash/isEqual';
 
 const searchResults = ( state = [], action ) => {
 	switch ( action.type ) {
-		case 'ADD_SEARCH_RESULTS':
+		case 'ADD_SEARCH_RESULTS': {
 			let newState;
 			const searchResultsPosition = findIndex( state, ( searchTerm ) => {
 				return isEqual( searchTerm.terms, action.terms );
@@ -32,6 +32,7 @@ const searchResults = ( state = [], action ) => {
 					terms: action.terms,
 				},
 			];
+		}
 
 		case 'REMOVE_SEARCH':
 			return state.filter( ( searchTerm ) => {

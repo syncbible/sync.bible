@@ -22,7 +22,7 @@ const openState = {
 
 const referenceSelectorMobile = (state = initialState, action) => {
   switch (action.type) {
-    case ROUTER_ON_LOCATION_CHANGED:
+    case ROUTER_ON_LOCATION_CHANGED: {
       const hash = getHashFromAction(action);
       const reference = getReferenceFromHash(hash);
       if (
@@ -38,6 +38,7 @@ const referenceSelectorMobile = (state = initialState, action) => {
         bookIndex: null,
         bookName: null,
       }));
+    }
 
     case "SET_REFERENCE":
     case "CLOSE_REFERENCE_SELECTOR_MOBILE":
@@ -49,7 +50,7 @@ const referenceSelectorMobile = (state = initialState, action) => {
         };
       });
 
-    case "TOGGLE_REFERENCE_SELECTOR_MOBILE":
+    case "TOGGLE_REFERENCE_SELECTOR_MOBILE": {
       const newState = state.map(() => {
         return {
           open: false,
@@ -60,8 +61,9 @@ const referenceSelectorMobile = (state = initialState, action) => {
 
       newState[action.index].open = !state[action.index].open;
       return newState;
+    }
 
-    case "OPEN_REFERENCE_SELECTOR_MOBILE":
+    case "OPEN_REFERENCE_SELECTOR_MOBILE": {
       const newState2 = state.map(() => {
         return {
           open: false,
@@ -72,15 +74,17 @@ const referenceSelectorMobile = (state = initialState, action) => {
 
       newState2[action.index].open = true;
       return newState2;
+    }
 
-    case "REFERENCE_SELECTOR_MOBILE_SET_BOOK":
+    case "REFERENCE_SELECTOR_MOBILE_SET_BOOK": {
       const setBookState = [...state];
       setBookState[action.index].bookName = action.bookName;
       setBookState[action.index].bookIndex = action.bookIndex;
 
       return setBookState;
+    }
 
-    case "ADD_COLUMN":
+    case "ADD_COLUMN": {
       const addedState = [...state];
       addedState.push({
         open: false,
@@ -88,11 +92,13 @@ const referenceSelectorMobile = (state = initialState, action) => {
         bookName: null,
       });
       return addedState;
+    }
 
-    case "REMOVE_COLUMN":
+    case "REMOVE_COLUMN": {
       const removedState = [...state];
       removedState.splice(action.index, 1);
       return removedState;
+    }
 
     default:
       return state;

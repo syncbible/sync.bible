@@ -4,7 +4,7 @@ const initialState = [];
 
 const list = ( state = initialState, action ) => {
 	switch ( action.type ) {
-		case 'ADD_TO_LIST':
+		case 'ADD_TO_LIST': {
 			const dataForId = Object.assign( {}, action.item.data );
 			delete dataForId.clickedWord;
 			delete dataForId.morphology;
@@ -29,6 +29,7 @@ const list = ( state = initialState, action ) => {
 				} ),
 				{ ...action.item, id },
 			];
+		}
 
 		case 'REMOVE_FROM_LIST':
 			return [

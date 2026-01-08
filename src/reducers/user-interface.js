@@ -1,6 +1,6 @@
 const userInterface = ( state = {}, action ) => {
 	switch ( action.type ) {
-		case 'ADD_TO_LIST':
+		case 'ADD_TO_LIST': {
 			const dataForId = Object.assign( {}, action.item.data );
 			delete dataForId.clickedWord;
 			delete dataForId.morphology;
@@ -15,6 +15,7 @@ const userInterface = ( state = {}, action ) => {
 			}
 			state[ id ] = true;
 			return { ...state };
+		}
 
 		case 'REMOVE_FROM_LIST':
 			delete state[ action.item.id ];

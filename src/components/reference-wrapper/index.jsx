@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 // Internal
 import ReferenceComponent from '../reference';
-import styles from './style.module.scss';
+import styles from './styles.module.scss';
 import { DOCK_HEIGHT } from '../../constants/dimensions';
 import { useTrayDimensions } from '../../hooks/useTrayDimensions';
 

@@ -3,7 +3,7 @@ import { useSelector, shallowEqual } from 'react-redux';
 
 // Internal
 import Navigation from '../navigation';
-import styles from './style.module.scss';
+import styles from './styles.module.scss';
 import { DOCK_HEIGHT } from '../../constants/dimensions';
 import { useTrayDimensions } from '../../hooks/useTrayDimensions';
 

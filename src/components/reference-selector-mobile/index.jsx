@@ -11,7 +11,7 @@ import {
 	referenceSelectorMobileSetBook,
 } from '../../actions';
 import ArrowBackIcon from '../svg/arrow-back';
-import styles from './style.module.scss';
+import styles from './styles.module.scss';
 import bible from '../../data/bible.js';
 
 const ReferenceSelectorMobile = ( { index, version } ) => {

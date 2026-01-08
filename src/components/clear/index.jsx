@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 // Internal dependencies
 import { removeTypeFromList } from '../../actions';
 import DeleteForever from '../svg/delete-forever';
-import styles from './style.module.scss';
+import styles from './styles.module.scss';
 
 export default function Clear( { selectedTrayId } ) {
 	const dispatch = useDispatch();

@@ -5263,12 +5263,10 @@ bible.Data.supportedVersions = {
   FreBBB: { name: "French Bible Bovet Bonnet (1900)", language: "fr" },
   FreBDM1744: { name: "Bible David Martin (1744)", language: "fr" },
   FreKhan: { name: "La Bible de Zadoc Khan", language: "fr" },
-  FrePGR: { name: "Bible Perret-Gentil et Rilliet", language: "fr" },
   FreSegond: {
     name: "French Traduction de Louis Segond (1910)",
     language: "fr",
   },
-  FreSegond1910: { name: "Bible Louis Segond (1910)", language: "fr" },
   IriODomhnuill: {
     name: "A modern Irish New Testament (Luke preview)",
     language: "ga",

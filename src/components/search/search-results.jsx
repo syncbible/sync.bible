@@ -1,9 +1,9 @@
-// External dependencies
+// External
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import Collapsible from '../collapsible';
 import SearchBlock from './search-block';
 import SearchStats from './search-stats';
@@ -14,7 +14,12 @@ import { removeFromList, toggleListItemVisible } from '../../actions';
 import { useScrollIntoView } from '../../hooks/use-scroll-into-view';
 
 // Single search result item component
-const SearchResultItem = ( { searchTerm, index, activeTabs, setActiveTabs } ) => {
+const SearchResultItem = ( {
+	searchTerm,
+	index,
+	activeTabs,
+	setActiveTabs,
+} ) => {
 	const dispatch = useDispatch();
 	const userInterface = useSelector( ( state ) => state.userInterface );
 	const textToCopy = useRef( null );
@@ -88,16 +93,12 @@ const SearchResultItem = ( { searchTerm, index, activeTabs, setActiveTabs } ) =>
 			header={ header }
 			open={ userInterface[ searchTerm.id ] }
 			textToCopy={ textToCopy }
-			onToggle={ () =>
-				dispatch( toggleListItemVisible( searchTerm ) )
-			}
+			onToggle={ () => dispatch( toggleListItemVisible( searchTerm ) ) }
 			onRemove={ () => dispatch( removeFromList( searchTerm ) ) }
 		>
 			<div className={ styles.tabs }>
 				<a
-					className={
-						activeTab === 'search' ? styles.active : ''
-					}
+					className={ activeTab === 'search' ? styles.active : '' }
 					onClick={ () => setActiveTab( 'search' ) }
 				>
 					<Search />

@@ -1,7 +1,7 @@
-// External dependencies
+// External
 import PropTypes from 'prop-types';
 
-// Internal dependencies.
+// Internal
 import styles from './styles.module.scss';
 import SortGroupResults from '../sort-group-results';
 

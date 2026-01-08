@@ -1,9 +1,9 @@
-// External dependencies
+// External
 import React, { useState, useMemo, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import { setTrayVisibilityFilter } from '../../actions';
 import Collapsible from '../collapsible';
 import JoinFull from '../svg/join-full';

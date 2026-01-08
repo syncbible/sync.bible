@@ -1,9 +1,9 @@
-// External dependencies
+// External
 import { useRef, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import { removeFromList, toggleListItemVisible } from '../../actions';
 import Collapsible from '../collapsible';
 import ReferenceText from '../reference-text';

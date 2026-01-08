@@ -1,8 +1,8 @@
-// External dependencies
+// External
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-// Internal dependencies
+// Internal
 import Download from '../svg/download';
 import styles from './styles.module.scss';
 

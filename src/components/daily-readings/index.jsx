@@ -1,7 +1,7 @@
-// External dependencies
+// External
 import { useState, Fragment } from 'react';
 
-// Internal dependencies
+// Internal
 import DailyReadingLink from './daily-reading-link';
 import styles from './styles.module.scss';
 import dailyReadings from '../../data/cdrplan.min.js';

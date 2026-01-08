@@ -1,8 +1,8 @@
-// External dependencies
+// External
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
-// Internal dependencies
+// Internal
 import { settingsChange } from '../../actions';
 import VersionSelect from '../version-select';
 import styles from './styles.module.scss';

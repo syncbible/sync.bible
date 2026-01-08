@@ -1,7 +1,7 @@
-// External dependencies
+// External
 import { useSelector } from 'react-redux';
 
-// Internal dependencies
+// Internal
 import Bookmark from '../svg/bookmark';
 import CombinedResults from '../word-details/combined';
 import SharedWords from '../shared-words';

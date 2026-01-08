@@ -1,9 +1,9 @@
-// External dependencies
+// External
 import React from 'react';
 import { useSelector } from 'react-redux';
 import classnames from 'classnames';
 
-// Internal dependencies
+// Internal
 import styles from './styles.module.scss';
 import TrayList from './tray-list';
 import ResizeHandle from './resize-handle';
@@ -123,7 +123,8 @@ const Trays = () => {
 	const interfaceLanguage = useSelector(
 		( state ) => state.settings.interfaceLanguage
 	);
-	const { darkMode, expandedSearchResults } = useSelector( selectAllSettings );
+	const { darkMode, expandedSearchResults } =
+		useSelector( selectAllSettings );
 	const { activeTrays, customWidth, activeTraysCount } = useTrayDimensions();
 	const drawerLeftOffset = DOCK_HEIGHT;
 

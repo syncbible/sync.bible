@@ -1,9 +1,9 @@
-// External dependencies
+// External
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import bible from '../../data/bible';
 import styles from './styles.module.scss';
 import { fetchData, fetchDataAsync, setReferenceInfo } from '../../actions';

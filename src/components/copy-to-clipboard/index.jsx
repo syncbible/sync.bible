@@ -1,8 +1,8 @@
-// External dependencies
+// External
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import CopySvg from '../svg/copy';
 import styles from './styles.module.scss';
 import copyToClipboardHelper from '../../lib/copy-to-clipboard-helper';
@@ -25,10 +25,7 @@ export default function CopyToClipboard( {
 	};
 
 	return (
-		<a
-			className={ styles.copyToClipboard }
-			onClick={ handleClick }
-		>
+		<a className={ styles.copyToClipboard } onClick={ handleClick }>
 			<CopySvg fill={ fill } />
 		</a>
 	);

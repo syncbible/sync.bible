@@ -1,4 +1,4 @@
-// External dependencies
+// External
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { Waypoint } from 'react-waypoint';
 import classnames from 'classnames';

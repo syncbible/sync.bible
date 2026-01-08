@@ -1,4 +1,4 @@
-// External dependencies
+// External
 import React, { useEffect } from 'react';
 import mousetrap from 'mousetrap';
 import { useDispatch, useSelector } from 'react-redux';

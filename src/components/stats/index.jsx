@@ -1,9 +1,9 @@
-// External dependencies
+// External
 import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
 
-// Internal dependencies
+// Internal
 import bible from '../../data/bible.js';
 import {
 	compareTwoReferences,

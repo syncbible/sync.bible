@@ -1,20 +1,23 @@
-// External dependencies
+// External
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-// Internal dependencies
+// Internal
 import { goToReferenceAction } from '../../actions';
 import bible from '../../data/bible.js';
 
 /** Link component for daily Bible readings */
 export default function DailyReadingLink( { book, chapter, verses } ) {
 	const dispatch = useDispatch();
-	const interfaceLanguage = useSelector(
-		( state ) => { return state.settings.interfaceLanguage }
-	);
+	const interfaceLanguage = useSelector( ( state ) => {
+		return state.settings.interfaceLanguage;
+	} );
 
-	const translatedBook = bible.getTranslatedBookName( book, interfaceLanguage );
+	const translatedBook = bible.getTranslatedBookName(
+		book,
+		interfaceLanguage
+	);
 
 	let referenceString = translatedBook + ' ' + chapter;
 	const reference = { book, chapter };

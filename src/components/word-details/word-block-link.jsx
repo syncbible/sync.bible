@@ -1,4 +1,4 @@
-// External dependencies
+// External
 import classnames from 'classnames';
 import React from 'react';
 import { useDispatch } from 'react-redux';

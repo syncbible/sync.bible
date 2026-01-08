@@ -1,7 +1,7 @@
-// External dependencies.
+// External
 import { push } from '@lagunovsky/redux-react-router';
 
-// Internal dependencies.
+// Internal
 import {
 	addColumnHelper,
 	deleteColumnHelper,
@@ -686,7 +686,9 @@ export const addToList = ( item ) => {
 			( listItem ) => listItem.listType === item.listType
 		);
 		// Get their IDs
-		const itemIdsToClose = itemsOfSameType.map( ( listItem ) => listItem.id );
+		const itemIdsToClose = itemsOfSameType.map(
+			( listItem ) => listItem.id
+		);
 
 		dispatch( {
 			type: 'ADD_TO_LIST',

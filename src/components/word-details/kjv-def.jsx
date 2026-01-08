@@ -1,8 +1,8 @@
-// External dependencies
+// External
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import { addSearch, setTrayVisibilityFilter } from '../../actions';
 import styles from './styles.module.scss';
 

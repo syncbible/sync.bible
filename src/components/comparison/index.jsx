@@ -1,13 +1,13 @@
-// External dependencies
+// External
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { union } from 'lodash';
 
-// Internal dependencies
+// Internal
 import VerseWrapper from '../reference/verse-wrapper.js';
 import SingleReference from '../reference/single-reference.js';
 import Title from '../reference/title.js';
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 import { sortReferences } from '../../lib/reference.js';
 
 const Comparison = () => {

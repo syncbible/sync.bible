@@ -1,10 +1,10 @@
-// External dependencies
+// External
 import map from 'lodash/map';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import KJVDef from './kjv-def';
 import morphology from '../../lib/morphology';
 import stripPointing from '../../lib/strip-pointing.js';

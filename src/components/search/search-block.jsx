@@ -1,10 +1,10 @@
-// External dependencies
+// External
 import React, { useState, useMemo } from 'react';
 import { countBy, sortBy } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import SearchLink from '../search-link';
 import styles from './styles.module.scss';
 import InlineResultsToggle from '../inline-results-toggle';

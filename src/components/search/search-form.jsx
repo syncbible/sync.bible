@@ -1,10 +1,10 @@
-// External dependencies
+// External
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import {
 	addSearch,
 	closeAdvancedSearch,

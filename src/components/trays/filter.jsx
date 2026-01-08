@@ -1,13 +1,10 @@
-// External dependencies
+// External
 import classnames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
-import {
-	toggleTray,
-	setTrayVisibilityFilter,
-} from '../../actions';
+// Internal
+import { toggleTray, setTrayVisibilityFilter } from '../../actions';
 import styles from './styles.module.scss';
 import { useIsMobile } from '../../hooks/useIsMobile';
 

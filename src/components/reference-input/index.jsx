@@ -1,17 +1,17 @@
-// External dependencies
+// External
 import React, { useRef, useState, useEffect } from 'react';
 import mousetrap from 'mousetrap';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import {
 	goToReferenceAction,
 	openReferenceSelectorMobile,
 } from '../../actions';
 import bible from '../../data/bible.js';
 
-// Internal dependencies
+// Internal
 import styles from './styles.module.scss';
 
 const getBookFromState = ( reference, scrollChapter ) => {

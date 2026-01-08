@@ -1,10 +1,10 @@
-// External dependencies
+// External
 import React, { useState, useMemo } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-// Internal dependencies.
+// Internal
 import { goToReferenceAction } from '../../actions';
 import styles from './styles.module.scss';
 import {
@@ -52,37 +52,58 @@ const SortGroupResults = ( {
 	}, shallowEqual );
 
 	// Determine which code path we're using
-	const useDirectResults = !!results;
-	const useListResults = !results && type && strongsNumber && version;
-	const useCombinedResults = !results && !(type && strongsNumber && version);
+	const useDirectResults = !! results;
+	const useListResults = ! results && type && strongsNumber && version;
+	const useCombinedResults =
+		! results && ! ( type && strongsNumber && version );
 
 	// Branch 1: Direct results
 	const directGroupedResults = useMemo(
-		() => useDirectResults ? getGroupedResults( results, group, sort, interfaceLanguage ) : null,
+		() =>
+			useDirectResults
+				? getGroupedResults( results, group, sort, interfaceLanguage )
+				: null,
 		[ useDirectResults, results, group, sort, interfaceLanguage ]
 	);
 	const directCountedResults = useMemo(
-		() => directGroupedResults ? getCountedResults( directGroupedResults, group ) : null,
+		() =>
+			directGroupedResults
+				? getCountedResults( directGroupedResults, group )
+				: null,
 		[ directGroupedResults, group ]
 	);
 
 	// Branch 2: List results
 	const listGroupedResults = useMemo(
-		() => useListResults ? getGroupedResults( _list.results, group, sort, interfaceLanguage ) : null,
+		() =>
+			useListResults
+				? getGroupedResults(
+						_list.results,
+						group,
+						sort,
+						interfaceLanguage
+				  )
+				: null,
 		[ useListResults, _list, group, sort, interfaceLanguage ]
 	);
 	const listCountedResults = useMemo(
-		() => listGroupedResults ? getCountedResults( listGroupedResults, group ) : null,
+		() =>
+			listGroupedResults
+				? getCountedResults( listGroupedResults, group )
+				: null,
 		[ listGroupedResults, group ]
 	);
 
 	// Branch 3: Combined results
 	const _results = useMemo(
-		() => useCombinedResults ? (precomputedResults || _list.map( ( { results } ) => results )) : null,
+		() =>
+			useCombinedResults
+				? precomputedResults || _list.map( ( { results } ) => results )
+				: null,
 		[ useCombinedResults, precomputedResults, _list ]
 	);
 	const combinedResultsData = useMemo( () => {
-		if (!useCombinedResults || !_results) return null;
+		if ( ! useCombinedResults || ! _results ) return null;
 
 		// Get all combined results (no grouping) for total count
 		const allCombinedResults = getCombinedResults( _results );
@@ -106,7 +127,10 @@ const SortGroupResults = ( {
 		};
 	}, [ useCombinedResults, _results, group, sort, interfaceLanguage ] );
 	const combinedCountedResults = useMemo(
-		() => combinedResultsData ? getCountedResults( combinedResultsData.groupedResults, group ) : null,
+		() =>
+			combinedResultsData
+				? getCountedResults( combinedResultsData.groupedResults, group )
+				: null,
 		[ combinedResultsData, group ]
 	);
 
@@ -240,10 +264,15 @@ const SortGroupResults = ( {
 				}
 				// For word/morph/strongs groups, always extract label from first result
 				// to preserve original case (since grouping key may be normalized)
-				const shouldExtractLabel = group === 'word' || group === 'morph' || group === 'strongs';
-				const label = Array.isArray( selectedResultsGrouped ) || shouldExtractLabel
-					? getLabel( selectedResultsGrouped[ result ][ 0 ] )
-					: result;
+				const shouldExtractLabel =
+					group === 'word' ||
+					group === 'morph' ||
+					group === 'strongs';
+				const label =
+					Array.isArray( selectedResultsGrouped ) ||
+					shouldExtractLabel
+						? getLabel( selectedResultsGrouped[ result ][ 0 ] )
+						: result;
 				const percent = Math.round(
 					( countedResults[ referenceString ] / totalResultsCount ) *
 						100

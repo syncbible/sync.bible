@@ -1,4 +1,4 @@
-// External dependencies
+// External
 import React from 'react';
 import bible from '../data/bible.js';
 

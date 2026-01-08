@@ -1,7 +1,7 @@
-// External dependencies
+// External
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import TrayFilter from '../../components/trays/filter';
 import Controls from '../controls';
 import styles from './styles.module.scss';

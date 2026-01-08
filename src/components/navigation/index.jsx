@@ -1,9 +1,9 @@
-// External dependencies
+// External
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import { changeVersion } from '../../actions';
 import ReferenceSelectorMobile from '../reference-selector-mobile';
 import ReferenceInput from '../reference-input';
@@ -37,7 +37,8 @@ const Navigation = ( { index, version } ) => {
 };
 
 Navigation.propTypes = {
-	index: PropTypes.oneOfType( [ PropTypes.string, PropTypes.number ] ).isRequired,
+	index: PropTypes.oneOfType( [ PropTypes.string, PropTypes.number ] )
+		.isRequired,
 	version: PropTypes.string.isRequired,
 };
 

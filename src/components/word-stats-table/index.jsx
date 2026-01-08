@@ -1,10 +1,10 @@
-// External dependencies
+// External
 import React from 'react';
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import { selectWord } from '../../actions';
 import { createSortFunctions, getSortFunction } from './word-stats-utils';
 import stripPointing from '../../lib/strip-pointing.js';
@@ -79,11 +79,7 @@ const WordStatsTable = ( { common, sort, setSort } ) => {
 							)
 						}
 					>
-						<td
-							title={
-								strongsDictionary?.[ lemma ]?.xlit || ''
-							}
-						>
+						<td title={ strongsDictionary?.[ lemma ]?.xlit || '' }>
 							{ lemma }
 						</td>
 						<td>{ common[ lemma ] }</td>

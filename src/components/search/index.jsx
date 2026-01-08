@@ -1,8 +1,8 @@
-// External dependencies
+// External
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import SearchForm from './search-form';
 import SearchResults from './search-results';
 import CombinedResults from '../word-details/combined';

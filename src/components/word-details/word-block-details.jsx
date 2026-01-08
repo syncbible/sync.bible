@@ -1,9 +1,9 @@
-// External dependencies
+// External
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import Translate from '../svg/translate';
 import Search from '../svg/search';
 import Stats from '../svg/stats';

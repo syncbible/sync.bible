@@ -1,7 +1,7 @@
-// External dependencies
+// External
 import { useDispatch, useSelector } from 'react-redux';
 
-// Internal dependencies
+// Internal
 import { settingsChange } from '../../actions';
 import UnfoldLess from '../svg/unfold-less';
 import UnfoldMore from '../svg/unfold-more';

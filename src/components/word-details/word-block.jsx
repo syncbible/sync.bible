@@ -1,11 +1,11 @@
-// External dependencies
+// External
 import React, { useRef } from 'react';
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import stripPointing from '../../lib/strip-pointing.js';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import Collapsible from '../collapsible';
 import { getHighlight } from '../strongs-color.js';
 import styles from './styles.module.scss';

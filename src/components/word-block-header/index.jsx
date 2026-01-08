@@ -1,7 +1,7 @@
-// External dependencies
+// External
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import RemoveSvg from '../svg/remove';
 import CopyToClipboard from '../copy-to-clipboard';
 import ReferenceLink from '../reference-link';

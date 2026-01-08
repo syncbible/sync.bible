@@ -1,9 +1,9 @@
-// External dependencies
+// External
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import { removeTypeFromList } from '../../actions';
 import DeleteForever from '../svg/delete-forever';
 import styles from './styles.module.scss';
@@ -19,7 +19,9 @@ const Clear = ( { selectedTrayId } ) => {
 	}
 
 	// Check if there are any items to clear
-	const itemsOfType = list.filter( ( { listType } ) => listType === selectedTrayId );
+	const itemsOfType = list.filter(
+		( { listType } ) => listType === selectedTrayId
+	);
 	if ( itemsOfType.length === 0 ) {
 		return null;
 	}
@@ -30,18 +32,15 @@ const Clear = ( { selectedTrayId } ) => {
 	};
 
 	return (
-		<button
-			onClick={ clearTray }
-			title="Clear"
-			className={ styles.clear }
-		>
+		<button onClick={ clearTray } title="Clear" className={ styles.clear }>
 			<DeleteForever />
 		</button>
 	);
 };
 
 Clear.propTypes = {
-	selectedTrayId: PropTypes.oneOf( [ 'bookmark', 'word', 'search' ] ).isRequired,
+	selectedTrayId: PropTypes.oneOf( [ 'bookmark', 'word', 'search' ] )
+		.isRequired,
 };
 
 export default Clear;

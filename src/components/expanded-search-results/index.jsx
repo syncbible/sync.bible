@@ -1,8 +1,8 @@
-// External dependencies
+// External
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies.
+// Internal
 import Verse from '../reference/verse';
 
 /** Component to show expanded search results for a verse */

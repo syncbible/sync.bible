@@ -1,9 +1,9 @@
-// External dependencies
+// External
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import { fetchData } from '../../actions/index.js';
 import Collapsible from '../collapsible/index.jsx';
 import {
@@ -65,9 +65,7 @@ function SharedWords( { type } ) {
 			} }
 			header={ 'Shared words' }
 		>
-			<div>
-				Words that are used in more than one reference
-			</div>
+			<div>Words that are used in more than one reference</div>
 			<LimitControl limit={ limit } onChange={ setLimit } />
 			{ Object.keys( filteredSharedWords ).length > 0 ? (
 				<div className={ styles.tableWrapper }>

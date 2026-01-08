@@ -1,9 +1,9 @@
-// External dependencies
+// External
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+// Internal
 import { goToReferenceAction } from '../../actions';
 import ExpandedSearchResults from '../expanded-search-results';
 import styles from './styles.module.scss';

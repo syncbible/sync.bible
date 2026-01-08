@@ -1,4 +1,4 @@
-// External dependencies
+// External
 import React from 'react';
 
 const MenuCloseSvg = ( { fill } ) => (

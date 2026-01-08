@@ -1,7 +1,7 @@
 // External.
-import { createRouterMiddleware, ReduxRouter } from '@lagunovsky/redux-react-router'
-import { createHashHistory } from 'history'
-import { applyMiddleware, compose, createStore } from 'redux'
+import { createRouterMiddleware, ReduxRouter } from '@lagunovsky/redux-react-router';
+import { createHashHistory } from 'history';
+import { applyMiddleware, compose, createStore } from 'redux';
 import { thunk } from 'redux-thunk';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
@@ -41,7 +41,7 @@ function App() {
         </ReduxRouter>
         </PersistGate>
       </Provider>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -11,7 +11,7 @@ import Trays from './trays';
 import WordHighlight from './word-highlight';
 import InitialView from './inital-view';
 import styles from './root.module.scss';
-import { closeReferenceSelectorMobile, fetchDataAsync, settingsChange } from '../actions';
+import { fetchDataAsync, settingsChange } from '../actions';
 import { rootClasses } from './utils';
 import { selectAllSettings, selectReferenceData } from '../selectors';
 import { getReferenceFromHash } from '../lib/reference';
@@ -71,11 +71,6 @@ export default function Root() {
 		return `body, .root { font-family: ${ fontFamily }; font-size: ${ fontSize }; }`;
 	}, [ fontFamily, fontSize ] );
 
-	// Memoize callback to avoid recreating on every render
-	const clearReferenceSelector = useCallback( () => {
-		dispatch( closeReferenceSelectorMobile() );
-	}, [ dispatch ] );
-
 	useEffect( () => {
 		// show the fallback errors which are hidden initially.
 		// this does mean that if this component has an error then nothing will load.
@@ -93,12 +88,10 @@ export default function Root() {
 		() => (
 			<>
 				<Dock />
-				<div onClick={ clearReferenceSelector }>
-					<ReferenceWrapper />
-				</div>
+				<ReferenceWrapper />
 			</>
 		),
-		[ clearReferenceSelector ]
+		[]
 	);
 
 	return (

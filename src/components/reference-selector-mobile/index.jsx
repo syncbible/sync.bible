@@ -1,6 +1,6 @@
 // External
 import classnames from 'classnames';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
@@ -16,6 +16,7 @@ import bible from '../../data/bible.js';
 
 const ReferenceSelectorMobile = ( { index, version } ) => {
 	const dispatch = useDispatch();
+	const containerRef = useRef( null );
 	const open = useSelector(
 		( state ) => state.referenceSelectorMobile[ index ].open
 	);
@@ -39,6 +40,22 @@ const ReferenceSelectorMobile = ( { index, version } ) => {
 	const close = () => {
 		dispatch( closeReferenceSelectorMobile( index ) );
 	};
+
+	useEffect( () => {
+		const handleClickOutside = ( event ) => {
+			if ( containerRef.current && ! containerRef.current.contains( event.target ) && open ) {
+				close();
+			}
+		};
+
+		if ( open ) {
+			document.addEventListener( 'mousedown', handleClickOutside );
+		}
+
+		return () => {
+			document.removeEventListener( 'mousedown', handleClickOutside );
+		};
+	}, [ open ] );
 
 	const goToReference = ( newReference ) => {
 		close();
@@ -144,7 +161,7 @@ const ReferenceSelectorMobile = ( { index, version } ) => {
 	return (
 		<span className={ styles.referenceSelectorMobile }>
 			{ open && (
-				<div className={ classes }>
+				<div className={ classes } ref={ containerRef }>
 					{ ! bookName && renderBookList() }
 					{ bookName && renderChapterList() }
 				</div>

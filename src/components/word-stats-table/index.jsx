@@ -10,7 +10,7 @@ import { createSortFunctions, getSortFunction } from './word-stats-utils';
 import stripPointing from '../../lib/strip-pointing.js';
 import styles from './styles.module.scss';
 
-export default function WordStatsTable( { common, sort, setSort } ) {
+const WordStatsTable = ( { common, sort, setSort } ) => {
 	const dispatch = useDispatch();
 	const strongsDictionary = useSelector(
 		( state ) => state.data.strongsDictionary
@@ -152,10 +152,12 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 			<tbody>{ commonWords }</tbody>
 		</table>
 	);
-}
+};
 
 WordStatsTable.propTypes = {
 	common: PropTypes.object.isRequired,
 	sort: PropTypes.string.isRequired,
 	setSort: PropTypes.func.isRequired,
 };
+
+export default WordStatsTable;

@@ -1,6 +1,7 @@
 // External dependencies
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import { changeVersion } from '../../actions';
@@ -11,7 +12,7 @@ import bible from '../../data/bible.js';
 import styles from './styles.module.scss';
 
 /** Navigation component with reference selection and version controls */
-export default function Navigation( { index, version } ) {
+const Navigation = ( { index, version } ) => {
 	const dispatch = useDispatch();
 	const handleChangeVersion = useCallback(
 		( event ) => {
@@ -33,4 +34,11 @@ export default function Navigation( { index, version } ) {
 			/>
 		</div>
 	);
-}
+};
+
+Navigation.propTypes = {
+	index: PropTypes.oneOfType( [ PropTypes.string, PropTypes.number ] ).isRequired,
+	version: PropTypes.string.isRequired,
+};
+
+export default Navigation;

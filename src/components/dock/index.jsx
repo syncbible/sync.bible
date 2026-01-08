@@ -1,4 +1,5 @@
 // External
+import React from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 
 // Internal
@@ -7,7 +8,7 @@ import styles from './styles.module.scss';
 import { DOCK_HEIGHT } from '../../constants/dimensions';
 import { useTrayDimensions } from '../../hooks/useTrayDimensions';
 
-export default function Dock() {
+const Dock = () => {
 	const versionArray = useSelector(
 		( state ) =>
 			state.reference.map(
@@ -44,4 +45,6 @@ export default function Dock() {
 			</div>
 		</div>
 	);
-}
+};
+
+export default Dock;

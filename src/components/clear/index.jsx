@@ -1,13 +1,14 @@
 // External dependencies
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import { removeTypeFromList } from '../../actions';
 import DeleteForever from '../svg/delete-forever';
 import styles from './styles.module.scss';
 
-export default function Clear( { selectedTrayId } ) {
+const Clear = ( { selectedTrayId } ) => {
 	const dispatch = useDispatch();
 	const list = useSelector( ( state ) => state.list );
 
@@ -37,4 +38,10 @@ export default function Clear( { selectedTrayId } ) {
 			<DeleteForever />
 		</button>
 	);
-}
+};
+
+Clear.propTypes = {
+	selectedTrayId: PropTypes.oneOf( [ 'bookmark', 'word', 'search' ] ).isRequired,
+};
+
+export default Clear;

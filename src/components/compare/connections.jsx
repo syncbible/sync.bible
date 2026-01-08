@@ -9,7 +9,7 @@ import styles from './styles.module.scss';
 import { fetchData, fetchDataAsync, setReferenceInfo } from '../../actions';
 import { getBooks, getCompareChapters } from '../../lib/select-helpers';
 
-export default function Connections( { close } ) {
+const Connections = ( { close } ) => {
 	const dispatch = useDispatch();
 	//dispatch( fetchData( 'original' ) );
 	dispatch( fetchDataAsync( 'strongsObjectWithFamilies' ) );
@@ -366,8 +366,10 @@ export default function Connections( { close } ) {
 			</div>
 		</>
 	);
-}
+};
 
 Connections.propTypes = {
 	close: PropTypes.func.isRequired,
 };
+
+export default Connections;

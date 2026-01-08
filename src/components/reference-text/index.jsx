@@ -1,11 +1,12 @@
 // External
+import React from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Internal
 import bible from '../../data/bible.js';
 
-export default function ReferenceText( { reference } ) {
+const ReferenceText = ( { reference } ) => {
 	const interfaceLanguage = useSelector(
 		( state ) => state.settings.interfaceLanguage
 	);
@@ -18,7 +19,7 @@ export default function ReferenceText( { reference } ) {
 		text += ':' + reference.verse;
 	}
 	return text;
-}
+};
 
 ReferenceText.propTypes = {
 	reference: PropTypes.shape( {
@@ -27,3 +28,5 @@ ReferenceText.propTypes = {
 		verse: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 	} ).isRequired,
 };
+
+export default ReferenceText;

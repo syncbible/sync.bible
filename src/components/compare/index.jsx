@@ -187,29 +187,31 @@ export default function Compare() {
 		);
 	}
 
+	/*
 	// Commented out unused code
-	// const allChapters = ''; /*bible.Data.books.map( ( book, id ) => {
-		<h3>All chapters</h3>
-		return bible.Data.verses[ id ].map( ( numberOfChapters, chapter ) => {
-			const parameters = {
-				referenceInfo: {
-					reference,
-					referenceToCompareWith: {
-						book: book[0],
-						chapter: chapter,
-					},
-					limit
-				},
-				data
-			};
-			const comparisonData = compareTwoReferences( parameters );
-			if ( comparisonData.length ) {
-				return (
-					<div key={ id + chapter }>{ book[ 0 ] + ' ' + ( chapter + 1 ) }: { comparisonData.length }</div>
-				);
-			}
-		} );
-	} );*/
+	const allChapters = ''; // bible.Data.books.map( ( book, id ) => {
+		// <h3>All chapters</h3>
+		// return bible.Data.verses[ id ].map( ( numberOfChapters, chapter ) => {
+		// 	const parameters = {
+		// 		referenceInfo: {
+		// 			reference,
+		// 			referenceToCompareWith: {
+		// 				book: book[0],
+		// 				chapter: chapter,
+		// 			},
+		// 			limit
+		// 		},
+		// 		data
+		// 	};
+		// 	const comparisonData = compareTwoReferences( parameters );
+		// 	if ( comparisonData.length ) {
+		// 		return (
+		// 			<div key={ id + chapter }>{ book[ 0 ] + ' ' + ( chapter + 1 ) }: { comparisonData.length }</div>
+		// 		);
+		// 	}
+		// } );
+	// } );
+	*/
 
 	if ( compareAllChapters ) {
 		return <Connections close={ () => setCompareAllChapters( false ) } />;

@@ -285,11 +285,11 @@ export default function Compare() {
 				<div className={ styles.statsResults }>{ getOverlap() }</div>
 				<div className={ styles.chapterTray }>
 					{ overlap && overlap.length > 0 && (
-						<button onClick={ addAllWords }>Select all words</button>
+						<button className={ styles.selectAllButton } onClick={ addAllWords }>Select all words</button>
 					) }
 				</div>
 				<a
-					className={ styles.button }
+					className={ styles.compareAllLink }
 					onClick={ () => {
 						dispatch( settingsChange( 'compareMode', true ) );
 						setCompareAllChapters( true );

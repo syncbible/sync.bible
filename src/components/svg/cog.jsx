@@ -1,4 +1,5 @@
 // External
+import PropTypes from 'prop-types';
 
 const Cog = ( { fill } ) => (
 	<svg
@@ -14,5 +15,9 @@ const Cog = ( { fill } ) => (
 		</g>
 	</svg>
 );
+
+Cog.propTypes = {
+	fill: PropTypes.string,
+};
 
 export default Cog;

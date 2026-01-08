@@ -43,4 +43,5 @@ WordBlockHeader.propTypes = {
 	className: PropTypes.string,
 	textToCopy: PropTypes.oneOfType( [ PropTypes.string, PropTypes.object ] ),
 	onRemove: PropTypes.func,
+	reference: PropTypes.object,
 };

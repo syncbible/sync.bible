@@ -1,4 +1,5 @@
 // External
+import PropTypes from 'prop-types';
 
 const LeftPanelClose = ( { fill } ) => {
 	return (
@@ -14,6 +15,10 @@ const LeftPanelClose = ( { fill } ) => {
 			</svg>
 		</>
 	);
+};
+
+LeftPanelClose.propTypes = {
+	fill: PropTypes.string,
 };
 
 export default LeftPanelClose;

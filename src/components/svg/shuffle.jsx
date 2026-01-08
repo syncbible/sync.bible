@@ -1,4 +1,9 @@
 // External
+import PropTypes from 'prop-types';
+
+Ushuffle.propTypes = {
+	fill: PropTypes.string,
+};
 
 export default function Shuffle( { fill } ) {
 	return (

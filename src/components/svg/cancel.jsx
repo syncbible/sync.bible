@@ -1,4 +1,5 @@
 // External
+import PropTypes from 'prop-types';
 
 const Cancel = ( { fill } ) => (
 	<svg version="1.1" width="20" height="20" viewBox="0 0 512 512">
@@ -8,5 +9,9 @@ const Cancel = ( { fill } ) => (
 		></path>
 	</svg>
 );
+
+Cancel.propTypes = {
+	fill: PropTypes.string,
+};
 
 export default Cancel;

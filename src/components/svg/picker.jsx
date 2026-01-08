@@ -1,4 +1,5 @@
 // External
+import PropTypes from 'prop-types';
 
 const Picker = ( { fill } ) => (
 	<svg version="1.1" width="24" height="24" viewBox="0 0 24 24">
@@ -8,5 +9,9 @@ const Picker = ( { fill } ) => (
 		></path>
 	</svg>
 );
+
+Picker.propTypes = {
+	fill: PropTypes.string,
+};
 
 export default Picker;

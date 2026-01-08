@@ -2,6 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import mousetrap from 'mousetrap';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import {
@@ -178,6 +179,10 @@ const ReferenceInput = ( { index } ) => {
 			</form>
 		</div>
 	);
+};
+
+ReferenceInput.propTypes = {
+	index: PropTypes.number.isRequired,
 };
 
 export default React.memo( ReferenceInput );

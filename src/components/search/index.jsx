@@ -1,5 +1,6 @@
 // External dependencies
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import SearchForm from './search-form';
@@ -15,5 +16,9 @@ const Search = ( { isActive } ) => (
 		<SharedWords type="search" />
 	</>
 );
+
+Search.propTypes = {
+	isActive: PropTypes.bool.isRequired,
+};
 
 export default React.memo( Search );

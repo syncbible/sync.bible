@@ -1,7 +1,6 @@
 // External dependencies
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 
 // Internal dependencies
 import { changeVersion } from '../../actions';
@@ -35,9 +34,3 @@ export default function Navigation( { index, version } ) {
 		</div>
 	);
 }
-
-Navigation.propTypes = {
-	index: PropTypes.oneOfType( [ PropTypes.string, PropTypes.number ] )
-		.isRequired,
-	version: PropTypes.string.isRequired,
-};

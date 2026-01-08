@@ -1,5 +1,6 @@
 // External
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal
 import bible from '../../data/bible.js';
@@ -18,3 +19,11 @@ export default function ReferenceText( { reference } ) {
 	}
 	return text;
 }
+
+ReferenceText.propTypes = {
+	reference: PropTypes.shape( {
+		book: PropTypes.string.isRequired,
+		chapter: PropTypes.number,
+		verse: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
+	} ).isRequired,
+};

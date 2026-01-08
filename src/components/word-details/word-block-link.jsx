@@ -2,6 +2,7 @@
 import classnames from 'classnames';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import styles from './styles.module.scss';
 import { selectWord } from '../../actions';
@@ -42,6 +43,12 @@ const WordBlockLink = ( { strongsNumber, version, count } ) => {
 			</a>
 		</span>
 	);
+};
+
+WordBlockLink.propTypes = {
+	strongsNumber: PropTypes.string.isRequired,
+	version: PropTypes.string.isRequired,
+	count: PropTypes.number,
 };
 
 export default React.memo( WordBlockLink );

@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 // Internal
 import { fetchData } from '../../actions';
@@ -85,6 +86,11 @@ const TrayList = ( { trays, sidebarWidth } ) => {
 			</div>
 		);
 	} );
+};
+
+TrayList.propTypes = {
+	trays: PropTypes.array.isRequired,
+	sidebarWidth: PropTypes.number.isRequired,
 };
 
 export default React.memo( TrayList );

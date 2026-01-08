@@ -1,5 +1,6 @@
 // External
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Internal
 import WordSingle from './word-single';
@@ -140,6 +141,21 @@ const WordComponent = ( {
 	}
 
 	return <React.Fragment key={ word }> { wordString }</React.Fragment>;
+};
+
+WordComponent.propTypes = {
+	word: PropTypes.array,
+	version: PropTypes.string.isRequired,
+	prevWord: PropTypes.array,
+	reference: PropTypes.shape( {
+		book: PropTypes.string.isRequired,
+		chapter: PropTypes.number.isRequired,
+		verse: PropTypes.number.isRequired,
+	} ).isRequired,
+	index: PropTypes.number.isRequired,
+	lcData: PropTypes.object,
+	farsiTranslations: PropTypes.object,
+	strongsObjectWithFamilies: PropTypes.object,
 };
 
 // Custom comparison function for better memoization

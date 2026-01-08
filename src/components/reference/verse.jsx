@@ -1,6 +1,7 @@
 // External
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal
 import { mapVersionToData } from '../../lib/reference';
@@ -86,6 +87,15 @@ const Verse = ( { reference, version } ) => {
 	}
 
 	return words;
+};
+
+Verse.propTypes = {
+	reference: PropTypes.shape( {
+		book: PropTypes.string.isRequired,
+		chapter: PropTypes.number.isRequired,
+		verse: PropTypes.number.isRequired,
+	} ).isRequired,
+	version: PropTypes.string.isRequired,
 };
 
 // Note: We don't need to check data in comparison because useSelector

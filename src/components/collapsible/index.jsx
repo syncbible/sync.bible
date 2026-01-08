@@ -1,6 +1,7 @@
 // External dependencies
 import classnames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import styles from './styles.module.scss';
@@ -57,5 +58,21 @@ const Collapsible = React.forwardRef( ( {
 } );
 
 Collapsible.displayName = 'Collapsible';
+
+Collapsible.propTypes = {
+	children: PropTypes.node,
+	className: PropTypes.string,
+	header: PropTypes.node,
+	onToggle: PropTypes.func.isRequired,
+	textToCopy: PropTypes.object,
+	title: PropTypes.string,
+	onRemove: PropTypes.func,
+	onMouseOver: PropTypes.func,
+	onMouseOut: PropTypes.func,
+	onPointerOver: PropTypes.func,
+	onPointerOut: PropTypes.func,
+	open: PropTypes.bool,
+	reference: PropTypes.object,
+};
 
 export default React.memo( Collapsible );

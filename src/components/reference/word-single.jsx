@@ -2,6 +2,7 @@
 import React, { useMemo, useCallback } from 'react';
 import classnames from 'classnames';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal
 import { activateSearchSelect, selectWord, updateData } from '../../actions';
@@ -169,6 +170,23 @@ const WordSingleComponent = ( props ) => {
 			{ wordText }
 		</span>
 	);
+};
+
+WordSingleComponent.propTypes = {
+	lemma: PropTypes.string,
+	morph: PropTypes.string,
+	version: PropTypes.string.isRequired,
+	word: PropTypes.string,
+	wordText: PropTypes.string,
+	reference: PropTypes.shape( {
+		book: PropTypes.string.isRequired,
+		chapter: PropTypes.number.isRequired,
+		verse: PropTypes.number.isRequired,
+	} ).isRequired,
+	index: PropTypes.number.isRequired,
+	farsiTranslations: PropTypes.object,
+	literalConsistentTranslation: PropTypes.string,
+	strongsObjectWithFamilies: PropTypes.object,
 };
 
 // Custom comparison function for better memoization

@@ -2,6 +2,7 @@
 import map from 'lodash/map';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import KJVDef from './kjv-def';
@@ -147,6 +148,12 @@ const MoreDetails = ( { morphologyProp, strongsNumber, version } ) => {
 			</div>
 		</>
 	);
+};
+
+MoreDetails.propTypes = {
+	morphologyProp: PropTypes.string,
+	strongsNumber: PropTypes.string.isRequired,
+	version: PropTypes.string.isRequired,
 };
 
 export default React.memo( MoreDetails );

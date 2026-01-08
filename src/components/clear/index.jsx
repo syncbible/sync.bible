@@ -1,7 +1,6 @@
 // External dependencies
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 
 // Internal dependencies
 import { removeTypeFromList } from '../../actions';
@@ -39,8 +38,3 @@ export default function Clear( { selectedTrayId } ) {
 		</button>
 	);
 }
-
-Clear.propTypes = {
-	selectedTrayId: PropTypes.oneOf( [ 'bookmark', 'word', 'search' ] )
-		.isRequired,
-};

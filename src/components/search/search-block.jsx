@@ -2,6 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import { countBy, sortBy } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import SearchLink from '../search-link';
@@ -246,6 +247,12 @@ const SearchBlock = ( props ) => {
 			) }
 		</div>
 	);
+};
+
+SearchBlock.propTypes = {
+	visible: PropTypes.bool,
+	sorted: PropTypes.array,
+	results: PropTypes.array.isRequired,
 };
 
 export default React.memo( SearchBlock );

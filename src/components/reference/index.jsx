@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { Waypoint } from 'react-waypoint';
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal
 import { setScrollChapter, setScrollChapterSynced } from '../../actions';
@@ -259,6 +260,15 @@ const ReferenceComponent = ( props ) => {
 				} ) }
 		</div>
 	);
+};
+
+ReferenceComponent.propTypes = {
+	reference: PropTypes.shape( {
+		book: PropTypes.string,
+		chapter: PropTypes.number,
+		verse: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
+	} ),
+	index: PropTypes.number,
 };
 
 export default React.memo( ReferenceComponent );

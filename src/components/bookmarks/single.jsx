@@ -1,6 +1,7 @@
 // External dependencies
 import { useRef, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import { removeFromList, toggleListItemVisible } from '../../actions';
@@ -160,3 +161,8 @@ export default function Single( { bookmark, index } ) {
 		</Collapsible>
 	);
 }
+
+Single.propTypes = {
+	bookmark: PropTypes.object.isRequired,
+	index: PropTypes.number.isRequired,
+};

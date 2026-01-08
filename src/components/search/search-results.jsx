@@ -1,6 +1,7 @@
 // External dependencies
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import Collapsible from '../collapsible';
@@ -112,6 +113,13 @@ const SearchResultItem = ( { searchTerm, index, activeTabs, setActiveTabs } ) =>
 			{ getActiveTab() }
 		</Collapsible>
 	);
+};
+
+SearchResultItem.propTypes = {
+	searchTerm: PropTypes.object.isRequired,
+	index: PropTypes.number.isRequired,
+	activeTabs: PropTypes.object.isRequired,
+	setActiveTabs: PropTypes.func.isRequired,
 };
 
 const SearchResults = () => {

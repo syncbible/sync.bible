@@ -1,5 +1,6 @@
 // External
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 // Internal
 import BookControl from './book-control';
@@ -26,6 +27,11 @@ const ReferenceSelector = ( { onGoToReference, onChangeDisplayState } ) => {
 			/>
 		);
 	} );
+};
+
+ReferenceSelector.propTypes = {
+	onGoToReference: PropTypes.func.isRequired,
+	onChangeDisplayState: PropTypes.func.isRequired,
 };
 
 export default React.memo( ReferenceSelector );

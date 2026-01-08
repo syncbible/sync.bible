@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import stripPointing from '../../lib/strip-pointing.js';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import Collapsible from '../collapsible';
@@ -119,6 +120,14 @@ const WordBlock = ( props ) => {
 			</div>
 		</Collapsible>
 	);
+};
+
+WordBlock.propTypes = {
+	data: PropTypes.object.isRequired,
+	visible: PropTypes.bool,
+	highlight: PropTypes.func,
+	setFocus: PropTypes.func,
+	word: PropTypes.object,
 };
 
 export default React.memo( WordBlock );

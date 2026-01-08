@@ -1,6 +1,7 @@
 // External dependencies
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import Translate from '../svg/translate';
@@ -187,6 +188,18 @@ const WordBlockDetails = ( {
 			<div className={ styles.wordBlockDetails }>{ getActiveTab() }</div>
 		</>
 	);
+};
+
+WordBlockDetails.propTypes = {
+	morphologyProp: PropTypes.string,
+	strongsNumber: PropTypes.string.isRequired,
+	version: PropTypes.string.isRequired,
+	resultsFromProps: PropTypes.array,
+	current: PropTypes.bool,
+	id: PropTypes.string,
+	loading: PropTypes.bool,
+	data: PropTypes.object,
+	word: PropTypes.object,
 };
 
 export default React.memo( WordBlockDetails );

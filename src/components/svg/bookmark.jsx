@@ -1,5 +1,6 @@
 // External dependencies
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Bookmark = ( { fill } ) => (
 	<svg
@@ -15,5 +16,9 @@ const Bookmark = ( { fill } ) => (
 		/>
 	</svg>
 );
+
+Bookmark.propTypes = {
+	fill: PropTypes.string,
+};
 
 export default Bookmark;

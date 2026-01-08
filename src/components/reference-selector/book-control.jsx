@@ -1,6 +1,7 @@
 // External
 import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal
 import { goToReferenceAction } from '../../actions';
@@ -72,6 +73,11 @@ const BookControl = ( { chapters, name } ) => {
 			<span className={ styles.go }>{ buttonText }</span>
 		</div>
 	);
+};
+
+BookControl.propTypes = {
+	chapters: PropTypes.number.isRequired,
+	name: PropTypes.string.isRequired,
 };
 
 export default React.memo( BookControl );

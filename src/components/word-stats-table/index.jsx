@@ -2,6 +2,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import { selectWord } from '../../actions';
@@ -152,3 +153,9 @@ export default function WordStatsTable( { common, sort, setSort } ) {
 		</table>
 	);
 }
+
+WordStatsTable.propTypes = {
+	common: PropTypes.object.isRequired,
+	sort: PropTypes.string.isRequired,
+	setSort: PropTypes.func.isRequired,
+};

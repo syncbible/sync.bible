@@ -1,6 +1,7 @@
 // External dependencies
 import React, { useState, useMemo, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import { setTrayVisibilityFilter } from '../../actions';
@@ -80,6 +81,10 @@ const CombinedResults = ( { type } ) => {
 			/>
 		</Collapsible>
 	);
+};
+
+CombinedResults.propTypes = {
+	type: PropTypes.string.isRequired,
 };
 
 export default React.memo( CombinedResults );

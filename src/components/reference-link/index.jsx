@@ -1,6 +1,7 @@
 // External dependencies
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Internal
 import { goToReferenceHelper } from '../../lib/reference.js';
@@ -32,6 +33,16 @@ const ReferenceLink = ( { reference, number, isIcon } ) => {
 			{ isIcon ? <BookSvg /> : <ReferenceText reference={ reference } /> }
 		</a>
 	);
+};
+
+ReferenceLink.propTypes = {
+	reference: PropTypes.shape( {
+		book: PropTypes.string.isRequired,
+		chapter: PropTypes.number,
+		verse: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
+	} ).isRequired,
+	number: PropTypes.number,
+	isIcon: PropTypes.bool,
 };
 
 export default React.memo( ReferenceLink );

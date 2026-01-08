@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 // Internal dependencies
 import {
@@ -249,6 +250,10 @@ const SearchForm = ( { isActive } ) => {
 			</form>
 		</div>
 	);
+};
+
+SearchForm.propTypes = {
+	isActive: PropTypes.bool.isRequired,
 };
 
 export default React.memo( SearchForm );

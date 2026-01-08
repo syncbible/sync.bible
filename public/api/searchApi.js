@@ -1,5 +1,3 @@
-var language;
-
 javascripture.api.search = {
 	types: [ 'word', 'lemma', 'morph' ],
 	results: {

@@ -284,7 +284,7 @@ const getResultsForWord = ( versionData, strongsNumber ) => {
 };
 
 export const addWord = ( word ) => {
-	return function ( dispatch, getState ) {
+	return function ( dispatch ) {
 		// Send data to our worker.
 		dispatch( addToList( word ) );
 	};
@@ -656,7 +656,7 @@ export const selectWord = ( props ) => {
 			dispatch( addTray( 'word' ) );
 
 			lemma &&
-				lemma.split( /[\&\s]/ ).map( ( strongsNumber ) => {
+				lemma.split( /[&\s]/ ).map( ( strongsNumber ) => {
 					if ( ! isValidWord( strongsNumber ) ) {
 						return;
 					}

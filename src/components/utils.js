@@ -30,7 +30,7 @@ export function getLiteralConsistentTranslation(
 	if ( 'הו' === word ) {
 		// If the last word was a noun then modify "him" to "his".
 		if ( prevWord?.[ 2 ] ) {
-			const morphContainsAVerb = prevWord[ 2 ].match( /[N|\/N]/ );
+			const morphContainsAVerb = prevWord[ 2 ].match( /[N|/N]/ );
 			if ( morphContainsAVerb && morphContainsAVerb.length > 0 ) {
 				return 'his';
 			}

@@ -2,7 +2,6 @@
 import { useState, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 
 // Internal
 import bible from '../../data/bible.js';

@@ -3,15 +3,16 @@ import tinycolor from 'tinycolor2';
 
 function getStrongsColor( lemma ) {
 	var strongsInt = parseInt( lemma );
+	var hue, staturation, lightness;
 	if ( isNaN( strongsInt ) ) {
-		var hue = 0,
-			staturation = '0%',
-			lightness = '50%';
+		hue = 0;
+		staturation = '0%';
+		lightness = '50%';
 	} else {
-		var theSizeOfAColorSegment = 360 / 8000,
-			hue = Math.floor( strongsInt * theSizeOfAColorSegment ),
-			staturation = ( strongsInt % 80 ) + 10 + '%',
-			lightness = ( strongsInt % 10 ) * 4 + 30 + '%';
+		var theSizeOfAColorSegment = 360 / 8000;
+		hue = Math.floor( strongsInt * theSizeOfAColorSegment );
+		staturation = ( strongsInt % 80 ) + 10 + '%';
+		lightness = ( strongsInt % 10 ) * 4 + 30 + '%';
 	}
 	return 'hsl(' + hue + ',' + staturation + ',' + lightness + ')';
 }

@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 // Internal
 import CopyToClipboard from '../copy-to-clipboard';
@@ -35,9 +36,10 @@ export default function VerseWrapper( {
 	lang,
 	columnIndex,
 } ) {
+	const darkMode = useSelector( ( state ) => state.settings.darkMode );
 	const verseWrapperRef = useRef( null );
 	const reference = { book, chapter: chapter - 1, verse: verse - 1 };
-
+	const fill = darkMode ? '#eeeeee' : '#666';
 	return (
 		<div
 			lang={ lang }
@@ -59,7 +61,7 @@ export default function VerseWrapper( {
 					/>
 					<span className={ styles.hidden }>
 						<CopyToClipboard
-							fill={ '#999' }
+							fill={ fill }
 							textToCopy={ verseWrapperRef }
 						/>
 					</span>

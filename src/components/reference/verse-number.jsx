@@ -36,8 +36,12 @@ const VerseNumber = ( { book, chapter, verse, columnIndex } ) => {
 		}
 	};
 
+	// Check system dark mode preference if darkMode is not explicitly set
+	const systemDarkMode = window.matchMedia( '(prefers-color-scheme: dark)' ).matches;
+	const isDarkMode = darkMode === null ? systemDarkMode : darkMode;
+
 	// Use different gray colors for bookmark icons based on dark mode
-	const fill = darkMode ? '#eeeeee' : '#666';
+	const fill = isDarkMode ? '#eeeeee' : '#666';
 
 	return (
 		<span

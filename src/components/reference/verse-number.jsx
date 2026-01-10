@@ -13,7 +13,10 @@ const VerseNumber = ( { book, chapter, verse, columnIndex } ) => {
 	const dispatch = useDispatch();
 	const data = useSelector( ( state ) => state.data );
 	const inSync = useSelector( ( state ) => state.settings.inSync );
-	const targetColumn = useSelector( ( state ) => state.settings.targetColumn );
+	const targetColumn = useSelector(
+		( state ) => state.settings.targetColumn
+	);
+	const darkMode = useSelector( ( state ) => state.settings.darkMode );
 
 	const addBookmarkAction = () => {
 		dispatch( addTray( 'bookmark' ) );
@@ -33,8 +36,8 @@ const VerseNumber = ( { book, chapter, verse, columnIndex } ) => {
 		}
 	};
 
-	// Use consistent gray color for all bookmark icons
-	const fill = '#999';
+	// Use different gray colors for bookmark icons based on dark mode
+	const fill = darkMode ? '#eeeeee' : '#666';
 
 	return (
 		<span

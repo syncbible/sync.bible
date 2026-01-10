@@ -81,8 +81,8 @@
 		}
 
 		.verseNumber {
-			color: #fff;
-			text-shadow: 1px 1px #000;
+			color: var(--background);
+			text-shadow: 1px 1px var(--color);
 		}
 
 		.verseNumberIcon {
@@ -148,10 +148,6 @@
 	> span:first-child {
 		position: relative;
 		z-index: 1;
-	}
-
-	span:hover {
-		color: var(--accent);
 	}
 }
 

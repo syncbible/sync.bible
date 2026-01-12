@@ -74,7 +74,7 @@
 		color: var(--color-dimmed);
 	}
 
-	&:hover {
+	&:hover, &.isCurrent {
 		z-index: 1;
 		.hidden {
 			visibility: visible;
@@ -84,15 +84,6 @@
 			color: var(--background);
 			text-shadow: 1px 1px var(--color);
 		}
-
-		.verseNumberIcon {
-			z-index: 0;
-		}
-	}
-
-	// High contrast verse number for current verse
-	&.isCurrent .verseNumber {
-		color: var(--background);
 	}
 }
 
@@ -144,10 +135,8 @@
 	text-align: center;
 	width: $column-padding;
 
-	// Ensure verse number text is above the bookmark icon
-	> span:first-child {
-		position: relative;
-		z-index: 1;
+	span:hover {
+		color: var(--accent);
 	}
 }
 
@@ -162,22 +151,12 @@
 	}
 }
 
-// Show bookmark icon for current verse
-.isCurrent .verseNumberIcon {
-	z-index: 0;
-}
-
 .placeholder {
 	background: var(--background-ui);
 	font-size: .8em;
 	display: block;
 	margin: .4em 0 .5em 0;
 }
-
-// Removed background highlighting - using bookmark icon color instead
-// .isCurrent {
-// 	background: var(--active);
-// }
 
 .invisible {
 	display: none;

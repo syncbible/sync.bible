@@ -1,7 +1,7 @@
 // External
 import React, { useEffect } from 'react';
 import mousetrap from 'mousetrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
 import {
@@ -27,6 +27,8 @@ const KeyboardShortcuts = () => {
 	const currentListItem = currentListItemFromState.shift();*/
 
 	const dispatch = useDispatch();
+	const targetColumn = useSelector( ( state ) => state.settings.targetColumn );
+	const referenceCount = useSelector( ( state ) => state.reference?.length || 0 );
 
 	const goToChapter = ( event, combo ) => {
 		const currentTimeStamp = Math.floor( event.timeStamp );
@@ -49,6 +51,30 @@ const KeyboardShortcuts = () => {
 		event.preventDefault();
 		const tray = combo.split( '+' )[ 1 ];
 		dispatch( setTrayVisibilityFilter( tray ) );
+	};
+
+	const focusReferenceInput = ( event ) => {
+		event.preventDefault();
+		const allInputs = document.querySelectorAll( 'input[name="reference"]' );
+
+		// If shift is pressed, use column 1 (second column), otherwise use targetColumn
+		const columnToFocus = event.shiftKey ? 1 : targetColumn;
+		const targetInput = allInputs[ columnToFocus ];
+
+		if ( targetInput ) {
+			targetInput.focus();
+			targetInput.selectionStart = targetInput.selectionEnd = 0;
+			// Set the value to the pressed key
+			targetInput.value = event.key;
+			// Trigger input event to update React state
+			const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+				window.HTMLInputElement.prototype,
+				'value'
+			).set;
+			nativeInputValueSetter.call( targetInput, event.key );
+			const inputEvent = new Event( 'input', { bubbles: true } );
+			targetInput.dispatchEvent( inputEvent );
+		}
 	};
 
 	useEffect( () => {
@@ -110,6 +136,46 @@ const KeyboardShortcuts = () => {
 				'alt+9',
 			],
 			( event, combo ) => openTray( event, combo )
+		);
+		mousetrap.bind(
+			[
+				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+				'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+				's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+			],
+			focusReferenceInput
+		);
+		mousetrap.bind(
+			[
+				'shift+a', 'shift+b', 'shift+c', 'shift+d', 'shift+e', 'shift+f',
+				'shift+g', 'shift+h', 'shift+i', 'shift+j', 'shift+k', 'shift+l',
+				'shift+m', 'shift+n', 'shift+o', 'shift+p', 'shift+q', 'shift+r',
+				'shift+s', 'shift+t', 'shift+u', 'shift+v', 'shift+w', 'shift+x',
+				'shift+y', 'shift+z',
+			],
+			( event ) => {
+				event.preventDefault();
+				const allInputs = document.querySelectorAll( 'input[name="reference"]' );
+				// Use the rightmost column (last index)
+				const rightmostColumn = Math.max( 0, referenceCount - 1 );
+				const targetInput = allInputs[ rightmostColumn ];
+
+				if ( targetInput ) {
+					targetInput.focus();
+					targetInput.selectionStart = targetInput.selectionEnd = 0;
+					// Get the actual key pressed (lowercase version)
+					const key = event.key.toLowerCase();
+					targetInput.value = key;
+					// Trigger input event to update React state
+					const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+						window.HTMLInputElement.prototype,
+						'value'
+					).set;
+					nativeInputValueSetter.call( targetInput, key );
+					const inputEvent = new Event( 'input', { bubbles: true } );
+					targetInput.dispatchEvent( inputEvent );
+				}
+			}
 		);
 		mousetrap.bind( [ 'esc' ], () => dispatch( deactivateSearchSelect() ) );
 	} );

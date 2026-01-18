@@ -3,7 +3,6 @@
 -   switch search to match words by default
 -   group words by translation
 -   harmony broken?
--   get typing to target the target column
 -   Select all branches
 -   keyboard navigation
 -   John 16:32 -> 1 Kings 22:17

@@ -1,6 +1,5 @@
 // External
 import React, { useRef, useState, useEffect } from 'react';
-import mousetrap from 'mousetrap';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -61,14 +60,6 @@ const ReferenceInput = ( { index } ) => {
 		setLocalReference( event.target.value );
 	};
 
-	const goToReferenceField = ( event ) => {
-		event.preventDefault();
-		referenceInputField.current.focus();
-		referenceInputField.current.selectionStart =
-			referenceInputField.current.selectionEnd = 0;
-		setLocalReference( event.key );
-	};
-
 	const getLocalReferenceObject = () => {
 		const newLocalReference = bible.parseReference( localReference );
 		newLocalReference.book =
@@ -85,75 +76,6 @@ const ReferenceInput = ( { index } ) => {
 	useEffect( () => {
 		setLocalReference( referenceValue );
 	}, [ setLocalReference, referenceValue ] );
-
-	useEffect( () => {
-		if ( index === 0 ) {
-			mousetrap.bind(
-				[
-					'a',
-					'b',
-					'c',
-					'd',
-					'e',
-					'f',
-					'g',
-					'h',
-					'i',
-					'j',
-					'k',
-					'l',
-					'm',
-					'n',
-					'o',
-					'p',
-					'q',
-					'r',
-					's',
-					't',
-					'u',
-					'v',
-					'w',
-					'x',
-					'y',
-					'z',
-				],
-				goToReferenceField
-			);
-		}
-		if ( index === 1 ) {
-			mousetrap.bind(
-				[
-					'A',
-					'B',
-					'C',
-					'D',
-					'E',
-					'F',
-					'G',
-					'H',
-					'I',
-					'J',
-					'K',
-					'L',
-					'M',
-					'N',
-					'O',
-					'P',
-					'Q',
-					'R',
-					'S',
-					'T',
-					'U',
-					'V',
-					'W',
-					'X',
-					'Y',
-					'Z',
-				],
-				goToReferenceField
-			);
-		}
-	} );
 
 	const focus = () => {
 		dispatch( openReferenceSelectorMobile( index ) );

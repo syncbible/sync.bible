@@ -46,6 +46,12 @@ const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 		} ),
 		shallowEqual
 	);
+
+	// Guard against null/undefined reference during initialization
+	if ( ! reference || ! Array.isArray( reference ) ) {
+		return null;
+	}
+
 	const currentReference = reference[ index ];
 
 	// Guard against null reference during initialization

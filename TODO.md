@@ -1,5 +1,10 @@
 ## Todo
 
+-   switch search to match words by default
+-   group words by translation
+-   harmony broken?
+-   get typing to target the target column
+-   add a button to switch columns
 -   Select all branches
 -   keyboard navigation
 -   John 16:32 -> 1 Kings 22:17

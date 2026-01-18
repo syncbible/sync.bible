@@ -67,6 +67,7 @@ export default ( state = initialState, action ) => {
 		case 'TOGGLE_TRAY':
 		case 'ADD_TRAY':
 		case 'REMOVE_TRAY':
+		case 'SET_TRAY_VISIBILITY_FILTER':
 			return { ...state, sidebarWidth: null };
 
 		default:

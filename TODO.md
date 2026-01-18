@@ -1,7 +1,6 @@
 ## Todo
 
 -   switch search to match words by default
--   group words by translation
 -   harmony broken?
 -   Select all branches
 -   keyboard navigation

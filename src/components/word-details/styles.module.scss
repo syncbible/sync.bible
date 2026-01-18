@@ -101,3 +101,29 @@ a.moreDetails {
 	top: 0;
 	right: 0;
 }
+
+.translationHeading {
+	border-bottom: 1px solid var(--color);
+	font-weight: 100;
+	margin-top: 0.5em;
+	list-style: none;
+}
+
+.sortForm {
+	margin-top: 0.5em;
+
+	fieldset {
+		display: flex;
+		flex-wrap: nowrap;
+	}
+
+	label {
+		font-size: .7em;
+	}
+
+	select {
+		font-size: .7em;
+		height: 40px;
+		margin-bottom: 1em;
+	}
+}

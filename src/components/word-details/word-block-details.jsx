@@ -14,6 +14,7 @@ import { searchForWord, addSearchResults } from '../../actions';
 import MoreDetails from './more-details';
 import WordStats from './word-stats';
 import bible from '../../data/bible.js';
+import { getReferenceFromSearchResult, getVerseData } from '../../lib/reference';
 
 const WordBlockDetails = ( {
 	morphologyProp,
@@ -33,7 +34,10 @@ const WordBlockDetails = ( {
 	const strongsWithFamilies = useSelector(
 		( state ) => state.data.strongsObjectWithFamilies
 	);
+	const versionData = useSelector( ( state ) => state.data[ version ] );
 	const [ activeTab, setActiveTab ] = useState( 'search' );
+	const [ sortBy, setSortBy ] = useState( 'reference' );
+	const [ filterBook, setFilterBook ] = useState( 'all' );
 
 	let numberOfUses =
 		strongsWithFamilies &&
@@ -60,20 +64,63 @@ const WordBlockDetails = ( {
 	] );
 
 	let resultsData = resultsFromProps;
+
+	// Filter results by book if needed
+	if ( resultsData && Array.isArray( resultsData ) && filterBook !== 'all' ) {
+		resultsData = resultsData.filter( ( result ) => {
+			const ref = getReferenceFromSearchResult( result.reference );
+			return ref && ref.book === filterBook;
+		} );
+	}
+
+	// Sort results if needed
+	if ( resultsData && Array.isArray( resultsData ) && sortBy === 'translation' && versionData ) {
+		resultsData = [ ...resultsData ].sort( ( a, b ) => {
+			// Each result has a 'word' property that contains the word data
+			const textA = a.word && a.word[ 0 ] ? a.word[ 0 ].toLowerCase() : '';
+			const textB = b.word && b.word[ 0 ] ? b.word[ 0 ].toLowerCase() : '';
+
+			return textA.localeCompare( textB );
+		} );
+	}
+
 	const results =
 		resultsData &&
 		Array.isArray( resultsData ) &&
-		resultsData.map( ( { reference }, index ) => {
+		resultsData.map( ( result, index ) => {
 			const isActive =
 				typeof current !== 'undefined' && current === index;
+
+			// Add heading when sorted by translation
+			let heading = null;
+			if ( sortBy === 'translation' ) {
+				// Get the translated word text from the result
+				const currentText = result.word && result.word[ 0 ] ? result.word[ 0 ] : '';
+
+				// Check if this is a new translation (first occurrence or different from previous)
+				const prevText = index > 0 && resultsData[ index - 1 ].word && resultsData[ index - 1 ].word[ 0 ]
+					? resultsData[ index - 1 ].word[ 0 ]
+					: '';
+
+				if ( index === 0 || currentText.toLowerCase() !== prevText.toLowerCase() ) {
+					heading = (
+						<li key={ `heading-${ index }` } className={ styles.translationHeading }>
+							{ currentText }
+						</li>
+					);
+				}
+			}
+
 			return (
-				<SearchLink
-					key={ index }
-					index={ index }
-					referenceString={ reference }
-					wordId={ id }
-					isActive={ isActive }
-				/>
+				<React.Fragment key={ index }>
+					{ heading }
+					<SearchLink
+						index={ index }
+						referenceString={ result.reference }
+						wordId={ id }
+						isActive={ isActive }
+					/>
+				</React.Fragment>
 			);
 		} );
 
@@ -83,11 +130,50 @@ const WordBlockDetails = ( {
 		}
 		const useString = numberOfUses === 1 ? 'use' : 'uses';
 		const resultString = numberOfUses === 1 ? 'result' : 'results';
+
+		// Get unique books from all results
+		const booksInResults = resultsFromProps && Array.isArray( resultsFromProps )
+			? [ ...new Set( resultsFromProps.map( ( result ) => {
+				const ref = getReferenceFromSearchResult( result.reference );
+				return ref ? ref.book : null;
+			} ).filter( Boolean ) ) ]
+			: [];
+
 		if ( results ) {
 			return (
 				<>
 					Found { numberOfUses } { useString } in { version }:{ ' ' }
 					<InlineResultsToggle />
+					<form className={ styles.sortForm }>
+						<fieldset>
+							<div>
+								<label htmlFor="sort-word">Sort by</label>
+								<select
+									value={ sortBy }
+									onChange={ ( e ) => setSortBy( e.target.value ) }
+									name="sort-word"
+								>
+									<option value="reference">Reference</option>
+									<option value="translation">Translation</option>
+								</select>
+							</div>
+							<div>
+								<label htmlFor="filter-word">Show</label>
+								<select
+									value={ filterBook }
+									onChange={ ( e ) => setFilterBook( e.target.value ) }
+									name="filter-word"
+								>
+									<option value="all">All books</option>
+									{ booksInResults.map( ( book ) => (
+										<option key={ book } value={ book }>
+											{ bible.getTranslatedBookName( book, version ) }
+										</option>
+									) ) }
+								</select>
+							</div>
+						</fieldset>
+					</form>
 					<ol
 						className={ styles.results }
 						dir={

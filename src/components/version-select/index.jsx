@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Internal
 import bible from '../../data/bible.js';
 import styles from './styles.module.scss';
-import { settingsChange, setTrayVisibilityFilter } from '../../actions/';
+import { settingsChange, setTrayVisibilityFilter, removeColumn } from '../../actions/';
 
 /** Component for selecting Bible versions with language grouping */
 export default function VersionSelect( {
@@ -16,10 +16,11 @@ export default function VersionSelect( {
 	large,
 } ) {
 	const dispatch = useDispatch();
-	const { availableVersions, interfaceLanguage } = useSelector( ( state ) => {
+	const { availableVersions, interfaceLanguage, referenceCount } = useSelector( ( state ) => {
 		return {
 			availableVersions: state.settings.versions,
 			interfaceLanguage: state.settings.interfaceLanguage,
+			referenceCount: state.reference?.length || 0,
 		};
 	} );
 	const classes = classnames(
@@ -48,6 +49,9 @@ export default function VersionSelect( {
 					// open more
 					dispatch( settingsChange( 'compareMode', true ) );
 					dispatch( setTrayVisibilityFilter( 'versions' ) );
+				} else if ( event.target.value === 'delete-column' ) {
+					// Delete this column
+					dispatch( removeColumn( parseInt( name ) ) );
 				} else {
 					onChange( event );
 				}
@@ -98,6 +102,9 @@ export default function VersionSelect( {
 				);
 			} ) }
 			<option value="more">Select more versions</option>
+			{ referenceCount > 1 && (
+				<option value="delete-column">Delete this column</option>
+			) }
 		</select>
 	);
 }

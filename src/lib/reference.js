@@ -440,6 +440,11 @@ export const deleteColumnHelper = ( stateReference ) => {
 	return getHashFromStateReference( stateReference );
 };
 
+export const deleteColumnByIndexHelper = ( stateReference, index ) => {
+	const newReference = stateReference.filter( ( ref, i ) => i !== index );
+	return getHashFromStateReference( newReference );
+};
+
 export const getSyncReference = ( stateReference ) => {
 	const syncedReference = stateReference.map( ( reference ) => {
 		let newSyncedReference = {
@@ -516,6 +521,20 @@ export const getNewVersionHash = ( stateReference, index, version ) => {
 		}
 
 		return reference;
+	} );
+
+	return getHashFromStateReference( newReference );
+};
+
+export const swapColumnsHash = ( stateReference, indexA, indexB ) => {
+	const newReference = stateReference.map( ( ref, index ) => {
+		if ( index === indexA ) {
+			return { ...stateReference[ indexB ] };
+		}
+		if ( index === indexB ) {
+			return { ...stateReference[ indexA ] };
+		}
+		return { ...ref };
 	} );
 
 	return getHashFromStateReference( newReference );

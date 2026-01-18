@@ -33,4 +33,36 @@
 	display: flex;
 	justify-content: center;
 	margin: 0 auto;
+	align-items: stretch;
 }
+
+button.swap-button {
+	background-color: var(--background-ui);
+	border: none;
+	border-left: 1px solid var(--mid);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 8px;
+	transition: background-color 150ms;
+
+	&:hover {
+		background-color: var(--highlight);
+	}
+
+	&:active {
+		background-color: var(--active);
+	}
+
+	svg {
+		fill: var(--color);
+		width: 20px;
+		height: 20px;
+	}
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+

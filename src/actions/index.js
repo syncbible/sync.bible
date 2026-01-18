@@ -5,11 +5,13 @@ import { push } from '@lagunovsky/redux-react-router';
 import {
 	addColumnHelper,
 	deleteColumnHelper,
+	deleteColumnByIndexHelper,
 	getAllLemmasFromReference,
 	goToReferenceHelper,
 	getSyncReference,
 	getUnSyncReference,
 	getNewVersionHash,
+	swapColumnsHash,
 	sortReferences,
 	getHarmonisedVerses,
 	findHarmonisedReference,
@@ -415,6 +417,26 @@ export const changeVersion = ( index, version ) => {
 			parseInt( index ),
 			version
 		);
+		dispatch( push( newHash ) );
+	};
+};
+
+export const swapColumns = ( indexA, indexB ) => {
+	return function ( dispatch, getState ) {
+		const state = getState();
+		const newHash = swapColumnsHash( state.reference, indexA, indexB );
+		dispatch( push( newHash ) );
+	};
+};
+
+export const removeColumn = ( index ) => {
+	return function ( dispatch, getState ) {
+		const state = getState();
+		// Don't allow removing the last column
+		if ( state.reference.length <= 1 ) {
+			return;
+		}
+		const newHash = deleteColumnByIndexHelper( state.reference, index );
 		dispatch( push( newHash ) );
 	};
 };

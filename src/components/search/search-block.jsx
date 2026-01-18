@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import SearchLink from '../search-link';
 import styles from './styles.module.scss';
 import InlineResultsToggle from '../inline-results-toggle';
+import SortForm from '../sort-form';
 import bible from '../../data/bible.js';
 import { selectWord } from '../../actions';
 import { getReferenceFromSearchResult } from '../../lib/reference';
@@ -200,45 +201,33 @@ const SearchBlock = ( props ) => {
 			} );
 	}
 
+	// Build filter options
+	const filterOptions = [
+		{ value: 'all', label: 'All books' },
+		...[ ...new Set( resultsBooks ) ].map( ( book ) => ( {
+			value: book,
+			label: book,
+		} ) ),
+	];
+
+	const sortOptions = [
+		{ value: 'reference', label: 'Reference' },
+		{ value: 'strongs', label: 'Strongs' },
+	];
+
 	return (
 		<div dir={ bible.isRtlVersion( interfaceLanguage ) ? 'rtl' : 'ltr' }>
 			<InlineResultsToggle />
 			Found { results.length } results in { props.data.version }{ ' ' }
 			{ strongsNumbers.length > 0 && (
-				<form className={ styles.sortForm }>
-					<fieldset>
-						<div>
-							<label htmlFor="sort-search">Sort by</label>
-							<select
-								value={ sortBy }
-								onChange={ ( event ) =>
-									setSortBy( event.target.value )
-								}
-								name="sort-search"
-							>
-								<option value="reference">Reference</option>
-								<option value="strongs">Strongs</option>
-							</select>
-						</div>
-						<div>
-							<label htmlFor="filter-search">Show</label>
-							<select
-								name="filter-search"
-								onChange={ ( event ) =>
-									setFilterBy( event.target.value )
-								}
-								value={ filterBy }
-							>
-								<option value="all">All</option>
-								{ [ ...new Set( resultsBooks ) ].map(
-									( book, index ) => (
-										<option key={ index }>{ book }</option>
-									)
-								) }
-							</select>
-						</div>
-					</fieldset>
-				</form>
+				<SortForm
+					sortBy={ sortBy }
+					onSortChange={ setSortBy }
+					sortOptions={ sortOptions }
+					filterBy={ filterBy }
+					onFilterChange={ setFilterBy }
+					filterOptions={ filterOptions }
+				/>
 			) }
 			{ sortBy === 'strongs' || sorted ? (
 				<div>{ renderedResults }</div>

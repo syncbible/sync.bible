@@ -10,6 +10,7 @@ import Stats from '../svg/stats';
 import styles from './styles.module.scss';
 import SearchLink from '../search-link';
 import InlineResultsToggle from '../inline-results-toggle';
+import SortForm from '../sort-form';
 import { searchForWord, addSearchResults } from '../../actions';
 import MoreDetails from './more-details';
 import WordStats from './word-stats';
@@ -139,41 +140,33 @@ const WordBlockDetails = ( {
 			} ).filter( Boolean ) ) ]
 			: [];
 
+		// Build filter options
+		const filterOptions = [
+			{ value: 'all', label: 'All books' },
+			...booksInResults.map( ( book ) => ( {
+				value: book,
+				label: bible.getTranslatedBookName( book, version ),
+			} ) ),
+		];
+
+		const sortOptions = [
+			{ value: 'reference', label: 'Reference' },
+			{ value: 'translation', label: 'Translation' },
+		];
+
 		if ( results ) {
 			return (
 				<>
 					Found { numberOfUses } { useString } in { version }:{ ' ' }
 					<InlineResultsToggle />
-					<form className={ styles.sortForm }>
-						<fieldset>
-							<div>
-								<label htmlFor="sort-word">Sort by</label>
-								<select
-									value={ sortBy }
-									onChange={ ( e ) => setSortBy( e.target.value ) }
-									name="sort-word"
-								>
-									<option value="reference">Reference</option>
-									<option value="translation">Translation</option>
-								</select>
-							</div>
-							<div>
-								<label htmlFor="filter-word">Show</label>
-								<select
-									value={ filterBook }
-									onChange={ ( e ) => setFilterBook( e.target.value ) }
-									name="filter-word"
-								>
-									<option value="all">All books</option>
-									{ booksInResults.map( ( book ) => (
-										<option key={ book } value={ book }>
-											{ bible.getTranslatedBookName( book, version ) }
-										</option>
-									) ) }
-								</select>
-							</div>
-						</fieldset>
-					</form>
+					<SortForm
+						sortBy={ sortBy }
+						onSortChange={ setSortBy }
+						sortOptions={ sortOptions }
+						filterBy={ filterBook }
+						onFilterChange={ setFilterBook }
+						filterOptions={ filterOptions }
+					/>
 					<ol
 						className={ styles.results }
 						dir={

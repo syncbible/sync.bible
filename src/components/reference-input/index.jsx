@@ -97,6 +97,10 @@ const ReferenceInput = ( { index } ) => {
 					onChange={ change }
 					ref={ referenceInputField }
 					onFocus={ focus }
+					autoComplete="off"
+					autoCorrect="off"
+					autoCapitalize="off"
+					spellCheck="false"
 				/>
 			</form>
 		</div>

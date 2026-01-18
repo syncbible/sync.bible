@@ -380,11 +380,16 @@ export function getNextChapter( { book, chapter } ) {
 }
 
 export function getNumberOfVerses( { book, chapter } ) {
+	if ( ! book || ! chapter ) {
+		return 0;
+	}
 	if ( book === 'Harmony' ) {
-		return harmonised[ chapter - 1 ].length;
+		const harmonisedChapter = harmonised[ chapter - 1 ];
+		return harmonisedChapter ? harmonisedChapter.length : 0;
 	}
 	const bookId = bible.getBookId( book + ' ' + chapter );
-	return bible.Data.verses[ bookId - 1 ][ chapter - 1 ];
+	const bookVerses = bible.Data.verses[ bookId - 1 ];
+	return bookVerses ? bookVerses[ chapter - 1 ] : 0;
 }
 
 export function getHarmonisedReference( {
@@ -392,9 +397,19 @@ export function getHarmonisedReference( {
 	verseNumber,
 	index,
 } ) {
-	const harmonisedReference =
-		harmonised[ chapter - 1 ][ verseNumber ][ index ];
 	const books = [ 'Matthew', 'Mark', 'Luke', 'John' ];
+
+	// Guard against invalid chapter or verse
+	if ( ! harmonised[ chapter - 1 ] || ! harmonised[ chapter - 1 ][ verseNumber ] ) {
+		return {
+			book: books[ index ],
+			chapter: null,
+			verseNumber: null,
+			index,
+		};
+	}
+
+	const harmonisedReference = harmonised[ chapter - 1 ][ verseNumber ][ index ];
 	return {
 		book: books[ index ],
 		chapter: harmonisedReference[ 0 ] ?? null,
@@ -406,6 +421,10 @@ export function getHarmonisedReference( {
 }
 
 export function getHarmonisedVerses( { chapter, verseNumber } ) {
+	// Guard against invalid chapter or verse
+	if ( ! harmonised[ chapter - 1 ] || ! harmonised[ chapter - 1 ][ verseNumber ] ) {
+		return null;
+	}
 	return harmonised[ chapter - 1 ][ verseNumber ];
 }
 

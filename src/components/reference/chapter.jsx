@@ -59,6 +59,11 @@ const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 		return null;
 	}
 
+	// Guard against missing book or chapter
+	if ( ! book || ! chapter ) {
+		return null;
+	}
+
 	const version = currentReference.version;
 	const startVerse = currentReference.verse;
 	const endVerse = currentReference.endVerse;

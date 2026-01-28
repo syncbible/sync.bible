@@ -136,7 +136,8 @@
 	width: $column-padding;
 
 	span:hover {
-		color: var(--accent);
+		color: var(--background);
+		text-shadow: 1px 1px var(--color);
 	}
 }
 

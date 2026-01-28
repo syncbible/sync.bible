@@ -1,12 +1,14 @@
 // External
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { PURGE } from 'redux-persist';
 
 // Internal
 import Download from '../svg/download';
 import styles from './styles.module.scss';
 
 const HelpTray = () => {
+	const dispatch = useDispatch();
 	const data = useSelector( ( state ) => state.data );
 	const [ cacheStatus, setCacheStatus ] = useState( {
 		serviceWorkerActive: false,
@@ -77,14 +79,28 @@ const HelpTray = () => {
 	const clearCache = async () => {
 		if ( 'serviceWorker' in navigator && 'caches' in window ) {
 			try {
+				// Purge redux-persist state first
+				dispatch( { type: PURGE, result: () => null } );
+
+				// Wait a bit for purge to complete
+				await new Promise( ( resolve ) => setTimeout( resolve, 100 ) );
+
 				// Clear localStorage
 				localStorage.clear();
 
 				// Clear sessionStorage
 				sessionStorage.clear();
 
-				// Delete IndexedDB
-				indexedDB.deleteDatabase( 'syncbible' );
+				// Delete IndexedDB - wait for completion
+				await new Promise( ( resolve, reject ) => {
+					const request = indexedDB.deleteDatabase( 'syncbible' );
+					request.onsuccess = () => resolve();
+					request.onerror = () => reject( request.error );
+					request.onblocked = () => {
+						console.warn( 'IndexedDB deletion blocked' );
+						resolve(); // Continue anyway
+					};
+				} );
 
 				// Unregister all service workers
 				const registrations =
@@ -101,8 +117,8 @@ const HelpTray = () => {
 					)
 				);
 
-				// Redirect to home page
-				window.location.href = './';
+				// Reload the page
+				window.location.reload();
 			} catch ( error ) {
 				console.error( 'Error clearing cache:', error );
 				alert(

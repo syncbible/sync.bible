@@ -9,6 +9,7 @@ import {
 	syncReferences,
 	unSyncReferences,
 	harmoniseAction,
+	singleVerseAction,
 } from '../../actions';
 import Add from '../svg/add';
 import Menu from '../svg/menu';
@@ -18,6 +19,9 @@ const Controls = () => {
 	const dispatch = useDispatch();
 	const inSync = useSelector( ( state ) => state.settings.inSync );
 	const referenceLength = useSelector( ( state ) => state.reference.length );
+	const isSingle = useSelector(
+		( state ) => state.reference[ 0 ]?.version === 'All'
+	);
 	const change = ( event ) => {
 		if ( event.target.value === 'add' ) {
 			dispatch( addColumnAction() );
@@ -39,12 +43,16 @@ const Controls = () => {
 			dispatch( harmoniseAction() );
 		}
 
+		if ( event.target.value === 'single' ) {
+			dispatch( singleVerseAction() );
+		}
+
 		setValue( '' );
 		event.target.blur();
 	};
 	const [ value, setValue ] = useState( '' );
 
-	if ( referenceLength > 1 ) {
+	if ( referenceLength > 1 || isSingle ) {
 		return (
 			<div className={ styles.controls }>
 				<button className={ styles.menu }>
@@ -58,16 +66,23 @@ const Controls = () => {
 					<option value="" disabled hidden>
 						…
 					</option>
-					<option value="add">Add a column</option>
-					<option value="delete">Delete column</option>
-					{ inSync !== true && (
+					{ ! isSingle && (
+						<option value="add">Add a column</option>
+					) }
+					{ referenceLength > 1 && (
+						<option value="delete">Delete column</option>
+					) }
+					{ ( isSingle || inSync !== true ) && (
 						<option value="sync">Sync references</option>
 					) }
-					{ inSync !== false && (
+					{ ( isSingle || inSync !== false ) && (
 						<option value="unsync">Un-sync references</option>
 					) }
-					{ inSync !== 'harmonised' && (
+					{ ( isSingle || inSync !== 'harmonised' ) && (
 						<option value="harmonised">Harmonise</option>
+					) }
+					{ ! isSingle && (
+						<option value="single">Single verse</option>
 					) }
 				</select>
 			</div>

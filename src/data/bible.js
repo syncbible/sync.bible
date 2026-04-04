@@ -15969,12 +15969,15 @@ bible.getTranslatedBookName = function ( bookName, version ) {
 	if ( ! bookName || ! version ) {
 		return 'problemo';
 	}
+	if ( ! bible.Data.supportedVersions[ version ] ) {
+		return bookName;
+	}
 	var language = bible.Data.supportedVersions[ version ].language;
 	return bible.getTranslatedBookNameByLanguage( bookName, language );
 };
 
 bible.isRtlVersion = function ( version, book ) {
-	if ( ! version ) {
+	if ( ! version || ! bible.Data.supportedVersions[ version ] ) {
 		return false;
 	}
 

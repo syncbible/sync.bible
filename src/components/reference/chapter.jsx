@@ -17,6 +17,7 @@ import bible from '../../data/bible.js';
 import { fetchData, setScrollChapterHarmonised } from '../../actions';
 import Title from './title';
 import VerseWrapper from './verse-wrapper';
+import SingleVerseView from './single-verse-view';
 import styles from './styles.module.scss';
 import {
 	mapVersionToData,
@@ -34,7 +35,7 @@ function getLanguageFromVersion( version, book ) {
 
 		return 'grc';
 	}
-	return bible.Data.supportedVersions[ version ].language;
+	return bible.Data.supportedVersions[ version ]?.language || 'en';
 }
 
 const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
@@ -441,7 +442,18 @@ const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 			<div className={ styles.invisible } ref={ textToCopyRef }>
 				{ textToCopyText }
 			</div>
-			{ inSync ? getSyncVerses() : getDifferentVerses( version ) }
+			{ version === 'All' ? (
+				<SingleVerseView
+					book={ book }
+					chapter={ chapter }
+					startVerse={ startVerse }
+					version={ version }
+				/>
+			) : inSync ? (
+				getSyncVerses()
+			) : (
+				getDifferentVerses( version )
+			) }
 		</div>
 	);
 };

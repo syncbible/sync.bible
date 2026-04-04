@@ -26,7 +26,9 @@ const ReferenceWrapper = () => {
 		return null;
 	}
 
-	if ( inSync ) {
+	const isSingle = reference[ 0 ]?.version === 'All';
+
+	if ( inSync || isSingle ) {
 		references = (
 			<ReferenceComponent reference={ reference[ 0 ] } index={ 0 } />
 		);

@@ -208,7 +208,7 @@ const ReferenceComponent = ( props ) => {
 		return props.reference.endVerse;
 	};
 
-	if ( referenceHasEndVerse() ) {
+	if ( referenceHasEndVerse() || props.reference?.version === 'All' ) {
 		return (
 			<div className={ classname }>
 				<div

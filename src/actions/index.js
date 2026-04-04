@@ -4,6 +4,7 @@ import { push } from '@lagunovsky/redux-react-router';
 // Internal
 import {
 	addColumnHelper,
+	createReferenceLink,
 	deleteColumnHelper,
 	deleteColumnByIndexHelper,
 	getAllLemmasFromReference,
@@ -66,10 +67,20 @@ export const goToChapterAction = ( chapterToGoTo ) => {
 	};
 };
 
+const restoreFromSingle = ( state ) => {
+	if ( state.reference[ 0 ]?.version !== 'All' ) {
+		return state.reference;
+	}
+	const ref = state.reference[ 0 ];
+	const version = state.settings.interfaceLanguage || 'KJV';
+	return [ { ...ref, version } ];
+};
+
 export const syncReferences = () => {
 	return function ( dispatch, getState ) {
 		const state = getState();
-		const newHash = getSyncReference( state.reference );
+		const references = restoreFromSingle( state );
+		const newHash = getSyncReference( references );
 		dispatch( push( newHash ) );
 		dispatch( settingsChange( 'inSync', true ) );
 	};
@@ -78,7 +89,8 @@ export const syncReferences = () => {
 export const unSyncReferences = () => {
 	return function ( dispatch, getState ) {
 		const state = getState();
-		const newHash = getUnSyncReference( state.reference );
+		const references = restoreFromSingle( state );
+		const newHash = getUnSyncReference( references );
 		dispatch( push( newHash ) );
 		dispatch( settingsChange( 'inSync', false ) );
 	};
@@ -88,6 +100,15 @@ export const addColumnAction = ( version = '' ) => {
 	return function ( dispatch, getState ) {
 		const state = getState();
 		const newHash = addColumnHelper( state.reference, version );
+		dispatch( push( newHash ) );
+	};
+};
+
+export const singleVerseAction = () => {
+	return function ( dispatch, getState ) {
+		const state = getState();
+		const ref = state.reference[ 0 ];
+		const newHash = createReferenceLink( { ...ref, version: 'All' } );
 		dispatch( push( newHash ) );
 	};
 };

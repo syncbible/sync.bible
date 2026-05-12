@@ -96,25 +96,26 @@ const TrayList = ( { trays, sidebarWidth } ) => {
 							'search',
 							'bookmark',
 							'combinedall',
-						].includes( tray.id ) && hasTrayItems && (
-							<div className={ styles.versionMenuControl }>
-								<button
-									className={ styles.trayHeaderButton }
-									type="button"
-									tabIndex={ -1 }
-									aria-hidden="true"
-									title="Select language"
-								>
-									<LibraryBooksSvg />
-								</button>
-								<VersionSelect
-									value={ interfaceLanguage }
-									name="interfaceLanguage"
-									onChange={ changeInterfaceLanguage }
-									ariaLabel="Select language"
-								/>
-							</div>
-						) }
+						].includes( tray.id ) &&
+							hasTrayItems && (
+								<div className={ styles.versionMenuControl }>
+									<button
+										className={ styles.trayHeaderButton }
+										type="button"
+										tabIndex={ -1 }
+										aria-hidden="true"
+										title="Select language"
+									>
+										<LibraryBooksSvg />
+									</button>
+									<VersionSelect
+										value={ interfaceLanguage }
+										name="interfaceLanguage"
+										onChange={ changeInterfaceLanguage }
+										ariaLabel="Select language"
+									/>
+								</div>
+							) }
 						<TrayHeaderButtons
 							trayId={ tray.id }
 							trayText={ tray.text }

@@ -1,72 +1,145 @@
 .versions {
-    padding: 0 10px 10px 10px;
+	--versions-tray-header-height: 60px;
+	--versions-search-height: 6.75rem;
+
+	padding: 0 10px 10px 10px;
 }
 
-.fieldset {
-    margin-top: 1em;
-
-    > label {
-        font-weight: 500;
-    }
-
-    ul {
-        list-style: none;
-    }
+.languageHeader {
+	align-items: center;
+	background: var(--background-ui);
+	display: flex;
+	gap: 0.35em;
+	margin-bottom: 0.25em;
+	margin-top: 0.35em;
+	padding: 0.1em 0;
 }
 
-.buttons { float: right; position: sticky; top: .5em; }
-.buttons button { padding: 0 1em; }
+.stickyLanguageHeader {
+	position: sticky;
+	top: calc(
+		var(--versions-tray-header-height) + var(--versions-search-height)
+	);
+	z-index: 2;
+}
+
+.languageCheckbox {
+	display: flex;
+	flex: 0 0 auto;
+
+	input[type="checkbox"] {
+		margin: 0;
+	}
+}
+
+.languageToggle {
+	align-items: center;
+	display: flex;
+	flex: 0 0 auto;
+	font-size: 0.9em;
+	gap: 0.3em;
+	line-height: 1.2;
+	text-align: left;
+	text-decoration: none;
+}
+
+.languageName {
+	flex: 1 1 auto;
+	font-size: 0.9em;
+	line-height: 1.2;
+	text-decoration: none;
+}
+
+.collapseIndicator {
+	display: inline-block;
+	font-family: monospace;
+	text-align: center;
+	width: 1em;
+}
+
+.buttons {
+	float: right;
+	position: sticky;
+	top: 0.5em;
+}
+.buttons button {
+	padding: 0 1em;
+}
 
 .searchContainer {
-    background: var(--background-ui);
-    box-shadow: 0 10px 10px 10px var(--background-ui);
-    margin-bottom: 1em;
-    position: sticky;
-    top: 0;
-    padding: 1em 0 0;
-    z-index: 1;
+	background: var(--background-ui);
+	border-bottom: 1px solid var(--background);
+	margin-bottom: 1em;
+	position: sticky;
+	top: var(--versions-tray-header-height);
+	padding: 1em 0 0.5em;
+	z-index: 3;
 
-    legend {
-        margin-bottom: .5em;
-    }
+	legend {
+		margin-bottom: 0.5em;
+	}
 }
 
 .searchInput {
-    width: 100%;
-    padding: 0.5em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    box-sizing: border-box;
+	width: 100%;
+	padding: 0.5em;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
+	box-sizing: border-box;
 
-    &:focus {
-        outline: none;
-        border-color: #666;
-    }
+	&:focus {
+		outline: none;
+		border-color: #666;
+	}
+}
+
+.clearAllLink {
+	display: block;
+	font-size: 13px;
+	margin-top: 0.35em;
+	text-align: right;
+	text-decoration: underline;
+}
+
+.disabledLink {
+	cursor: default;
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.versionList {
+	list-style: none;
+	margin: 0.25em 0 0.5em 1.35em;
+	padding: 0;
+
+	.versionLabel {
+		margin-left: 0;
+	}
 }
 
 .versionLabel {
-    cursor: pointer;
-    display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: 8fr 11fr;
-    margin: 0 -10px 10px -10px;
-    padding: 0 10px;
+	cursor: pointer;
+	display: grid;
+	grid-template-rows: auto;
+	grid-template-columns: 8fr 11fr;
+	margin: 0 -10px 10px -10px;
+	padding: 0 10px;
 
-    span {
-        word-break: break-word;
-    }
+	span {
+		word-break: break-word;
+	}
 
-    &:hover {
-        background: var(--background);
-        color:var(--color-bright)
-    }
+	&:hover {
+		background: var(--background);
+		color: var(--color-bright);
+	}
 
-    &.withCheckbox {
-        grid-template-columns: 2fr 8fr 11fr;
-    }
+	&.withCheckbox {
+		grid-template-columns: 2fr 8fr 11fr;
+	}
 
-   input[type="checkbox"] {
-        margin-top: 5px;
-   }
+	input[type="checkbox"] {
+		margin-top: 5px;
+	}
 }

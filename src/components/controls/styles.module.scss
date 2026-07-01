@@ -1,4 +1,4 @@
-@import '../dimensions.scss';
+@import "../dimensions.scss";
 
 .extraOptions {
 	border-top: none;
@@ -7,15 +7,6 @@
 	top: 0;
 	right: 0;
 	opacity: 0;
-}
-
-.addButton {
-	background: var(--background-ui);
-	width: $dock-height;
-}
-
-.addButton.addButton {
-	border: none;
 }
 
 .menu {

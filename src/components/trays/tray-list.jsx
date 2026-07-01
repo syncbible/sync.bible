@@ -1,5 +1,9 @@
 // External
+<<<<<<< Updated upstream
 import React, { useCallback, useEffect } from 'react';
+=======
+import React, { useEffect, useCallback, useState } from 'react';
+>>>>>>> Stashed changes
 import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
@@ -9,7 +13,11 @@ import { fetchData, settingsChange } from '../../actions';
 import { mapVersionToData } from '../../lib/reference';
 import TrayHeaderButtons from './tray-header-buttons';
 import VersionSelect from '../version-select';
+<<<<<<< Updated upstream
 import LibraryBooksSvg from '../svg/library-books';
+=======
+import KebabSvg from '../svg/kebab';
+>>>>>>> Stashed changes
 import styles from './styles.module.scss';
 import {
 	TRAY_WIDTH,
@@ -25,6 +33,18 @@ const TrayList = ( { trays, sidebarWidth } ) => {
 	);
 	const list = useSelector( ( state ) => state.list );
 	const userInterface = useSelector( ( state ) => state.userInterface );
+	const [ openKebab, setOpenKebab ] = useState( null );
+
+	useEffect( () => {
+		if ( ! openKebab ) return;
+		const handleClickOutside = ( e ) => {
+			if ( ! e.target.closest( '[data-kebab]' ) ) {
+				setOpenKebab( null );
+			}
+		};
+		document.addEventListener( 'mousedown', handleClickOutside );
+		return () => document.removeEventListener( 'mousedown', handleClickOutside );
+	}, [ openKebab ] );
 
 	// Calculate per-tray width by dividing sidebar width by number of active trays
 	const trayWidth =
@@ -91,6 +111,7 @@ const TrayList = ( { trays, sidebarWidth } ) => {
 				<div className={ styles.trayHeader }>
 					<h3 className={ styles.trayTitle }>{ tray.text }</h3>
 					<div className={ styles.trayHeaderRight }>
+<<<<<<< Updated upstream
 						{ [
 							'word',
 							'search',
@@ -116,6 +137,29 @@ const TrayList = ( { trays, sidebarWidth } ) => {
 									/>
 								</div>
 							) }
+=======
+						{ [ 'word', 'search', 'bookmark', 'combinedall' ].includes( tray.id ) && (
+							<div className={ styles.kebabMenu } data-kebab>
+								{ openKebab === tray.id && (
+									<VersionSelect
+										value={ interfaceLanguage }
+										name="interfaceLanguage"
+										onChange={ ( e ) => {
+											changeInterfaceLanguage( e );
+											setOpenKebab( null );
+										} }
+									/>
+								) }
+								<button
+									className={ styles.trayHeaderButton }
+									onClick={ () => setOpenKebab( openKebab === tray.id ? null : tray.id ) }
+									title="Select language"
+								>
+									<KebabSvg />
+								</button>
+							</div>
+						) }
+>>>>>>> Stashed changes
 						<TrayHeaderButtons
 							trayId={ tray.id }
 							trayText={ tray.text }

@@ -1,5 +1,5 @@
 // External
-import { useState, useCallback, useMemo } from 'react';
+import { Fragment, useState, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import classnames from 'classnames';
 
@@ -17,14 +17,15 @@ import {
 const Versions = () => {
 	const dispatch = useDispatch();
 	const [ searchQuery, setSearchQuery ] = useState( '' );
+	const [ collapsedLanguages, setCollapsedLanguages ] = useState( {} );
 	const availableVersions = useSelector(
 		( state ) => state.settings.versions
 	);
 	const { interfaceLanguage, compareMode } = useSelector(
-		( state ) => ({
+		( state ) => ( {
 			compareMode: state.settings.compareMode,
 			interfaceLanguage: state.settings.interfaceLanguage,
-		}),
+		} ),
 		shallowEqual
 	);
 	const reference = useSelector( ( state ) => state.reference );
@@ -38,10 +39,58 @@ const Versions = () => {
 		() => [ ...referenceVersions, interfaceLanguage ],
 		[ referenceVersions, interfaceLanguage ]
 	);
-
 	const allVersions = useMemo(
 		() => Object.keys( bible.Data.supportedVersions ),
 		[]
+	);
+	const requiredVersions = useMemo(
+		() => [
+			...new Set(
+				usedVersions.filter(
+					( version ) => version && allVersions.includes( version )
+				)
+			),
+		],
+		[ allVersions, usedVersions ]
+	);
+	const hasVersionsToClear = useMemo(
+		() =>
+			availableVersions.some(
+				( version ) => ! requiredVersions.includes( version )
+			),
+		[ availableVersions, requiredVersions ]
+	);
+
+	const clearAllVersions = useCallback( () => {
+		dispatch( settingsChange( 'versions', requiredVersions ) );
+	}, [ dispatch, requiredVersions ] );
+
+	const toggleLanguageCollapsed = useCallback( ( key ) => {
+		setCollapsedLanguages( ( currentCollapsedLanguages ) => ( {
+			...currentCollapsedLanguages,
+			[ key ]: currentCollapsedLanguages[ key ] === false,
+		} ) );
+	}, [] );
+
+	const toggleLanguageVersions = useCallback(
+		( versionsForLanguage, checked ) => {
+			const requiredVersionsSet = new Set( requiredVersions );
+			const nextVersions = checked
+				? [
+						...new Set( [
+							...availableVersions,
+							...versionsForLanguage,
+						] ),
+				  ]
+				: availableVersions.filter(
+						( version ) =>
+							! versionsForLanguage.includes( version ) ||
+							requiredVersionsSet.has( version )
+				  );
+
+			dispatch( settingsChange( 'versions', nextVersions ) );
+		},
+		[ availableVersions, dispatch, requiredVersions ]
 	);
 
 	const onSelectVersion = useCallback(
@@ -61,6 +110,7 @@ const Versions = () => {
 				{ compareMode && (
 					<div className={ styles.buttons }>
 						<button
+							type="button"
 							onClick={ () => {
 								dispatch(
 									settingsChange( 'versions', allVersions )
@@ -71,16 +121,16 @@ const Versions = () => {
 						</button>
 						&nbsp;
 						<button
+							type="button"
 							onClick={ () => {
-								dispatch(
-									settingsChange( 'versions', usedVersions )
-								);
+								clearAllVersions();
 							} }
 						>
 							Clear
 						</button>
 						&nbsp;
 						<button
+							type="button"
 							onClick={ () =>
 								dispatch(
 									settingsChange( 'compareMode', false )
@@ -100,37 +150,73 @@ const Versions = () => {
 						onChange={ ( e ) => setSearchQuery( e.target.value ) }
 						className={ styles.searchInput }
 					/>
+					{ interfaceLanguage && (
+						<a
+							href="#clear-all-versions"
+							className={ classnames(
+								styles.clearAllLink,
+								! hasVersionsToClear && styles.disabledLink
+							) }
+							aria-disabled={ ! hasVersionsToClear }
+							onClick={ ( event ) => {
+								event.preventDefault();
+								if ( hasVersionsToClear ) {
+									clearAllVersions();
+								}
+							} }
+						>
+							Clear all
+						</a>
+					) }
 				</div>
 
 				{ Object.keys( bible.Data.tongues ).map( ( key ) => {
 					const languageName = bible.Data.tongues[ key ];
-					const versionsForLanguage = Object.keys(
-						bible.Data.supportedVersions
-					).filter( ( versionForLanguage ) => {
-						const versionData =
-							bible.Data.supportedVersions[ versionForLanguage ];
-						const query = searchQuery.toLowerCase();
-						const matchesSearch =
-							searchQuery === '' ||
-							versionForLanguage
-								.toLowerCase()
-								.includes( query ) ||
-							versionData.name.toLowerCase().includes( query ) ||
-							languageName.toLowerCase().includes( query );
-						return (
+					const query = searchQuery.toLowerCase();
+					const versionsForLanguage = allVersions.filter(
+						( versionForLanguage ) =>
 							bible.Data.supportedVersions[ versionForLanguage ]
-								.tongue === key && matchesSearch
-						);
-					} );
+								.tongue === key
+					);
+					const visibleVersionsForLanguage =
+						versionsForLanguage.filter( ( versionForLanguage ) => {
+							const versionData =
+								bible.Data.supportedVersions[
+									versionForLanguage
+								];
+							return (
+								searchQuery === '' ||
+								versionForLanguage
+									.toLowerCase()
+									.includes( query ) ||
+								versionData.name
+									.toLowerCase()
+									.includes( query ) ||
+								languageName.toLowerCase().includes( query )
+							);
+						} );
 					// Skip empty language groups
-					if ( versionsForLanguage.length === 0 ) {
+					if ( visibleVersionsForLanguage.length === 0 ) {
 						return null;
 					}
+					const selectedLanguageVersions = versionsForLanguage.filter(
+						( version ) => availableVersions.indexOf( version ) > -1
+					);
+					const hasSelectedLanguageVersions =
+						selectedLanguageVersions.length > 0;
+					const hasAllLanguageVersions =
+						selectedLanguageVersions.length ===
+						versionsForLanguage.length;
+					const hasSomeLanguageVersions =
+						hasSelectedLanguageVersions && ! hasAllLanguageVersions;
+					const languageCheckboxId = `language-${ key }`;
+					const versionsListId = `versions-${ key }`;
+					const isCollapsed = collapsedLanguages[ key ] !== false;
 					const labelClasses = classnames(
 						styles.versionLabel,
 						interfaceLanguage && styles.withCheckbox
 					);
-					const versionOption = versionsForLanguage.map(
+					const versionOption = visibleVersionsForLanguage.map(
 						( version ) => {
 							const versionData =
 								bible.Data.supportedVersions[ version ];
@@ -150,7 +236,7 @@ const Versions = () => {
 												id={ version }
 												type="checkbox"
 												disabled={
-													usedVersions.indexOf(
+													requiredVersions.indexOf(
 														version
 													) > -1
 												}
@@ -178,13 +264,75 @@ const Versions = () => {
 						}
 					);
 					return (
-						<fieldset
-							className={ styles.fieldset }
-							key={ 'fieldset' + key }
-						>
-							<label>{ bible.Data.tongues[ key ] }</label>
-							<ul>{ versionOption }</ul>
-						</fieldset>
+						<Fragment key={ 'language' + key }>
+							<div
+								className={ classnames(
+									styles.languageHeader,
+									! isCollapsed && styles.stickyLanguageHeader
+								) }
+							>
+								<a
+									href={ `#${ versionsListId }` }
+									className={ styles.languageToggle }
+									aria-expanded={ ! isCollapsed }
+									aria-controls={ versionsListId }
+									onClick={ ( event ) => {
+										event.preventDefault();
+										toggleLanguageCollapsed( key );
+									} }
+								>
+									<span
+										className={ styles.collapseIndicator }
+										aria-hidden="true"
+									>
+										{ isCollapsed ? '+' : '-' }
+									</span>
+								</a>
+								{ interfaceLanguage && (
+									<label
+										className={ styles.languageCheckbox }
+										htmlFor={ languageCheckboxId }
+									>
+										<input
+											id={ languageCheckboxId }
+											type="checkbox"
+											checked={ hasAllLanguageVersions }
+											ref={ ( input ) => {
+												if ( input ) {
+													input.indeterminate =
+														hasSomeLanguageVersions;
+												}
+											} }
+											onChange={ ( event ) => {
+												toggleLanguageVersions(
+													versionsForLanguage,
+													event.target.checked
+												);
+											} }
+										/>
+									</label>
+								) }
+								<a
+									href={ `#${ versionsListId }` }
+									className={ styles.languageName }
+									aria-expanded={ ! isCollapsed }
+									aria-controls={ versionsListId }
+									onClick={ ( event ) => {
+										event.preventDefault();
+										toggleLanguageCollapsed( key );
+									} }
+								>
+									{ languageName }
+								</a>
+							</div>
+							<ul
+								id={ versionsListId }
+								className={ styles.versionList }
+								hidden={ isCollapsed }
+							>
+								{ versionOption }
+							</ul>
+						</Fragment>
 					);
 				} ) }
 			</form>

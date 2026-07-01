@@ -60,6 +60,7 @@
 	justify-content: space-between;
 	height: $dock-height;
 	padding-left: 10px;
+	padding-right: 10px;
 	position: sticky;
 	top: 0;
 	z-index: 19;
@@ -70,6 +71,7 @@
 	display: flex;
 	align-items: center;
 	gap: 0;
+	margin-left: auto;
 }
 
 button.trayHeaderButton,
@@ -80,6 +82,12 @@ button.trayHeaderButton,
 	&:hover {
 		color: var(--color-dimmed);
 	}
+}
+
+.trayHeaderRight button {
+	flex: 0 0 32px;
+	height: 32px;
+	width: 32px;
 }
 
 .chapter-tray-padding {
@@ -197,6 +205,34 @@ button.trayHeaderButton,
 
 	label {
 		display: block;
+	}
+}
+
+.versionMenuControl {
+	display: flex;
+	align-items: center;
+	position: relative;
+
+	&:hover,
+	&:focus-within {
+		button.trayHeaderButton {
+			background: var(--hover);
+		}
+
+		svg,
+		svg path {
+			fill: var(--color);
+		}
+	}
+
+	select {
+		cursor: pointer;
+		height: 100%;
+		inset: 0;
+		opacity: 0;
+		position: absolute;
+		width: 100%;
+		z-index: 1;
 	}
 }
 

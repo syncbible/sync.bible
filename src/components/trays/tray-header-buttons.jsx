@@ -1,6 +1,5 @@
 // External
 import { useDispatch } from 'react-redux';
-import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 // Internal
@@ -34,11 +33,14 @@ const TrayHeaderButtons = ( { trayId, trayText, hasListItems, hasOpenItems } ) =
 							<UnfoldLessDouble />
 						</button>
 					) }
-					<Clear selectedTrayId={ trayId } />
+					<Clear
+						className={ styles.trayHeaderButton }
+						selectedTrayId={ trayId }
+					/>
 				</>
 			) }
 			<button
-				className={ classnames( styles.trayHeaderButton ) }
+				className={ styles.trayHeaderButton }
 				onClick={ closeTray }
 				title={ `Close ${ trayText }` }
 			>

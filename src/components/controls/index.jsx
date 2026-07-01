@@ -11,7 +11,6 @@ import {
 	harmoniseAction,
 	singleVerseAction,
 } from '../../actions';
-import Add from '../svg/add';
 import Menu from '../svg/menu';
 import styles from './styles.module.scss';
 
@@ -52,55 +51,36 @@ const Controls = () => {
 	};
 	const [ value, setValue ] = useState( '' );
 
-	if ( referenceLength > 1 || isSingle ) {
-		return (
-			<div className={ styles.controls }>
-				<button className={ styles.menu }>
-					<Menu />
-				</button>
-				<select
-					onChange={ change }
-					className={ styles.extraOptions }
-					value={ value }
-				>
-					<option value="" disabled hidden>
-						…
-					</option>
-					{ ! isSingle && (
-						<option value="add">Add a column</option>
-					) }
-					{ referenceLength > 1 && (
-						<option value="delete">Delete column</option>
-					) }
-					{ ( isSingle || inSync !== true ) && (
-						<option value="sync">Sync references</option>
-					) }
-					{ ( isSingle || inSync !== false ) && (
-						<option value="unsync">Un-sync references</option>
-					) }
-					{ ( isSingle || inSync !== 'harmonised' ) && (
-						<option value="harmonised">Harmonise</option>
-					) }
-					{ ! isSingle && (
-						<option value="single">Single verse</option>
-					) }
-				</select>
-			</div>
-		);
-	}
-
-	if ( referenceLength === 1 ) {
-		return (
-			<div className={ styles.controls }>
-				<button
-					className={ styles.addButton }
-					onClick={ () => dispatch( addColumnAction() ) }
-				>
-					<Add />
-				</button>
-			</div>
-		);
-	}
+	return (
+		<div className={ styles.controls }>
+			<button className={ styles.menu }>
+				<Menu />
+			</button>
+			<select
+				onChange={ change }
+				className={ styles.extraOptions }
+				value={ value }
+			>
+				<option value="" disabled hidden>
+					…
+				</option>
+				{ ! isSingle && <option value="add">Add a column</option> }
+				{ referenceLength > 1 && (
+					<option value="delete">Delete column</option>
+				) }
+				{ referenceLength > 1 && inSync !== true && (
+					<option value="sync">Sync references</option>
+				) }
+				{ referenceLength > 1 && inSync !== false && (
+					<option value="unsync">Un-sync references</option>
+				) }
+				{ ( isSingle || inSync !== 'harmonised' ) && (
+					<option value="harmonised">Harmonise</option>
+				) }
+				{ ! isSingle && <option value="single">Single verse</option> }
+			</select>
+		</div>
+	);
 };
 
 export default React.memo( Controls );

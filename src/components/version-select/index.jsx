@@ -14,6 +14,7 @@ export default function VersionSelect( {
 	value = 'default',
 	onChange,
 	large,
+	ariaLabel,
 } ) {
 	const dispatch = useDispatch();
 	const { availableVersions, interfaceLanguage, referenceCount } = useSelector( ( state ) => {
@@ -34,6 +35,7 @@ export default function VersionSelect( {
 			className={ classes }
 			name={ name }
 			value={ value }
+			aria-label={ ariaLabel }
 			onChange={ ( event ) => {
 				if (
 					typeof window !== 'undefined' &&
@@ -114,4 +116,5 @@ VersionSelect.propTypes = {
 	value: PropTypes.string,
 	onChange: PropTypes.func.isRequired,
 	large: PropTypes.bool,
+	ariaLabel: PropTypes.string,
 };

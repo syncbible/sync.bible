@@ -5,9 +5,8 @@ import PropTypes from 'prop-types';
 // Internal
 import { removeTypeFromList } from '../../actions';
 import DeleteForever from '../svg/delete-forever';
-import styles from './styles.module.scss';
 
-const Clear = ( { selectedTrayId } ) => {
+const Clear = ( { className, selectedTrayId } ) => {
 	const dispatch = useDispatch();
 	const list = useSelector( ( state ) => state.list );
 
@@ -31,13 +30,14 @@ const Clear = ( { selectedTrayId } ) => {
 	};
 
 	return (
-		<button onClick={ clearTray } title="Clear" className={ styles.clear }>
+		<button onClick={ clearTray } title="Clear" className={ className }>
 			<DeleteForever />
 		</button>
 	);
 };
 
 Clear.propTypes = {
+	className: PropTypes.string,
 	selectedTrayId: PropTypes.oneOf( [ 'bookmark', 'word', 'search' ] )
 		.isRequired,
 };

@@ -1,7 +1,8 @@
 // External
-import { Fragment, useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 // Internal
 import bible from '../../data/bible.js';
@@ -14,10 +15,11 @@ import {
 	settingsChange,
 } from '../../actions';
 
-const Versions = () => {
+const Versions = ( { initialView = false } ) => {
 	const dispatch = useDispatch();
 	const [ searchQuery, setSearchQuery ] = useState( '' );
 	const [ collapsedLanguages, setCollapsedLanguages ] = useState( {} );
+	const defaultLanguagesCollapsed = ! initialView;
 	const availableVersions = useSelector(
 		( state ) => state.settings.versions
 	);
@@ -65,12 +67,21 @@ const Versions = () => {
 		dispatch( settingsChange( 'versions', requiredVersions ) );
 	}, [ dispatch, requiredVersions ] );
 
-	const toggleLanguageCollapsed = useCallback( ( key ) => {
-		setCollapsedLanguages( ( currentCollapsedLanguages ) => ( {
-			...currentCollapsedLanguages,
-			[ key ]: currentCollapsedLanguages[ key ] === false,
-		} ) );
-	}, [] );
+	const toggleLanguageCollapsed = useCallback(
+		( key ) => {
+			setCollapsedLanguages( ( currentCollapsedLanguages ) => {
+				const isCurrentlyCollapsed =
+					currentCollapsedLanguages[ key ] ??
+					defaultLanguagesCollapsed;
+
+				return {
+					...currentCollapsedLanguages,
+					[ key ]: ! isCurrentlyCollapsed,
+				};
+			} );
+		},
+		[ defaultLanguagesCollapsed ]
+	);
 
 	const toggleLanguageVersions = useCallback(
 		( versionsForLanguage, checked ) => {
@@ -94,18 +105,23 @@ const Versions = () => {
 	);
 
 	const onSelectVersion = useCallback(
-		( version ) => {
+		( version, event ) => {
 			dispatch( addColumnAction( version ) );
 			dispatch( updateSearchForm( 'version', version ) );
 			dispatch( settingsChange( 'interfaceLanguage', version ) );
 			dispatch( addVersion( version ) );
-			event.target.blur();
+			event.currentTarget.blur();
 		},
 		[ dispatch ]
 	);
 
 	return (
-		<div className={ styles.versions }>
+		<div
+			className={ classnames(
+				styles.versions,
+				initialView && styles.initialView
+			) }
+		>
 			<form>
 				{ compareMode && (
 					<div className={ styles.buttons }>
@@ -211,7 +227,8 @@ const Versions = () => {
 						hasSelectedLanguageVersions && ! hasAllLanguageVersions;
 					const languageCheckboxId = `language-${ key }`;
 					const versionsListId = `versions-${ key }`;
-					const isCollapsed = collapsedLanguages[ key ] !== false;
+					const isCollapsed =
+						collapsedLanguages[ key ] ?? defaultLanguagesCollapsed;
 					const labelClasses = classnames(
 						styles.versionLabel,
 						interfaceLanguage && styles.withCheckbox
@@ -225,9 +242,12 @@ const Versions = () => {
 									<label
 										title={ versionData.name }
 										className={ labelClasses }
-										onClick={ () => {
+										onClick={ ( event ) => {
 											if ( ! interfaceLanguage ) {
-												onSelectVersion( version );
+												onSelectVersion(
+													version,
+													event
+												);
 											}
 										} }
 									>
@@ -264,7 +284,10 @@ const Versions = () => {
 						}
 					);
 					return (
-						<Fragment key={ 'language' + key }>
+						<div
+							key={ 'language' + key }
+							className={ styles.languageGroup }
+						>
 							<div
 								className={ classnames(
 									styles.languageHeader,
@@ -332,12 +355,16 @@ const Versions = () => {
 							>
 								{ versionOption }
 							</ul>
-						</Fragment>
+						</div>
 					);
 				} ) }
 			</form>
 		</div>
 	);
+};
+
+Versions.propTypes = {
+	initialView: PropTypes.bool,
 };
 
 export default Versions;

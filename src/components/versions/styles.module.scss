@@ -5,6 +5,15 @@
 	padding: 0 10px 10px 10px;
 }
 
+.initialView {
+	--versions-tray-header-height: 0px;
+	--versions-search-height: 5.25rem;
+}
+
+.languageGroup {
+	position: relative;
+}
+
 .languageHeader {
 	align-items: center;
 	background: var(--background-ui);

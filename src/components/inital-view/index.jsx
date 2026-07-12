@@ -65,7 +65,7 @@ export default function InitialView() {
 				</p>
 			</div>
 			<div className={ styles.rightPanel }>
-				<Versions />
+				<Versions initialView />
 			</div>
 		</div>
 	);

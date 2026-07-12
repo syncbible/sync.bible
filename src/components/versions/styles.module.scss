@@ -7,7 +7,7 @@
 
 .initialView {
 	--versions-tray-header-height: 0px;
-	--versions-search-height: 5.25rem;
+	--versions-search-height: 5.75rem;
 }
 
 .languageGroup {
@@ -77,7 +77,6 @@
 
 .searchContainer {
 	background: var(--background-ui);
-	border-bottom: 1px solid var(--background);
 	margin-bottom: 1em;
 	position: sticky;
 	top: var(--versions-tray-header-height);

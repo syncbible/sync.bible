@@ -1,5 +1,4 @@
 ## Todo
-
 -   i don't think ps 22:16 has the word lion in it even though the strongs numbers have it
 -   switch search to match words by default
 -   harmony broken?

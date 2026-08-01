@@ -2,7 +2,7 @@
 import { createSelector } from 'reselect';
 import { mapVersionToData } from '../lib/reference';
 import { getFamily } from '../lib/word';
-import { getLiteralConsistentTranslation } from '../components/utils.js';
+import { getLiteralConsistentTranslation } from '../lib/reference-text';
 
 // Base selectors
 const selectData = (state) => state.data;

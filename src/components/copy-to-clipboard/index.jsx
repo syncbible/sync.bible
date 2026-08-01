@@ -11,12 +11,13 @@ export default function CopyToClipboard( {
 	fill,
 	textToCopy,
 	customClickHandler,
+	customClickHandlerValue,
 	version,
 } ) {
 	const handleClick = ( event ) => {
 		event.stopPropagation();
 		if ( customClickHandler ) {
-			customClickHandler( version );
+			customClickHandler( customClickHandlerValue ?? version );
 		} else {
 			copyToClipboardHelper( textToCopy );
 		}
@@ -34,5 +35,6 @@ CopyToClipboard.propTypes = {
 	fill: PropTypes.string,
 	textToCopy: PropTypes.oneOfType( [ PropTypes.string, PropTypes.object ] ),
 	customClickHandler: PropTypes.func,
+	customClickHandlerValue: PropTypes.object,
 	version: PropTypes.string,
 };

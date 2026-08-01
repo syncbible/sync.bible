@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+export { getLiteralConsistentTranslation } from '../lib/reference-text';
 
 export function rootClasses( darkMode, expandedSearchResults ) {
 	return classnames( 'root', {
@@ -6,40 +7,4 @@ export function rootClasses( darkMode, expandedSearchResults ) {
 		'dark-mode-off': darkMode === false,
 		'expanded-search-results': expandedSearchResults === true,
 	} );
-}
-
-export function getLiteralConsistentTranslation(
-	LC,
-	word,
-	lemma,
-	morph,
-	prevWord
-) {
-	if ( ! LC ) {
-		return null;
-	}
-
-	if ( ! LC[ word ] ) {
-		return null;
-	}
-
-	if ( ! lemma ) {
-		lemma = '';
-	}
-
-	if ( 'הו' === word ) {
-		// If the last word was a noun then modify "him" to "his".
-		if ( prevWord?.[ 2 ] ) {
-			const morphContainsAVerb = prevWord[ 2 ].match( /[N|/N]/ );
-			if ( morphContainsAVerb && morphContainsAVerb.length > 0 ) {
-				return 'his';
-			}
-		}
-	}
-
-	if ( typeof LC[ word ]?.[ lemma ]?.[ morph ] === 'string' ) {
-		return LC[ word ][ lemma ][ morph ];
-	}
-
-	return null;
 }

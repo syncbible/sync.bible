@@ -4,19 +4,12 @@ import PropTypes from 'prop-types';
 
 // Internal
 import WordSingle from './word-single';
-import { getLiteralConsistentTranslation } from '../utils.js';
-
-function startsWithPunctuation( word ) {
-	return (
-		word.indexOf( '.' ) === 0 ||
-		word.indexOf( ')' ) === 0 ||
-		word.indexOf( '?' ) === 0 ||
-		word.indexOf( '!' ) === 0 ||
-		word.indexOf( ':' ) === 0 ||
-		word.indexOf( ';' ) === 0 ||
-		word.indexOf( ',' ) === 0
-	);
-}
+import {
+	getLiteralConsistentTranslation,
+	getWordParts,
+	getWordSingleText,
+	startsWithPunctuation,
+} from '../../lib/reference-text';
 
 const WordComponent = ( {
 	word,
@@ -32,65 +25,25 @@ const WordComponent = ( {
 		return null;
 	}
 
-	const [ wordValue, lemma, morph ] = word;
-
-	const lemmaArray =
-		lemma && typeof lemma === 'string' ? lemma.split( '/' ) : null;
-	const morphArray =
-		morph && typeof morph === 'string' ? morph.split( '/' ) : null;
-
-	const getWordSingle = ( wordSingleValue, lemmaSingle, morphSingle ) => {
-		if ( version === 'LC' ) {
-			return getLiteralConsistentTranslation(
-				lcData,
-				wordSingleValue,
-				lemmaSingle,
-				morphSingle,
-				prevWord
-			);
-		}
-
-		return wordSingleValue;
-	};
-
-	const getLemmaSingle = ( key ) => {
-		return lemmaArray ? lemmaArray[ key ] : null;
-	};
-
-	const getMorphSingle = ( key ) => {
-		if ( ! morphArray ) {
-			return null;
-		}
-
-		if ( morph.indexOf( 'H' ) === 0 && key > 0 ) {
-			return 'H' + morphArray[ key ];
-		}
-
-		if ( morph.indexOf( 'A' ) === 0 && key > 0 ) {
-			return 'A' + morphArray[ key ];
-		}
-
-		return morphArray[ key ];
-	};
+	const [ wordValue ] = word;
 
 	const wordString =
 		wordValue &&
 		typeof wordValue === 'string' &&
-		wordValue.split( '/' ).map( ( wordSingleValue, key ) => {
-			const lemmaSingle = getLemmaSingle( key );
-			const morphSingle = getMorphSingle( key );
-			const wordSingle = getWordSingle(
-				wordSingleValue,
-				lemmaSingle,
-				morphSingle
-			);
+		getWordParts( word ).map( ( wordPart, key ) => {
+			const wordSingle = getWordSingleText( {
+				version,
+				lcData,
+				prevWord,
+				...wordPart,
+			} );
 			const literalConsistentTranslation =
 				version === 'LC'
 					? getLiteralConsistentTranslation(
 							lcData,
-							wordSingleValue,
-							lemmaSingle,
-							morphSingle
+							wordPart.word,
+							wordPart.lemma,
+							wordPart.morph
 					  )
 					: null;
 
@@ -100,10 +53,10 @@ const WordComponent = ( {
 						{ ' ' }
 						<WordSingle
 							key={ key }
-							lemma={ lemmaSingle }
-							word={ wordSingleValue }
+							lemma={ wordPart.lemma }
+							word={ wordPart.word }
 							wordText={ wordSingle }
-							morph={ morphSingle }
+							morph={ wordPart.morph }
 							version={ version }
 							reference={ reference }
 							index={ index }
@@ -121,10 +74,10 @@ const WordComponent = ( {
 			return (
 				<WordSingle
 					key={ key }
-					lemma={ lemmaSingle }
-					word={ wordSingleValue }
+					lemma={ wordPart.lemma }
+					word={ wordPart.word }
 					wordText={ wordSingle }
-					morph={ morphSingle }
+					morph={ wordPart.morph }
 					version={ version }
 					reference={ reference }
 					index={ index }

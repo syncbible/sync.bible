@@ -1,12 +1,5 @@
 // External
-import React, {
-	createRef,
-	useEffect,
-	useRef,
-	Fragment,
-	useState,
-	useMemo,
-} from 'react';
+import React, { useEffect, useRef, Fragment, useMemo } from 'react';
 import { Waypoint } from 'react-waypoint';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -26,6 +19,7 @@ import {
 } from '../../lib/reference';
 import copyToClipboardHelper from '../../lib/copy-to-clipboard-helper';
 import { DOCK_HEIGHT } from '../../constants/dimensions';
+import { getChapterText } from '../../lib/reference-text';
 
 function getLanguageFromVersion( version, book ) {
 	if ( version === 'original' ) {
@@ -160,15 +154,20 @@ const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 			: null;
 	};
 
-	const textToCopyRef = createRef( book + chapter + version + index );
-	const [ textToCopyText, setTextToCopyText ] = useState( '' );
+	const customClickHandler = ( referenceToCopy ) => {
+		const chapterReference =
+			typeof referenceToCopy === 'string'
+				? { book, chapter, version: referenceToCopy }
+				: referenceToCopy;
+		const chapterText = getChapterText( {
+			...chapterReference,
+			data,
+		} );
 
-	const customClickHandler = ( version ) => {
-		setTextToCopyText( getDifferentVerses( version ) );
+		if ( chapterText ) {
+			copyToClipboardHelper( chapterText );
+		}
 	};
-	useEffect( () => {
-		copyToClipboardHelper( textToCopyRef );
-	}, [ textToCopyText ] );
 
 	const getSyncVerses = () => {
 		let parsedReference;
@@ -438,10 +437,6 @@ const Chapter = ( { book, chapter, index, useVirtualization = false } ) => {
 
 	return (
 		<div className={ styles.chapter }>
-			{ /*This outputs an extra div for copying*/ }
-			<div className={ styles.invisible } ref={ textToCopyRef }>
-				{ textToCopyText }
-			</div>
 			{ version === 'All' ? (
 				<SingleVerseView
 					book={ book }

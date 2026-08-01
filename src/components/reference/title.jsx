@@ -34,6 +34,7 @@ export default function Title( {
 				<CopyToClipboard
 					fill={ '#999' }
 					customClickHandler={ customClickHandler }
+					customClickHandlerValue={ { book, chapter, version } }
 					version={ version }
 				/>
 			</span>
